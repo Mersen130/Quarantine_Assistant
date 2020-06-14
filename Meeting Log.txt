@@ -1,0 +1,10 @@
+﻿CSC309 Team 23 Project Phase 1 Meeting Memo
+
+
+* June13 2020 
+   * Framework: React + Bootstrap
+   * Meeting frequency: Every Wednesday & Saturday 2:00pm
+   * Mission distribution
+      * Yifei: Recommendation + Login & Sign up
+      * Yuqiu: Progress + User Profile
+      * Qixin: Q&A(post) + Questionaire
