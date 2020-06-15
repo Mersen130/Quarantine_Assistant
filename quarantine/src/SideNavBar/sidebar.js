@@ -8,9 +8,9 @@ class Sidebar extends React.Component {
 
   render(){
     return (
-      <div>
-        <div id="mySidebar" class="sidebar">
-            <a href="javascript:void(0)" class="closebtn" onClick={this.closeSide}>&times;</a>
+      <div className="Navbar">
+        <div id="mySidebar" className="sidebar">
+            <a href="javascript:void(0)" className="closebtn" onClick={this.closeSide}>&times;</a>
             {/* TODO: change hrefs to appropriate links */}
             {/*Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>*/}
             <a><img id="profilePhoto" src={require("./lib/sampleprofile.png")}/></a>
@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
         </div>
 
         <div id="main">
-    <button class="openbtn" onClick={this.openSide}>&#9776; {this.state.title}</button>
+          <button className="openbtn" onClick={this.openSide}>&#9776; {this.state.title}</button>
         </div>
 
 
