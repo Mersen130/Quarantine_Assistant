@@ -19,7 +19,7 @@
   
   /* The sidebar links */
   .sidebar a {
-    padding: 8px 8px 8px 0px;
+    padding: 8px 8px 8px 8px;
     text-align: left;
     margin-left: 20px;
     text-decoration: none;
@@ -43,7 +43,9 @@
   #profileName{
       font-size: 15px;
       text-align: left;
-      padding-left: 90px;
+      padding-left: 95px;
+      margin-top:15px;
+      margin-bottom: 15px;
       color: #818181
   }
   

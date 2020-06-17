@@ -1,0 +1,36 @@
+.title{
+    font-size: 70px;
+    text-align: left;
+}
+
+.container{
+    height: 150px;
+}
+
+.jumbotron{
+    background-color: #fafff0;
+}
+
+.form-group{
+    width: 800px;
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.profilephoto{
+    width: 60px;
+    border-radius: 50%;
+}
+
+h4{
+    text-align: left;
+}
+
+.content{
+    margin-left: 20px;
+    text-align: left;
+}
+
+.Media{
+    margin-bottom: 100px;
+}

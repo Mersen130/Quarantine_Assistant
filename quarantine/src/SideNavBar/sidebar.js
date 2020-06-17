@@ -13,12 +13,12 @@ class Sidebar extends React.Component {
             <a href="javascript:void(0)" className="closebtn" onClick={this.closeSide}>&times;</a>
             {/* TODO: change hrefs to appropriate links */}
             {/*Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>*/}
-            <a><img id="profilePhoto" src={require("./lib/sampleprofile.png")}/></a>
+            <a><img id="profilePhoto" src={require("../lib/sidebar/sampleprofile.png")}/></a>
             <p id="profileName" >Annonymous</p>
-            <a onClick={this.changeNavbarTitle} href="#"><img src={require("./lib/dashboard.png")}/>        Dashboard</a>
-            <a onClick={this.changeNavbarTitle} href="#"><img src={require("./lib/qa.png")}/>        Q&A</a>
-            <a onClick={this.changeNavbarTitle} href="#"><img src={require("./lib/activity.png")}/>        Activities</a>
-            <a onClick={this.changeNavbarTitle} href="#"><img src={require("./lib/nearby.png")}/>        People nearby</a>
+            <a onClick={this.changeNavbarTitle} href="#"><img src={require("../lib/sidebar/dashboard.png")}/>        Dashboard</a>
+            <a onClick={this.changeNavbarTitle} href="#"><img src={require("../lib/sidebar/qa.png")}/>        Q&A</a>
+            <a onClick={this.changeNavbarTitle} href="#"><img src={require("../lib/sidebar/activity.png")}/>        Activities</a>
+            <a onClick={this.changeNavbarTitle} href="#"><img src={require("../lib/sidebar/nearby.png")}/>        People nearby</a>
             <a href="#" id="logout">log out</a>
         </div>
 
