@@ -1,10 +1,10 @@
 
 /* The sidebar menu */
 .sidebar {
+    z-index: 1000;
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
     top: 0;
     left: 0;
     background-color: #a5d6a7; /* Green*/
@@ -78,6 +78,7 @@
 
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
   #main {
+    z-index: 999;
     position: fixed;
     top: 0;
     width: 100%;

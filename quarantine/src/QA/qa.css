@@ -2,9 +2,8 @@
     font-size: 70px;
     text-align: left;
 }
-
-.container{
-    height: 150px;
+.searchGroup{
+    margin-top: 40px;
 }
 
 .jumbotron{
@@ -17,7 +16,16 @@
     display: inline-block;
 }
 
+.like{
+    height: 30px;
+    position: absolute;
+    right: 200px;
+    text-align: center;
+    line-height: 15px;
+}
+
 .profilephoto{
+    margin-right: 8px;
     width: 60px;
     border-radius: 50%;
 }
@@ -33,4 +41,47 @@ h4{
 
 .Media{
     margin-bottom: 100px;
+}
+
+#post{
+    width: 800px;
+    height: 100px;
+}
+
+#tags{
+    width: 100px;
+    position: relative;
+    left: 20px;
+}
+
+.tagDiv{
+    position: relative;
+    float: left;
+    left: 244px;
+    width: 100px
+}
+
+.anonnCheck{
+    padding-top: 5px;
+    padding-left: 40px;
+    position: relative;
+    right: 300px;
+    display: inline-block
+}
+
+.postForm{
+    position: relative;
+}
+
+.profilephotoPost{
+    position: absolute;
+    left: 180px;
+    top: 8px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.replyBtn{
+    padding-top: 5px;
+    height: 18px;
 }
