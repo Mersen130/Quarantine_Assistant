@@ -1,0 +1,23 @@
+.jumbotronQuest{
+    position: relative;
+    height: 100vh;
+    background-color: #fafff0;
+}
+
+.containerQuest{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    margin: -15% 0 0 -25%;
+}
+
+.btnQuest{
+    margin: 20px 12px 12px 12px;
+    border: 0;
+}
+
+.btnQuest:hover{
+    background-color: #a5d6a7;
+}

@@ -1,71 +1,74 @@
-.title{
-    font-size: 70px;
-    text-align: left;
+.titleQa{
+    font-size: 8vh;
+    text-align: center;
 }
-.searchGroup{
-    margin-top: 40px;
+.searchGroupQa{
+    margin-top: 5vh;
 }
 
-.jumbotron{
+.jumbotronQa{
     background-color: #fafff0;
+    height: auto;
 }
 
-.form-group{
-    width: 800px;
-    margin-right: 20px;
+.form-groupQa{
+    width: 99vh;
+    margin-right: 2vh;
     display: inline-block;
 }
 
-.like{
-    height: 30px;
+.likeQa{
+    height: 4vh;
     position: absolute;
-    right: 200px;
+    right: 5%;
     text-align: center;
     line-height: 15px;
 }
 
-.profilephoto{
-    margin-right: 8px;
-    width: 60px;
+.profilephotoQa{
+    margin-right: 2vh;
+    width: 7.5vh;
     border-radius: 50%;
 }
 
-h4{
+.h4Qa{
     text-align: left;
 }
 
-.content{
-    margin-left: 20px;
+.contentQa{
+    margin-left: 2vh;
     text-align: left;
 }
 
 .Media{
-    margin-bottom: 100px;
+    margin-bottom: 10vh;
+    min-height: 20vh;
+    overflow: hidden;
 }
 
 #post{
-    width: 800px;
-    height: 100px;
+    width: 99vh;
+    height: 15vh;
 }
 
 #tags{
-    width: 100px;
+    width: 12vh;
     position: relative;
-    left: 20px;
+    left: 2vh;
 }
 
 .tagDiv{
     position: relative;
     float: left;
-    left: 244px;
-    width: 100px
+    left: 29.5vh;
+    width: 10vh
 }
 
 .anonnCheck{
-    padding-top: 5px;
-    padding-left: 40px;
+    padding-top: 1vh;
+    padding-left: 4vh;
     position: relative;
-    right: 300px;
+    right: 35vh;
     display: inline-block
 }
 
@@ -75,13 +78,35 @@ h4{
 
 .profilephotoPost{
     position: absolute;
-    left: 180px;
+    left: 22vh;
     top: 8px;
-    width: 60px;
+    width: 7.5vh;
     border-radius: 50%;
 }
 
 .replyBtn{
     padding-top: 5px;
     height: 18px;
+}
+
+.replyInput{
+    position: absolute;
+    left: 10%;
+    width: 50%;
+    visibility: collapse;
+}
+
+.borderQa{
+    position: relative;
+    min-height: 140px;
+    overflow: hidden;
+}
+
+.mt-3Qa{
+    margin-left: 30vh;
+}
+
+#dropDown{
+    position: absolute;
+    left: 10vh;
 }
