@@ -15,3 +15,7 @@ CSC309 Team 23 Project Phase 1 Meeting Memo
 * June21 2020
    * progress check
    * Todo: figure out a way to switch views
+
+* June24 2020
+   * progress check
+   * prepare for TA meeting
