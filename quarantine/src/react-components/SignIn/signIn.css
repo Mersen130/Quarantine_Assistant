@@ -1,0 +1,82 @@
+
+.Image{
+	margin:auto;
+}
+h2{
+	color:white;
+	font-family: Montserrat;
+}
+.signInForm{
+	width:100%;
+	max-width:396px;
+	height:100%;
+	max-height:500px;
+	margin:auto;
+	margin-top: 100px;
+	padding:15px;
+
+}
+
+#formEmail{
+	width:396px;
+	height:56px;
+	margin:auto;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	background-color: #a5d6a7;
+	font-size: 16px;
+}
+
+#formPassword{
+	width:396px;
+	height:56px;
+	margin-top:11px;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	font-size:16px;
+	background-color: #a5d6a7;
+}
+
+.form-check{
+	margin-top:11px;
+	position:absolute;
+	color:black;
+}
+.btn-primary{
+	width:396px;
+	height:36px;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	font-size:16px;
+	background-color: #a5d6a7;
+	color:white;
+}
+.reset{
+	float:left;
+	background-color: white;
+	border:solid;
+	border-color: white;
+	color:#1976d2;
+	font-size:14px;
+}
+.reset:hover{
+	text-decoration: underline;
+}
+.signUp{
+	float:right;
+	margin-right:-10%;
+	background-color: white;
+	border:solid;
+	border-color: white;
+	color:#1976d2;
+	font-size:14px;
+}
+.signUp:hover{
+	text-decoration: underline;
+}
