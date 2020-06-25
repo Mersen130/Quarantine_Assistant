@@ -4,6 +4,7 @@ import "./App.css";
 import Sidebar from "./SideNavBar/sidebar.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Dashboard from "./Dashboard/index";
+import UserProfile from "./userProfile/index";
 class App extends React.Component {
   render() {
     return (
@@ -12,6 +13,7 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Route path="/dashboard/" component={Dashboard} />
+            <Route path="/userprofile/" component={UserProfile} />
           </Switch>
         </Router>
       </div>

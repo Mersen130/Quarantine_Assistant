@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Row, Button, Col, Container } from "shards-react";
+import { Row, Col, Container } from "shards-react";
 import ProgressCheck from "./ProgressCheck";
 import ContentCard from "./ContentCard";
 
@@ -7,7 +7,8 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Container fluid className="main-content-container px-xl-5">
+        <Container fluid className="main-content-container px-4 pb-4">
+          <h2>Your quarantine progress:</h2>
           <Row>
             <Col lg="12">
               <ProgressCheck />
