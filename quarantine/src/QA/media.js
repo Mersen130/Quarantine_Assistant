@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './qa.css';
+import '../components.css'
 
 class Media extends React.Component {
 

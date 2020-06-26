@@ -1,5 +1,6 @@
 import React from 'react';
-import './qa.css';
+import '../components.css'
+
 class DropDown extends React.Component {
 
     render() {
