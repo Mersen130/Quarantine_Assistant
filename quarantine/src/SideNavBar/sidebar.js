@@ -15,11 +15,11 @@ class Sidebar extends React.Component {
                     {/*Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>*/}
                     <a><img id="profilePhoto" src={require("../lib/sidebar/sampleprofile.png")} /></a>
                     <p id="profileName" >Annonymous</p>
-                    <a onClick={this.changeNavbarTitle} href="#"><img src={require("../lib/sidebar/dashboard.png")} />        Dashboard</a>
-                    <a onClick={this.changeNavbarTitle} href="#"><img src={require("../lib/sidebar/qa.png")} />        Q&A</a>
-                    <a onClick={this.changeNavbarTitle} href="#"><img src={require("../lib/sidebar/activity.png")} />        Activities</a>
+                    <a onClick={this.changeNavbarTitle} href="/dashboard"><img src={require("../lib/sidebar/dashboard.png")} />        Dashboard</a>
+                    <a onClick={this.changeNavbarTitle} href="/qa"><img src={require("../lib/sidebar/qa.png")} />        Q&A</a>
+                    <a onClick={this.changeNavbarTitle} href="/activity"><img src={require("../lib/sidebar/activity.png")} />        Activities</a>
                     <a onClick={this.changeNavbarTitle} href="#"><img src={require("../lib/sidebar/nearby.png")} />        People nearby</a>
-                    <a href="#" id="logout">log out</a>
+                    <a href="http://www.google.com" id="logout">log out</a>
                 </div>
 
                 <div id="main">
