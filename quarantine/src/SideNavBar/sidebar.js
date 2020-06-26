@@ -1,8 +1,9 @@
-import React from 'react';
-import '../App.css';
-import './sidebar.css'
+import React from "react";
+import "../App.css";
+import "./sidebar.css";
 
 class Sidebar extends React.Component {
+  state = { title: "Dashboard" };
 
     state = { title: "Dashboard" }
 
