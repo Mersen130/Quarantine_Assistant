@@ -109,4 +109,5 @@
 #dropDown{
     position: absolute;
     left: 10vh;
+    width: 50px;
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Sidebar from "./SideNavBar/sidebar.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -12,11 +11,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <Sidebar />
-        <QA>
         <Router>
           <Switch>
             <Route path="/dashboard/" component={Dashboard} />
             <Route path="/userprofile/" component={UserProfile} />
+            <Route path="/QA/" component={QA} />
+            <Route path="/questionnaire/" component={Questionnaire} />
           </Switch>
         </Router>
       </div>
