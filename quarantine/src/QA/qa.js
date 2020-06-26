@@ -1,9 +1,10 @@
 
 import React from 'react';
-import './qa.css';
+import '../components.css'
 import Media from './media';
 import { uid } from "react-uid";
 import DropDown from './dropdown';
+import Sidebar from '../SideNavBar/sidebar.js';
 
 
 class QA extends React.Component {
@@ -17,6 +18,7 @@ class QA extends React.Component {
     render() {
         return (
             <div>
+                <Sidebar />
                 <div className="jumbotron jumbotronQa jumbotron-fluid">
                     <div className="container">
                         <h1 className="title titleQa">Quanrantine Assistant Communities</h1>

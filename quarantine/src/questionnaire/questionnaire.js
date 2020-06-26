@@ -1,5 +1,5 @@
 import React from 'react';
-import "./questionnaire.css"
+import '../components.css'
 import "./question.js"
 import Question from './question.js';
 
