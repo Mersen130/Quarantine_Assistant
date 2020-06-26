@@ -18,7 +18,7 @@ class Media extends React.Component {
         return (
             <div className="container mt-3 mt-3Qa Media">
                 <div className="media border borderQa p-3">
-                    <img src={require("../lib/profilephotos/Qixin.png")} className="profilephotoQa" />
+                    <img src={require("../lib/profilephotos/"+names[0]+".png")} className="profilephotoQa" />
                     <div className="media-body">
                         <h4 className="h4Qa">{names[0]} <small><i>Posted on {times[0].toString().slice(0, 25)}</i></small></h4>
                         <p className="content contentQa">{contents[0]} {names.length == 1 && <input type="image" src={require("../lib/qa/reply.png")} className="replyBtn" onClick={()=>this.showReply(0, mediaId)}/>} <button onClick={(e)=>this.like(0, likes[0], e)} className="likeQa btn btn-primary">Like</button></p>
@@ -26,7 +26,7 @@ class Media extends React.Component {
                         <div>
                             {indices.map(i => (
                             <div className="media p-3">
-                                <img src={require("../lib/profilephotos/Yifei.png")} className="profilephotoQa" />
+                                <img src={require("../lib/profilephotos/"+names[i]+".png")} className="profilephotoQa" />
                                 <div className="media-body">
                                     <h4 className="h4Qa">{names[i]} <small><i> Replied on {times[i].toString().slice(0, 25)}</i></small></h4>
                                     <p class="content contentQa">{contents[i]} {i==names.length-1 && <input className="replyBtn" type="image" src={require("../lib/qa/reply.png")} onClick={()=>this.showReply(i, mediaId)}/>} <button onClick={(e)=>this.like(1, likes[i], e)} className="likeQa btn btn-primary">Like</button></p>
@@ -70,7 +70,7 @@ class Media extends React.Component {
     reply = (i, mediaId, e) => {
         e.preventDefault();
         if (e.keyCode === 13){
-            this.props.handleReply("Yifei", e.target.value);
+            this.props.handleReply("user1", e.target.value);
             this.showReply(i, mediaId);
         }
 

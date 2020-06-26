@@ -10,8 +10,8 @@ import Sidebar from '../SideNavBar/sidebar.js';
 class QA extends React.Component {
     state = {
         /*user = this.props.user*/
-        postsList: [{ names: ["Qixin", "Yifei"], contents: ["Aba aba aba? #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 2], tags: ["#aba", "#aba"] },
-        { names: ["Qixin", "Yifei"], contents: ["Aba aba aba? #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [1, 659], tags: ["#aba", "#aba"] }]
+        postsList: [{ names: ["user2", "user1"], contents: ["Aba aba aba?1 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [10, 2], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?2 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] }]
 
     }
 
@@ -34,7 +34,7 @@ class QA extends React.Component {
 
                 <div>
                     <form action="#" className="postForm">
-                        <img src={require("../lib/profilephotos/Qixin.png")} className="profilephotoPost" />
+                        <img src={require("../lib/profilephotos/user1.png")} className="profilephotoPost" />
 
                         <div className="form-group form-groupQa">
                             <input className="form-control" id="post" placeholder="Make a new post here..." name="email" />
@@ -52,7 +52,7 @@ class QA extends React.Component {
                 </div>
                 <br /><hr /><br /><br /><br />
                 <div>
-                    <span id="dropDown"><DropDown/></span>
+                    <span id="dropDown"><DropDown handleOrder={this.handleOrder}/></span>
                     {this.state.postsList.map((post, mediaNum) => (
                     <Media key={uid(post)} postsList={post} handleLike={(i, amt) => this.like(i, mediaNum, amt)} handleReply={(name, content) => this.handleReply(mediaNum, name, content)} mediaId={mediaNum} />
                      ))}
@@ -121,6 +121,67 @@ class QA extends React.Component {
         newList[mediaId].likes.push(0);
         newList[mediaId].tags.push("");
         this.setState({postsList: newList});
+    }
+
+    swap = (items, firstIndex, secondIndex)=>{
+        let temp = items[firstIndex];
+        items[firstIndex] = items[secondIndex];
+        items[secondIndex] = temp;
+    }
+
+    selectionSort = (items, order) => {
+
+        let len = items.length, max;
+    
+        for (let i=0; i < len; i++){
+    
+            //set maximum to this position
+            max = i;
+    
+            //check the rest of the array to see if anything is smaller
+
+            if (order == "Newest"){ // time based
+                for (let j=i+1; j < len; j++){
+                    if (items[j].times[0] > items[max].times[0]){
+                        max = j;
+                    }
+                }
+            } else if (order == "Top"){ // like based
+                for (let j=i+1; j < len; j++){
+                    if (items[j].likes[0] > items[max].likes[0]){
+                        max = j;
+                    }
+                }
+            } else{ // reply based
+                for (let j=i+1; j < len; j++){
+                    if (items[j].contents.length > items[max].contents.length){
+                        max = j;
+                    }
+                }
+            }
+    
+            //if the maximum isn't in the position, swap it
+            if (i != max){
+                this.swap(items, i, max);
+            }
+        }
+    
+        return items;
+    }
+
+
+    handleOrder = (e) =>{
+        console.log(e);
+        const postsListB = this.state.postsList;
+        if (e == "Newest"){ // time based
+            this.setState({postsList: this.selectionSort(postsListB, "Newest")})
+        } else if (e == "Top rated"){ // like based
+            console.log(this.selectionSort(postsListB, "Top"));
+            this.setState({postsList: this.selectionSort(postsListB, "Top")})
+        } else{ // reply based
+            this.setState({postsList: this.selectionSort(postsListB, "Hottest")})
+        }
+        return;
     }
 }
 
