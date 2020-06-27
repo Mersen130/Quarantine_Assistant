@@ -39,7 +39,7 @@ class Sidebar extends React.Component {
           <a onClick={this.changeNavbarTitle} href="#">
             <img src={require("../lib/sidebar/nearby.png")} /> People nearby
           </a>
-          <a href="http://www.google.com" id="logout">
+          <a href="/Signin" id="logout">
             log out
           </a>
         </div>
