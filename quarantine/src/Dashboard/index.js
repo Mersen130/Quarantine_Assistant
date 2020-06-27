@@ -2,6 +2,8 @@ import React from "react";
 import { Row, Col, Container } from "shards-react";
 import ProgressCheck from "./ProgressCheck";
 import ContentCard from "./ContentCard";
+import "shards-ui/dist/css/shards.min.css";
+import "./../theme/theme.css";
 
 class Dashboard extends React.Component {
   render() {

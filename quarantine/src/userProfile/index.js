@@ -2,6 +2,8 @@ import React from "react";
 import { Container, Row, Col } from "shards-react";
 import UserBrief from "./userBrief";
 import UserDetails from "./userDetails";
+import "shards-ui/dist/css/shards.min.css";
+import "./../theme/theme.css";
 
 class UserProfile extends React.Component {
   render() {
