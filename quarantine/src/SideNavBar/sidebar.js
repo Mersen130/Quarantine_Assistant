@@ -4,7 +4,7 @@ import '../components.css'
 
 class Sidebar extends React.Component {
 
-    state = { title: "Dashboard" }
+    state = { title: this.props.title }
 
     render() {
         return (

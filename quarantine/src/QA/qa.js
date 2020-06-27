@@ -5,24 +5,40 @@ import Media from './media';
 import { uid } from "react-uid";
 import DropDown from './dropdown';
 import Sidebar from '../SideNavBar/sidebar.js';
+import Pagination from './pagination.js';
 
 
 class QA extends React.Component {
     state = {
         /*user = this.props.user*/
         postsList: [{ names: ["user2", "user1"], contents: ["Aba aba aba?1 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [10, 2], tags: ["#aba", "#aba"] },
-        { names: ["user2", "user1"], contents: ["Aba aba aba?2 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] }]
+        { names: ["user2", "user1"], contents: ["Aba aba aba?2 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?3 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?4 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?5 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?6 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?7 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?8 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?9 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?10 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?11 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?12 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?13 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?14 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?15 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user2", "user1"], contents: ["Aba aba aba?16 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] }],
+        currShown: [0, 10]
 
     }
 
     render() {
         return (
             <div>
-                <Sidebar />
+                <Sidebar title={"Q&A"}/>
                 <div className="jumbotron jumbotronQa jumbotron-fluid">
                     <div className="container">
                         <h1 className="title titleQa">Quanrantine Assistant Communities</h1>
-                        <p>Find answers, ask questions, and connect with our community of the most authoritative doctors from around the world.</p>
+                        <p>Find answers, ask questions, and connect with our community of the most authoritative doctors around the world.</p>
                         <form className="searchGroup searchGroupQa">
                             <div className="form-group form-groupQa">
                                 <input type="text" id="searchedTag" className="form-control" placeholder="Search by tags..." />
@@ -53,11 +69,11 @@ class QA extends React.Component {
                 <br /><hr /><br /><br /><br />
                 <div>
                     <span id="dropDown"><DropDown handleOrder={this.handleOrder}/></span>
-                    {this.state.postsList.map((post, mediaNum) => (
+                    {this.state.postsList.slice(this.state.currShown[0], this.state.currShown[1]).map((post, mediaNum) => (
                     <Media key={uid(post)} postsList={post} handleLike={(i, amt) => this.like(i, mediaNum, amt)} handleReply={(name, content) => this.handleReply(mediaNum, name, content)} mediaId={mediaNum} />
                      ))}
                 </div>
-                
+                <Pagination len={Math.ceil(this.state.postsList.length/10)} handleClick={this.handlePage}/>
                 <button type="button" onClick={this.backTop} className="btn btn-primary btn-block">Back to top</button>
             </div>
         );
@@ -182,6 +198,16 @@ class QA extends React.Component {
             this.setState({postsList: this.selectionSort(postsListB, "Hottest")})
         }
         return;
+    }
+
+    handlePage = (mode, page) => {
+        if (mode === 'next'){
+            if (this.state.currShown[1]>=this.state.postsList.length) return;
+            this.setState({currShown: [this.state.currShown[0] + 10, this.state.currShown[1] + 10]});
+        } else{
+            this.setState({currShown: [(page-1)*10, page*10]});
+        }
+        
     }
 }
 
