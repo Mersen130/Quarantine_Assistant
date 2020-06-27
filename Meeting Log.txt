@@ -19,3 +19,7 @@ CSC309 Team 23 Project Phase 1 Meeting Memo
 * June24 2020
    * progress check
    * prepare for TA meeting
+
+* June27 2020
+   * merge everything
+   * TODO: resolve framework & classname conflicts
