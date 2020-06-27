@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Form, Image, Row, Col,FormGroup, Label, Nav} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignUp.css';
 
@@ -35,9 +34,7 @@ class SignUp extends React.Component{
     			<Form.Check type="checkbox" label="I want to recieve notifications via email" />
   			</Form.Group>
 			<Button variant="primary" type="submit">Sign Up</Button>
-			<LinkContainer to="/">
-        <Button variant = "link">Already have an account? Sign In</Button>
- 		 </LinkContainer>
+        		<Button variant = "link">Already have an account? Sign In</Button>
     </Form>
 		</div>
 			);
