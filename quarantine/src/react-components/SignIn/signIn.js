@@ -1,5 +1,4 @@
 import React from 'react';
-import {LinkContainer} from 'react-router-bootstrap';
 import {Button, Form, FormGroup, Label, Image} from 'react-bootstrap';
 import './signIn.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,12 +22,8 @@ class SignIn extends React.Component{
   			</Form.Group>
   			<Button variant="primary" type="submit">Submit
   			</Button>
-        <LinkContainer to="/Reset">
-  			 <Button variant="link" bsPrefix='reset'>Forgot password?</Button>
-         </LinkContainer>
-         <LinkContainer to="/SignUp">
-  			   <Button variant="link" bsPrefix='signUp'>Don't have an account? Sign Up</Button>
-  			</LinkContainer>
+  			<Button variant="link" bsPrefix='reset'>Forgot password?</Button>
+  			<Button variant="link" bsPrefix='signUp'>Don't have an account? Sign Up</Button>
 		</Form>
 		</div>
 			);
