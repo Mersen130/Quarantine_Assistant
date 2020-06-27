@@ -1,0 +1,25 @@
+import React from "react";
+import { Container, Row, Col } from "shards-react";
+import UserBrief from "./userBrief";
+import UserDetails from "./userDetails";
+import "shards-ui/dist/css/shards.min.css";
+import "./../theme/theme.css";
+
+class UserProfile extends React.Component {
+  render() {
+    return (
+      <Container fluid className="main-content-container px-4">
+        <Row>
+          <Col lg="4">
+            <UserBrief />
+          </Col>
+          <Col lg="8">
+            <UserDetails />
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
+
+export default UserProfile;
