@@ -1,0 +1,106 @@
+body{
+	background-color: #00bfa5
+}
+
+h2{
+	color:black;
+	font-family: Montserrat;
+}
+.signUpForm{
+	margin:auto;
+	width:396px;
+	height:500px;
+	margin-top: 100px;
+	padding:15px;
+
+}
+h2.signUp{
+	text-align: center;
+	margin:auto;
+}
+#formGridFirstName{
+	width:190px;
+	height:56px;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	background-color: #a5d6a7;
+	font-size: 16px;	
+}
+#formGridLastName{
+	margin-left:5%;
+	width:190px;
+	height:56px;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	background-color: #a5d6a7;
+	font-size: 16px;
+}
+
+#formGridEmail{
+	width:396px;
+	height:56px;
+	margin:auto;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	background-color: #a5d6a7;
+	font-size: 16px;
+}
+
+#formGridPassword{
+	width:396px;
+	height:56px;
+	margin:auto;
+	margin-top:11px;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	font-size:16px;
+	background-color: #a5d6a7;
+}
+#formGridDocId{
+	width:396px;
+	height:56px;
+	margin:auto;
+	margin-top:11px;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	font-size:16px;
+	background-color: #a5d6a7;
+}
+
+#formGridCheckbox{
+	margin-top:10px;
+	position:absolute;
+	margin-left:-10%;
+	color:white;
+}
+
+.btn-primary{
+	width:396px;
+	height:36px;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	font-size:16px;
+	background-color: #a5d6a7;
+	color:white;
+}
+.btn-link{
+	margin-left:20%;
+	font-size:16px;
+	font-family:Montserrat;
+}
+
+::placeholder{
+	color:white;
+}
