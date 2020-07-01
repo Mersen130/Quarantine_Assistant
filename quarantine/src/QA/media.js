@@ -28,7 +28,7 @@ class Media extends React.Component {
                             <div className="media p-3">
                                 <img src={require("../lib/profilephotos/"+names[i]+".png")} className="profilephotoQa" />
                                 <div className="media-body">
-                                    <h4 className="h4Qa">{names[i]} <small><i> Replied on {times[i].toString().slice(0, 25)}</i></small></h4>
+                                    <h4 className="h4Qa">{names[i]} <small><i> Doctor replied on {times[i].toString().slice(0, 25)}</i></small></h4>
                                     <p class="content contentQa">{contents[i]} {i==names.length-1 && <input className="replyBtn" type="image" src={require("../lib/qa/reply.png")} onClick={()=>this.showReply(i, mediaId)}/>} <button onClick={(e)=>this.like(1, likes[i], e)} className="likeQa btn btn-primary">Like</button></p>
                                     {i==names.length-1 && <div><input id={"replyInput"+i.toString(10)+mediaId.toString(10)} className="replyInput" type="text" onKeyUp={(e) => this.reply(i, mediaId, e)} placeholder={"reply to "+names[i]}/></div>}
                                 </div>
