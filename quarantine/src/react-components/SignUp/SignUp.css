@@ -1,106 +1,107 @@
-body{
+.wrapper{
+	height:100vh;
+	width:100%;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
 	background-color: #00bfa5
+
 }
 
 h2{
-	color:black;
+	text-align: center;
+	color:white;
 	font-family: Montserrat;
 }
-.signUpForm{
+#signUpLogo{
+	width:40px;
+	height:40px;
 	margin:auto;
-	width:396px;
-	height:500px;
+}
+
+#signUpForm{
+	margin:auto;
+	border-radius:10px;
+	box-shadow: 0px 10px 50px #555;
+	background-color:#a5d6a7;
+	width:420px;
+	height:470px;
 	margin-top: 100px;
 	padding:15px;
+}
 
-}
-h2.signUp{
-	text-align: center;
-	margin:auto;
-}
-#formGridFirstName{
+.signUpName{
 	width:190px;
 	height:56px;
+	border-radius: 20px;
 	border-width: 2px;
 	border-color: #66bb6a;
 	border-style:solid;
 	border-radius: 20px;
-	background-color: #a5d6a7;
-	font-size: 16px;	
+	outline:none;
+	font-size: 15px;
 }
-#formGridLastName{
-	margin-left:5%;
+
+
+
+.emailDoc{
+	outline:none;
+	width:390px;
+	height:56px;
+	margin-top:11px;
+	border-width: 2px;
+	border-color: #66bb6a;
+	border-style:solid;
+	border-radius: 20px;
+	font-size: 15px;
+}
+
+.pswd{
+	outline:none;
+	height:56px;
 	width:190px;
-	height:56px;
-	border-width: 2px;
-	border-color: #66bb6a;
-	border-style:solid;
-	border-radius: 20px;
-	background-color: #a5d6a7;
-	font-size: 16px;
-}
-
-#formGridEmail{
-	width:396px;
-	height:56px;
-	margin:auto;
-	border-width: 2px;
-	border-color: #66bb6a;
-	border-style:solid;
-	border-radius: 20px;
-	background-color: #a5d6a7;
-	font-size: 16px;
-}
-
-#formGridPassword{
-	width:396px;
-	height:56px;
 	margin:auto;
 	margin-top:11px;
 	border-width: 2px;
 	border-color: #66bb6a;
 	border-style:solid;
 	border-radius: 20px;
-	font-size:16px;
-	background-color: #a5d6a7;
+	font-size:15px;
 }
-#formGridDocId{
-	width:396px;
-	height:56px;
-	margin:auto;
-	margin-top:11px;
-	border-width: 2px;
-	border-color: #66bb6a;
-	border-style:solid;
-	border-radius: 20px;
-	font-size:16px;
-	background-color: #a5d6a7;
+#labelViaEmail{
+	font-size:14px;
+	font-family:Montserrat;
 }
-
-#formGridCheckbox{
-	margin-top:10px;
-	position:absolute;
-	margin-left:-10%;
-	color:white;
+#signUpCheckbox{
+	margin-top:-10px;
 }
-
-.btn-primary{
+#signUpBtn{
 	width:396px;
 	height:36px;
+	outline:none;
 	border-width: 2px;
 	border-color: #66bb6a;
 	border-style:solid;
 	border-radius: 20px;
 	font-size:16px;
+	background-color: white;
+	color:grey;
+	margin-top: 11px;
+}
+#signUpBtn:hover{
 	background-color: #a5d6a7;
 	color:white;
+	box-shadow: 0px 5px 20px #555;
 }
-.btn-link{
-	margin-left:20%;
-	font-size:16px;
+#goLogin{
+	float:right;
+	font-size:14px;
 	font-family:Montserrat;
 }
 
-::placeholder{
-	color:white;
+.errorMessage{
+	color:red;
+	font-family:Montserrat;
+	font-size:14px;
 }
+

@@ -13,7 +13,7 @@ class App extends React.Component {
       <React.Fragment>
       	<Router>
       		<Switch>
-      			<Route exact path="/" component={SignIn} />
+      			<Route path="/SignIn" component={SignIn} />
       			<Route path="/SignUp" component={SignUp} />
       			<Route path="/Reset" component={Reset} />
       		</Switch>

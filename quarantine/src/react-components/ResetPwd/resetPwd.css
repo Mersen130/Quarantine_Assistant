@@ -1,41 +1,68 @@
+.wrapper{
+	height:100vh;
+	width:100%;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #00bfa5
 
-#img{
+}
+
+#resetLogo{
+	width:40px;
+	height:40px;
 	margin:auto;
 }
-h3{
+.resetHeader{
+	margin-top:11px;
+	text-align: center;
 	color:black;
 	font-family: Montserrat;
 }
-.resetForm{
-	width:100%;
-	max-width:396px;
-	height:100%;
-	max-height:500px;
+#resetForm{
 	margin:auto;
+	border-radius:10px;
+	box-shadow: 0px 10px 50px #555;
+	background-color:#a5d6a7;
+	width:420px;
+	height:400px;
 	margin-top: 100px;
 	padding:15px;
 
 }
 
-#registedEmail{
-	width:396px;
+.resetInput{
+	outline:none;
+	width:390px;
 	height:56px;
-	margin:auto;
+	margin-top:11px;
 	border-width: 2px;
 	border-color: #66bb6a;
 	border-style:solid;
 	border-radius: 20px;
-	background-color: #a5d6a7;
-	font-size: 16px;
+	font-size: 15px;
 }
-.btn-primary{
+#resetBtn{
 	width:396px;
 	height:36px;
+	outline:none;
 	border-width: 2px;
 	border-color: #66bb6a;
 	border-style:solid;
 	border-radius: 20px;
 	font-size:16px;
+	background-color: white;
+	color:grey;
+	margin-top: 11px;
+}
+#resetBtn:hover{
 	background-color: #a5d6a7;
 	color:white;
+	box-shadow: 0px 5px 20px #555;
+}
+#resetLink{
+	margin-top:11px;
+	float:right;
+	font-family: Montserrat;
+	font-size:16px;
 }
