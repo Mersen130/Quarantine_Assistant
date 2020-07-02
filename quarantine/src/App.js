@@ -19,14 +19,13 @@ class App extends React.Component {
               <Route exact path="/" component={SignIn} />
               <Route path="/SignUp" component={SignUp} />
               <Route path="/Reset" component={Reset} />
-            <Route path="/questionnaire/" component={Questionnaire} />
-            <Route path="/qa/" component={QA} />
-            <Route path="/dashboard/" component={Dashboard} />
-            <Route path="/userprofile/" component={UserProfile} />
+              <Route path="/questionnaire/" component={Questionnaire} />
+              <Route path="/qa/" component={QA} />
+              <Route path="/dashboard/" component={Dashboard} />
+              <Route path="/userprofile/" component={UserProfile} />
             </Switch>
           </Router>
         </React.Fragment>
-
       </div>
     );
   }
