@@ -11,21 +11,21 @@ import Pagination from './pagination.js';
 class QA extends React.Component {
     state = {
         /*user = this.props.user*/
-        postsList: [{ names: ["user2", "user1"], contents: ["Aba aba aba?1 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [10, 2], tags: ["#aba", "#aba"] },
+        postsList: [{ names: ["user1", "user2"], contents: ["Aba aba aba?1 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [10, 2], tags: ["#aba", "#aba"] },
         { names: ["user2", "user1"], contents: ["Aba aba aba?2 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
-        { names: ["user2", "user1"], contents: ["Aba aba aba?3 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user1", "user2"], contents: ["Aba aba aba?3 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
         { names: ["user2", "user1"], contents: ["Aba aba aba?4 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
-        { names: ["user2", "user1"], contents: ["Aba aba aba?5 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user1", "user2"], contents: ["Aba aba aba?5 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
         { names: ["user2", "user1"], contents: ["Aba aba aba?6 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
-        { names: ["user2", "user1"], contents: ["Aba aba aba?7 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user1", "user2"], contents: ["Aba aba aba?7 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
         { names: ["user2", "user1"], contents: ["Aba aba aba?8 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
-        { names: ["user2", "user1"], contents: ["Aba aba aba?9 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user1", "user2"], contents: ["Aba aba aba?9 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
         { names: ["user2", "user1"], contents: ["Aba aba aba?10 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
-        { names: ["user2", "user1"], contents: ["Aba aba aba?11 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user1", "user2"], contents: ["Aba aba aba?11 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
         { names: ["user2", "user1"], contents: ["Aba aba aba?12 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
-        { names: ["user2", "user1"], contents: ["Aba aba aba?13 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user1", "user2"], contents: ["Aba aba aba?13 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
         { names: ["user2", "user1"], contents: ["Aba aba aba?14 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
-        { names: ["user2", "user1"], contents: ["Aba aba aba?15 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
+        { names: ["user1", "user2"], contents: ["Aba aba aba?15 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] },
         { names: ["user2", "user1"], contents: ["Aba aba aba?16 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [100, 659], tags: ["#aba", "#aba"] }],
         currShown: [0, 10]
 
@@ -70,7 +70,7 @@ class QA extends React.Component {
                 <div>
                     <span id="dropDown"><DropDown handleOrder={this.handleOrder}/></span>
                     {this.state.postsList.slice(this.state.currShown[0], this.state.currShown[1]).map((post, mediaNum) => (
-                    <Media key={uid(post)} postsList={post} handleLike={(i, amt) => this.like(i, mediaNum, amt)} handleReply={(name, content) => this.handleReply(mediaNum, name, content)} mediaId={mediaNum} />
+                    <Media key={uid(post)} postsList={post} handleLike={(i, amt) => this.like(i, mediaNum, amt)} handleReply={(name, content) => this.handleReply(mediaNum, name, content)} handleRemove={(e)=>this.handleRemove(mediaNum, e)} mediaId={mediaNum} />
                      ))}
                 </div>
                 <Pagination len={Math.ceil(this.state.postsList.length/10)} handleClick={this.handlePage}/>
@@ -112,7 +112,7 @@ class QA extends React.Component {
         }
         const tags = document.querySelector("#tags");
         console.log(post.value);
-        this.state.postsList.splice(0, 0, { names: ["Qixin"], contents: [post.value + " " + tags.value], times: [new Date()], likes: [0], tags: [tags.value] });
+        this.state.postsList.splice(0, 0, { names: ["user1"], contents: [post.value + " " + tags.value], times: [new Date()], likes: [0], tags: [tags.value] });
         const newList = this.state.postsList;
         this.setState({ postsList: newList })
         // todo: a server call that sends data
@@ -208,6 +208,14 @@ class QA extends React.Component {
             this.setState({currShown: [(page-1)*10, page*10]});
         }
         
+    }
+
+    handleRemove = (mediaNum, e) => {
+        e.preventDefault();
+        const postsListB = this.state.postsList;
+        postsListB.splice(mediaNum, 1);
+        console.log(postsListB);
+        this.setState({postsList: postsListB});
     }
 }
 
