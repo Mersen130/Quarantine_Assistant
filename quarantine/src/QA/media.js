@@ -21,7 +21,7 @@ class Media extends React.Component {
                     <img src={require("../lib/profilephotos/"+names[0]+".png")} className="profilephotoQa" />
                     <div className="media-body">
                         <h4 className="h4Qa">{names[0]} <small><i>Posted on {times[0].toString().slice(0, 25)}</i></small></h4>
-        <p className="content contentQa">{contents[0]} {names[0] === 'user1' && <a href="#" onClick={this.props.handleRemove}>delete</a>} {names.length == 1 && <input type="image" src={require("../lib/qa/reply.png")} className="replyBtn" onClick={()=>this.showReply(0, mediaId)}/>} <button onClick={(e)=>this.like(0, likes[0], e)} className="likeQa btn btn-primary">Like</button></p>
+        <p className="content contentQa">{contents[0]} {names[0] === 'user1' && <a href="#" onClick={(e)=>this.props.handleRemove(0, e)}>delete</a>} {names.length == 1 && <input type="image" src={require("../lib/qa/reply.png")} className="replyBtn" onClick={()=>this.showReply(0, mediaId)}/>} <button onClick={(e)=>this.like(0, likes[0], e)} className="likeQa btn btn-primary">Like</button></p>
                         {names.length == 1 && <div><input id={"replyInput0"+mediaId.toString(10)} className="replyInput" type="text" onKeyUp={(e) => this.reply(0, mediaId, e)} placeholder={"reply to "+names[0]}/></div>}
                         <div>
                             {indices.map(i => (
@@ -29,7 +29,7 @@ class Media extends React.Component {
                                 <img src={require("../lib/profilephotos/"+names[i]+".png")} className="profilephotoQa" />
                                 <div className="media-body">
                                     <h4 className="h4Qa">{names[i]} <small><i> Doctor replied on {times[i].toString().slice(0, 25)}</i></small></h4>
-                                    <p class="content contentQa">{contents[i]} {i==names.length-1 && <input className="replyBtn" type="image" src={require("../lib/qa/reply.png")} onClick={()=>this.showReply(i, mediaId)}/>} <button onClick={(e)=>this.like(1, likes[i], e)} className="likeQa btn btn-primary">Like</button></p>
+                                    <p class="content contentQa">{contents[i]} {i==names.length-1 && <input className="replyBtn" type="image" src={require("../lib/qa/reply.png")} onClick={()=>this.showReply(i, mediaId)}/>} {names[i] === 'user1' && <a href="#" onClick={(e)=>this.props.handleRemove(i, e)}>delete</a>} <button onClick={(e)=>this.like(1, likes[i], e)} className="likeQa btn btn-primary">Like</button></p>
                                     {i==names.length-1 && <div><input id={"replyInput"+i.toString(10)+mediaId.toString(10)} className="replyInput" type="text" onKeyUp={(e) => this.reply(i, mediaId, e)} placeholder={"reply to "+names[i]}/></div>}
                                 </div>
                             </div>
