@@ -1,14 +1,14 @@
 
 import React from 'react';
 import '../components.css'
-import Media from './media';
+import MediaAdmin from './mediaAdmin';
 import { uid } from "react-uid";
 import DropDown from './dropdown';
 import Sidebar from '../SideNavBar/sidebar.js';
 import Pagination from './pagination.js';
 
 
-class QA extends React.Component {
+class QAAdmin extends React.Component {
     state = {
         /*user = this.props.user*/
         postsList: [{ names: ["user1", "user2"], contents: ["Aba aba aba?1 #aba", "Aba aba aba aba aba. #aba"], times: [new Date(), new Date()], likes: [10, 2], tags: ["#aba", "#aba"] },
@@ -37,8 +37,8 @@ class QA extends React.Component {
                 <Sidebar title={"Q&A"}/>
                 <div className="jumbotron jumbotronQa jumbotron-fluid">
                     <div className="container">
-                        <h1 className="title titleQa">Quanrantine Assistant Communities</h1>
-                        <p>Find answers, ask questions, and connect with our community of the most authoritative doctors around the world.</p>
+                        <h1 className="title titleQa">Welcome, Admin</h1>
+                        <p>Please delete inappropriate posts.</p>
                         <form className="searchGroup searchGroupQa">
                             <div className="form-group form-groupQa">
                                 <input type="text" id="searchedTag" className="form-control" placeholder="Search by tags..." />
@@ -48,29 +48,11 @@ class QA extends React.Component {
                     </div>
                 </div>
 
-                <div>
-                    <form action="#" className="postForm">
-                        <img src={require("../lib/profilephotos/user1.png")} className="profilephotoPost" />
-
-                        <div className="form-group form-groupQab">
-                            <input className="form-control" id="post" placeholder="Make a new post here..." name="email" />
-                        </div>
-                        <button type="submit" className="btn btn-primary" id="postBtn" onClick={this.post}>Post ! !  </button><br />
-                        <div className="form-group form-groupQab tagDiv">
-                            <input className="form-control" id="tags" placeholder="#Tags" name="pswd" />
-                        </div>
-                        <div className="anonnCheck">
-                            <label className="form-check-label">
-                                <input className="form-check-input" type="checkbox" /> Anonnymous to others
-                            </label>
-                        </div>
-                    </form>
-                </div>
                 <br /><hr /><br /><br /><br />
                 <div>
                     <span id="dropDown"><DropDown handleOrder={this.handleOrder}/></span>
                     {this.state.postsList.slice(this.state.currShown[0], this.state.currShown[1]).map((post, mediaNum) => (
-                    <Media key={uid(post)} postsList={post} handleLike={(i, amt) => this.like(i, mediaNum, amt)} handleReply={(name, content) => this.handleReply(mediaNum, name, content)} handleRemove={(i, e)=>this.handleRemove(i, mediaNum, e)} mediaId={mediaNum} />
+                    <MediaAdmin key={uid(post)} postsList={post} handleRemove={(i, e)=>this.handleRemove(i, mediaNum, e)} mediaId={mediaNum} />
                      ))}
                 </div>
                 <Pagination len={Math.ceil(this.state.postsList.length/10)} handleClick={this.handlePage}/>
@@ -121,22 +103,6 @@ class QA extends React.Component {
     backTop = () => {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    }
-
-    like = (i, j, amt) => {
-        const postsListB = this.state.postsList;
-        postsListB[j].likes[i] += amt;
-        this.setState({ postsList: postsListB });
-    }
-
-    handleReply = (mediaId, name, content) => {
-        const newList = this.state.postsList;
-        newList[mediaId].names.push(name);
-        newList[mediaId].contents.push(content);
-        newList[mediaId].times.push(new Date());
-        newList[mediaId].likes.push(0);
-        newList[mediaId].tags.push("");
-        this.setState({postsList: newList});
     }
 
     swap = (items, firstIndex, secondIndex)=>{
@@ -225,4 +191,4 @@ class QA extends React.Component {
     }
 }
 
-export default QA;
+export default QAAdmin;
