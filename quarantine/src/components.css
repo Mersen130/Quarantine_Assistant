@@ -231,4 +231,11 @@
     background-color: #a5d6a7;
 }
 
-
+.notification{
+    position: absolute;
+    background-color: transparent;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    border: none;
+}
