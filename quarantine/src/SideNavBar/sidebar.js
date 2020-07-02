@@ -4,7 +4,7 @@ import '../components.css'
 
 class Sidebar extends React.Component {
 
-    state = { title: this.props.title }
+    state = { title: this.props.title , numUnread: 2}
 
     render() {
         return (
@@ -24,6 +24,16 @@ class Sidebar extends React.Component {
 
                 <div id="main">
                     <button className="openbtn" onClick={this.openSide}>&#9776; {this.state.title}</button>
+
+                    <div class="dropdown notification">
+                        <button class="btn btn-secondary dropdown-toggle notification" type="button" id="dropdownMenuButton" onClick={this.removeUnread} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Notifications <span class="badge badge-danger">{this.state.numUnread!=0 && this.state.numUnread}</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Your post "aba aba..." has been deleted.</a>
+                            <a class="dropdown-item" href="#">Your reply "aba aba..." has been deleted.</a>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -43,6 +53,10 @@ class Sidebar extends React.Component {
     /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
     closeSide = () => {
         document.getElementById("mySidebar").style.width = "0";
+    }
+
+    removeUnread = () =>{
+        this.setState({numUnread: 0});
     }
 }
 
