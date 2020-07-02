@@ -8,6 +8,7 @@ import UserProfile from "./userProfile/index";
 import SignIn from "./react-components/SignIn/signIn.js";
 import SignUp from "./react-components/SignUp/signUp.js";
 import Reset from "./react-components/ResetPwd/resetPwd.js";
+import QAAdmin from "./QA/qaAdmin.js";
 
 class App extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class App extends React.Component {
               <Route path="/SignUp" component={SignUp} />
               <Route path="/Reset" component={Reset} />
               <Route path="/questionnaire/" component={Questionnaire} />
+              <Route path="/qaAdmin/" component={QAAdmin} />
               <Route path="/qa/" component={QA} />
               <Route path="/dashboard/" component={Dashboard} />
               <Route path="/userprofile/" component={UserProfile} />

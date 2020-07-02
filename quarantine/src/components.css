@@ -13,7 +13,7 @@
 
 .form-groupQa{
     width: 99vh;
-    margin-right: 2vh;
+    margin-right: 1vw;
     display: inline-block;
 }
 
@@ -26,8 +26,8 @@
 }
 
 .profilephotoQa{
-    margin-right: 2vh;
-    width: 7.5vh;
+    margin-right: 1vw;
+    width: 4.5vw;
     border-radius: 50%;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .contentQa{
-    margin-left: 2vh;
+    margin-left: 2vw;
     text-align: left;
 }
 
@@ -47,40 +47,42 @@
 }
 
 #post{
-    width: 99vh;
+    position: absolute;
+    width: 55vw;
+    left: 20vw;
     height: 15vh;
 }
 
 #tags{
-    width: 12vh;
-    position: relative;
-    left: 2vh;
+    width: 8vw;
+    position: absolute;
+    top: 17vh;
+    left: 20vw;
 }
 
-.tagDiv{
-    position: relative;
-    float: left;
-    left: 29.5vh;
-    width: 10vh
-}
 
 .anonnCheck{
-    padding-top: 1vh;
-    padding-left: 4vh;
-    position: relative;
-    right: 35vh;
-    display: inline-block
+    position: absolute;
+    top: 18vh;
+    left: 31vw;
 }
 
 .postForm{
     position: relative;
+    min-height: 200px;
+}
+
+#postBtn{
+    position: absolute;
+    left: 77vw;
+    top: 5vh;
 }
 
 .profilephotoPost{
     position: absolute;
-    left: 22vh;
+    left: 14vw;
     top: 8px;
-    width: 7.5vh;
+    width: 4.5vw;
     border-radius: 50%;
 }
 
@@ -103,12 +105,12 @@
 }
 
 .mt-3Qa{
-    margin-left: 30vh;
+    margin-left: 15vw;
 }
 
 #dropDown{
     position: absolute;
-    left: 10vh;
+    left: 5vw;
 }
 
 
@@ -229,4 +231,11 @@
     background-color: #a5d6a7;
 }
 
-
+.notification{
+    position: absolute;
+    background-color: transparent;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    border: none;
+}

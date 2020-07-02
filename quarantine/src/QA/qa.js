@@ -164,7 +164,7 @@ class QA extends React.Component {
               className="profilephotoPost"
             />
 
-            <div className="form-group form-groupQa">
+            <div className="form-group form-groupQab">
               <input
                 className="form-control"
                 id="post"
@@ -175,12 +175,13 @@ class QA extends React.Component {
             <button
               type="submit"
               className="btn btn-primary"
+              id="postBtn"
               onClick={this.post}
             >
               Post ! !{" "}
             </button>
             <br />
-            <div className="form-group form-groupQa tagDiv">
+            <div className="form-group form-groupQab tagDiv">
               <input
                 className="form-control"
                 id="tags"
@@ -215,6 +216,7 @@ class QA extends React.Component {
                 handleReply={(name, content) =>
                   this.handleReply(mediaNum, name, content)
                 }
+                handleRemove={(i, e) => this.handleRemove(i, mediaNum, e)}
                 mediaId={mediaNum}
               />
             ))}
@@ -233,7 +235,6 @@ class QA extends React.Component {
       </div>
     );
   }
-
   search = (e) => {
     const t = document.getElementById("searchedTag").value;
     e.preventDefault();
@@ -253,6 +254,18 @@ class QA extends React.Component {
         if (this.state.postsList[i].tags[j].includes(t)) {
           posts[i].style.visibility = "visible";
         }
+        const tags = document.querySelector("#tags");
+        console.log(post.value);
+        this.state.postsList.splice(0, 0, {
+          names: ["user1"],
+          contents: [post.value + " " + tags.value],
+          times: [new Date()],
+          likes: [0],
+          tags: [tags.value],
+        });
+        const newList = this.state.postsList;
+        this.setState({ postsList: newList });
+        // todo: a server call that sends data
       }
     }
   };
@@ -374,6 +387,20 @@ class QA extends React.Component {
     } else {
       this.setState({ currShown: [(page - 1) * 10, page * 10] });
     }
+  };
+
+  handleRemove = (i, mediaNum, e) => {
+    e.preventDefault();
+    const postsListB = this.state.postsList;
+    postsListB[mediaNum].contents[i] = "[content deleted by admin/author]";
+    if (i === 0) {
+      postsListB.splice(mediaNum, 1);
+    }
+
+    console.log(postsListB);
+    this.setState({ postsList: postsListB });
+
+    /* todo: push notifications*/
   };
 }
 
