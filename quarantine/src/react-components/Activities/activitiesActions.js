@@ -1,5 +1,4 @@
 export const addToMyList = (recAct, queue) =>{
-	console.log("adding");
 	const myList = queue.state.userActList;
 
 

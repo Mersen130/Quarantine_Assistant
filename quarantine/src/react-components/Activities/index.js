@@ -2,7 +2,6 @@ import React from "react";
 import Sidebar from '../../SideNavBar/sidebar.js';
 import RecommendList from "./RecommendList.js";
 import MyList from './myList.js';
-// import {addToMyList} from 'activitiesActions.js';
 
 
 class Activities extends React.Component{
