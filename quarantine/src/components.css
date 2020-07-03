@@ -1,12 +1,12 @@
 .titleQa {
-  font-size: 8vh;
+  font-size: 7.5vh;
   text-align: center;
 }
 .searchGroupQa {
   margin-top: 5vh;
 }
 
-.jumbotronQa {
+#jumbotronQa {
   background-color: #fafff0;
   height: auto;
 }
@@ -109,7 +109,7 @@
 
 #dropDown {
   position: absolute;
-  left: 5vw;
+  left: 3vw;
 }
 
 /* The sidebar menu */
@@ -207,13 +207,13 @@
   }
 }
 
-.jumbotronQuest {
+#jumbotronQuest {
   position: relative;
   height: 100vh;
   background-color: #fafff0;
 }
 
-.containerQuest {
+#containerQuest {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -231,7 +231,16 @@
   background-color: #a5d6a7;
 }
 
-.notification {
+#notification {
+  position: absolute;
+  background-color: transparent;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+  border: none;
+}
+
+#notification2 {
   position: absolute;
   background-color: transparent;
   right: 10px;

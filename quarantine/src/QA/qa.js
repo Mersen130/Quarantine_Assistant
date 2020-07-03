@@ -124,13 +124,16 @@ class QA extends React.Component {
       },
     ],
     currShown: [0, 10],
+    notes: ["Your post \"aba aba...\" has been deleted.", "Your post \"aba aba...\" has been deleted."],
+    numNotes: 2
   };
 
   render() {
     return (
       <div>
-        <Sidebar title={"Q&A"} />
-        <div className="jumbotron jumbotronQa jumbotron-fluid">
+          {console.log(this.state)}
+        <Sidebar title={"Q&A"} notes={this.state.notes} numNotes={this.state.numNotes} />
+        <div className="jumbotron jumbotron-fluid" id="jumbotronQa">
           <div className="container">
             <h1 className="title titleQa">Quanrantine Assistant Communities</h1>
             <p>
@@ -255,7 +258,6 @@ class QA extends React.Component {
           posts[i].style.visibility = "visible";
         }
         const tags = document.querySelector("#tags");
-        console.log(posts.value);
         this.state.postsList.splice(0, 0, {
           names: ["user1"],
           contents: [posts.value + " " + tags.value],
@@ -279,7 +281,6 @@ class QA extends React.Component {
       return;
     }
     const tags = document.querySelector("#tags");
-    console.log(post.value);
     this.state.postsList.splice(0, 0, {
       names: ["Qixin"],
       contents: [post.value + " " + tags.value],
@@ -301,6 +302,7 @@ class QA extends React.Component {
     const postsListB = this.state.postsList;
     postsListB[j].likes[i] += amt;
     this.setState({ postsList: postsListB });
+    this.pushNote("A like has been added to your post.");
   };
 
   handleReply = (mediaId, name, content) => {
@@ -311,6 +313,8 @@ class QA extends React.Component {
     newList[mediaId].likes.push(0);
     newList[mediaId].tags.push("");
     this.setState({ postsList: newList });
+    this.pushNote("A reply has been added to your post.");
+
   };
 
   swap = (items, firstIndex, secondIndex) => {
@@ -362,14 +366,12 @@ class QA extends React.Component {
   };
 
   handleOrder = (e) => {
-    console.log(e);
     const postsListB = this.state.postsList;
     if (e == "Newest") {
       // time based
       this.setState({ postsList: this.selectionSort(postsListB, "Newest") });
     } else if (e == "Top rated") {
       // like based
-      console.log(this.selectionSort(postsListB, "Top"));
       this.setState({ postsList: this.selectionSort(postsListB, "Top") });
     } else {
       // reply based
@@ -397,11 +399,19 @@ class QA extends React.Component {
       postsListB.splice(mediaNum, 1);
     }
 
-    console.log(postsListB);
     this.setState({ postsList: postsListB });
 
     /* todo: push notifications*/
+    this.pushNote("A post has been deleted.");
   };
+
+  pushNote = (v)=> {
+      const noteB = this.state.notes;
+      const numB = this.state.numNotes + 1;
+      noteB.push(v);
+      this.setState({notes: noteB});
+      this.setState({ numNotes: numB});
+  }
 }
 
 export default QA;

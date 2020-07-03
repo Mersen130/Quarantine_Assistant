@@ -28,8 +28,8 @@ class Questionnaire extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div class="jumbotron jumbotronQuest jumbotron-fluid">
-                    <div class="container containerQuest">
+                <div class="jumbotron jumbotron-fluid" id="jumbotronQuest">
+                    <div class="container" id="containerQuest">
                         <Question currQ={this.state.currQ} handleNext={this.nextQ} handleLast={this.lastQ} handleCheck={this.check} />
                     </div>
                 </div>
