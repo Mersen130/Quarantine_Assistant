@@ -96,6 +96,7 @@ class Dashboard extends React.Component {
   updateCal = (e) => {
     e.preventDefault();
     const today = new Date();
+    const todayTemp = document.querySelector("#temp").value;
     this.setState({
       visible: true,
     });
