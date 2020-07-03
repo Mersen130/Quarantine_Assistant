@@ -1,10 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from "shards-react";
-import UserBrief from "./userBrief";
-import UserDetails from "./userDetails";
+import User2Brief from "./user2Brief";
 import PageTitle from "./../theme/PageTitle";
 import Sidebar from "./../SideNavBar/sidebar";
-class UserProfile extends React.Component {
+class User2Profile extends React.Component {
   render() {
     return (
       <div>
@@ -20,11 +19,8 @@ class UserProfile extends React.Component {
               />
             </Row>
             <Row>
-              <Col lg="4">
-                <UserBrief />
-              </Col>
-              <Col lg="8">
-                <UserDetails />
+              <Col lg="12">
+                <User2Brief />
               </Col>
             </Row>
           </Col>
@@ -34,4 +30,4 @@ class UserProfile extends React.Component {
   }
 }
 
-export default UserProfile;
+export default User2Profile;

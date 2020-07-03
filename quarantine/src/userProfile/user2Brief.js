@@ -6,7 +6,7 @@ import {
   ListGroupItem,
   Progress,
 } from "shards-react";
-class UserBrief extends React.Component {
+class User2Brief extends React.Component {
   render() {
     return (
       <Card small className="mb-4 pt-3">
@@ -20,7 +20,7 @@ class UserBrief extends React.Component {
             />
           </div>
           <h4 className="mb-0">{this.props.name}</h4>{" "}
-          <i className="fas fa-mars"></i>
+          <i className="fas fa-venus"></i>
           <span>, {this.props.age}</span>
           <span className="text-muted d-block mb-2">{this.props.region}</span>
           {/* <Button pill outline size="sm" className="mb-2">
@@ -49,15 +49,15 @@ class UserBrief extends React.Component {
     );
   }
 }
-UserBrief.defaultProps = {
-  name: "Quincy Zhang",
-  age: 24,
+User2Brief.defaultProps = {
+  name: "Yifei Gao",
+  age: 18,
   userType: "User",
-  avatar: require("./sampleprofile.png"),
-  selfIsoProg: 66,
-  gender: "Male",
-  description: "Today is a nice day",
+  avatar: require("./../lib/profilephotos/user2.png"),
+  selfIsoProg: 20,
+  gender: "Female",
+  description: "I love bubble tea!",
   region: "Toronto",
 };
 
-export default UserBrief;
+export default User2Brief;

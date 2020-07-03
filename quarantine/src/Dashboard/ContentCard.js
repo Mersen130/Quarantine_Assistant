@@ -35,31 +35,29 @@ export class ContentCard extends Component {
   render() {
     return (
       <div>
-        <Col lg="6" sm="12" className="mb-4 mx-auto">
-          <Card className="card-post card-post--1">
-            <div
-              className="card-post__image"
-              style={{ backgroundImage: `url('${this.state.bgImage}')` }}
+        <Card small className="card-post card-post--1">
+          <div
+            className="card-post__image"
+            style={{ backgroundImage: `url('${this.state.bgImage}')` }}
+          >
+            <Badge
+              pill
+              theme={this.state.badgeColor}
+              className="card-post__category"
             >
-              <Badge
-                pill
-                theme={this.state.badgeColor}
-                className="card-post__category"
-              >
-                {"Covid-19 " + this.props.category}
-              </Badge>
-            </div>
-            <CardBody>
-              <h5 className="card-title">
-                <a className="text-fiord-blue" href="#">
-                  {this.state.title}
-                </a>
-              </h5>
-              <p className="card-text d-inline-block mb-3">{this.state.body}</p>
-              <span className="text-muted">{this.state.date}</span>
-            </CardBody>
-          </Card>
-        </Col>
+              {"Covid-19 " + this.props.category}
+            </Badge>
+          </div>
+          <CardBody>
+            <h5 className="card-title">
+              <a className="text-fiord-blue" href="#">
+                {this.state.title}
+              </a>
+            </h5>
+            <p className="card-text d-inline-block mb-3">{this.state.body}</p>
+            <span className="text-muted">{this.state.date}</span>
+          </CardBody>
+        </Card>
       </div>
     );
   }

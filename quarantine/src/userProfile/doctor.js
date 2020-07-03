@@ -1,10 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from "shards-react";
-import UserBrief from "./userBrief";
-import UserDetails from "./userDetails";
+import DoctorBrief from "./doctorBrief";
 import PageTitle from "./../theme/PageTitle";
 import Sidebar from "./../SideNavBar/sidebar";
-class UserProfile extends React.Component {
+class DoctorProfile extends React.Component {
   render() {
     return (
       <div>
@@ -14,17 +13,14 @@ class UserProfile extends React.Component {
             <Row noGutters className="page-header py-4 ">
               <PageTitle
                 sm="4"
-                title="User Profile"
+                title="Doctor Profile"
                 subtitle=""
                 className="text-sm-left"
               />
             </Row>
             <Row>
-              <Col lg="4">
-                <UserBrief />
-              </Col>
-              <Col lg="8">
-                <UserDetails />
+              <Col lg="12">
+                <DoctorBrief />
               </Col>
             </Row>
           </Col>
@@ -34,4 +30,4 @@ class UserProfile extends React.Component {
   }
 }
 
-export default UserProfile;
+export default DoctorProfile;

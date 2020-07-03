@@ -12,7 +12,11 @@ import Questionnaire from "./questionnaire/questionnaire.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import QAAdmin from "./QA/qaAdmin.js";
 import UserProfile from "./userProfile/index";
+import User2Profile from "./userProfile/user2";
+import DoctorProfile from "./userProfile/doctor";
+import AdminProfile from "./userProfile/admin";
 import Dashboard from "./Dashboard/index";
+import "bootstrap/dist/css/bootstrap.css";
 
 class App extends React.Component {
   render() {
@@ -29,6 +33,9 @@ class App extends React.Component {
               <Route path="/qa/" component={QA} />
               <Route path="/dashboard/" component={Dashboard} />
               <Route path="/userprofile/" component={UserProfile} />
+              <Route path="/user2/" component={User2Profile} />
+              <Route path="/doctorprofile/" component={DoctorProfile} />
+              <Route path="/adminprofile/" component={AdminProfile} />
               <Route path="/Activities" component ={Activities}/>
             </Switch>
           </Router>
