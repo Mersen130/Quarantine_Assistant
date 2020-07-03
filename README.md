@@ -8,8 +8,9 @@ after set up successfully, please run following code to start the app:<br/>
 
 ## Login
 The page let user to log in. There are 2 accounts that can log in with:
-<pre>userName: <b>user</b>, password: <b>user</b></pre> (lead to normal user's front end)</br>
-<pre>userName: <b>admin</b>, password: <b>admin</b></pre>(leadn to admin user's front end)</br>
+<pre>userName: <b>user</b>, password: <b>user</b></pre></br>
+<pre>userName: <b>admin</b>, password: <b>admin</b></pre></br>
+
 
 ## signup
 The page let user to create an account, the page will route to the normal user's dashboard page once create successfully. Users can only create accounts in the type of normal user, admin account is setted up by developers, it could not be created by users.
