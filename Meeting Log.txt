@@ -11,3 +11,15 @@ CSC309 Team 23 Project Phase 1 Meeting Memo
 
 * June18 2020
    * progress check
+
+* June21 2020
+   * progress check
+   * Todo: figure out a way to switch views
+
+* June24 2020
+   * progress check
+   * prepare for TA meeting
+
+* June27 2020
+   * merge everything
+   * TODO: resolve framework & classname conflicts
