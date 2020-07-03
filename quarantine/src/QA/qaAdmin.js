@@ -122,13 +122,13 @@ class QAAdmin extends React.Component {
     
             //check the rest of the array to see if anything is smaller
 
-            if (order == "Newest"){ // time based
+            if (order === "Newest"){ // time based
                 for (let j=i+1; j < len; j++){
                     if (items[j].times[0] > items[max].times[0]){
                         max = j;
                     }
                 }
-            } else if (order == "Top"){ // like based
+            } else if (order === "Top"){ // like based
                 for (let j=i+1; j < len; j++){
                     if (items[j].likes[0] > items[max].likes[0]){
                         max = j;
@@ -143,7 +143,7 @@ class QAAdmin extends React.Component {
             }
     
             //if the maximum isn't in the position, swap it
-            if (i != max){
+            if (i !== max){
                 this.swap(items, i, max);
             }
         }
@@ -155,9 +155,9 @@ class QAAdmin extends React.Component {
     handleOrder = (e) =>{
         console.log(e);
         const postsListB = this.state.postsList;
-        if (e == "Newest"){ // time based
+        if (e === "Newest"){ // time based
             this.setState({postsList: this.selectionSort(postsListB, "Newest")})
-        } else if (e == "Top rated"){ // like based
+        } else if (e === "Top rated"){ // like based
             console.log(this.selectionSort(postsListB, "Top"));
             this.setState({postsList: this.selectionSort(postsListB, "Top")})
         } else{ // reply based
