@@ -1,9 +1,9 @@
 # team23 Quanrantine Assistant
 
 ## Set Up
-To start the app, please run following code to set up.
+To start the app, please run following code to set up.<br/>
 `npm install`
-after set up successfully, please run following code to start the app:
+after set up successfully, please run following code to start the app:<br/>
 `npm start`
 
 ## Login
