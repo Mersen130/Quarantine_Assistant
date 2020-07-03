@@ -102,7 +102,7 @@ class SignUp extends React.Component{
     <div id = "signUpForm">
     <form onSubmit={this.handleSubmit}>
       <img src={require("../../lib/signIn/calendar.png")}class = "mx-auto d-block" id="signUpLogo"/>
-      <h2 calssName = "signUp">Sign Up</h2>
+      <h2 id="h2_SignUp">Sign Up</h2>
         <div class="form-row">
           <div class="col">
               <input
