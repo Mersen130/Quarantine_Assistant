@@ -255,10 +255,10 @@ class QA extends React.Component {
           posts[i].style.visibility = "visible";
         }
         const tags = document.querySelector("#tags");
-        console.log(post.value);
+        console.log(posts.value);
         this.state.postsList.splice(0, 0, {
           names: ["user1"],
-          contents: [post.value + " " + tags.value],
+          contents: [posts.value + " " + tags.value],
           times: [new Date()],
           likes: [0],
           tags: [tags.value],

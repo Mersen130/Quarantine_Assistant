@@ -1,41 +1,39 @@
-
-#img{
-	margin:auto;
+#img {
+  margin: auto;
 }
-h3{
-	color:black;
-	font-family: Montserrat;
+h3 {
+  color: black;
+  font-family: Montserrat;
 }
-.resetForm{
-	width:100%;
-	max-width:396px;
-	height:100%;
-	max-height:500px;
-	margin:auto;
-	margin-top: 100px;
-	padding:15px;
-
+.resetForm {
+  width: 100%;
+  max-width: 396px;
+  height: 100%;
+  max-height: 500px;
+  margin: auto;
+  margin-top: 100px;
+  padding: 15px;
 }
 
-#registedEmail{
-	width:396px;
-	height:56px;
-	margin:auto;
-	border-width: 2px;
-	border-color: #66bb6a;
-	border-style:solid;
-	border-radius: 20px;
-	background-color: #a5d6a7;
-	font-size: 16px;
+#registedEmail {
+  width: 396px;
+  height: 56px;
+  margin: auto;
+  border-width: 2px;
+  border-color: #66bb6a;
+  border-style: solid;
+  border-radius: 20px;
+  background-color: #a5d6a7;
+  font-size: 16px;
 }
-.btn-primary{
-	width:396px;
-	height:36px;
-	border-width: 2px;
-	border-color: #66bb6a;
-	border-style:solid;
-	border-radius: 20px;
-	font-size:16px;
-	background-color: #a5d6a7;
-	color:white;
+.btn-primary {
+  width: 396px;
+  height: 36px;
+  border-width: 2px;
+  border-color: #66bb6a;
+  border-style: solid;
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: #a5d6a7;
+  color: white;
 }

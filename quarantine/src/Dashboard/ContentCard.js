@@ -5,7 +5,6 @@ import {
   Col,
   Card,
   CardBody,
-  CardFooter,
   Badge,
   Button,
 } from "shards-react";
@@ -36,7 +35,7 @@ export class ContentCard extends Component {
   render() {
     return (
       <div>
-        <Col lg="6" sm="12" className="mb-4">
+        <Col lg="6" sm="12" className="mb-4 mx-auto">
           <Card className="card-post card-post--1">
             <div
               className="card-post__image"

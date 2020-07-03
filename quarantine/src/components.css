@@ -1,241 +1,241 @@
-.titleQa{
-    font-size: 8vh;
-    text-align: center;
+.titleQa {
+  font-size: 8vh;
+  text-align: center;
 }
-.searchGroupQa{
-    margin-top: 5vh;
-}
-
-.jumbotronQa{
-    background-color: #fafff0;
-    height: auto;
+.searchGroupQa {
+  margin-top: 5vh;
 }
 
-.form-groupQa{
-    width: 99vh;
-    margin-right: 1vw;
-    display: inline-block;
+.jumbotronQa {
+  background-color: #fafff0;
+  height: auto;
 }
 
-.likeQa{
-    height: 4vh;
-    position: absolute;
-    right: 5%;
-    text-align: center;
-    line-height: 15px;
+.form-groupQa {
+  width: 99vh;
+  margin-right: 1vw;
+  display: inline-block;
 }
 
-.profilephotoQa{
-    margin-right: 1vw;
-    width: 4.5vw;
-    border-radius: 50%;
+.likeQa {
+  height: 4vh;
+  position: absolute;
+  right: 5%;
+  text-align: center;
+  line-height: 15px;
 }
 
-.h4Qa{
-    text-align: left;
+.profilephotoQa {
+  margin-right: 1vw;
+  width: 4.5vw;
+  border-radius: 50%;
 }
 
-.contentQa{
-    margin-left: 2vw;
-    text-align: left;
+.h4Qa {
+  text-align: left;
 }
 
-.Media{
-    margin-bottom: 10vh;
-    min-height: 20vh;
-    overflow: hidden;
+.contentQa {
+  margin-left: 2vw;
+  text-align: left;
 }
 
-#post{
-    position: absolute;
-    width: 55vw;
-    left: 20vw;
-    height: 15vh;
+.Media {
+  margin-bottom: 10vh;
+  min-height: 20vh;
+  overflow: hidden;
 }
 
-#tags{
-    width: 8vw;
-    position: absolute;
-    top: 17vh;
-    left: 20vw;
+#post {
+  position: absolute;
+  width: 55vw;
+  left: 20vw;
+  height: 15vh;
 }
 
-
-.anonnCheck{
-    position: absolute;
-    top: 18vh;
-    left: 31vw;
+#tags {
+  width: 8vw;
+  position: absolute;
+  top: 17vh;
+  left: 20vw;
 }
 
-.postForm{
-    position: relative;
-    min-height: 200px;
+.anonnCheck {
+  position: absolute;
+  top: 18vh;
+  left: 31vw;
 }
 
-#postBtn{
-    position: absolute;
-    left: 77vw;
-    top: 5vh;
+.postForm {
+  position: relative;
+  min-height: 200px;
 }
 
-.profilephotoPost{
-    position: absolute;
-    left: 14vw;
-    top: 8px;
-    width: 4.5vw;
-    border-radius: 50%;
+#postBtn {
+  position: absolute;
+  left: 77vw;
+  top: 5vh;
 }
 
-.replyBtn{
-    padding-top: 5px;
-    height: 18px;
+.profilephotoPost {
+  position: absolute;
+  left: 14vw;
+  top: 8px;
+  width: 4.5vw;
+  border-radius: 50%;
 }
 
-.replyInput{
-    position: absolute;
-    left: 10%;
-    width: 50%;
-    visibility: collapse;
+.replyBtn {
+  padding-top: 5px;
+  height: 18px;
 }
 
-.borderQa{
-    position: relative;
-    min-height: 140px;
-    overflow: hidden;
+.replyInput {
+  position: absolute;
+  left: 10%;
+  width: 50%;
+  visibility: collapse;
 }
 
-.mt-3Qa{
-    margin-left: 15vw;
+.borderQa {
+  position: relative;
+  min-height: 140px;
+  overflow: hidden;
 }
 
-#dropDown{
-    position: absolute;
-    left: 5vw;
+.mt-3Qa {
+  margin-left: 15vw;
 }
 
+#dropDown {
+  position: absolute;
+  left: 5vw;
+}
 
 /* The sidebar menu */
 .sidebar {
-    z-index: 1000;
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    top: 0;
-    left: 0;
-    background-color: #a5d6a7; /* Green*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-  }
+  z-index: 1000;
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  top: 0;
+  left: 0;
+  background-color: #a5d6a7; /* Green*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
 
-  .Navbar {
-    height: 46px;
+.Navbar {
+  height: 46px;
+}
+
+/* The sidebar links */
+.sidebar a {
+  padding: 8px 8px 8px 8px;
+  text-align: left;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+#profilePhoto {
+  border-radius: 50%;
+  width: 60px;
+  float: left;
+}
+
+#profileName {
+  font-size: 15px;
+  text-align: left;
+  padding-left: 95px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #818181;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* The button used to open the sidebar */
+.openbtn {
+  font-size: 30px;
+  cursor: pointer;
+  background-color: #455a64;
+  padding-bottom: 5px;
+  color: white;
+  float: left;
+  border: none;
+}
+
+#logout {
+  position: absolute;
+  bottom: 90px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #455a64;
+  transition: margin-left 0.5s; /* If you want a transition effect */
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
   }
-  
-  /* The sidebar links */
   .sidebar a {
-    padding: 8px 8px 8px 8px;
-    text-align: left;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+    font-size: 18px;
   }
-  
-  /* When you mouse over the navigation links, change their color */
-  .sidebar a:hover {
-    color: #f1f1f1;
-  }
-
-  #profilePhoto {
-      border-radius: 50%;
-      width: 60px;
-      float: left;
-  }
-
-  #profileName{
-      font-size: 15px;
-      text-align: left;
-      padding-left: 95px;
-      margin-top:15px;
-      margin-bottom: 15px;
-      color: #818181
-  }
-  
-  /* Position and style the close button (top right corner) */
-  .sidebar .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-  
-  /* The button used to open the sidebar */
-  .openbtn {
-    font-size: 30px;
-    cursor: pointer;
-    background-color: #455a64;
-    padding-bottom: 5px;
-    color: white;
-    float: left;
-    border: none;
-  }
-
-  #logout{
-      position: absolute;
-      bottom: 90px;
-  }
-
-  
-
-  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-  #main {
-    z-index: 999;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #455a64;
-    transition: margin-left .5s; /* If you want a transition effect */ 
-  }
-  
-  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-    .sidebar {padding-top: 15px;}
-    .sidebar a {font-size: 18px;}
-  }
-
-  .jumbotronQuest{
-    position: relative;
-    height: 100vh;
-    background-color: #fafff0;
 }
 
-.containerQuest{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 30%;
-    width: 50%;
-    margin: -15% 0 0 -25%;
+.jumbotronQuest {
+  position: relative;
+  height: 100vh;
+  background-color: #fafff0;
 }
 
-.btnQuest{
-    margin: 20px 12px 12px 12px;
-    border: 0;
+.containerQuest {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 30%;
+  width: 50%;
+  margin: -15% 0 0 -25%;
 }
 
-.btnQuest:hover{
-    background-color: #a5d6a7;
+.btnQuest {
+  margin: 20px 12px 12px 12px;
+  border: 0;
 }
 
-.notification{
-    position: absolute;
-    background-color: transparent;
-    right: 10px;
-    top: 0;
-    bottom: 0;
-    border: none;
+.btnQuest:hover {
+  background-color: #a5d6a7;
+}
+
+.notification {
+  position: absolute;
+  background-color: transparent;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+  border: none;
 }
