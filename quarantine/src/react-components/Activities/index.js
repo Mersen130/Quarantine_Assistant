@@ -4,6 +4,7 @@ import RecommendList from "./RecommendList.js";
 import MyList from './myList.js';
 
 
+
 class Activities extends React.Component{
 
 	state = {
@@ -20,7 +21,7 @@ class Activities extends React.Component{
 	render(){
 
 		return(
-			<div>
+			<div id="wrapper">
 				<Sidebar title={"My Activities"}/>
 				<div id="myActivitiesBlock">
 					<h3 id="h3_myAct">My Activities:</h3>
