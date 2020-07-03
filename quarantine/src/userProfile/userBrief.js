@@ -20,7 +20,11 @@ class UserBrief extends React.Component {
             />
           </div>
           <h4 className="mb-0">{this.props.name}</h4>{" "}
-          <i className="fas fa-mars"></i>
+          {this.props.gender == "Male" ? (
+            <i className="fas fa-mars"></i>
+          ) : (
+            <i className="fas fa-venus"></i>
+          )}
           <span>, {this.props.age}</span>
           <span className="text-muted d-block mb-2">{this.props.region}</span>
           {/* <Button pill outline size="sm" className="mb-2">

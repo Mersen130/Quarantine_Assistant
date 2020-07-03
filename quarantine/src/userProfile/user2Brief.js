@@ -50,7 +50,7 @@ class User2Brief extends React.Component {
   }
 }
 User2Brief.defaultProps = {
-  name: "Yifei Gao",
+  name: "User2",
   age: 18,
   userType: "User",
   avatar: require("./../lib/profilephotos/user2.png"),

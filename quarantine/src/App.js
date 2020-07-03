@@ -12,6 +12,7 @@ import User2Profile from "./userProfile/user2";
 import DoctorProfile from "./userProfile/doctor";
 import AdminProfile from "./userProfile/admin";
 import Dashboard from "./Dashboard/index";
+import { AdminDashboard } from "./AdminDashboard/index";
 import "bootstrap/dist/css/bootstrap.css";
 
 class App extends React.Component {
@@ -32,6 +33,7 @@ class App extends React.Component {
               <Route path="/user2/" component={User2Profile} />
               <Route path="/doctorprofile/" component={DoctorProfile} />
               <Route path="/adminprofile/" component={AdminProfile} />
+              <Route path="/admindashboard/" component={AdminDashboard} />
             </Switch>
           </Router>
         </React.Fragment>

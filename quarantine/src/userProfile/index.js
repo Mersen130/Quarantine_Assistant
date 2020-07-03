@@ -5,6 +5,34 @@ import UserDetails from "./userDetails";
 import PageTitle from "./../theme/PageTitle";
 import Sidebar from "./../SideNavBar/sidebar";
 class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "User1",
+      age: 24,
+      userType: "User",
+      avatar: require("./sampleprofile.png"),
+      selfIsoProg: 66,
+      gender: "Male",
+      description: "Today is a nice day",
+      region: "Toronto",
+    };
+  }
+  handleUpdate = (
+    nameUpdate,
+    genderUpdate,
+    ageUpdate,
+    cityUpdate,
+    descriptionUpdate
+  ) => {
+    this.setState({
+      name: nameUpdate,
+      gender: genderUpdate,
+      age: ageUpdate,
+      region: cityUpdate,
+      description: descriptionUpdate,
+    });
+  };
   render() {
     return (
       <div>
@@ -21,10 +49,16 @@ class UserProfile extends React.Component {
             </Row>
             <Row>
               <Col lg="4">
-                <UserBrief />
+                <UserBrief
+                  name={this.state.name}
+                  gender={this.state.gender}
+                  age={this.state.age}
+                  region={this.state.region}
+                  description={this.state.description}
+                />
               </Col>
               <Col lg="8">
-                <UserDetails />
+                <UserDetails onUpdateClick={this.handleUpdate} />
               </Col>
             </Row>
           </Col>
