@@ -2,6 +2,7 @@ import React from "react";
 import Sidebar from '../../SideNavBar/sidebar.js';
 import RecommendList from "./RecommendList.js";
 import MyList from './myList.js';
+import "./activities.css";
 
 
 
@@ -21,13 +22,15 @@ class Activities extends React.Component{
 	render(){
 
 		return(
-			<div id="wrapper">
+			<div>
 				<Sidebar title={"My Activities"}/>
+				<div id="wrapper">
 				<div id="myActivitiesBlock">
 					<h3 id="h3_myAct">My Activities:</h3>
 					<MyList
 						myActs={this.state.userActList}
 						queueComponent={this}
+						id="myTable"
 					/>
 				</div>
 				<div id="recommendBlock">
@@ -37,6 +40,7 @@ class Activities extends React.Component{
 						queueComponent={this}
 					
 					/>
+				</div>
 				</div>
 			</div>
 			);
