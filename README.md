@@ -1,10 +1,18 @@
 # team23 Quanrantine Assistant
 
-## Login
-TODO
+## Set Up
+To start the app, please run following code to set up.
+`npm install`
+after set up successfully, please run following code to start the app:
+`npm start`
 
-## login & signup
-TODO
+## Login
+The page let user to log in. There are 2 accounts that can log in with:
+>`userName: **user**, password: **user**` (lead to normal user's front end)
+>`userName: **admin**, password: **admin**`(leadn to admin user's front end)
+
+## signup
+The page let user to create an account, the page will route to the normal user's dashboard page once create successfully. Users can only create accounts in the type of normal user, admin account is setted up by developers, it could not be created by users.
 
 ## Questionnaire
 A simple questionnaire system to analyse whether a new user need to take a 2 weeks quarantine. This page is only accessable to a new user, a new user must finish all questions before continuing. If a user refuse to quarantine, the page will be redirected to login page.
@@ -26,7 +34,7 @@ A page can contain maximumly 10 posts, the rest of posts can be accessed through
 An admin cannot [like, post, reply], but can delete ANY posts/replies if the content is not appropriate.
 
 ## Recommend activities
-TODO
+A page that lists  user's activities and activities that recommended by the website(which the data will come from other source/API). Users can remove the activities from their list and can add activities from recommended list to their list.
 
 ## Sidebar (with notification center on top)
 A user/admin can redirect to Dashboard/Q&A/recomendation activities pages or log out through sidebar.
