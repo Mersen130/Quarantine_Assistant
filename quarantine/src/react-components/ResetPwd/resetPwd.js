@@ -16,7 +16,13 @@ class Reset extends React.Component{
 	}
 	handleSubmit = e =>{
 		e.preventDefault();
-		this.props.history.push('/SignIn');
+		if(this.state.resetUser ==="user" ){
+			this.props.history.push('/dashboard');
+		}
+		if(this.state.resetUser == "admin"){
+			this.props.history.push('/dashboard');
+		}
+		
 	}
 	render(){
 		return(

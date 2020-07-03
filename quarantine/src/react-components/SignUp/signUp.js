@@ -68,7 +68,7 @@ class SignUp extends React.Component{
     else{
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
-      this.props.history.push('/SignIn');
+      this.props.history.push('/dashboard');
 
 
   };
