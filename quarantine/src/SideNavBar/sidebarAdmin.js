@@ -2,10 +2,10 @@ import React from "react";
 import "../App.css";
 import "../components.css";
 
-class Sidebar extends React.Component {
+class Sidebaradmin extends React.Component {
   state = { title: "Dashboard" };
 
-  state = { title: this.props.title, numUnread: 2 };
+  state = { title: this.props.title};
 
   render() {
     return (
@@ -27,10 +27,10 @@ class Sidebar extends React.Component {
             />
           </a>
           <p id="profileName">user1</p>
-          <a onClick={this.changeNavbarTitle} href="/dashboard">
+          <a onClick={this.changeNavbarTitle} href="/admindashboard">
             <img src={require("../lib/sidebar/dashboard.png")} /> Dashboard
           </a>
-          <a onClick={this.changeNavbarTitle} href="/qa">
+          <a onClick={this.changeNavbarTitle} href="/qaAdmin">
             <img src={require("../lib/sidebar/qa.png")} /> Q&A
           </a>
           <a onClick={this.changeNavbarTitle} href="/activity">
@@ -45,31 +45,6 @@ class Sidebar extends React.Component {
           <button className="openbtn" onClick={this.openSide}>
             &#9776; {this.state.title}
           </button>
-
-          <div class="dropdown notification">
-            <button
-              class="btn btn-secondary dropdown-toggle notification"
-              type="button"
-              id="dropdownMenuButton"
-              onClick={this.removeUnread}
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Notifications{" "}
-              <span class="badge badge-danger">
-                {this.state.numUnread != 0 && this.state.numUnread}
-              </span>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">
-                Your post "aba aba..." has been deleted.
-              </a>
-              <a class="dropdown-item" href="#">
-                Your reply "aba aba..." has been deleted.
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     );
@@ -94,4 +69,4 @@ class Sidebar extends React.Component {
   };
 }
 
-export default Sidebar;
+export default Sidebaradmin;

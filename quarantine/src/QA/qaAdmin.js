@@ -5,6 +5,7 @@ import MediaAdmin from './mediaAdmin';
 import { uid } from "react-uid";
 import DropDown from './dropdown';
 import Sidebar from '../SideNavBar/sidebar.js';
+import Sidebaradmin from '../SideNavBar/sidebarAdmin.js';
 import Pagination from './pagination.js';
 
 
@@ -34,7 +35,7 @@ class QAAdmin extends React.Component {
     render() {
         return (
             <div>
-                <Sidebar title={"Q&A"}/>
+                <Sidebaradmin title={"Q&A"}/>
                 <div className="jumbotron jumbotron-fluid" id="jumbotronQaadmin">
                     <div className="container">
                         <h1 className="title titleQa">Welcome, Admin</h1>
