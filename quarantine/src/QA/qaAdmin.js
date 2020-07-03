@@ -35,7 +35,7 @@ class QAAdmin extends React.Component {
         return (
             <div>
                 <Sidebar title={"Q&A"}/>
-                <div className="jumbotron jumbotronQa jumbotron-fluid">
+                <div className="jumbotron jumbotron-fluid" id="jumbotronQaadmin">
                     <div className="container">
                         <h1 className="title titleQa">Welcome, Admin</h1>
                         <p>Please delete inappropriate posts.</p>

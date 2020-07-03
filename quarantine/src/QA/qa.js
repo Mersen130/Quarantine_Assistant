@@ -11,7 +11,7 @@ class QA extends React.Component {
     /*user = this.props.user*/
     postsList: [
       {
-        names: ["user2", "user1"],
+        names: ["user1", "user2"],
         contents: ["Aba aba aba?1 #aba", "Aba aba aba aba aba. #aba"],
         times: [new Date(), new Date()],
         likes: [10, 2],
@@ -25,7 +25,7 @@ class QA extends React.Component {
         tags: ["#aba", "#aba"],
       },
       {
-        names: ["user2", "user1"],
+        names: ["user1", "user2"],
         contents: ["Aba aba aba?3 #aba", "Aba aba aba aba aba. #aba"],
         times: [new Date(), new Date()],
         likes: [100, 659],
@@ -39,7 +39,7 @@ class QA extends React.Component {
         tags: ["#aba", "#aba"],
       },
       {
-        names: ["user2", "user1"],
+        names: ["user1", "user2"],
         contents: ["Aba aba aba?5 #aba", "Aba aba aba aba aba. #aba"],
         times: [new Date(), new Date()],
         likes: [100, 659],
@@ -53,7 +53,7 @@ class QA extends React.Component {
         tags: ["#aba", "#aba"],
       },
       {
-        names: ["user2", "user1"],
+        names: ["user1", "user2"],
         contents: ["Aba aba aba?7 #aba", "Aba aba aba aba aba. #aba"],
         times: [new Date(), new Date()],
         likes: [100, 659],
@@ -67,7 +67,7 @@ class QA extends React.Component {
         tags: ["#aba", "#aba"],
       },
       {
-        names: ["user2", "user1"],
+        names: ["user1", "user2"],
         contents: ["Aba aba aba?9 #aba", "Aba aba aba aba aba. #aba"],
         times: [new Date(), new Date()],
         likes: [100, 659],
@@ -81,7 +81,7 @@ class QA extends React.Component {
         tags: ["#aba", "#aba"],
       },
       {
-        names: ["user2", "user1"],
+        names: ["user1", "user2"],
         contents: ["Aba aba aba?11 #aba", "Aba aba aba aba aba. #aba"],
         times: [new Date(), new Date()],
         likes: [100, 659],
@@ -95,7 +95,7 @@ class QA extends React.Component {
         tags: ["#aba", "#aba"],
       },
       {
-        names: ["user2", "user1"],
+        names: ["user1", "user2"],
         contents: ["Aba aba aba?13 #aba", "Aba aba aba aba aba. #aba"],
         times: [new Date(), new Date()],
         likes: [100, 659],
@@ -109,7 +109,7 @@ class QA extends React.Component {
         tags: ["#aba", "#aba"],
       },
       {
-        names: ["user2", "user1"],
+        names: ["user1", "user2"],
         contents: ["Aba aba aba?15 #aba", "Aba aba aba aba aba. #aba"],
         times: [new Date(), new Date()],
         likes: [100, 659],

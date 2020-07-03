@@ -8,6 +8,13 @@
 
 #jumbotronQa {
   background-color: #fafff0;
+  text-align: center;
+  height: auto;
+}
+
+#jumbotronQaadmin {
+  background-color: #fafff0;
+  text-align: center;
   height: auto;
 }
 
@@ -215,6 +222,7 @@
 
 #containerQuest {
   position: absolute;
+  text-align: center;
   top: 50%;
   left: 50%;
   height: 30%;
