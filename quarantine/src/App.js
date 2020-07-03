@@ -1,11 +1,15 @@
-import React from "react";
-import "./App.css";
+
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Sidebar from './SideNavBar/sidebar.js'
+import SignIn from './react-components/SignIn/signIn.js'
+import SignUp from './react-components/SignUp/signUp.js'
+import Reset from './react-components/ResetPwd/resetPwd.js'
+import Activities from './react-components/Activities/index.js'
 import QA from "./QA/qa.js";
 import Questionnaire from "./questionnaire/questionnaire.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import SignIn from "./react-components/SignIn/signIn.js";
-import SignUp from "./react-components/SignUp/signUp.js";
-import Reset from "./react-components/ResetPwd/resetPwd.js";
 import QAAdmin from "./QA/qaAdmin.js";
 import UserProfile from "./userProfile/index";
 import User2Profile from "./userProfile/user2";
@@ -32,6 +36,7 @@ class App extends React.Component {
               <Route path="/user2/" component={User2Profile} />
               <Route path="/doctorprofile/" component={DoctorProfile} />
               <Route path="/adminprofile/" component={AdminProfile} />
+              <Route path="/Activities" component ={Activities}/>
             </Switch>
           </Router>
         </React.Fragment>

@@ -1,82 +1,74 @@
+.wrapper{
+	height:100vh;
+	width:100%;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #00bfa5
 
-.Image{
-	margin:auto;
 }
-h2{
+
+.signIn{
+	text-align: center;
 	color:white;
 	font-family: Montserrat;
 }
-.signInForm{
-	width:100%;
-	max-width:396px;
-	height:100%;
-	max-height:500px;
+#signInLogo{
+	width:40px;
+	height:40px;
 	margin:auto;
+}
+#signInForm{
+	margin:auto;
+	border-radius:10px;
+	box-shadow: 0px 10px 50px #555;
+	background-color:#a5d6a7;
+	width:420px;
+	height:470px;
 	margin-top: 100px;
 	padding:15px;
 
 }
 
-#formEmail{
-	width:396px;
-	height:56px;
-	margin:auto;
-	border-width: 2px;
-	border-color: #66bb6a;
-	border-style:solid;
-	border-radius: 20px;
-	background-color: #a5d6a7;
-	font-size: 16px;
-}
-
-#formPassword{
-	width:396px;
+.signInEmailPswd{
+	outline:none;
+	width:390px;
 	height:56px;
 	margin-top:11px;
 	border-width: 2px;
 	border-color: #66bb6a;
 	border-style:solid;
 	border-radius: 20px;
-	font-size:16px;
-	background-color: #a5d6a7;
+	font-size: 15px;
 }
 
-.form-check{
-	margin-top:11px;
-	position:absolute;
-	color:black;
+#labelRememberMe{
+	font-size:14px;
+	font-family:Montserrat;
 }
-.btn-primary{
+#signInBtn{
 	width:396px;
 	height:36px;
+	outline:none;
 	border-width: 2px;
 	border-color: #66bb6a;
 	border-style:solid;
 	border-radius: 20px;
 	font-size:16px;
+	background-color: white;
+	color:grey;
+	margin-top: 11px;
+}
+#signInBtn:hover{
 	background-color: #a5d6a7;
 	color:white;
+	box-shadow: 0px 5px 20px #555;
 }
-.reset{
-	float:left;
-	background-color: white;
-	border:solid;
-	border-color: white;
-	color:#1976d2;
+#signInLink{
+	margin-top:10px;
 	font-size:14px;
+	font-family:Montserrat;
 }
-.reset:hover{
-	text-decoration: underline;
-}
-.signUp{
+#goQue{
 	float:right;
-	margin-right:-10%;
-	background-color: white;
-	border:solid;
-	border-color: white;
-	color:#1976d2;
-	font-size:14px;
-}
-.signUp:hover{
-	text-decoration: underline;
 }
