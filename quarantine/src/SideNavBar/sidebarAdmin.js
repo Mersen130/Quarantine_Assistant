@@ -33,7 +33,7 @@ class Sidebaradmin extends React.Component {
           <a onClick={this.changeNavbarTitle} href="/qaAdmin">
             <img src={require("../lib/sidebar/qa.png")} /> Q&A
           </a>
-          <a onClick={this.changeNavbarTitle} href="/activity">
+          <a onClick={this.changeNavbarTitle} href="/adminactivity">
             <img src={require("../lib/sidebar/activity.png")} /> Activities
           </a>
           <a href="/Signin" id="logout">
@@ -64,9 +64,6 @@ class Sidebaradmin extends React.Component {
     document.getElementById("mySidebar").style.width = "0";
   };
 
-  removeUnread = (numNotes) => {
-    this.setState({ numRead: numNotes });
-  };
 }
 
 export default Sidebaradmin;
