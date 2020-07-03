@@ -4,6 +4,7 @@ import Sidebar from "../SideNavBar/sidebar.js";
 import PageTitle from "../theme/PageTitle";
 import StatCard from "./StatCard";
 import UserByGender from "./DivisionChart.js";
+import { UserByRegion } from "./userByRegion";
 export class AdminDashboard extends Component {
   render() {
     return (
@@ -35,8 +36,13 @@ export class AdminDashboard extends Component {
               ))}
             </Row>
             <Row>
-              <Col lg="6" className="mb-4">
-                <UserByGender />
+              {this.props.categoryData.map((cat, idx) => (
+                <Col lg="4" className="mb-4">
+                  <UserByGender title={cat.title} chartData={cat.chartData} />
+                </Col>
+              ))}
+              <Col lg="4" md="12" sm="12" className="mb-4">
+                <UserByRegion />
               </Col>
             </Row>
           </Col>
@@ -65,6 +71,38 @@ AdminDashboard.defaultProps = {
       value: "4321",
       percentage: "3.6%",
       increase: "true",
+    },
+  ],
+  categoryData: [
+    {
+      title: "Users by gender",
+      chartData: {
+        datasets: [
+          {
+            hoverBorderColor: "#ffffff",
+            data: [48.3, 51.7],
+            backgroundColor: ["rgba(0,123,255,0.9)", "rgba(0,123,255,0.3)"],
+          },
+        ],
+        labels: ["Male", "Female"],
+      },
+    },
+    {
+      title: "Users by age",
+      chartData: {
+        datasets: [
+          {
+            hoverBorderColor: "#ffffff",
+            data: [45.5, 35.5, 19],
+            backgroundColor: [
+              "rgba(230, 161, 74,0.9)",
+              "rgba(230, 161, 74,0.6)",
+              "rgba(230, 161, 74,0.3)",
+            ],
+          },
+        ],
+        labels: ["18-25", "25-40", ">40"],
+      },
     },
   ],
 };

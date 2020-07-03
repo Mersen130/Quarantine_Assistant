@@ -32,7 +32,7 @@ class App extends React.Component {
               <Route path="/qaAdmin/" component={QAAdmin} />
               <Route path="/qa/" component={QA} />
               <Route path="/dashboard/" component={Dashboard} />
-              <Route path="/userprofile/" component={UserProfile} />
+              <Route path="/user1/" component={UserProfile} />
               <Route path="/user2/" component={User2Profile} />
               <Route path="/doctorprofile/" component={DoctorProfile} />
               <Route path="/adminprofile/" component={AdminProfile} />
