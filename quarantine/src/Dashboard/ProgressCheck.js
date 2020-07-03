@@ -9,17 +9,26 @@ const birthdayStyle = `.DayPicker-Day--highlighted {
 
 const highlighted = {
   from: new Date(2020, 6, 1),
-  to: new Date(2020, 6, 14),
+  to: new Date(2020, 6, 2),
 };
 
+const passed = {
+  from: new Date(2020, 6, 3),
+  to: new Date(2020, 6, 14),
+};
 const modifiers = {
   highlighted,
+  passed,
 };
 
 const modifiersStyles = {
-  highlighted: {
+  passed: {
     color: "#ffc107",
     backgroundColor: "#fffdee",
+  },
+  highlighted: {
+    color: "#03910c",
+    backgroundColor: "#9aedb0",
   },
 };
 
