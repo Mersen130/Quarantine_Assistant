@@ -6,7 +6,7 @@ import {
   ListGroupItem,
   Progress,
 } from "shards-react";
-class UserBrief extends React.Component {
+class AdminBrief extends React.Component {
   render() {
     return (
       <Card small className="mb-4 pt-3">
@@ -23,23 +23,11 @@ class UserBrief extends React.Component {
           <i className="fas fa-mars"></i>
           <span>, {this.props.age}</span>
           <span className="text-muted d-block mb-2">{this.props.region}</span>
-          {/* <Button pill outline size="sm" className="mb-2">
-            <i className="material-icons mr-1">person_add</i> Follow
-          </Button> */}
+          <div className="p-3">
+            <i className="material-icons mr-1">admin_panel_settings</i> Admin
+          </div>
         </CardHeader>
         <ListGroup flush>
-          <ListGroupItem className="px-4">
-            <div className="progress-wrapper">
-              <strong className="text-muted d-block mb-2">
-                Quarantine Progress
-              </strong>
-              <Progress className="progress-sm" value={this.props.selfIsoProg}>
-                <span className="progress-value">
-                  {this.props.selfIsoProg}%
-                </span>
-              </Progress>
-            </div>
-          </ListGroupItem>
           <ListGroupItem className="p-4">
             <strong className="text-muted d-block mb-2">Description</strong>
             <span>{this.props.description}</span>
@@ -49,15 +37,16 @@ class UserBrief extends React.Component {
     );
   }
 }
-UserBrief.defaultProps = {
-  name: "Quincy Zhang",
-  age: 24,
-  userType: "User",
-  avatar: require("./sampleprofile.png"),
-  selfIsoProg: 66,
+AdminBrief.defaultProps = {
+  name: "Dr. Strange",
+  age: 35,
+  userType: "Admin",
+  avatar: require("./../lib/profilephotos/strange.png"),
+  //   selfIsoProg: 20,
   gender: "Male",
-  description: "Today is a nice day",
+  description:
+    "I went forward in time to view alternate futures. To see all the possible outcomes of the coming conflict. Only one time did we win.",
   region: "Toronto",
 };
 
-export default UserBrief;
+export default AdminBrief;

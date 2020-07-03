@@ -6,7 +6,7 @@ import {
   ListGroupItem,
   Progress,
 } from "shards-react";
-class UserBrief extends React.Component {
+class DoctorBrief extends React.Component {
   render() {
     return (
       <Card small className="mb-4 pt-3">
@@ -23,12 +23,15 @@ class UserBrief extends React.Component {
           <i className="fas fa-mars"></i>
           <span>, {this.props.age}</span>
           <span className="text-muted d-block mb-2">{this.props.region}</span>
+          <div className="p-3">
+            <i className="material-icons mr-1">verified</i> Certified Doctor
+          </div>
           {/* <Button pill outline size="sm" className="mb-2">
             <i className="material-icons mr-1">person_add</i> Follow
           </Button> */}
         </CardHeader>
         <ListGroup flush>
-          <ListGroupItem className="px-4">
+          {/* <ListGroupItem className="px-4">
             <div className="progress-wrapper">
               <strong className="text-muted d-block mb-2">
                 Quarantine Progress
@@ -39,6 +42,10 @@ class UserBrief extends React.Component {
                 </span>
               </Progress>
             </div>
+          </ListGroupItem> */}
+          <ListGroupItem className="p-4">
+            <strong className="text-muted d-block mb-2">Specialization</strong>
+            <span>General Pathology</span>
           </ListGroupItem>
           <ListGroupItem className="p-4">
             <strong className="text-muted d-block mb-2">Description</strong>
@@ -49,15 +56,15 @@ class UserBrief extends React.Component {
     );
   }
 }
-UserBrief.defaultProps = {
-  name: "Quincy Zhang",
-  age: 24,
-  userType: "User",
-  avatar: require("./sampleprofile.png"),
-  selfIsoProg: 66,
+DoctorBrief.defaultProps = {
+  name: "Yuqiu Zhang",
+  age: 42,
+  userType: "Doctor",
+  avatar: require("./../lib/profilephotos/user3.png"),
+  //   selfIsoProg: 20,
   gender: "Male",
-  description: "Today is a nice day",
+  description: "Feel free to ask me questions!",
   region: "Toronto",
 };
 
-export default UserBrief;
+export default DoctorBrief;

@@ -58,16 +58,23 @@ class UserDetails extends React.Component {
                         autoComplete="email"
                       />
                     </Col>
-                    <Col md="6" className="form-group">
-                      <label htmlFor="fePassword">Password</label>
+                    <Col md="3" className="form-group">
+                      <label htmlFor="feAge">Age</label>
                       <FormInput
-                        type="password"
-                        id="fePassword"
-                        placeholder="Password"
-                        value="Password"
+                        type="number"
+                        id="feAge"
+                        placeholder="Age"
+                        value="24"
                         onChange={() => {}}
-                        autoComplete="current-password"
                       />
+                    </Col>
+                    <Col md="3" className="form-group">
+                      <label htmlFor="feGender">Gender</label>
+                      <FormSelect id="feInputState">
+                        <option>Choose...</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                      </FormSelect>
                     </Col>
                   </Row>
                   <FormGroup>
@@ -103,7 +110,7 @@ class UserDetails extends React.Component {
                       <FormTextarea id="feDescription" rows="5" />
                     </Col>
                   </Row>
-                  <Button theme="accent">Update Account</Button>
+                  <Button theme="info">Update Account</Button>
                 </Form>
               </Col>
             </Row>

@@ -7,8 +7,11 @@ import {
   Card,
   CardHeader,
   InputGroup,
+  ListGroup,
+  ListGroupItem,
   InputGroupAddon,
   InputGroupText,
+  Form,
   FormInput,
   Button,
 } from "shards-react";
@@ -16,8 +19,7 @@ import ProgressCheck from "./ProgressCheck";
 import ContentCard from "./ContentCard";
 import Sidebar from "../SideNavBar/sidebar.js";
 import PageTitle from "../theme/PageTitle";
-import "shards-ui/dist/css/shards.min.css";
-import "./../theme/theme.css";
+import "./../theme/shards-ui.min.css";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -53,18 +55,27 @@ class Dashboard extends React.Component {
                   <CardHeader className="border-bottom">
                     <h6 className="m-0">Check-in Today!</h6>
                   </CardHeader>
-                  <InputGroup seamless className="mb-3">
-                    <FormInput placeholder="Today's Temprature" id="temp" />
-                    <InputGroupAddon type="append">
-                      <Button
-                        theme="info"
-                        id="checkin"
-                        onClick={this.updateCal}
-                      >
-                        Checkin
-                      </Button>
-                    </InputGroupAddon>
-                  </InputGroup>
+                  <ListGroup flush>
+                    <ListGroupItem className="px-1">
+                      <Form>
+                        <InputGroup seamless className="mb-3">
+                          <FormInput
+                            placeholder="Today's body temprature"
+                            id="temp"
+                          />
+                          <InputGroupAddon type="append">
+                            <Button
+                              theme="info"
+                              id="checkin"
+                              onClick={this.updateCal}
+                            >
+                              Checkin
+                            </Button>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </Form>
+                    </ListGroupItem>
+                  </ListGroup>
                 </Card>
                 <Alert theme="success" open={this.state.visible}>
                   You've successfully checked in today!
@@ -81,10 +92,10 @@ class Dashboard extends React.Component {
               />
             </Row>
             <Row>
-              <Col lg="6">
+              <Col lg="6" sm="12" className="mb-4">
                 <ContentCard category="Tips" />
               </Col>
-              <Col lg="6">
+              <Col lg="6" sm="12" className="mb-4">
                 <ContentCard category="News" />
               </Col>
             </Row>
