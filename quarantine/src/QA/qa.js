@@ -1,11 +1,11 @@
 import React from "react";
+import { Col } from "shards-react";
 import "../components.css";
 import Media from "./media";
 import { uid } from "react-uid";
 import DropDown from "./dropdown";
 import Sidebar from "../SideNavBar/sidebar.js";
 import Pagination from "./pagination.js";
-
 class QA extends React.Component {
   state = {
     /*user = this.props.user*/
@@ -124,15 +124,22 @@ class QA extends React.Component {
       },
     ],
     currShown: [0, 10],
-    notes: ["Your post \"aba aba...\" has been deleted.", "Your post \"aba aba...\" has been deleted."],
-    numNotes: 2
+    notes: [
+      'Your post "aba aba..." has been deleted.',
+      'Your post "aba aba..." has been deleted.',
+    ],
+    numNotes: 2,
   };
 
   render() {
     return (
       <div>
-          {console.log(this.state)}
-        <Sidebar title={"Q&A"} notes={this.state.notes} numNotes={this.state.numNotes} />
+        {console.log(this.state)}
+        <Sidebar
+          title={"Q&A"}
+          notes={this.state.notes}
+          numNotes={this.state.numNotes}
+        />
         <div className="jumbotron jumbotron-fluid" id="jumbotronQa">
           <div className="container">
             <h1 className="title titleQa">Quanrantine Assistant Communities</h1>
@@ -159,7 +166,6 @@ class QA extends React.Component {
             </form>
           </div>
         </div>
-
         <div>
           <form action="#" className="postForm">
             <img
@@ -314,7 +320,6 @@ class QA extends React.Component {
     newList[mediaId].tags.push("");
     this.setState({ postsList: newList });
     this.pushNote("A reply has been added to your post.");
-
   };
 
   swap = (items, firstIndex, secondIndex) => {
@@ -405,13 +410,13 @@ class QA extends React.Component {
     this.pushNote("A post has been deleted.");
   };
 
-  pushNote = (v)=> {
-      const noteB = this.state.notes;
-      const numB = this.state.numNotes + 1;
-      noteB.push(v);
-      this.setState({notes: noteB});
-      this.setState({ numNotes: numB});
-  }
+  pushNote = (v) => {
+    const noteB = this.state.notes;
+    const numB = this.state.numNotes + 1;
+    noteB.push(v);
+    this.setState({ notes: noteB });
+    this.setState({ numNotes: numB });
+  };
 }
 
 export default QA;

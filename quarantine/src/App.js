@@ -17,7 +17,7 @@ import AdminProfile from "./userProfile/admin";
 import Dashboard from "./Dashboard/index";
 import { AdminDashboard } from "./AdminDashboard/index";
 import "bootstrap/dist/css/bootstrap.css";
-
+import "./theme/theme.css";
 class App extends React.Component {
   render() {
     return (
