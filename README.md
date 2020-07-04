@@ -58,7 +58,7 @@ Note that all data used in user views are now hard-coded. The information will b
 
 - Doctor profile (`/doctorprofile/`): This is the view where a user checks a doctor user's profile. Apart from the necessary information, there's also a badge verifying the doctor identity and a field indicating the doctor's specialization.
 
-- Doctor profile (`/doctorprofile/`): This is the view where a user checks an admin's profile. Apart from the necessary information, there's also a badge indicating this is an admin.
+- Admin profile (`/adminprofile/`): This is the view where a user checks an admin's profile. Apart from the necessary information, there's also a badge indicating this is an admin.
 
 ## Dashboard
 
