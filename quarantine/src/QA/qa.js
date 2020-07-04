@@ -166,81 +166,83 @@ class QA extends React.Component {
             </form>
           </div>
         </div>
-        <div>
-          <form action="#" className="postForm">
-            <img
-              src={require("../lib/profilephotos/user1.png")}
-              className="profilephotoPost"
-            />
+        <div id="bgwhite">
+          <div>
+            <form action="#" className="postForm">
+              <img
+                src={require("../lib/profilephotos/user1.png")}
+                className="profilephotoPost"
+              />
 
-            <div className="form-group form-groupQab">
-              <input
-                className="form-control"
-                id="post"
-                placeholder="Make a new post here..."
-                name="email"
-              />
-            </div>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              id="postBtn"
-              onClick={this.post}
-            >
-              Post ! !{" "}
-            </button>
-            <br />
-            <div className="form-group form-groupQab tagDiv">
-              <input
-                className="form-control"
-                id="tags"
-                placeholder="#Tags"
-                name="pswd"
-              />
-            </div>
-            <div className="anonnCheck">
-              <label className="form-check-label">
-                <input className="form-check-input" type="checkbox" />{" "}
-                Anonnymous to others
-              </label>
-            </div>
-          </form>
+              <div className="form-group form-groupQab">
+                <input
+                  className="form-control"
+                  id="post"
+                  placeholder="Make a new post here..."
+                  name="email"
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                id="postBtn"
+                onClick={this.post}
+              >
+                Post ! !{" "}
+              </button>
+              <br />
+              <div className="form-group form-groupQab tagDiv">
+                <input
+                  className="form-control"
+                  id="tags"
+                  placeholder="#Tags"
+                  name="pswd"
+                />
+              </div>
+              <div className="anonnCheck">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" />{" "}
+                  Anonnymous to others
+                </label>
+              </div>
+            </form>
+          </div>
+          <br />
+          <hr />
+          <br />
+          <br />
+          <br />
+          <div>
+            <span id="dropDown">
+              <DropDown handleOrder={this.handleOrder} />
+            </span>
+            {this.state.postsList
+              .slice(this.state.currShown[0], this.state.currShown[1])
+              .map((post, mediaNum) => (
+                <Media
+                  key={uid(post)}
+                  postsList={post}
+                  handleLike={(i, amt) => this.like(i, mediaNum, amt)}
+                  handleReply={(name, content) =>
+                    this.handleReply(mediaNum, name, content)
+                  }
+                  handleRemove={(i, e) => this.handleRemove(i, mediaNum, e)}
+                  mediaId={mediaNum}
+                />
+              ))}
+          </div>
+          <Pagination
+            len={Math.ceil(this.state.postsList.length / 10)}
+            handleClick={this.handlePage}
+          />
+          <button
+            type="button"
+            onClick={this.backTop}
+            className="btn btn-primary btn-block"
+          >
+            Back to top
+          </button>
         </div>
-        <br />
-        <hr />
-        <br />
-        <br />
-        <br />
-        <div>
-          <span id="dropDown">
-            <DropDown handleOrder={this.handleOrder} />
-          </span>
-          {this.state.postsList
-            .slice(this.state.currShown[0], this.state.currShown[1])
-            .map((post, mediaNum) => (
-              <Media
-                key={uid(post)}
-                postsList={post}
-                handleLike={(i, amt) => this.like(i, mediaNum, amt)}
-                handleReply={(name, content) =>
-                  this.handleReply(mediaNum, name, content)
-                }
-                handleRemove={(i, e) => this.handleRemove(i, mediaNum, e)}
-                mediaId={mediaNum}
-              />
-            ))}
-        </div>
-        <Pagination
-          len={Math.ceil(this.state.postsList.length / 10)}
-          handleClick={this.handlePage}
-        />
-        <button
-          type="button"
-          onClick={this.backTop}
-          className="btn btn-primary btn-block"
-        >
-          Back to top
-        </button>
       </div>
     );
   }

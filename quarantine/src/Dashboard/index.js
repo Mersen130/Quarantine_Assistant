@@ -10,7 +10,6 @@ import {
   ListGroup,
   ListGroupItem,
   InputGroupAddon,
-  InputGroupText,
   Form,
   FormInput,
   Button,
@@ -39,7 +38,7 @@ class Dashboard extends React.Component {
               <PageTitle
                 sm="4"
                 title="Quarantine Progress"
-                subtitle="Dashboard"
+                subtitle=""
                 className="text-sm-left"
               />
             </Row>
@@ -58,11 +57,12 @@ class Dashboard extends React.Component {
                   <ListGroup flush>
                     <ListGroupItem className="px-1">
                       <Form>
-                        <InputGroup seamless className="mb-3">
+                        <InputGroup className="mb-3">
                           <FormInput
                             placeholder="Today's body temprature"
                             id="temp"
                           />
+                          <FormInput placeholder="Today's weight" id="weight" />
                           <InputGroupAddon type="append">
                             <Button
                               theme="info"

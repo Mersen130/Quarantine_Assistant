@@ -256,3 +256,7 @@
   bottom: 0;
   border: none;
 }
+
+#bgwhite {
+  background-color: white;
+}
