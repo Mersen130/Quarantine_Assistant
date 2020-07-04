@@ -54,7 +54,7 @@ class SignIn extends React.Component{
     //   handleChange
     // } = this.props;
 		return(
-      <div class="wrapper">
+      <div id="wrapper">
         <div id = "signInForm">
           <form onSubmit={handleSubmit.bind(this,this.state.userName,this.state.password,this.props.history)}>
             <img src={require("../../lib/signIn/calendar.png")}class = "mx-auto d-block" id="signInLogo"/>

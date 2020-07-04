@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "shards-react";
-import Sidebar from "../SideNavBar/sidebar.js";
+import SidebarAdmin from "../SideNavBar/sidebarAdmin.js";
 import PageTitle from "../theme/PageTitle";
 import StatCard from "./StatCard";
 import UserByGender from "./DivisionChart.js";
@@ -9,7 +9,7 @@ export class AdminDashboard extends Component {
   render() {
     return (
       <div>
-        <Sidebar title={"Dashboard"} />
+        <SidebarAdmin title={"Dashboard"} />
 
         <Container fluid className="main-content-container px-4 pb-4">
           <Col lg={{ size: 10, offset: 2 }} md={{ size: 9, offset: 3 }}>

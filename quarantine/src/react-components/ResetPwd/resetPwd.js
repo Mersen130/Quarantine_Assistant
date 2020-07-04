@@ -20,13 +20,13 @@ class Reset extends React.Component{
 			this.props.history.push('/dashboard');
 		}
 		if(this.state.resetUser == "admin"){
-			this.props.history.push('/dashboard');
+			this.props.history.push('/admindashboard');
 		}
 		
 	}
 	render(){
 		return(
-			<div class="wrapper">
+			<div id="wrapper">
 			<div id="resetForm">
 				<form onSubmit={this.handleSubmit}>
 					<img src={require("../../lib/signIn/calendar.png")}class = "mx-auto d-block" id="resetLogo"/>

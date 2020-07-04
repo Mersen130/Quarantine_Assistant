@@ -1,0 +1,23 @@
+#wrapper{
+	height:100vh;
+	width:100%;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #fafff0;
+
+}
+
+#myActivitiesBlock{
+	width:80%;
+	margin-left:10%;
+
+}
+
+#h3_myAct{
+	margin-top: -20%;
+}
+#recommendBlock{
+	width:80%;
+	margin-left:10%;
+}
