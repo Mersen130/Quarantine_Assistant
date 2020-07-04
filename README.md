@@ -25,9 +25,9 @@ The main components of the front-end part of this application are (followed by i
 - Activity Recommendations (`/Activities/`)
 - Other miscs (Navbar, Sidebar etc.)
 
-## Login
+## Login (`/`)
 
-This page lets users to log in the app. There are 2 accounts you can login with for now:
+This page lets users log in the app. There are 2 accounts you can login with for now:
 
 - Regular user
 <pre>userName: <b>user</b>, password: <b>user</b></pre></br>
@@ -38,13 +38,13 @@ This page lets users to log in the app. There are 2 accounts you can login with 
 
 User and Admin will be routed to the corresponding dashboard after login.
 
-## Questionnaire
+## Questionnaire (`/questionnaire/`)
 
 If a user does not have an existing account, he will be directed to a simple questionnaire system to analyse whether he needs to take a 2 weeks quarantine. This page is only accessable to a new user, a new user must finish all questions before continuing. If it's deemed necessary for the user to take the quarantine, he will be directed to the signup page. If a user refuse to quarantine, the page will be directed to login page.
 
-## Signup
+## Signup (`/signup/`)
 
-This page lets user to create an account, and will route to the normal user's dashboard page upon creation. Users can only create accounts in the type of normal user, admin account and doctor account are setup by developers, it could not be created by users.
+This page lets users create an account, and will route to the normal user's dashboard page upon creation. Users can only create accounts in the type of normal user, admin account and doctor account are setup by developers, it could not be created by users.
 
 ## User profile
 
@@ -95,7 +95,7 @@ There are two views of the QA platform, for regular users and admins respectivel
 
 The admin view shares similar layout with user view, except that an admin cannot [like, post, reply], but can delete ANY posts/replies if the content is not appropriate.
 
-## Recommend activities
+## Activity Recommendations (`/Activities/`)
 
 This is a page that lists user's activities and activities that recommended by the website (of which the data will come from other source/API later). Users can remove the activities from their list and can add activities from recommended list to their list.
 
