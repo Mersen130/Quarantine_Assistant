@@ -99,12 +99,18 @@ The admin view shares similar layout with user view, except that an admin cannot
 
 This is a page that lists user's activities and activities that recommended by the website (of which the data will come from other source/API later). Users can remove the activities from their list and can add activities from recommended list to their list.
 
-## Sidebar (with notification center on top)
+## Sidebar and Navbar (with notification center on top)
 
-A user/admin can redirect to his own profile/Dashboard/Q&A/recomendation activities pages or log out through sidebar.
+A user/admin can redirect to his own profile/Dashboard/Q&A/recomendation activities pages or log out through sidebar, or check the notifications through navbar.
+
+## Note
+
+As TA suggested, we choose to implement the abovementioned unique features of our app first. Time permitted, we will implement the additional `People Nearby` feature at a later stage.
 
 ## Contributors and work distribution
 
 - Qixin: Sidebar, Q&A, Questionnire
 - Yuqiu: User profile, Dashboard
 - Yifei: Login & signup, Recommend activities
+
+Thanks :)
