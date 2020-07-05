@@ -1,37 +1,108 @@
 import React from 'react';
-import {LinkContainer} from 'react-router-bootstrap';
-import {Button, Form, FormGroup, Label, Image} from 'react-bootstrap';
+import '../../App.css';
 import './signIn.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {handleSubmit, handleChangePage} from "./signInActions.js";
+
+
+
+const formValid = ({ formErrors, ...rest }) => {
+  let valid = true;
+
+  Object.values(formErrors).forEach(val => {
+    val.length > 0 && (valid = false);
+  });
+
+  return valid;
+};
+
 
 class SignIn extends React.Component{
 
+  // constructor(props){
+  //   super(props);
+    
+  state = {
+      userName:"",
+      password:"",
+      userType:"",
+      users:[
+        {userName:'user', password:'user', userType:"user"},
+        {userName:"admin", password:"admin", userType:"admin"}
+      ],
+      formErrors:{
+      userName:"",
+      password:""
+    }
+  }
+
+
+
+  handleChange = e =>{
+    e.preventDefault();
+    const {name, value} = e.target;
+    this.setState({
+      [name]:value
+    });
+  }
+
+
 	render(){
+    // const{
+    //   userName,
+    //   password,
+    //   userType,
+    //   handleChange
+    // } = this.props;
 		return(
-		<div>
-		<Form className = "signInForm">
-			<Image src='./../../media/calendar.png40x40' roundedCircle/>
-			<h2 calssName = "text-center">Sign In</h2>
-  			<Form.Group controlId="formEmail">
-    			<Form.Control type="email" placeholder=" Email Address*"/>
-  			</Form.Group>
-			<Form.Group controlId="formPassword">
-    			<Form.Control type="password" placeholder=" Password*" />
-  			</Form.Group>
-  			<Form.Group controlId="formCheckbox">
-    		<Form.Check type="checkbox" label="Remeber me" />
-  			</Form.Group>
-  			<Button variant="primary" type="submit">Submit
-  			</Button>
-        <LinkContainer to="/Reset">
-  			 <Button variant="link" bsPrefix='reset'>Forgot password?</Button>
-         </LinkContainer>
-         <LinkContainer to="/SignUp">
-  			   <Button variant="link" bsPrefix='signUp'>Don't have an account? Sign Up</Button>
-  			</LinkContainer>
-		</Form>
-		</div>
-			);
+      <div class="wrapper">
+        <div id = "signInForm">
+          <form onSubmit={handleSubmit.bind(this,this.state.userName,this.state.password,this.props.history)}>
+            <img src={require("../../lib/signIn/calendar.png")}class = "mx-auto d-block" id="signInLogo"/>
+            <h2 id="signIn">Sign In</h2>
+            <div class = "form-group">
+              <input
+                type="text"
+                name="userName"
+                value = {this.state.userName}
+                class="custom-form-control signInEmailPswd" 
+                placeholder="Username*"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div class = "form-group">
+               <input
+                 type="password"
+                 name="password"
+                 value= {this.state.password}
+                 class="custom-form-control signInEmailPswd"
+                 placeholder="Password*"
+                 onChange={this.handleChange}
+                 required
+               />
+            </div>
+            <div class="custom-control custom-checkbox" id="signInCheckbox">
+              <input 
+                type="checkbox"
+                class="custom-control-input"
+                id="rememberMe"
+              />
+              <label class = "custom-control-label" id="labelRememberMe"for="rememberMe">Remeber Me</label>
+            </div>
+            <button
+              type="submit"
+              id="signInBtn"
+              >
+              Sign In
+            </button>
+            <div id="signInLink">
+              <a onClick = {handleChangePage.bind(this, "/Reset", this.props.history)} href="/Reset" id="goReset">Forgot your password?</a>
+              <a onClick = {handleChangePage.bind(this, "/questionnaire", this.props.history)} href="/questionnaire" id="goQue">Don't have an account? Sign up</a>
+            </div>
+          </form>
+        </div>
+      </div>
+  );
 
 	}
 }
