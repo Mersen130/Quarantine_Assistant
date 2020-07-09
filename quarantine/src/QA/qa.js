@@ -246,40 +246,33 @@ class QA extends React.Component {
       </div>
     );
   }
+
   search = (e) => {
     const t = document.getElementById("searchedTag").value;
     e.preventDefault();
     const posts = document.getElementsByClassName("mt-3");
+    console.log(posts)
     const regExp = / +/;
     if (t === "" || regExp.test(t)) {
-      for (let i = 0; i < posts.length; i++) {
-        posts[i].style.visibility = "visible";
-      }
-      return;
+        for (let i = 0; i < posts.length; i++) {
+            posts[i].style.visibility = "visible";
+        }
+        return;
     }
     for (let i = 0; i < posts.length; i++) {
-      posts[i].style.visibility = "collapse";
+        posts[i].style.visibility = "collapse";
     }
-    for (let i = 0; i < this.state.postsList.length; i++) {
-      for (let j = 0; j < this.state.postsList[i].tags.length; j++) {
-        if (this.state.postsList[i].tags[j].includes(t)) {
-          posts[i].style.visibility = "visible";
+    console.log(this.state.currShown)
+    for (let i = this.state.currShown[0]; i < this.state.currShown[1]; i++) {
+        for (let j = 0; j < this.state.postsList[i].tags.length; j++){
+            if (this.state.postsList[i].tags[j].includes(t)) {
+                console.log(posts[i])
+                posts[i].style.visibility = "visible";
+            }
         }
-        const tags = document.querySelector("#tags");
-        this.state.postsList.splice(0, 0, {
-          names: ["user1"],
-          contents: [posts.value + " " + tags.value],
-          times: [new Date()],
-          likes: [0],
-          tags: [tags.value],
-        });
-        const newList = this.state.postsList;
-        this.setState({ postsList: newList });
-        // todo: a server call that sends data
-      }
     }
-  };
-
+  }
+  
   post = (e) => {
     e.preventDefault();
     const post = document.querySelector("#post");
@@ -290,7 +283,7 @@ class QA extends React.Component {
     }
     const tags = document.querySelector("#tags");
     this.state.postsList.splice(0, 0, {
-      names: ["Qixin"],
+      names: ["user1"],
       contents: [post.value + " " + tags.value],
       times: [new Date()],
       likes: [0],
@@ -390,11 +383,19 @@ class QA extends React.Component {
   handlePage = (mode, page) => {
     if (mode === "next") {
       if (this.state.currShown[1] >= this.state.postsList.length) return;
+      let end = this.state.currShown[1] + 10;
+      if (end > this.state.postsList.length){
+        end = this.state.postsList.length
+      }
       this.setState({
-        currShown: [this.state.currShown[0] + 10, this.state.currShown[1] + 10],
+        currShown: [this.state.currShown[0] + 10, end],
       });
     } else {
-      this.setState({ currShown: [(page - 1) * 10, page * 10] });
+      let end = page * 10;
+      if (end > this.state.postsList.length){
+        end = this.state.postsList.length
+      }
+      this.setState({ currShown: [(page - 1) * 10, end] });
     }
   };
 
