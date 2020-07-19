@@ -53,7 +53,7 @@ DoctorBrief.defaultProps = {
     name: "Yuqiu Zhang",
     age: 42,
     userType: "Doctor",
-    avatar: require("./../lib/profilephotos/user3.png"),
+    avatar: require("../../lib/profilephotos/user3.png"),
     //   selfIsoProg: 20,
     gender: "Male",
     description: "Feel free to ask me questions!",

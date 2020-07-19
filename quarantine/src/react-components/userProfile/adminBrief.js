@@ -41,7 +41,7 @@ AdminBrief.defaultProps = {
   name: "Dr. Strange",
   age: 35,
   userType: "Admin",
-  avatar: require("./../lib/profilephotos/strange.png"),
+  avatar: require("../../lib/profilephotos/strange.png"),
   //   selfIsoProg: 20,
   gender: "Male",
   description:

@@ -53,7 +53,7 @@ User2Brief.defaultProps = {
   name: "User2",
   age: 18,
   userType: "User",
-  avatar: require("./../lib/profilephotos/user2.png"),
+  avatar: require("../../lib/profilephotos/user2.png"),
   selfIsoProg: 20,
   gender: "Female",
   description: "I love bubble tea!",

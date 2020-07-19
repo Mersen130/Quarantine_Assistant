@@ -1,5 +1,5 @@
 import React from "react";
-import "../components.css";
+import "../../components.css";
 import MediaAdmin from "./mediaAdmin";
 import { uid } from "react-uid";
 import DropDown from "./dropdown";

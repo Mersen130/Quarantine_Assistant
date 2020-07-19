@@ -23,15 +23,15 @@ class Sidebaradmin extends React.Component {
           <a href="/adminprofile">
             <img
               id="profilePhoto"
-              src={require("../lib/profilephotos/strange.png")}
+              src={require("../../lib/profilephotos/strange.png")}
             />
           </a>
           <p id="profileName">user1</p>
           <a onClick={this.changeNavbarTitle} href="/admindashboard">
-            <img src={require("../lib/sidebar/dashboard.png")} /> Dashboard
+            <img src={require("../../lib/sidebar/dashboard.png")} /> Dashboard
           </a>
           <a onClick={this.changeNavbarTitle} href="/qaAdmin">
-            <img src={require("../lib/sidebar/qa.png")} /> Q&A
+            <img src={require("../../lib/sidebar/qa.png")} /> Q&A
           </a>
           <a href="/Signin" id="logout">
             log out

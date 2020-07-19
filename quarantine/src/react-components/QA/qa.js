@@ -1,5 +1,5 @@
 import React from "react";
-import "../components.css";
+import "../../components.css";
 import Media from "./media";
 import { uid } from "react-uid";
 import DropDown from "./dropdown";
@@ -169,7 +169,7 @@ class QA extends React.Component {
           <div>
             <form action="#" className="postForm">
               <img
-                src={require("../lib/profilephotos/user1.png")}
+                src={require("../../lib/profilephotos/user1.png")}
                 className="profilephotoPost"
               />
 

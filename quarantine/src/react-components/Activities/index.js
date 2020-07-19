@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "shards-react";
-import Sidebar from "../../SideNavBar/sidebar.js";
+import Sidebar from "../SideNavBar/sidebar.js";
 import RecommendList from "./RecommendList.js";
 import MyList from "./myList.js";
 
