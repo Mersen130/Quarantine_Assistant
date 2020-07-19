@@ -1,5 +1,4 @@
 import React from "react";
-import { Col } from "shards-react";
 import "../components.css";
 import Media from "./media";
 import { uid } from "react-uid";

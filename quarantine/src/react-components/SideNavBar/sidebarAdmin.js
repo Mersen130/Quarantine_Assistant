@@ -1,6 +1,6 @@
 import React from "react";
-import "../App.css";
-import "../components.css";
+import "../../App.css";
+import "../../components.css";
 
 class Sidebaradmin extends React.Component {
   state = { title: "Dashboard" };
