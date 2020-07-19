@@ -60,6 +60,7 @@ class SignIn extends React.Component{
             <img src={require("../../lib/signIn/calendar.png")}class = "mx-auto d-block" id="signInLogo"/>
             <h2 id="signIn">Sign In</h2>
             <div class = "form-group">
+		      //TODO: request server call
               <input
                 type="text"
                 name="userName"
@@ -70,6 +71,7 @@ class SignIn extends React.Component{
                 required
               />
             </div>
+		//TODO: request server call
             <div class = "form-group">
                <input
                  type="password"
