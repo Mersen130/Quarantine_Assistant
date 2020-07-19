@@ -62,6 +62,7 @@ class Questionnaire extends React.Component {
             total += this.state.selected[v];
         }
         console.log(total);
+        // todo: a server call that sends data
         if (total > 0.5) return "You are at high risk! We strongly recommend you to start a 2-week self-isolation."
         return "Although it's unlikely that you are infected, we still recommend you to start a 2-week self-isolation."
     }

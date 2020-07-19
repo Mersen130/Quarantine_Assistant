@@ -303,6 +303,7 @@ class QA extends React.Component {
     postsListB[j].likes[i] += amt;
     this.setState({ postsList: postsListB });
     this.pushNote("A like has been added to your post.");
+    // todo: a server call that sends data
   };
 
   handleReply = (mediaId, name, content) => {
@@ -314,6 +315,7 @@ class QA extends React.Component {
     newList[mediaId].tags.push("");
     this.setState({ postsList: newList });
     this.pushNote("A reply has been added to your post.");
+    // todo: a server call that sends data
   };
 
   swap = (items, firstIndex, secondIndex) => {
@@ -407,9 +409,8 @@ class QA extends React.Component {
     }
 
     this.setState({ postsList: postsListB });
-
-    /* todo: push notifications*/
     this.pushNote("A post has been deleted.");
+    // todo: a server call that sends data
   };
 
   pushNote = (v) => {

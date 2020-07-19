@@ -329,6 +329,7 @@ class QAAdmin extends React.Component {
     this.setState({ postsList: postsListB });
 
     /* todo: push notifications*/
+    // todo: a server call that sends data
   };
 }
 
