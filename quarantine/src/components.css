@@ -24,13 +24,19 @@
   display: inline-block;
 }
 
-.likeQa {
-  height: 4vh;
+.likeQa{
+  border-radius: 20px;
+  border: 0;
+  height: 36px;
   position: absolute;
+  background-color: #a5d6a7 !important;
   right: 5%;
-  text-align: center;
-  line-height: 15px;
 }
+
+.likeQa:focus{
+  outline: none;
+}
+
 
 .profilephotoQa {
   margin-right: 1vw;
@@ -80,8 +86,17 @@
 
 #postBtn {
   position: absolute;
+  background-color: #a5d6a7;
+  border: 0;
+  border-radius: 20px;
   left: 77vw;
   top: 5vh;
+}
+
+#searchBtn{
+  background-color: #a5d6a7;
+  border: 0;
+  border-radius: 20px;
 }
 
 .profilephotoPost {
@@ -104,6 +119,12 @@
   visibility: collapse;
 }
 
+#backToTop{
+  background-color: #a5d6a7;
+  border: 0;
+  border-radius: 20px;
+}
+
 .borderQa {
   position: relative;
   min-height: 140px;
@@ -117,6 +138,12 @@
 #dropDown {
   position: absolute;
   left: 3vw;
+}
+
+#dropdownMenuLink {
+  background-color: #a5d6a7;
+  border: 0;
+  border-radius: 20px;
 }
 
 /* The sidebar menu */
@@ -231,12 +258,10 @@
 }
 
 .btnQuest {
-  margin: 20px 12px 12px 12px;
-  border: 0;
-}
-
-.btnQuest:hover {
-  background-color: #a5d6a7;
+  background-color: #a5d6a7 !important;
+  margin: 20px 12px 12px 12px !important;
+  border: 0 !important;
+  border-radius: 20px !important;
 }
 
 #notification {

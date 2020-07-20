@@ -147,6 +147,7 @@ class QAAdmin extends React.Component {
               <button
                 type="submit"
                 className="btn btn-primary"
+                id="searchBtn"
                 onClick={this.search}
               >
                 Search !
@@ -182,6 +183,7 @@ class QAAdmin extends React.Component {
           <button
             type="button"
             onClick={this.backTop}
+            id="backToTop"
             className="btn btn-primary btn-block"
           >
             Back to top
