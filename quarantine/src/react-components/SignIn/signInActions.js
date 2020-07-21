@@ -6,6 +6,9 @@ export const handleSubmit = (userName, password, history) =>{
 	if(userName === "admin" && password === "admin"){
 	 	history.push('./admindashboard')
 	}
+	if(userName === "doctor" && password === "password"){
+		history.push('./dashboard')
+	}
 
 	
 };

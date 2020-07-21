@@ -11,12 +11,7 @@ class RecommendList extends React.Component{
 			queueComponent
 			}=this.props;
 		return(
-			<table class="table table-bordered">
-				<thead class ="thead-dark">
-					<th scope="col">Activities</th>
-					<th scope="col">Type</th>
-					<th scope="col"></th>
-				</thead>
+			<table class="table">
 				<tbody>
 					{recommendActs.map(recAct =>
 						<RecommendActivities

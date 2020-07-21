@@ -7,15 +7,28 @@ import MyList from "./myList.js";
 class Activities extends React.Component {
   state = {
     userActList: [
-      { name: "10 Days of Yoga", type: "sport" },
-      { name: "Learn Java in 5 days", type: "study" },
+      { name: "10 Days of Yoga",
+       type: "sport", 
+       image: require("../../lib/activities/Yoga.png"),
+       decr:"this is the decription of this activities: blahblah"
+     },
+      { name: "Learn Java in 5 days",
+       type: "study",
+       image: require("../../lib/activities/Yoga.png"),
+       decr:"this is the decription of this activities: blahblah"
+        },
     ],
     recommendList: [
       {
         name: "Reading 'The Harry Potter series' By J.K. Rowling in 7 days",
         type: "reading",
+        image: require("../../lib/activities/Yoga.png"),
+        decr:"this is the decription of this activities: blahblah"
       },
-      { name: "A list of trending movies", type: "movie" },
+      { name: "A list of trending movies",
+        type: "movie",
+        image: require("../../lib/activities/Yoga.png"),
+        decr:"this is the decription of this activities: blahblah"},
     ],
   };
 

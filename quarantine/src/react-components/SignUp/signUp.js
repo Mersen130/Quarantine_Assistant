@@ -181,7 +181,7 @@ class SignUp extends React.Component{
           <label class = "custom-control-label" id="labelViaEmail"for="recieveViaEmail">I want to recieve notifications via email</label>
         </div>
       <button type="submit" id="signUpBtn">Create Account</button>
-      <a onClick = {this.handleChangePage} href="/SignIn" id="goLogin">Already have an account?</a>
+      <a onClick = {this.handleChangePage} href="/" id="goLogin">Already have an account?</a>
     </form>
     </div>
     </div>

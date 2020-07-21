@@ -6,12 +6,7 @@ class MyList extends React.Component{
 	render(){
 		const {myActs, queueComponent}=this.props;
 		return(
-			<table class="table table-bordered">
-				<thead class = "thead-dark">
-					<th scope="col">Activities</th>
-					<th scope="col">Type</th>
-					<th scope="col"></th>
-				</thead>
+			<table class="table">
 				<tbody>
 					{myActs.map(myAct =>
 						<MyActivities
