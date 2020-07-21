@@ -4,61 +4,62 @@ import "./question.js"
 import Question from './question.js';
 
 class Questionnaire extends React.Component {
-    state = { currQ: 0, selected: [-1, -1, -1, -1, -1] }
+    state = {selected: [-1, -1, -1, -1, -1], show: false }
 
     render() {
         return (
             <div>
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
+                    {this.state.show == true && <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Well done!</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Notice</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {this.getTotal()}
+                                {(() => {
+                                    const ans = this.getTotal();
+                                    if (ans == "failed"){
+                                        return "Please complete all questions.";
+                                    }
+                                    return ans;
+                                })()}
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={() => window.location.href = "/signin"}>Exit</button>
+                            {this.getTotal() !== "failed" && <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={() => window.location.href = "/"}>Exit</button>
                                 <button type="button" class="btn btn-primary" onClick={() => window.location.href = "/signup"}>Continue to signup...</button>
-                            </div>
-                        </div>
+                            </div>}
+                        </div>}
                     </div>
                 </div>
                 <div class="jumbotron jumbotron-fluid" id="jumbotronQuest">
                     <div class="container" id="containerQuest">
-                        <Question currQ={this.state.currQ} handleNext={this.nextQ} handleLast={this.lastQ} handleCheck={this.check} />
+                        <Question handleSubmit = {this.handleSubmit} handleCheck={this.check} />
                     </div>
                 </div>
             </div>
         );
     }
 
-    nextQ = (e) => {
-        e.preventDefault();
-        if (this.state.selected[this.state.currQ] === -1) {
-            alert("please select one answer");
-            return;
-        }
-        this.setState({ currQ: ++this.state.currQ });
+    handleSubmit = () => {
+        this.setState({show: true});
     }
 
-    lastQ = (e) => {
+    check = (value, i, e) => {
         e.preventDefault();
-        this.setState({ currQ: --this.state.currQ });
-    }
-
-    check = (value, e) => {
-        e.preventDefault();
-        this.state.selected[this.state.currQ] = value;
+        this.state.selected[i] = value;
     }
 
     getTotal = () => {
         let total = 0;
+        console.log(this.state.selected);
+
         for (let v = 0; v < this.state.selected.length; v++) {
+            if (this.state.selected[v] === -1){
+                return "failed";
+            }
             total += this.state.selected[v];
         }
         console.log(total);

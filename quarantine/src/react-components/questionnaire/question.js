@@ -6,119 +6,98 @@ class Question extends React.Component {
         return (
             <div>
 
-
-                {this.props.currQ == 0 && 
+                <h1 class="display-3">Questionnaire</h1><br/><br/>
                 <div>
-                    <h1 class="display-4">Questionnaire #1 (total 5)</h1>
+                    <h1 class="display-5">#1</h1>
                     <p class="lead">Are you at age group of 0-16/30-inf?</p>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(0.3, e)} type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline1">Y</label>
+                        <input onChange={(e)=>this.props.handleCheck(0.3, 0, e)} type="radio" id="customRadioInline11" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline11">Y</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(0, e)} type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline2">N</label>
+                        <input onChange={(e)=>this.props.handleCheck(0, 0, e)} type="radio" id="customRadioInline21" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline21">N</label>
                     </div>
-                    <div>
-                        <button className="btn btn-secondary btnQuest" onClick={this.props.handleNext}>next question</button>
-                    </div>
-                </div>}
+                </div><br/><br/><br/>
 
 
-                {this.props.currQ == 1 && 
                 <div>
-                    <h1 class="display-4">Questionnaire #2 (total 5)</h1>
+                    <h1 class="display-5">#2</h1>
                     <p class="lead">Do you feel one or more of the following symptoms? (Sneezing, coughing, fever, difficulty breathing, pneumonia in both lungs)</p>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(0, e)} type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline1">0</label>
+                        <input onChange={(e)=>this.props.handleCheck(0, 1, e)} type="radio" id="customRadioInline12" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline12">0</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(1, e)} type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline2">1</label>
+                        <input onChange={(e)=>this.props.handleCheck(1, 1, e)} type="radio" id="customRadioInline22" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline22">1</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(1, e)} type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline3">2</label>
+                        <input onChange={(e)=>this.props.handleCheck(1, 1, e)} type="radio" id="customRadioInline32" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline32">2</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(1, e)} type="radio" id="customRadioInline4" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline4">3</label>
+                        <input onChange={(e)=>this.props.handleCheck(1, 1, e)} type="radio" id="customRadioInline42" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline42">3</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(1, e)} type="radio" id="customRadioInline5" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline5">4</label>
+                        <input onChange={(e)=>this.props.handleCheck(1, 1, e)} type="radio" id="customRadioInline52" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline52">4</label>
                     </div>
-                    <div>
-                        <button className="btn btn-secondary btnQuest" onClick={this.props.handleLast}>last question</button>
-                        <button className="btn btn-secondary btnQuest" onClick={this.props.handleNext}>next question</button>
-                    </div>
-                </div>}
+                </div>
+                <br/><br/><br/>
 
-
-                {this.props.currQ == 2 && 
                 <div>
-                    <h1 class="display-4">Questionnaire #3 (total 5)</h1>
+                    <h1 class="display-5">#3</h1>
                     <p class="lead">Did you have close contact with any person with flu-like symptoms in the past 2 weeks?</p>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(1, e)} type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline1">Y</label>
+                        <input onChange={(e)=>this.props.handleCheck(1, 2, e)} type="radio" id="customRadioInline13" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline13">Y</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(0, e)} type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline2">N</label>
+                        <input onChange={(e)=>this.props.handleCheck(0, 2, e)} type="radio" id="customRadioInline23" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline23">N</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(0.5, e)} type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline3">Not sure</label>
+                        <input onChange={(e)=>this.props.handleCheck(0.5, 2, e)} type="radio" id="customRadioInline33" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline33">Not sure</label>
                     </div>
-                    <div>
-                        <button className="btn btn-secondary btnQuest" onClick={this.props.handleLast}>last question</button>
-                        <button className="btn btn-secondary btnQuest" onClick={this.props.handleNext}>next question</button>
-                    </div>
-                </div>}
+                </div><br/><br/><br/>
 
 
-                {this.props.currQ == 3 && 
                 <div>
-                    <h1 class="display-4">Questionnaire #4 (total 5)</h1>
+                    <h1 class="display-5"> #4</h1>
                     <p class="lead">Have you travelled outside your province/country in the past 2 weeks?</p>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(1, e)} type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline1">Y</label>
+                        <input onChange={(e)=>this.props.handleCheck(1, 3, e)} type="radio" id="customRadioInline14" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline14">Y</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(0, e)} type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline2">N</label>
+                        <input onChange={(e)=>this.props.handleCheck(0, 3, e)} type="radio" id="customRadioInline24" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline24">N</label>
                     </div>
-                    <div>
-                        <button className="btn btn-secondary btnQuest" onClick={this.props.handleLast}>last question</button>
-                        <button className="btn btn-secondary btnQuest" onClick={this.props.handleNext}>next question</button>
-                    </div>
-                </div>}
+                </div><br/><br/><br/>
 
 
-                {this.props.currQ == 4 && 
                 <div>
-                    <h1 class="display-4">Questionnaire #5 (total 5)</h1>
+                    <h1 class="display-5">#5</h1>
                     <p class="lead">Have you been to anyplace that have confirmed cases in the past 2 weeks?</p>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(1, e)} type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline1">Y</label>
+                        <input onChange={(e)=>this.props.handleCheck(1, 4, e)} type="radio" id="customRadioInline15" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline15">Y</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(0, e)} type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline2">N</label>
+                        <input onChange={(e)=>this.props.handleCheck(0, 4, e)} type="radio" id="customRadioInline25" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline25">N</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input onChange={(e)=>this.props.handleCheck(0.5, e)} type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline3">Not sure</label>
+                        <input onChange={(e)=>this.props.handleCheck(0.5, 4, e)} type="radio" id="customRadioInline35" name="customRadioInline1" class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadioInline35">Not sure</label>
                     </div>
                     <div>
-                        <button className="btn btn-secondary btnQuest" onClick={this.props.handleLast}>last question</button>
-                        <button type="button" class="btn btn-primary btnQuest" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
+                        <button type="button" onClick={this.props.handleSubmit} class="btn btn-primary btnQuest" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
                     </div>
-                </div>}
+                </div><br/><br/><br/>
 
             </div>
         )
