@@ -172,6 +172,9 @@ class QA extends React.Component {
               <img
                 src={require("../../lib/profilephotos/user1.png")}
                 className="profilephotoPost"
+                onClick={function() {
+                  window.location.href = 'user1';
+             }}
               />
 
               <div className="form-group form-groupQab">
