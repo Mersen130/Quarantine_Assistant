@@ -18,7 +18,9 @@ class MediaAdmin extends React.Component {
         return (
             <div className="container mt-3 mt-3Qa Media">
                 <div className="media border borderQa p-3">
-                    <img src={require("../../lib/profilephotos/"+names[0]+".png")} className="profilephotoQa" />
+                    <img src={require("../../lib/profilephotos/"+names[0]+".png")} onClick={function () {
+                        window.location.href = names[0];
+                    }} className="profilephotoQa" />
                     <div className="media-body">
                         <h4 className="h4Qa">{names[0]} <small><i>Posted on {times[0].toString().slice(0, 25)}</i></small></h4>
         <p className="content contentQa">{contents[0]} <a href="#" onClick={(e) => this.props.handleRemove(0, e)}>delete</a></p>
@@ -26,7 +28,9 @@ class MediaAdmin extends React.Component {
                         <div>
                             {indices.map(i => (
                             <div className="media p-3">
-                                <img src={require("../../lib/profilephotos/"+names[i]+".png")} className="profilephotoQa" />
+                                <img src={require("../../lib/profilephotos/"+names[i]+".png")} onClick={function () {
+                        window.location.href = names[i];
+                    }} className="profilephotoQa" />
                                 <div className="media-body">
                                     <h4 className="h4Qa">{names[i]} <small><i> Doctor replied on {times[i].toString().slice(0, 25)}</i></small></h4>
                                     <p class="content contentQa">{contents[i]} <a href="#" onClick={(e)=>this.props.handleRemove(i, e)}>delete</a></p>

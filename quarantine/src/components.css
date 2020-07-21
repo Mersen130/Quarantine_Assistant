@@ -9,7 +9,6 @@
 #jumbotronQa {
   background-color: #fafff0;
   text-align: center;
-  height: auto;
 }
 
 #jumbotronQaadmin {
@@ -81,6 +80,7 @@
 
 .postForm {
   position: relative;
+  top: 30px;
   min-height: 200px;
 }
 
