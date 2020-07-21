@@ -157,6 +157,7 @@ class QA extends React.Component {
               </div>
               <button
                 type="submit"
+                id="searchBtn"
                 className="btn btn-primary"
                 onClick={this.search}
               >
@@ -237,6 +238,7 @@ class QA extends React.Component {
           <button
             type="button"
             onClick={this.backTop}
+            id="backToTop"
             className="btn btn-primary btn-block"
           >
             Back to top
