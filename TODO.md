@@ -15,9 +15,11 @@ Admin is able to view all users' profiles and manage users, such as add, delete/
 
 ## Yifei:
 
--Redsign views of activities(important) and SignIn (make the view sketch of SignIn more connect with other pages)
+- Redesign views of activities(important) and SignIn (make the view sketch of SignIn more connect with other pages)
 
--Redirect "Already have an account" to the correct page(SignIn: /)
+- Add a doctor account that will direct to doctor's page after user logged in 
+
+- Redirect "Already have an account" to the correct page(SignIn: /)
 
 ## Qixin:
 - put a doctor sign when doctor replies
