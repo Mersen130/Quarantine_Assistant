@@ -33,7 +33,7 @@ class Sidebaradmin extends React.Component {
           <a onClick={this.changeNavbarTitle} href="/qaAdmin">
             <img src={require("../../lib/sidebar/qa.png")} /> Q&A
           </a>
-          <a href="/Signin" id="logout">
+          <a href="/" id="logout">
             log out
           </a>
         </div>
