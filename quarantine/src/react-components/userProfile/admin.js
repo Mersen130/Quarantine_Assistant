@@ -1,5 +1,4 @@
 import React from "react";
-import { Container, Row, Col } from "shards-react";
 import AdminBrief from "./adminBrief";
 import PageTitle from "./../theme/PageTitle";
 import Sidebaradmin from "./../SideNavBar/sidebarAdmin";
@@ -10,26 +9,27 @@ class AdminProfile extends React.Component {
         return (
             <div>
                 <Sidebaradmin title={"Profile"} />
-                <Container fluid className="main-content-container px-4">
-                    <Col
+                <div className="main-content-container px-4 container-fluid">
+                    <div
+                        className="col"
                         lg={{ size: 10, offset: 2 }}
                         md={{ size: 9, offset: 3 }}
                     >
-                        <Row noGutters className="page-header py-4 ">
+                        <div className="row no-gutters page-header py-4 ">
                             <PageTitle
                                 sm="4"
                                 title="Admin Profile"
                                 subtitle=""
                                 className="text-sm-left"
                             />
-                        </Row>
-                        <Row>
-                            <Col lg="12">
+                        </div>
+                        <div className="row">
+                            <div className="col col-lg-12">
                                 <AdminBrief />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

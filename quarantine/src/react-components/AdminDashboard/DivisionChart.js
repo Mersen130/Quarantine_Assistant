@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Row, Col, Card, CardHeader, CardBody, CardFooter } from "shards-react";
-
 import Chart from "chart.js";
 
 class UserByGender extends Component {
@@ -40,18 +38,18 @@ class UserByGender extends Component {
             /* TODO: Add servel call to retrieve stat from DB*/
         }
         return (
-            <Card small className="h-100">
-                <CardHeader className="border-bottom">
+            <div className="h-100 card small">
+                <div className="border-bottom card-header">
                     <h6 className="m-0">{title}</h6>
-                </CardHeader>
-                <CardBody className="d-flex py-0">
+                </div>
+                <div className="d-flex py-0 card-body">
                     <canvas
                         height="200"
                         ref={this.canvasRef}
                         className="blog-users-by-device  my-3"
                     />
-                </CardBody>
-            </Card>
+                </div>
+            </div>
         );
     }
 }

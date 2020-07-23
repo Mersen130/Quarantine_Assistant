@@ -1,14 +1,4 @@
 import React, { Component } from "react";
-import {
-    Container,
-    Row,
-    Col,
-    Card,
-    CardBody,
-    Badge,
-    Button,
-} from "shards-react";
-
 export class ContentCard extends Component {
     constructor(props) {
         super(props);
@@ -35,22 +25,23 @@ export class ContentCard extends Component {
     render() {
         return (
             <div>
-                <Card small className="card-post card-post--1">
+                <div className="card small card-post card-post--1">
                     <div
                         className="card-post__image"
                         style={{
                             backgroundImage: `url('${this.state.bgImage}')`,
                         }}
                     >
-                        <Badge
-                            pill
-                            theme={this.state.badgeColor}
-                            className="card-post__category"
+                        <span
+                            className={
+                                "card-post__category badge-pill badge-" +
+                                this.state.badgeColor
+                            }
                         >
                             {"Covid-19 " + this.props.category}
-                        </Badge>
+                        </span>
                     </div>
-                    <CardBody>
+                    <div className="card-body">
                         <h5 className="card-title">
                             <a className="text-fiord-blue" href="#">
                                 {this.state.title}
@@ -61,8 +52,8 @@ export class ContentCard extends Component {
                             {this.state.body}
                         </p>
                         <span className="text-muted">{this.state.date}</span>
-                    </CardBody>
-                </Card>
+                    </div>
+                </div>
             </div>
         );
     }

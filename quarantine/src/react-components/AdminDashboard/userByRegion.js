@@ -1,45 +1,30 @@
 import React, { Component } from "react";
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    ListGroup,
-    ListGroupItem,
-    CardFooter,
-    Row,
-    Col,
-    FormSelect,
-} from "shards-react";
-
 export class UserByRegion extends Component {
     render() {
         return (
             <div>
-                <Card small>
+                <div className="card small">
                     {/* TODO: Add servel call to retrieve stat from DB*/}
-                    <CardHeader className="border-bottom">
+                    <div className="border-bottom card-header">
                         <h6 className="m-0">{this.props.title}</h6>
                         <div className="block-handle" />
-                    </CardHeader>
+                    </div>
 
-                    <CardBody className="p-0">
-                        <ListGroup small flush className="list-group-small">
+                    <div className="p-0 card-body">
+                        <div className="list-group-small list-group-flush small">
                             {this.props.region.map((item, idx) => (
-                                <ListGroupItem
-                                    key={idx}
-                                    className="d-flex px-3"
-                                >
+                                <div className="d-flex px-3 list-group-item">
                                     <span className="text-semibold text-fiord-blue">
                                         {item.title}
                                     </span>
                                     <span className="ml-auto text-right text-semibold text-reagent-gray">
                                         {item.value}
                                     </span>
-                                </ListGroupItem>
+                                </div>
                             ))}
-                        </ListGroup>
-                    </CardBody>
-                </Card>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

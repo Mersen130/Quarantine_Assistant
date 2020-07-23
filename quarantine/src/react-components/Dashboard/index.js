@@ -1,24 +1,9 @@
 import React from "react";
-import {
-    Row,
-    Col,
-    Container,
-    Alert,
-    Card,
-    CardHeader,
-    InputGroup,
-    ListGroup,
-    ListGroupItem,
-    InputGroupAddon,
-    Form,
-    FormInput,
-    Button,
-} from "shards-react";
+import { Alert } from "shards-react";
 import ProgressCheck from "./ProgressCheck";
 import ContentCard from "./ContentCard";
 import Sidebar from "../SideNavBar/sidebar.js";
 import PageTitle from "../theme/PageTitle";
-import "./../theme/shards-ui.min.css";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -32,60 +17,58 @@ class Dashboard extends React.Component {
             <div>
                 <Sidebar title={"Dashboard"} />
 
-                <Container fluid className="main-content-container px-4 pb-4">
-                    <Col
-                        lg={{ size: 10, offset: 2 }}
-                        md={{ size: 9, offset: 3 }}
-                    >
-                        <Row noGutters className="page-header py-4 ">
+                <div className="main-content-container px-4 pb-4 container-fluid">
+                    <div className="col-lg-10 offset-lg-2">
+                        <div className="row no-gutters page-header py-4 ">
                             <PageTitle
                                 sm="4"
                                 title="Quarantine Progress"
                                 subtitle=""
                                 className="text-sm-left"
                             />
-                        </Row>
-                        <Alert theme="dark">
+                        </div>
+                        <div class="alert alert-dark" role="alert">
                             {/* TODO: Add servel call */}
                             Your self-isolation started at July 2nd, 2020.
-                        </Alert>
-                        <Row>
-                            <Col lg="8">
+                        </div>
+                        <div>
+                            <div className="col col-lg-8">
                                 <ProgressCheck />
-                            </Col>
-                            <Col lg="4" className="mb-4">
-                                <Card small className="mb-4">
-                                    <CardHeader className="border-bottom">
+                            </div>
+                            <div className="col col-lg-4 mb-4">
+                                <div className="card small mb-4">
+                                    <div className="card-header border-bottom">
                                         <h6 className="m-0">Check-in Today!</h6>
-                                    </CardHeader>
-                                    <ListGroup flush>
-                                        <ListGroupItem className="px-1">
-                                            <Form>
-                                                <InputGroup className="mb-3">
-                                                    <FormInput
-                                                        placeholder="Today's body temprature"
+                                    </div>
+                                    <div className="list-group-flush">
+                                        <div className="px-1 list-group-item">
+                                            <div className="form-group">
+                                                <div className="mb-3 input-group">
+                                                    <input
+                                                        placeholder="Today's  temprature"
                                                         id="temp"
                                                     />
-                                                    <FormInput
+                                                    <input
                                                         placeholder="Today's weight"
                                                         id="weight"
                                                     />
-                                                    <InputGroupAddon type="append">
-                                                        <Button
-                                                            theme="info"
+                                                    <div class="input-group-prepend">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-info"
                                                             id="checkin"
                                                             onClick={
                                                                 this.updateCal
                                                             }
                                                         >
                                                             Checkin
-                                                        </Button>
-                                                    </InputGroupAddon>
-                                                </InputGroup>
-                                            </Form>
-                                        </ListGroupItem>
-                                    </ListGroup>
-                                </Card>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <Alert
                                     theme="success"
                                     open={this.state.visible}
@@ -93,27 +76,27 @@ class Dashboard extends React.Component {
                                     {/* TODO: Add servel call */}
                                     You've successfully checked in today!
                                 </Alert>
-                            </Col>
-                        </Row>
+                            </div>
+                        </div>
                         <hr></hr>
-                        <Row>
+                        <div className="row">
                             <PageTitle
                                 sm="4"
                                 title="COVID-19 related:"
                                 subtitle=""
                                 className="text-sm-left"
                             />
-                        </Row>
-                        <Row>
-                            <Col lg="6" sm="12" className="mb-4">
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-6">
                                 <ContentCard category="Tips" />
-                            </Col>
-                            <Col lg="6" sm="12" className="mb-4">
+                            </div>
+                            <div className="col-lg-6">
                                 <ContentCard category="News" />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

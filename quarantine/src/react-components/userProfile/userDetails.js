@@ -1,136 +1,147 @@
 import React from "react";
-import {
-    Card,
-    CardHeader,
-    ListGroup,
-    ListGroupItem,
-    Row,
-    Col,
-    Form,
-    FormGroup,
-    FormInput,
-    FormSelect,
-    FormTextarea,
-    Button,
-} from "shards-react";
-
 class UserDetails extends React.Component {
     render() {
         return (
-            <Card small className="mb-4">
-                <CardHeader className="border-bottom">
+            <div className="card small mb-4">
+                <div className="card-header border-bottom">
                     <h6 className="m-0">Account Details</h6>
-                </CardHeader>
+                </div>
                 {/* TODO: Add servel call to retrieve user info from user DB*/}
 
-                <ListGroup flush>
-                    <ListGroupItem className="p-3">
-                        <Row>
-                            <Col>
-                                <Form>
-                                    <Row form>
-                                        <Col md="6" className="form-group">
+                <div className="list-group-flush">
+                    <div className="p-3 list-group-item">
+                        <div className=" row">
+                            <div className="col">
+                                <form>
+                                    <div className="form-group row">
+                                        <div
+                                            className="col col-md-6"
+                                            className="form-group"
+                                        >
                                             <label htmlFor="feFirstName">
                                                 First Name
                                             </label>
-                                            <FormInput
+                                            <input
+                                                type="text"
+                                                class="form-control"
                                                 id="feFirstName"
                                                 placeholder="First Name"
-                                                // value="Quincy"
-                                                onChange={() => {}}
-                                            />
-                                        </Col>
-                                        <Col md="6" className="form-group">
+                                            ></input>
+                                        </div>
+                                        <div
+                                            className="col col-md-6"
+                                            className="form-group"
+                                        >
                                             <label htmlFor="feLastName">
                                                 Last Name
                                             </label>
-                                            <FormInput
+                                            <input
+                                                type="text"
+                                                class="form-control"
                                                 id="feLastName"
                                                 placeholder="Last Name"
-                                                // value="Zhang"
-                                                onChange={() => {}}
-                                            />
-                                        </Col>
-                                    </Row>
-                                    <Row form>
-                                        <Col md="6" className="form-group">
+                                            ></input>
+                                        </div>
+                                    </div>
+                                    <div className="form-group row">
+                                        <div
+                                            className="col col-md-6"
+                                            className="form-group"
+                                        >
                                             <label htmlFor="feEmail">
                                                 Email
                                             </label>
-                                            <FormInput
+
+                                            <input
                                                 type="email"
+                                                class="form-control"
                                                 id="feEmail"
                                                 placeholder="Email Address"
-                                                // value="123@gmail.com"
-                                                onChange={() => {}}
                                                 autoComplete="email"
-                                            />
-                                        </Col>
-                                        <Col md="3" className="form-group">
+                                            ></input>
+                                        </div>
+                                        <div
+                                            className="col col-md-3"
+                                            className="form-group"
+                                        >
                                             <label htmlFor="feAge">Age</label>
-                                            <FormInput
+
+                                            <input
                                                 type="number"
+                                                class="form-control"
                                                 id="feAge"
                                                 placeholder="Age"
-                                                // value="24"
-                                                onChange={() => {}}
-                                            />
-                                        </Col>
-                                        <Col md="3" className="form-group">
+                                            ></input>
+                                        </div>
+                                        <div
+                                            className="col col-md-3"
+                                            className="form-group"
+                                        >
                                             <label htmlFor="feGender">
                                                 Gender
                                             </label>
-                                            <FormSelect id="feInputGender">
+                                            <select class="form-control">
                                                 {/* <option>Choose...</option> */}
                                                 <option>Male</option>
                                                 <option>Female</option>
-                                            </FormSelect>
-                                        </Col>
-                                    </Row>
-                                    <FormGroup>
-                                        <label htmlFor="feAddress">
-                                            Address
-                                        </label>
-                                        <FormInput
-                                            id="feAddress"
-                                            placeholder="Address"
-                                            // value="10 St. George"
-                                            onChange={() => {}}
-                                        />
-                                    </FormGroup>
-                                    <Row form>
-                                        <Col md="6" className="form-group">
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label htmlFor="feAddress">
+                                                Address
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="feAddress"
+                                                placeholder="Address"
+                                            ></input>
+                                        </div>
+                                    </div>
+                                    <div className="form-group row">
+                                        <div
+                                            className="col col-md-6"
+                                            className="form-group"
+                                        >
                                             <label htmlFor="feCity">City</label>
-                                            <FormInput
+
+                                            <input
+                                                type="text"
+                                                class="form-control"
                                                 id="feCity"
                                                 placeholder="City"
-                                                // value="Toronto"
-                                                onChange={() => {}}
-                                            />
-                                        </Col>
-                                        <Col md="4" className="form-group">
+                                            ></input>
+                                        </div>
+                                        <div
+                                            className="col col-md-4"
+                                            className="form-group"
+                                        >
                                             <label htmlFor="feInputState">
                                                 State
                                             </label>
-                                            <FormSelect id="feInputState">
+                                            <select class="form-control">
                                                 <option>Choose...</option>
                                                 <option>...</option>
-                                            </FormSelect>
-                                        </Col>
-                                    </Row>
-                                    <Row form>
-                                        <Col md="12" className="form-group">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group row">
+                                        <div className="col-lg-12">
                                             <label htmlFor="feDescription">
                                                 Description
                                             </label>
-                                            <FormTextarea
+
+                                            <textarea
+                                                class="form-control"
                                                 id="feDescription"
                                                 rows="5"
                                             />
-                                        </Col>
-                                    </Row>
-                                    <Button
-                                        theme="info"
+                                        </div>
+                                    </div>
+                                    <button
+                                        className="btn btn-info"
+                                        type="button"
                                         onClick={(e) => {
                                             e.preventDefault();
                                             const fName = document.querySelector(
@@ -162,13 +173,13 @@ class UserDetails extends React.Component {
                                         }}
                                     >
                                         Update Account
-                                    </Button>
-                                </Form>
-                            </Col>
-                        </Row>
-                    </ListGroupItem>
-                </ListGroup>
-            </Card>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }

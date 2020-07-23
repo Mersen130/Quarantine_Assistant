@@ -1,59 +1,60 @@
 import React, { Component } from "react";
-import { Container, Col, Row } from "shards-react";
 import SidebarAdmin from "../SideNavBar/sidebarAdmin.js";
 import PageTitle from "../theme/PageTitle";
 import StatCard from "./StatCard";
 import UserByGender from "./DivisionChart.js";
 import { UserByRegion } from "./userByRegion";
+import "./stats.css";
 export class AdminDashboard extends Component {
     render() {
         return (
             <div>
                 <SidebarAdmin title={"Dashboard"} />
 
-                <Container fluid className="main-content-container px-4 pb-4">
-                    <Col
+                <div className="main-content-container px-4 pb-4 container-fluid">
+                    <div
+                        className="col"
                         lg={{ size: 10, offset: 2 }}
                         md={{ size: 9, offset: 3 }}
                     >
-                        <Row noGutters className="page-header py-4 ">
+                        <div className="row no-gutters page-header py-4 ">
                             <PageTitle
                                 sm="4"
                                 title="Admin Overview"
                                 subtitle="Dashboard"
                                 className="text-sm-left"
                             />
-                        </Row>
+                        </div>
 
                         {/* overview cards*/}
                         {/* TODO: Add servel call to retrieve stat from DB*/}
-                        <Row>
+                        <div className="row">
                             {this.props.cardsData.map((stats, idx) => (
-                                <Col className="col-lg mb-4" key={idx}>
+                                <div className="col-lg mb-4" key={idx}>
                                     <StatCard
                                         label={stats.label}
                                         value={stats.value}
                                         percentage={stats.percentage}
                                         increase={stats.increase}
                                     />
-                                </Col>
+                                </div>
                             ))}
-                        </Row>
-                        <Row>
+                        </div>
+                        <div className="row">
                             {this.props.categoryData.map((cat, idx) => (
-                                <Col lg="4" className="mb-4">
+                                <div lg="4" className="col col-lg-4 col-mb-4">
                                     <UserByGender
                                         title={cat.title}
                                         chartData={cat.chartData}
                                     />
-                                </Col>
+                                </div>
                             ))}
-                            <Col lg="4" md="12" sm="12" className="mb-4">
+                            <div className="col mb-4 col-lg-6 col-sm-12 col-md-12">
                                 <UserByRegion />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -1,16 +1,9 @@
 import React from "react";
-import {
-    Card,
-    CardHeader,
-    ListGroup,
-    ListGroupItem,
-    Progress,
-} from "shards-react";
 class DoctorBrief extends React.Component {
     render() {
         return (
-            <Card small className="mb-4 pt-3">
-                <CardHeader className="border-bottom text-center">
+            <div className="card small mb-4 pt-3">
+                <div className="card-header border-bottom text-center">
                     <div className="mb-3 mx-auto">
                         {/* TODO: Add servel call to retrieve user info from user DB*/}
                         <img
@@ -30,22 +23,22 @@ class DoctorBrief extends React.Component {
                         <i className="material-icons mr-1">verified</i>{" "}
                         Certified Doctor
                     </div>
-                </CardHeader>
-                <ListGroup flush>
-                    <ListGroupItem className="p-4">
+                </div>
+                <div className="list-group-flush">
+                    <div className="p-4 list-group-item">
                         <strong className="text-muted d-block mb-2">
                             Specialization
                         </strong>
                         <span>General Pathology</span>
-                    </ListGroupItem>
-                    <ListGroupItem className="p-4">
+                    </div>
+                    <div className="p-4 list-group-item">
                         <strong className="text-muted d-block mb-2">
                             Description
                         </strong>
                         <span>{this.props.description}</span>
-                    </ListGroupItem>
-                </ListGroup>
-            </Card>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
