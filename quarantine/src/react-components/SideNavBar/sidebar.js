@@ -46,7 +46,7 @@ class Sidebar extends React.Component {
 
         <div id="main">
           <button className="openbtn" onClick={this.openSide}>
-            &#9776; {this.state.title}
+            <img className="logo" src={require("../../lib/appLogo.png")}/> <span>{this.state.title}</span>
           </button>
 
           <div class="dropdown" id="notification">

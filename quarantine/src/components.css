@@ -1,3 +1,9 @@
+.logo{
+  height: 45px;
+  width: 45px;
+  border: none;
+}
+
 .titleQa {
   font-size: 7.5vh;
   text-align: center;
