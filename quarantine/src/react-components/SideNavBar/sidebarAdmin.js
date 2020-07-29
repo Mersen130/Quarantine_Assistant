@@ -40,7 +40,7 @@ class Sidebaradmin extends React.Component {
 
         <div id="main">
           <button className="openbtn" onClick={this.openSide}>
-            &#9776; {this.state.title}
+          <img className="logo" src={require("../../lib/appLogo.png")}/> {this.state.title}
           </button>
         </div>
       </div>

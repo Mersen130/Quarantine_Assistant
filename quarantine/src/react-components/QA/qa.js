@@ -139,8 +139,9 @@ class QA extends React.Component {
           notes={this.state.notes}
           numNotes={this.state.numNotes}
         />
+        <div>
         <div className="jumbotron jumbotron-fluid" id="jumbotronQa">
-          <div className="container">
+          <div className="containerQA">
             <h1 className="title titleQa">Quanrantine Assistant Communities</h1>
             <p>
               Find answers, ask questions, and connect with our community of the
@@ -164,7 +165,10 @@ class QA extends React.Component {
                 Search !
               </button>
             </form>
+            <div id="scrollSign"><img src={require("../../lib/qa/scroll.png")}/>
+              Scroll Down</div>
           </div>
+        </div>
         </div>
         <div id="bgwhite">
           <div>

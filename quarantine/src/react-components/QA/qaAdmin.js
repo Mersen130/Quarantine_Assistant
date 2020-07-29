@@ -132,7 +132,7 @@ class QAAdmin extends React.Component {
       <div>
         <Sidebaradmin title={"Q&A"} />
         <div className="jumbotron jumbotron-fluid" id="jumbotronQaadmin">
-          <div className="container">
+          <div className="containerQA">
             <h1 className="title titleQa">Welcome, Admin</h1>
             <p>Please delete inappropriate posts.</p>
             <form className="searchGroup searchGroupQa">
@@ -153,6 +153,8 @@ class QAAdmin extends React.Component {
                 Search !
               </button>
             </form>
+            <div id="scrollSign"><img src={require("../../lib/qa/scroll.png")}/>
+              Scroll Down</div>
           </div>
         </div>
         <div id="bgwhite">
