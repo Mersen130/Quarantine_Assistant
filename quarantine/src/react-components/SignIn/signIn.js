@@ -47,36 +47,33 @@ class SignIn extends React.Component{
 
 
 	render(){
-    // const{
-    //   userName,
-    //   password,
-    //   userType,
-    //   handleChange
-    // } = this.props;
 		return(
-      <div id="wrapper">
+      <div id="SignInWrapper">
+      <div id="SignInFormWrapper">
+        <img src={require("../../lib/appLogo.png")}class = "mx-auto d-block" id="signInLogo"/>
+        <h4 id="signInTitle">Sign in to <b>Q</b>uarantine <b>A</b>ssistant</h4>
         <div id = "signInForm">
           <form onSubmit={handleSubmit.bind(this,this.state.userName,this.state.password,this.props.history)}>
-            <img src={require("../../lib/signIn/calendar.png")}class = "mx-auto d-block" id="signInLogo"/>
-            <h2 id="signIn">Sign In</h2>
             <div class = "form-group">
+              <label id="SIUsernameLable" class="signInLabel">Username</label>
               <input
                 type="text"
                 name="userName"
                 value = {this.state.userName}
                 class="custom-form-control signInEmailPswd" 
-                placeholder="Username*"
+                placeholder=""
                 onChange={this.handleChange}
                 required
               />
             </div>
             <div class = "form-group">
+               <label id="SIPswdLable" class="signInLabel">Password*</label>
                <input
                  type="password"
                  name="password"
                  value= {this.state.password}
                  class="custom-form-control signInEmailPswd"
-                 placeholder="Password*"
+                 placeholder=""
                  onChange={this.handleChange}
                  required
                />
@@ -96,10 +93,11 @@ class SignIn extends React.Component{
               Sign In
             </button>
             <div id="signInLink">
-              <a onClick = {handleChangePage.bind(this, "/Reset", this.props.history)} href="/Reset" id="goReset">Forgot your password?</a>
+              <a onClick = {handleChangePage.bind(this, "/Reset", this.props.history)} href="/Reset" id="goReset">Forgot password?</a>
               <a onClick = {handleChangePage.bind(this, "/questionnaire", this.props.history)} href="/questionnaire" id="goQue">Don't have an account? Sign up</a>
             </div>
           </form>
+        </div>
         </div>
       </div>
   );

@@ -4,9 +4,9 @@ export const handleSubmit = (userName, password, history) =>{
 		history.push("./dashboard")
 	}
 	if(userName === "admin" && password === "admin"){
-	 	history.push('./admindashboard')
+	 	history.push("./admindashboard")
 	}
-	if(userName === "doctor" && password === "password"){
+	if(userName === "doctor" && password === "doctor"){
 		history.push('./dashboard')
 	}
 

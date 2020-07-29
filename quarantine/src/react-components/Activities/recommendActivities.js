@@ -12,22 +12,6 @@ class RecommendActivities extends React.Component{
 	render(){
 		const {recAct, queueComponent}=this.props;
 		return(
-			// <tr>
-			// <td>{recAct.name}</td>
-			// <td>{recAct.type}</td>
-			// <td>
-			// 	<button 
-			// 		type="button"
-			// 		id="addActToMyList"
-			// 		class="ActivityBtn"
-			// 		onClick={
-			// 			addToMyList.bind(this,recAct,queueComponent)
-			// 		}
-			// 	>
-			// 		Add
-			// 	</button>
-			// </td>
-			// </tr>
 			<div class="card mb-3">
 			  <div class="row no-gutters">
 			    <div class="col-md-4">

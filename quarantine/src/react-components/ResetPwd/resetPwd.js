@@ -27,37 +27,41 @@ class Reset extends React.Component{
 	render(){
 		return(
 			<div id="wrapper">
+			<img src={require("../../lib/appLogo.png")}class = "mx-auto d-block" id="resetLogo"/>
+			<h4 class="resetHeader">Forgot your password?</h4>
 			<div id="resetForm">
 				<form onSubmit={this.handleSubmit}>
-					<img src={require("../../lib/signIn/calendar.png")}class = "mx-auto d-block" id="resetLogo"/>
-					<h3 class="resetHeader">Forgot your password?
-					</h3>
 		  			<div class="form-group">
-			  			<span id="labelReset">Please Enter Your Username Below:</span>
+		  				<div>
+		  				<label class="RSLabel">Username*</label>
 	    				<input
 				          type="text"
 				          name="resetUser"
 				          value={this.state.userName}
-				          placeholder="Enter your username*"
+				          placeholder=""
 				          class="custom-form-control resetInput"
 				          id="resetUsernameInput"
 				          onChange={this.handleChange}
 				          required
 				          />
+				          </div>
+				          <div id="newPswdDiv">
+				          <label class="RSLabel">New Password*</label>
 				          <input
 				          type="text"
 				          name="newPswd"
 				          value={this.state.userName}
-				          placeholder="Enter your new password*"
+				          placeholder=""
 				          class="custom-form-control resetInput"
 				          id="resetPswdInput"
 				          onChange={this.handleChange}
 				          required
 				          />
+				          </div>
 		  			</div>
 		  			<button type="submit" id="resetBtn">Submit</button>
 		  			<div id="resetLink">
-		              <a onClick = {this.handleChangePage} href="/SignIn" id="goSignIn">Goback sign in</a>
+		              <a onClick = {this.handleChangePage} href="/" id="goSignIn">Goback sign in</a>
 	              </div>
 		  		</form>
 			</div>
