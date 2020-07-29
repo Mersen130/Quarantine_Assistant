@@ -15,6 +15,8 @@ import DoctorProfile from "./react-components/userProfile/doctor";
 import AdminProfile from "./react-components/userProfile/admin";
 import Dashboard from "./react-components/Dashboard/index";
 import { AdminDashboard } from "./react-components/AdminDashboard/index";
+import DoctorDashboard from "./react-components/DoctorDashboard/index";
+import UserList from "./react-components/AdminDashboard/UserList";
 import "bootstrap/dist/css/bootstrap.css";
 import "./react-components/theme/theme.css";
 class App extends React.Component {
@@ -36,9 +38,14 @@ class App extends React.Component {
                             <Route path="/dashboard/" component={Dashboard} />
                             <Route path="/user1/" component={UserProfile} />
                             <Route path="/user2/" component={User2Profile} />
+                            <Route path="/userlist/" component={UserList} />
                             <Route
                                 path="/doctorprofile/"
                                 component={DoctorProfile}
+                            />
+                            <Route
+                                path="/doctordashboard/"
+                                component={DoctorDashboard}
                             />
                             <Route
                                 path="/adminprofile/"

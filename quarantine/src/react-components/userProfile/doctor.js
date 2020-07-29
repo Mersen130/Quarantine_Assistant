@@ -2,6 +2,7 @@ import React from "react";
 import DoctorBrief from "./doctorBrief";
 import PageTitle from "./../theme/PageTitle";
 import Sidebar from "./../SideNavBar/sidebar";
+import Recent from "./recent";
 class DoctorProfile extends React.Component {
     render() {
         return (
@@ -16,10 +17,18 @@ class DoctorProfile extends React.Component {
                                 subtitle=""
                                 className="text-sm-left"
                             />
+                            <PageTitle
+                                title="Recent activities"
+                                subtitle=""
+                                className="text-sm-left"
+                            />
                         </div>
                         <div className="row">
-                            <div className="col col-lg-12">
+                            <div className="col col-lg-4">
                                 <DoctorBrief />
+                            </div>
+                            <div className="col col-lg-8">
+                                <Recent view="doctor" username="doctor" />
                             </div>
                         </div>
                     </div>

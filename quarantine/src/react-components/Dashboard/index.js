@@ -73,7 +73,7 @@ class Dashboard extends React.Component {
                                     theme="success"
                                     open={this.state.visible}
                                 >
-                                    {/* TODO: Add servel call */}
+                                    {/* TODO: Add server call */}
                                     You've successfully checked in today!
                                 </Alert>
                             </div>

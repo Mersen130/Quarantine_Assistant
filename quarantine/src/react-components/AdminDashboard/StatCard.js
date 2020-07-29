@@ -8,7 +8,14 @@ class StatCard extends Component {
                         <div className="d-flex flex-column m-auto">
                             <div className="stats-small__data text-center">
                                 <span className="stats-small__label text-uppercase">
-                                    {this.props.label}
+                                    {this.props.label === "Users" && (
+                                        <a href="/UserList">
+                                            {this.props.label}
+                                        </a>
+                                    )}
+                                    {this.props.label !== "Users" && (
+                                        <a>{this.props.label}</a>
+                                    )}
                                 </span>
                                 <h6 className="stats-small__value count my-3">
                                     {this.props.value}

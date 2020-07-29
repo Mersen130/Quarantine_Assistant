@@ -12,11 +12,7 @@ export class AdminDashboard extends Component {
                 <SidebarAdmin title={"Dashboard"} />
 
                 <div className="main-content-container px-4 pb-4 container-fluid">
-                    <div
-                        className="col"
-                        lg={{ size: 10, offset: 2 }}
-                        md={{ size: 9, offset: 3 }}
-                    >
+                    <div className="col-lg-10 offset-lg-2">
                         <div className="row no-gutters page-header py-4 ">
                             <PageTitle
                                 sm="4"
@@ -49,7 +45,7 @@ export class AdminDashboard extends Component {
                                     />
                                 </div>
                             ))}
-                            <div className="col mb-4 col-lg-6 col-sm-12 col-md-12">
+                            <div className="col mb-4 col-lg-4 col-sm-12 col-md-12">
                                 <UserByRegion />
                             </div>
                         </div>
