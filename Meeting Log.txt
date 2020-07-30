@@ -23,3 +23,9 @@ CSC309 Team 23 Project Phase 1 Meeting Memo
 * June27 2020
    * merge everything
    * TODO: resolve framework & classname conflicts
+
+* July29 2020
+   *assign project parts to remaining member:
+      Qixin:Userprofil, Q&A
+      Yifei Gao: Dashboard, SignIn&SignUp section
+   * TODO: re-style part of project and start implemnet the backend
