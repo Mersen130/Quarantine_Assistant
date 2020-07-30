@@ -14,13 +14,14 @@
 
 #jumbotronQa {
   background-color: #fafff0;
+  height: 100vh;
   text-align: center;
 }
 
 #jumbotronQaadmin {
   background-color: #fafff0;
   text-align: center;
-  height: auto;
+  height: 100vh;
 }
 
 .form-groupQa {
@@ -251,6 +252,16 @@
   position: relative;
   height: 100vh;
   background-color: #fafff0;
+}
+
+.containerQA{
+  padding: 140px 0;
+}
+
+#scrollSign{
+  position: absolute;
+  bottom: 20px;
+  margin-left: 45vw;
 }
 
 #containerQuest {
