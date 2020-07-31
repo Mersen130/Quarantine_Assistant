@@ -425,7 +425,7 @@ class QA extends React.Component {
   pushNote = (v) => {
     const noteB = this.state.notes;
     const numB = this.state.numNotes + 1;
-    noteB.push(v);
+    noteB.splice(0, 0, v);
     this.setState({ notes: noteB });
     this.setState({ numNotes: numB });
   };

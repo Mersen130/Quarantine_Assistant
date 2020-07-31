@@ -29,3 +29,11 @@ CSC309 Team 23 Project Phase 1 Meeting Memo
       Qixin:Userprofil, Q&A
       Yifei Gao: Dashboard, SignIn&SignUp section
    * TODO: re-style part of project and start implemnet the backend
+
+--------Yuqiu dropped course-------
+
+* Jun29 2020
+   * design mongoose schema(see ./TODO.md)
+   * split up Yuqiu's work:
+       Qixin: Profile
+       Yifei: dashboard
