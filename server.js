@@ -8,6 +8,7 @@ const path = require('path')
 // Express
 const express = require('express')
 const app = express();
+app.use(express.static(__dirname + "/quarantine/build"));
 // const bodyParser = require('body-parser')
 // app.use(bodyParser.json());
 
@@ -20,6 +21,7 @@ const { Collection } = require('mongoose');
 // Setting up a static directory for the files in /public
 // using Express middleware.
 // Don't put anything in /public that you don't want the public to have access to!
+/* KEEP THIS BLOCK AT THE BOTTOM */
 app.get("*", (req, res) => {
     // check for page routes that we expect in the frontend to provide correct status code.
     const goodPageRoutes = ["/", "/qa", "questionnaire", "qaadmin", "profile"];
@@ -27,9 +29,9 @@ app.get("*", (req, res) => {
         // if url not in expected page routes, set status to 404.
         res.status(404);
     }
-
+    log("sending index.html")
     // send index.html
-    res.sendFile(__dirname + "/quarantine/build/index.html");
+    res.sendFile(path.join(__dirname + "/quarantine/build/index.html"));
 });
 
 // will use an 'environmental variable', process.env.PORT, for deployment.
