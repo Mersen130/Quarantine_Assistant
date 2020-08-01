@@ -1,2 +1,4 @@
 /quarantine/node_modules/
 .DS_Store
+/quarantine/build
+/quarantine/mongo-data
