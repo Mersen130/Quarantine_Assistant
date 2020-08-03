@@ -9,14 +9,107 @@ const path = require('path')
 const express = require('express')
 const app = express();
 app.use(express.static(__dirname + "/quarantine/build"));
-// const bodyParser = require('body-parser')
-// app.use(bodyParser.json());
+const bodyParser = require('body-parser')
+app.use(bodyParser.json());
 
 // Mongo and Mongoose
 const { ObjectID } = require('mongodb')
 const { mongoose } = require('./mongoose');
 const { Post, Notification } = require('./schema');  // TODO: update this
 const { Collection } = require('mongoose');
+
+// helpers
+function checkMongooseConnection(){
+    return mongoose.connection.readyState == 1;
+}
+
+// Qixin's API
+
+// Save a post to database
+/* const data = {
+      names: ["user1"],
+      contents: [post.value + " " + tags.value],
+      times: [new Date()],
+      likes: [0],
+      tags: [tags.value],
+    }*/
+app.post("/post/:posterId", (req, res) => {
+    // TODO: check user credential
+    if (!checkMongooseConnection()) {
+        res.status(500).send('Internal server error');
+        return;
+    }
+    const posterID = req.params.posterId;
+    const post = new Post{
+        posterID: posterID,
+        postContent: req.body.names[0],
+        postTime: req.body.times[0],
+        numLikes: req.body.likes[0],
+        tags: req.body.tags[0],
+        replies: [],
+    }
+
+    post.save().then((result) => {
+        res.send(post._id)
+    }).catch((error) => {
+        if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
+            res.status(500).send('Internal server error')
+        } else {
+            res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
+        }
+    })
+    // TODO: update profile
+});
+
+
+//leave a reply
+app.post("/reply/:postId", (req, res) => {
+    // TODO
+    res.status(500).send("internal server error");
+});
+
+// Delete a post
+app.delete("/post/:id", (req, res) => {
+    // TODO
+    res.status(500).send("internal server error");
+});
+
+
+// Delete a reply
+app.delete("/reply/:id", (req, res) => {
+    // TODO
+    res.status(500).send("internal server error");
+});
+
+
+// Like a Post
+app.patch("/post/like/:id", (req, res) => {
+    // TODO
+    res.status(500).send("internal server error");
+});
+
+
+// Like a reply
+app.patch("/reply/like/:id", (req, res) => {
+    // TODO
+    res.status(500).send("internal server error");
+});
+
+
+// Update profile
+app.post("/profile/:id", (req, res) => {
+    // TODO
+    res.status(500).send("internal server error");
+});
+
+
+// =================
+
+// Yifei's API
+
+
+
+
 
 // Setting up a static directory for the files in /public
 // using Express middleware.

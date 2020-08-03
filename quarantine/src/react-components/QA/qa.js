@@ -290,16 +290,39 @@ class QA extends React.Component {
       return;
     }
     const tags = document.querySelector("#tags");
-    this.state.postsList.splice(0, 0, {
+    const data = {
       names: ["user1"],
       contents: [post.value + " " + tags.value],
       times: [new Date()],
       likes: [0],
       tags: [tags.value],
+    }
+
+    // server call that sends data
+    const url = '/post'
+    const request = new Request(url, {
+      method: 'Post',
+      body: JSON.stringfy(data),
+      headers:{
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+      }
     });
-    const newList = this.state.postsList;
-    this.setState({ postsList: newList });
-    // todo: a server call that sends data
+
+    fetch(request)
+    .then(function(res)){
+        if (res.status === 200) {
+            // If post was added successfully, tell the user, and show the content.
+            console.log('Added post')
+            this.state.postsList.splice(0, 0, data);
+            const newList = this.state.postsList;
+            this.setState({ postsList: newList });
+        } else {
+            // If server couldn't add the post, tell the user.
+            console.log('failed')
+            // TODO: add some UI to notify user
+        }
+    }
   };
 
   backTop = () => {
