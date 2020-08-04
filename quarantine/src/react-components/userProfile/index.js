@@ -37,9 +37,11 @@ class UserProfile extends React.Component {
             <div>
                 <input type="file" id="FileUpload1" style={{display: "none"}} 
                 onChange={(e) => {
-                    console.log(e);
-                    const uploader = document.getElementById("FileUpload1");
-                    this.setState({avatar: require(uploader.value)});
+                    e.stopPropagation();
+                    e.preventDefault();
+                    var file = e.target.files[0];
+                    console.log(file);
+                    // a server call that sends file
                 }}/>
                 <Sidebar title={"Profile"} />
                 <div className=" container-fluid main-content-container px-4">
