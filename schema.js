@@ -1,47 +1,29 @@
 /* Quanrantine mongoose model */
 const mongoose = require('mongoose')
 
-const ReplySchema = new mongoose.Schema({
-	replierId: {
-		type: mongoose.Schema.ObjectId,
-		required: true,
-    },
-    replyContent: {
-        type: String,
-        required: true,
-    },
-    replyTime: {
-        type: Date,
-        required: true,
-    },
-    numLikes: {
-        type: Number,
-        default: 0,
-    },
-});
-
 // replies are embedded in Post model
 const PostSchema = new mongoose.Schema({
+    // first element in each array is the main post info
+    // the rests are replies
 	posterId: {
-		type: mongoose.Schema.ObjectId,
+		type: [mongoose.Schema.ObjectId],
 		required: true,
     },
     postContent: {
-        type: String,
+        type: [String],
         required: true,
     },
     postTime: {
-        type: Date,
+        type: [Date],
         required: true,
     },
     numLikes: {
-        type: Number,
+        type: [Number],
         default: 0,
     },
     tags: {
-        type: String,
-    }
-    replies: [ReplySchema]
+        type: [String],
+    },
 });
 
 const NotificationSchema = new mongoose.Schema({

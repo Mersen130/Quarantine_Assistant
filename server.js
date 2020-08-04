@@ -23,7 +23,32 @@ function checkMongooseConnection(){
     return mongoose.connection.readyState == 1;
 }
 
+function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
+	return typeof error === 'object' && error !== null && error.name === "MongoNetworkError";
+}
+
+function checkObjctId(id) {
+    return ObjectID.isValid(posterID);
+}
+
 // Qixin's API
+
+// get all posts
+app.get("/post", (req, res) => {
+    // TODO: check user credential
+    if (!checkMongooseConnection()) {
+        res.status(500).send('Internal server error');
+        return;
+    }
+    Post.find().then((posts) => {
+        res.send({ posts });
+    })
+    .catch((err) => {
+        log(err);
+        res.status(500).send("Internal Server Error");
+    });
+})
+
 
 // Save a post to database
 /* const data = {
@@ -40,15 +65,19 @@ app.post("/post/:posterId", (req, res) => {
         return;
     }
     const posterID = req.params.posterId;
-    const post = new Post{
-        posterID: posterID,
-        postContent: req.body.names[0],
-        postTime: req.body.times[0],
-        numLikes: req.body.likes[0],
-        tags: req.body.tags[0],
-        replies: [],
-    }
-
+    if (!checkObjctId(posterID)) {
+		res.status(404).send()  // if invalid id, definitely can't find resource, 404.
+		return;  // so that we don't run the rest of the handler.
+	}
+    log(posterID)
+    const post = new Post({
+        posterID: [posterID],
+        postContent: req.body.names,
+        postTime: req.body.times,
+        numLikes: req.body.likes,
+        tags: req.body.tags,
+    });
+    log(post)
     post.save().then((result) => {
         res.send(post._id)
     }).catch((error) => {
@@ -122,7 +151,6 @@ app.get("*", (req, res) => {
         // if url not in expected page routes, set status to 404.
         res.status(404);
     }
-    log("sending index.html")
     // send index.html
     res.sendFile(path.join(__dirname + "/quarantine/build/index.html"));
 });

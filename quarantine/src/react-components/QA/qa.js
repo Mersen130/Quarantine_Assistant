@@ -133,7 +133,6 @@ class QA extends React.Component {
   render() {
     return (
       <div>
-        {console.log(this.state)}
         <Sidebar
           title={"Q&A"}
           notes={this.state.notes}
@@ -299,10 +298,10 @@ class QA extends React.Component {
     }
 
     // server call that sends data
-    const url = '/post'
+    const url = '/post/someid' // todo
     const request = new Request(url, {
-      method: 'Post',
-      body: JSON.stringfy(data),
+      method: 'post',
+      body: JSON.stringify(data),
       headers:{
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
@@ -310,7 +309,7 @@ class QA extends React.Component {
     });
 
     fetch(request)
-    .then(function(res)){
+    .then((res) => {
         if (res.status === 200) {
             // If post was added successfully, tell the user, and show the content.
             console.log('Added post')
@@ -322,8 +321,11 @@ class QA extends React.Component {
             console.log('failed')
             // TODO: add some UI to notify user
         }
-    }
-  };
+    })
+    .catch((error) => {
+        console.log(error)
+    });
+  }
 
   backTop = () => {
     document.body.scrollTop = 0; // For Safari
