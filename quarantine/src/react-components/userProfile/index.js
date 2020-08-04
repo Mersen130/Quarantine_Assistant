@@ -35,6 +35,12 @@ class UserProfile extends React.Component {
     render() {
         return (
             <div>
+                <input type="file" id="FileUpload1" style={{display: "none"}} 
+                onChange={(e) => {
+                    console.log(e);
+                    const uploader = document.getElementById("FileUpload1");
+                    this.setState({avatar: require(uploader.value)});
+                }}/>
                 <Sidebar title={"Profile"} />
                 <div className=" container-fluid main-content-container px-4">
                     <div className="col-lg-10 offset-lg-2">
@@ -57,6 +63,7 @@ class UserProfile extends React.Component {
                                     age={this.state.age}
                                     region={this.state.region}
                                     description={this.state.description}
+                                    changePhoto={this.changePhoto}
                                 />
                             </div>
                             <div className="col col-lg-8">
@@ -69,6 +76,11 @@ class UserProfile extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    changePhoto = () => {
+        const uploader = document.getElementById("FileUpload1");
+        uploader.click();
     }
 }
 
