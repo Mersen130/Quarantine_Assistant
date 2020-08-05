@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 // Mongo and Mongoose
 const { ObjectID } = require('mongodb')
 const { mongoose } = require('./mongoose');
-const { Post, Notification } = require('./schema');  // TODO: update this
+const { Post, Notification, User, QuanrantineProgress, Activities} = require('./schema');  // TODO: update this
 const { Collection } = require('mongoose');
 
 // helpers
@@ -30,6 +30,25 @@ function isMongoError(error) { // checks for first error returned by promise rej
 function checkObjctId(id) {
     return ObjectID.isValid(posterID);
 }
+
+//Session
+const session = require("express-session");
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+    session({
+        secret:"quarantine",
+        resave:false,
+        saveUninitialized:false,
+        cookie:{
+            expires: 50000,
+            httpOnly:true
+        }
+
+    })
+);
+
+
 
 // Qixin's API
 
@@ -135,6 +154,32 @@ app.post("/profile/:id", (req, res) => {
 // =================
 
 // Yifei's API
+
+//login and creat a session for the current user
+app.post("/users/login",(req, res) =>{
+    const userName = req.body.userName;
+    const password = req.body.password;
+    User.findUser(userName, password).then(user =>{
+        req.session.user = user._id;
+        req.session.userName = user.userName;
+        res.send({currentLogedIn:user.userName});
+    })
+    .catch(error=>{
+        res.status(400).send()
+    });
+});
+
+//logOut and destroy the session
+app.get("/users/logout",(req,res) =>{
+    req.session.destroy(err =>{
+        if(err){
+            res.status(500).send(error);
+        }
+        else{
+            res.send()
+        }
+    });
+});
 
 
 
