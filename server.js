@@ -18,15 +18,46 @@ const { mongoose } = require('./mongoose');
 const { Post, Notification, User, QuanrantineProgress, Activities} = require('./schema');  // TODO: update this
 const { Collection } = require('mongoose');
 
-// helpers
-function checkMongooseConnection(){
-    return mongoose.connection.readyState == 1;
+// helpers & middlewares
+
+// check if mongoose is connected
+const mongoChecker = (req, res, next) => {
+	// check mongoose connection established.
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} else {
+		next()	
+	}	
 }
 
+// Middleware for authentication of resources
+const authenticate = (req, res, next) => {
+	if (req.session.user) {
+		User.findById(req.session.user).then((user) => {
+			if (!user) {
+				return Promise.reject()
+			} else {
+				req.user = user
+				next()
+			}
+		}).catch((error) => {
+			res.status(401).send("Unauthorized")
+		})
+	} else {
+		res.status(401).send("Unauthorized")
+	}
+}
+
+
+
+// check if mongo is disconnected
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
 	return typeof error === 'object' && error !== null && error.name === "MongoNetworkError";
 }
 
+// check if id is valid ObjectID
 function checkObjctId(id) {
     return ObjectID.isValid(posterID);
 }
@@ -53,12 +84,7 @@ app.use(
 // Qixin's API
 
 // get all posts
-app.get("/post", (req, res) => {
-    // TODO: check user credential
-    if (!checkMongooseConnection()) {
-        res.status(500).send('Internal server error');
-        return;
-    }
+app.get("/post", mongoChecker, authenticate, (req, res) => {
     Post.find().then((posts) => {
         res.send({ posts });
     })
@@ -77,13 +103,9 @@ app.get("/post", (req, res) => {
       likes: [0],
       tags: [tags.value],
     }*/
-app.post("/post/:posterId", (req, res) => {
-    // TODO: check user credential
-    if (!checkMongooseConnection()) {
-        res.status(500).send('Internal server error');
-        return;
-    }
-    const posterID = req.params.posterId;
+app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
+
+    const posterID = req.user._id;
     if (!checkObjctId(posterID)) {
 		res.status(404).send()  // if invalid id, definitely can't find resource, 404.
 		return;  // so that we don't run the rest of the handler.
