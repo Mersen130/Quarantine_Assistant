@@ -2,6 +2,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator');
 const { ObjectID } = require('mongodb');
+const bcrypt = require('bcryptjs')
 
 // replies are embedded in Post model
 const PostSchema = new mongoose.Schema({
