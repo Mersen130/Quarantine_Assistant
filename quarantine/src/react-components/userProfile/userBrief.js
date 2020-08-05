@@ -11,6 +11,9 @@ class UserBrief extends React.Component {
                             src={this.props.avatar}
                             alt={this.props.name}
                             width="110"
+                            alt="alternative text" 
+                            title="Click to change profile photo."
+                            onClick={this.props.changePhoto}
                         />
                     </div>
                     <h4 className="mb-0">{this.props.name}</h4>{" "}
