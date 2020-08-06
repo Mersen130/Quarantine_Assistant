@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 
 // Mongo and Mongoose
 const { ObjectID } = require('mongodb')
-const { mongoose } = require('./mongoose');
-const { Post, Notification, User, QuanrantineProgress, Activities} = require('./schema');  // TODO: update this
+const { mongoose } = require('./db/mongoose');
+const { Post, Notification, User, QuanrantineProgress, Activities} = require('./models/schema');  // TODO: update this
 const { Collection } = require('mongoose');
 
 // helpers & middlewares
