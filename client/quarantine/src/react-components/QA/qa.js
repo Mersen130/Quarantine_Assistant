@@ -5,6 +5,7 @@ import { uid } from "react-uid";
 import DropDown from "./dropdown";
 import Sidebar from "../SideNavBar/sidebar.js";
 import Pagination from "./pagination.js";
+import serverCall from "./serverCall"
 class QA extends React.Component {
   state = {
     /*user = this.props.user*/
@@ -298,33 +299,8 @@ class QA extends React.Component {
     }
 
     // server call that sends data
-    const url = '/post/someid' // todo
-    const request = new Request(url, {
-      method: 'post',
-      body: JSON.stringify(data),
-      headers:{
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-      }
-    });
-
-    fetch(request)
-    .then((res) => {
-        if (res.status === 200) {
-            // If post was added successfully, tell the user, and show the content.
-            console.log('Added post')
-            this.state.postsList.splice(0, 0, data);
-            const newList = this.state.postsList;
-            this.setState({ postsList: newList });
-        } else {
-            // If server couldn't add the post, tell the user.
-            console.log('failed')
-            // TODO: add some UI to notify user
-        }
-    })
-    .catch((error) => {
-        console.log(error)
-    });
+    const sendPost = serverCall.sendPost.bind(this);
+    sendPost(data);
   }
 
   backTop = () => {
@@ -342,14 +318,16 @@ class QA extends React.Component {
 
   handleReply = (mediaId, name, content) => {
     const newList = this.state.postsList;
+
     newList[mediaId].names.push(name);
     newList[mediaId].contents.push(content);
     newList[mediaId].times.push(new Date());
     newList[mediaId].likes.push(0);
     newList[mediaId].tags.push("");
-    this.setState({ postsList: newList });
-    this.pushNote("A reply has been added to your post.");
-    // todo: a server call that sends data
+
+    // a server call that sends data
+    const sendReply = serverCall.sendReply.bind(this);
+    sendReply(newList, mediaId);
   };
 
   swap = (items, firstIndex, secondIndex) => {

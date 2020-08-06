@@ -105,7 +105,7 @@ app.get("/post", mongoChecker, authenticate, (req, res) => {
     }*/
 app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
 
-    const posterID = req.user._id;
+    const posterID = req.params.posterId;
     if (!checkObjctId(posterID)) {
 		res.status(404).send()  // if invalid id, definitely can't find resource, 404.
 		return;  // so that we don't run the rest of the handler.
@@ -120,7 +120,7 @@ app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
     });
     log(post)
     post.save().then((result) => {
-        res.send(post._id)
+        res.send({ currentPost: post._id })
     }).catch((error) => {
         if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
             res.status(500).send('Internal server error')
@@ -128,14 +128,40 @@ app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
             res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
         }
     })
-    // TODO: update profile
+    // TODO: update user profile
 });
 
 
 //leave a reply
-app.post("/reply/:postId", (req, res) => {
-    // TODO
-    res.status(500).send("internal server error");
+app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
+    const postId = req.params.postId;
+
+    if (!checkObjctId){
+        res.status(404).send('Resource not found');
+    }
+    const post = new Post({
+        posterID: [posterID],
+        postContent: req.body.names,
+        postTime: req.body.times,
+        numLikes: req.body.likes,
+        tags: req.body.tags,
+    });
+    Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false})
+    .then(post => {
+        if (!post){
+            res.status(404).send();
+        } else{
+            res.send();
+        }
+    })
+    .catch(error => {
+        if (isMongoError(error)){
+            res.status(500).send("Internal server error");
+        } else{
+            log(error);
+            res.status(400).send("Bad Request");
+        }
+    })
 });
 
 // Delete a post
