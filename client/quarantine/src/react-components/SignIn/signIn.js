@@ -2,67 +2,44 @@ import React from 'react';
 import '../../App.css';
 import './signIn.css';
 import {handleSubmit, handleChangePage} from "./signInActions.js";
-
-
-
-const formValid = ({ formErrors, ...rest }) => {
-  let valid = true;
-
-  Object.values(formErrors).forEach(val => {
-    val.length > 0 && (valid = false);
-  });
-
-  return valid;
-};
-
+import {handleFormChange, signIn} from "../../actions/user.js";
 
 class SignIn extends React.Component{
 
-  // constructor(props){
-  //   super(props);
+  constructor(props){
+    super(props);
+    this.props.history.push("/SignIn")
+  }
     
   state = {
-      userName:"",
-      password:"",
-      userType:"",
-      users:[
-        {userName:'user', password:'user', userType:"user"},
-        {userName:"admin", password:"admin", userType:"admin"}
-      ],
-      formErrors:{
-      userName:"",
-      password:""
-    }
+    userName:"",
+    password:""
+
   }
 
 
 
-  handleChange = e =>{
-    e.preventDefault();
-    const {name, value} = e.target;
-    this.setState({
-      [name]:value
-    });
-  }
+
 
 
 	render(){
+    const {app} = this.props
 		return(
       <div id="SignInWrapper">
       <div id="SignInFormWrapper">
         <img src={require("../../lib/appLogo.png")}class = "mx-auto d-block" id="signInLogo"/>
         <h4 id="signInTitle">Sign in to <b>Q</b>uarantine <b>A</b>ssistant</h4>
         <div id = "signInForm">
-          <form onSubmit={handleSubmit.bind(this,this.state.userName,this.state.password,this.props.history)}>
+          <form >
             <div class = "form-group">
               <label id="SIUsernameLable" class="signInLabel">Username</label>
               <input
                 type="text"
                 name="userName"
-                value = {this.state.userName}
+                // value = {this.state.userName}
                 class="custom-form-control signInEmailPswd" 
                 placeholder=""
-                onChange={this.handleChange}
+                onChange={e => handleFormChange(this,e.target)}
                 required
               />
             </div>
@@ -71,10 +48,10 @@ class SignIn extends React.Component{
                <input
                  type="password"
                  name="password"
-                 value= {this.state.password}
+                //  value= {this.state.password}
                  class="custom-form-control signInEmailPswd"
                  placeholder=""
-                 onChange={this.handleChange}
+                 onChange={e => handleFormChange(this, e.target)}
                  required
                />
             </div>
@@ -89,6 +66,7 @@ class SignIn extends React.Component{
             <button
               type="submit"
               id="signInBtn"
+              onClick={() =>signIn(this,app)}
               >
               Sign In
             </button>

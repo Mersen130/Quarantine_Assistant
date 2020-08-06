@@ -19,14 +19,40 @@ import DoctorDashboard from "./react-components/DoctorDashboard/index";
 import UserList from "./react-components/AdminDashboard/UserList";
 import "bootstrap/dist/css/bootstrap.css";
 import "./react-components/theme/theme.css";
+import {readCookie} from "./actions/user.js";
 class App extends React.Component {
+    constructor(props){
+        super(props);
+        readCookie(this);
+    }
+    state = {
+        currentUserName:null,
+        currentUserType:null
+    }
     render() {
         return (
-            <div className="App">
+            
                 <React.Fragment>
                     <Router>
                         <Switch>
-                            <Route exact path="/" component={SignIn} />
+                            <Route
+                                exact path = {["/SignIn", "/SignUp","/Reset","/questionnaire/","/qaAdmin/","/qa/","/dashboard/","/user1/","/user2/","/userlist/","/doctorprofile/","/doctordashboard/","/adminprofile/","/Activities","/admindashboard/"]}
+                                render={({histroy}) =>{
+                                    <div classname = "App">
+                                        {!currentUserName 
+                                        ? <SingIn history = {history} app={this}/>
+                                        : {
+                                            'normal_user':<Dashboard history={history} app={this}/>,
+                                            'doctor':<DoctorDashboard history={history} app={this}/>,
+                                            'admin':<AdminDashboard history={history} app={this}/>
+
+                                        }[currentUserType]
+                                    }
+                                    </div>
+                                }}
+                            />
+                            
+                            {/* <Route exact path="/" component={SignIn} />
                             <Route path="/SignUp" component={SignUp} />
                             <Route path="/Reset" component={Reset} />
                             <Route
@@ -55,11 +81,10 @@ class App extends React.Component {
                             <Route
                                 path="/admindashboard/"
                                 component={AdminDashboard}
-                            />
+                            /> */}
                         </Switch>
                     </Router>
                 </React.Fragment>
-            </div>
         );
     }
 }

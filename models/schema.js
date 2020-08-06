@@ -42,6 +42,30 @@ const NotificationSchema = new mongoose.Schema({
         default: 0,
     }
 });
+const QuanrantineProgressSchema = new mongoose.Schema({
+    startDate: {
+        type:Date,
+        required:true
+    },
+    endDate:{
+        type:Date,
+        required:true
+    }
+});
+const ActivitiesSchema = new mongoose.Schema({
+    activityTile:{
+        type:String,
+        required:true
+    },
+    activityType:{
+        type:String,
+        required:true
+    },
+    activityDescription:{
+        type:String,
+        required:true
+    }
+});
 const UserSchema = new mongoose.Schema({
     userName:{
         type: String,
@@ -73,35 +97,12 @@ const UserSchema = new mongoose.Schema({
     selfDecription:{
         type:String
     },
-    quanrantineProgress:[QuanrantineProgress],
+    quanrantineProgress:[QuanrantineProgressSchema],
     posts:[PostSchema],
     notifications:[NotificationSchema],
-    activities:[Activities]
-})
-const QuanrantineProgressSchema = new mongoose.Schema({
-    startDate: {
-        type:Date,
-        required:true
-    },
-    endDate:{
-        type:Date,
-        required:true
-    }
-})
-const ActivitiesSchema = new mongoose.Schema({
-    activityTile:{
-        type:String,
-        required:true
-    },
-    activityType:{
-        type:String,
-        required:true
-    },
-    activityDescription:{
-        type:String,
-        required:true
-    }
-})
+    activities:[ActivitiesSchema]
+});
+
 
 //helper function for user that can use in the session
 UserSchema.statics.findUser = function(userName, password) {
