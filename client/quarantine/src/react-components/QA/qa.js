@@ -309,11 +309,12 @@ class QA extends React.Component {
   };
 
   like = (i, j, amt) => {
+    // j is the postIndex, i is the contentIndex
     const postsListB = this.state.postsList;
     postsListB[j].likes[i] += amt;
-    this.setState({ postsList: postsListB });
-    this.pushNote("A like has been added to your post.");
     // todo: a server call that sends data
+    const sendLike = serverCall.sendLike.bind(this);
+    sendLike(postsListB, i, j, amt);
   };
 
   handleReply = (mediaId, name, content) => {
@@ -324,7 +325,7 @@ class QA extends React.Component {
     newList[mediaId].times.push(new Date());
     newList[mediaId].likes.push(0);
     newList[mediaId].tags.push("");
-
+    
     // a server call that sends data
     const sendReply = serverCall.sendReply.bind(this);
     sendReply(newList, mediaId);

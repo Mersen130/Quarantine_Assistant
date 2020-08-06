@@ -164,6 +164,47 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     })
 });
 
+
+// Like a Post
+app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
+    const postId = req.params.postId;
+
+    if (!checkObjctId){
+        res.status(404).send('Resource not found');
+    }
+
+    Post.findById(postId)
+    .then( post => {
+        if (!post){
+            res.status(404).send('post not found');
+            return;
+        } else{
+            return post.numLikes;
+        }
+    })
+    .then( numLikes => {
+        numLikes[req.body.contentIndex] += req.body.likeNum;
+        const fieldsToUpdate = { numLikes: numLikes };
+        return Post.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+    })
+    .then(post => {
+        if (!post){
+            res.status(404).send();
+        } else{
+            res.send();
+        }
+    })
+    .catch(error => {
+        if (isMongoError(error)){
+            res.status(500).send("Internal server error");
+        } else{
+            log(error);
+            res.status(400).send("Bad Request");
+        }
+    })
+});
+
+
 // Delete a post
 app.delete("/post/:id", (req, res) => {
     // TODO
@@ -173,13 +214,6 @@ app.delete("/post/:id", (req, res) => {
 
 // Delete a reply
 app.delete("/reply/:id", (req, res) => {
-    // TODO
-    res.status(500).send("internal server error");
-});
-
-
-// Like a Post
-app.patch("/post/like/:id", (req, res) => {
     // TODO
     res.status(500).send("internal server error");
 });

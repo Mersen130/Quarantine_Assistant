@@ -37,7 +37,7 @@ class App extends React.Component {
                         <Switch>
                             <Route
                                 exact path = {["/SignIn", "/SignUp","/Reset","/questionnaire/","/qaAdmin/","/qa/","/dashboard/","/user1/","/user2/","/userlist/","/doctorprofile/","/doctordashboard/","/adminprofile/","/Activities","/admindashboard/"]}
-                                render={({histroy}) =>{
+                                render={({history}) =>{
                                     <div classname = "App">
                                         {!currentUserName 
                                         ? <SingIn history = {history} app={this}/>

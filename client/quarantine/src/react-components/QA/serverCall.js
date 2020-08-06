@@ -21,7 +21,7 @@ ServerCall.prototype = {
                     return res.json();
                 } else {
                     // If server couldn't add the post, tell the user.
-                    console.log('failed')
+                    console.log('post failed')
                     // TODO: add some UI to notify user
                 }
             })
@@ -51,13 +51,46 @@ ServerCall.prototype = {
 
         fetch(request)
         .then((res) => {
-            this.setState({ postsList: newList });
-            this.pushNote("A reply has been added to your post.");
+            if (res.status === 200){
+                this.setState({ postsList: newList });
+                this.pushNote("A reply has been added to your post.");
+            } else{
+                console.log('reply failed');
+            }
         })
         .catch(error=>{
             console.log(error);
         })
     },
+
+    sendLike: function (postsListB, postIndex, contentIndex, likeNum){
+        const url = `/post/like/${postsListB[postIndex].id}`;
+
+        const request = new request(url, {
+            method: 'patch',
+            body: JSON.stringify({
+                contentIndex: contentIndex,
+                likeNum: likeNum,
+            }), // data to send over(the entire post)
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        fetch(request)
+        .then((res) => {
+            if (res.status === 200){
+                this.setState({ postsList: postsListB });
+                this.pushNote("A like has been added to your post.");
+            } else{
+                console.log('like failed');
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
 }
 
 const serverCall = new ServerCall()
