@@ -8,7 +8,7 @@ const path = require('path')
 // Express
 const express = require('express')
 const app = express();
-app.use(express.static(__dirname + "/quarantine/build"));
+app.use(express.static(__dirname + "client/quarantine/build"));
 const bodyParser = require('body-parser')
 app.use(bodyParser.json());
 
