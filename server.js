@@ -273,13 +273,6 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
 });
 
 
-// Like a reply
-app.patch("/reply/like/:id", (req, res) => {
-    // TODO
-    res.status(500).send("internal server error");
-});
-
-
 // Update profile
 app.post("/profile/:id", (req, res) => {
     // TODO
