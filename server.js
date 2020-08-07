@@ -8,7 +8,7 @@ const path = require('path')
 // Express
 const express = require('express')
 const app = express();
-app.use(express.static(__dirname + "client/quarantine/build"));
+app.use(express.static(__dirname + "/client/quarantine/build"));
 const bodyParser = require('body-parser')
 app.use(bodyParser.json());
 
@@ -345,13 +345,13 @@ app.get("/users/logout",(req,res) =>{
 /* KEEP THIS BLOCK AT THE BOTTOM */
 app.get("*", (req, res) => {
     // check for page routes that we expect in the frontend to provide correct status code.
-    const goodPageRoutes = ["/", "/qa", "questionnaire", "qaadmin", "profile"];
+    const goodPageRoutes = ["/SignIn","/SignUp", "/qa", "questionnaire", "qaadmin", "profile"];
     if (!goodPageRoutes.includes(req.url)) {
         // if url not in expected page routes, set status to 404.
         res.status(404);
     }
     // send index.html
-    res.sendFile(path.join(__dirname + "/quarantine/build/index.html"));
+    res.sendFile(path.join(__dirname + "/client/quarantine/build/index.html"));
 });
 
 // will use an 'environmental variable', process.env.PORT, for deployment.

@@ -1,5 +1,3 @@
-import { json } from "express";
-
 export const handleFormChange = (component, inputField) =>{
     const value = inputField.value;
     const name = inputField.name;
