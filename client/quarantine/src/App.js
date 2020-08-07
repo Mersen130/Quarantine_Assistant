@@ -7,7 +7,7 @@ import Reset from "./react-components/ResetPwd/resetPwd.js";
 import Activities from "./react-components/Activities/index.js";
 import QA from "./react-components/QA/qa.js";
 import Questionnaire from "./react-components/questionnaire/questionnaire.js";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import QAAdmin from "./react-components/QA/qaAdmin.js";
 import UserProfile from "./react-components/userProfile/index";
 import User2Profile from "./react-components/userProfile/user2";
@@ -19,54 +19,40 @@ import DoctorDashboard from "./react-components/DoctorDashboard/index";
 import UserList from "./react-components/AdminDashboard/UserList";
 import "bootstrap/dist/css/bootstrap.css";
 import "./react-components/theme/theme.css";
+import {readCookie} from "./actions/user"
 class App extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        // readCookie(this);
+        readCookie(this); // sees if a user is logged in.
     }
+
+    // global state passed down includes the current logged in user.
     state = {
-        currentUserName:null
+        currentUserName: null
     }
+
     render() {
+        const { currentUserName} = this.state;
+
         return (
-            <div className="App">
-                <React.Fragment>
-                    <Router>
-                        <Switch>
-                            <Route exact path="/" component={SignIn} />
-                            <Route path="/SignUp" component={SignUp} />
-                            <Route path="/Reset" component={Reset} />
-                            <Route
-                                path="/questionnaire/"
-                                component={Questionnaire}
-                            />
-                            <Route path="/qaAdmin/" component={QAAdmin} />
-                            <Route path="/qa/" component={QA} />
-                            <Route path="/dashboard/" component={Dashboard} />
-                            <Route path="/user1/" component={UserProfile} />
-                            <Route path="/user2/" component={User2Profile} />
-                            <Route path="/userlist/" component={UserList} />
-                            <Route
-                                path="/doctorprofile/"
-                                component={DoctorProfile}
-                            />
-                            <Route
-                                path="/doctordashboard/"
-                                component={DoctorDashboard}
-                            />
-                            <Route
-                                path="/adminprofile/"
-                                component={AdminProfile}
-                            />
-                            <Route path="/Activities" component={Activities} />
-                            <Route
-                                path="/admindashboard/"
-                                component={AdminDashboard}
-                            />
-                        </Switch>
-                    </Router>
-                </React.Fragment>
-            </div>
+            <BrowserRouter>
+                <Switch>
+                    <Route
+                        exact path={["/", "/SignIn", "/Dashboard"] /* any of these URLs are accepted. */ }
+                        render={({ history }) => (
+                            <div className="app">
+                            {!currentUserName ? <SignIn history={history} app={this} /> : <Dashboard history={history} app={this} />}
+                                
+                            </div>
+                            
+                        )}
+                    />
+
+                    { /* 404 if URL isn't expected. */}
+                    <Route render={() => <div>404 Not found</div>} />
+
+                </Switch>
+            </BrowserRouter>
         );
     }
 }
