@@ -2,7 +2,7 @@ import React from 'react';
 import '../../App.css';
 import './signIn.css';
 import {handleSubmit, handleChangePage} from "./signInActions.js";
-import {handleFormChange, signIn} from "../../actions/user.js";
+import {handleFormChange, signIn} from "../../actions/user";
 
 class SignIn extends React.Component{
 

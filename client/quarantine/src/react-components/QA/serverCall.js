@@ -99,8 +99,8 @@ ServerCall.prototype = {
         const request = new Request(url, {
             method: "get",
             body: JSON.stringify({
-                contentIndex: contentIndex,
-                likeNum: likeNum,
+                // contentIndex: contentIndex,
+                // likeNum: likeNum,
             }), // data to send over(the entire post)
             headers: {
                 'Accept': 'application/json, text/plain, */*',

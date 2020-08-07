@@ -13,6 +13,7 @@
     "install": "^0.13.0",
     "mongodb": "^3.6.0",
     "mongoose": "^5.9.26",
+    "nodemailer": "^6.4.11",
     "npm": "^6.14.7",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
