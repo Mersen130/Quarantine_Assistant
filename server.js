@@ -64,6 +64,7 @@ function checkObjctId(id) {
 
 //Session
 const session = require("express-session");
+const { promises } = require('fs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
@@ -86,7 +87,7 @@ app.use(
 // get all posts
 app.get("/post", mongoChecker, authenticate, (req, res) => {
     Post.find().then((posts) => {
-        res.send({ posts });
+        res.send([ posts ]);
     })
     .catch((err) => {
         log(err);
@@ -177,7 +178,7 @@ app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
     .then( post => {
         if (!post){
             res.status(404).send('post not found');
-            return;
+            return Promise.reject();
         } else{
             return post.numLikes;
         }

@@ -22,11 +22,12 @@ ServerCall.prototype = {
                 } else {
                     // If server couldn't add the post, tell the user.
                     console.log('post failed')
+                    return Promise.reject();
                     // TODO: add some UI to notify user
                 }
             })
             .then(json => {
-                data.id = json.currentPost;
+                data._id = json.currentPost;
                 console.log('Added post')
                 this.state.postsList.splice(0, 0, data);
                 const newList = this.state.postsList;
@@ -38,7 +39,7 @@ ServerCall.prototype = {
     },
 
     sendReply: function (newList, mediaId) {
-        const url = `/reply/${newList.id}`;
+        const url = `/reply/${newList._id}`;
 
         const request = new Request(url, {
             method: 'put',
@@ -64,7 +65,7 @@ ServerCall.prototype = {
     },
 
     sendLike: function (postsListB, postIndex, contentIndex, likeNum){
-        const url = `/post/like/${postsListB[postIndex].id}`;
+        const url = `/post/like/${postsListB[postIndex]._id}`;
 
         const request = new request(url, {
             method: 'patch',
@@ -90,6 +91,37 @@ ServerCall.prototype = {
         .catch(error => {
             console.log(error);
         })
+    },
+
+    loadPosts: function(){
+        const url = "/post"
+        let postsList;
+        const request = new Request(url, {
+            method: "get",
+            body: JSON.stringify({
+                contentIndex: contentIndex,
+                likeNum: likeNum,
+            }), // data to send over(the entire post)
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then( res => {
+            if (res.status === 200){
+                return res.json();
+            } else{
+                console.log("get posts failed");
+                return Promise.reject();
+            }
+        })
+        .then(json => {
+            postsList = json;
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        return postsList;
     }
 }
 
