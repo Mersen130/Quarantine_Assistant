@@ -79,6 +79,9 @@ export const signUp = (component, app)=>{
         });
 
 }
+// export const resetPswd = ()=>{
+
+// }
 
 export const readCookie = (app)=>{
     const url = "/users/check-session";

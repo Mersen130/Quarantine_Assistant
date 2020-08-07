@@ -8,7 +8,7 @@ const path = require('path')
 // Express
 const express = require('express')
 const app = express();
-app.use(express.static(__dirname + "/client/quarantine/build"));
+app.use(express.static(__dirname + "client/quarantine/build"));
 const bodyParser = require('body-parser')
 app.use(bodyParser.json());
 
@@ -64,6 +64,7 @@ function checkObjctId(id) {
 
 //Session
 const session = require("express-session");
+const { promises } = require('fs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
@@ -86,7 +87,7 @@ app.use(
 // get all posts
 app.get("/post", mongoChecker, authenticate, (req, res) => {
     Post.find().then((posts) => {
-        res.send({ posts });
+        res.send([ posts ]);
     })
     .catch((err) => {
         log(err);
@@ -105,7 +106,7 @@ app.get("/post", mongoChecker, authenticate, (req, res) => {
     }*/
 app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
 
-    const posterID = req.user._id;
+    const posterID = req.params.posterId;
     if (!checkObjctId(posterID)) {
 		res.status(404).send()  // if invalid id, definitely can't find resource, 404.
 		return;  // so that we don't run the rest of the handler.
@@ -120,7 +121,7 @@ app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
     });
     log(post)
     post.save().then((result) => {
-        res.send(post._id)
+        res.send({ currentPost: post._id })
     }).catch((error) => {
         if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
             res.status(500).send('Internal server error')
@@ -128,15 +129,82 @@ app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
             res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
         }
     })
-    // TODO: update profile
+    // TODO: update user profile
 });
 
 
 //leave a reply
-app.post("/reply/:postId", (req, res) => {
-    // TODO
-    res.status(500).send("internal server error");
+app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
+    const postId = req.params.postId;
+
+    if (!checkObjctId){
+        res.status(404).send('Resource not found');
+    }
+    const post = new Post({
+        posterID: [posterID],
+        postContent: req.body.names,
+        postTime: req.body.times,
+        numLikes: req.body.likes,
+        tags: req.body.tags,
+    });
+    Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false})
+    .then(post => {
+        if (!post){
+            res.status(404).send();
+        } else{
+            res.send();
+        }
+    })
+    .catch(error => {
+        if (isMongoError(error)){
+            res.status(500).send("Internal server error");
+        } else{
+            log(error);
+            res.status(400).send("Bad Request");
+        }
+    })
 });
+
+
+// Like a Post
+app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
+    const postId = req.params.postId;
+
+    if (!checkObjctId){
+        res.status(404).send('Resource not found');
+    }
+
+    Post.findById(postId)
+    .then( post => {
+        if (!post){
+            res.status(404).send('post not found');
+            return Promise.reject();
+        } else{
+            return post.numLikes;
+        }
+    })
+    .then( numLikes => {
+        numLikes[req.body.contentIndex] += req.body.likeNum;
+        const fieldsToUpdate = { numLikes: numLikes };
+        return Post.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+    })
+    .then(post => {
+        if (!post){
+            res.status(404).send();
+        } else{
+            res.send();
+        }
+    })
+    .catch(error => {
+        if (isMongoError(error)){
+            res.status(500).send("Internal server error");
+        } else{
+            log(error);
+            res.status(400).send("Bad Request");
+        }
+    })
+});
+
 
 // Delete a post
 app.delete("/post/:id", (req, res) => {
@@ -147,13 +215,6 @@ app.delete("/post/:id", (req, res) => {
 
 // Delete a reply
 app.delete("/reply/:id", (req, res) => {
-    // TODO
-    res.status(500).send("internal server error");
-});
-
-
-// Like a Post
-app.patch("/post/like/:id", (req, res) => {
     // TODO
     res.status(500).send("internal server error");
 });
@@ -177,7 +238,6 @@ app.post("/profile/:id", (req, res) => {
 
 // Yifei's API
 
-//login and creat a session for the current user, 2 things stores in the session: currentUserName, currentUnserType(normal_user, doctor, admin)
 app.post("/users/signIn",(req, res) =>{
     const userName = req.body.userName;
     const password = req.body.password;
@@ -222,16 +282,16 @@ app.post("/users/signUp",(req,res) =>{
         }
     })
 })
-app.post(".users.resetPswd",(req, res)=>{
-    const userEmail = req.body.email;
-    User.findOne({
-        email:req.body.email
-    }).then(user=>{
-        if(user){
-
-        }
-    })
-})
+// app.post("/users/resetPswd",(req, res)=>{
+//     const userEmail = req.body.email;
+//     User.findOne({
+//         email:req.body.email
+//     }).then(user=>{
+//         if(user){
+//             const email=require('nodemailer');
+//         }
+//     })
+// })
 app.get("/users/check-session",(req, res) =>{
     if(req.session.user){
         res.send({
@@ -258,21 +318,19 @@ app.get("/users/logout",(req,res) =>{
 
 
 
-
-
 // Setting up a static directory for the files in /public
 // using Express middleware.
 // Don't put anything in /public that you don't want the public to have access to!
 /* KEEP THIS BLOCK AT THE BOTTOM */
 app.get("*", (req, res) => {
     // check for page routes that we expect in the frontend to provide correct status code.
-    const goodPageRoutes = ["/SignIn", "/Dashboard","/qa", "questionnaire", "qaadmin", "profile"];
+    const goodPageRoutes = ["/", "/qa", "questionnaire", "qaadmin", "profile"];
     if (!goodPageRoutes.includes(req.url)) {
         // if url not in expected page routes, set status to 404.
         res.status(404);
     }
     // send index.html
-    res.sendFile(path.join(__dirname + "/client/quarantine/build/index.html"));
+    res.sendFile(path.join(__dirname + "/quarantine/build/index.html"));
 });
 
 // will use an 'environmental variable', process.env.PORT, for deployment.
