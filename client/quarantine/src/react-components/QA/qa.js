@@ -430,16 +430,15 @@ class QA extends React.Component {
     e.preventDefault();
     const postsListB = this.state.postsList;
     postsListB[mediaNum].contents[i] = "[content deleted by admin/author]";
-    if (i === 0) {
+    if (i === 0) { 
+      // a server call that sends data
       postsListB.splice(mediaNum, 1);
-
       const removePost = serverCall.removePost.bind(this);
       removePost(postsListB[mediaNum]._id, postsListB);
+    } else{
+      const removeReply = serverCall.removeReply.bind(this);
+      removeReply(postsListB[mediaNum]._id, i, postsListB);
     }
-
-    this.setState({ postsList: postsListB });
-    this.pushNote("A post has been deleted.");
-    // todo: a server call that sends data
   };
 
   pushNote = (v) => {

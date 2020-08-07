@@ -114,7 +114,7 @@ app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
     log(posterID)
     const post = new Post({
         posterID: [posterID],
-        postContent: req.body.names,
+        postContent: req.body.contents,
         postTime: req.body.times,
         numLikes: req.body.likes,
         tags: req.body.tags,
@@ -142,7 +142,7 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     }
     const post = new Post({
         posterID: [posterID],
-        postContent: req.body.names,
+        postContent: req.body.contents,
         postTime: req.body.times,
         numLikes: req.body.likes,
         tags: req.body.tags,
@@ -208,7 +208,6 @@ app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
 
 // Delete a post
 app.delete("/post/:postId", mongoChecker, authenticate, (req, res) => {
-    // TODO
     const postId = req.params.postId;
     
     if (!checkObjctId(postId)){
@@ -235,9 +234,42 @@ app.delete("/post/:postId", mongoChecker, authenticate, (req, res) => {
 
 
 // Delete a reply
-app.delete("/reply/:id", (req, res) => {
-    // TODO
-    res.status(500).send("internal server error");
+app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
+    const postId = req.params.postId;
+
+    if (!checkObjctId(postid)){
+        res.status(404).send('Resource not found');
+    }
+
+    Post.findById(postId)
+    .then( post => {
+        if (!post){
+            res.status(404).send('post not found');
+            return Promise.reject();  // todo: debug this
+        } else{
+            return post.contents;
+        }
+    })
+    .then( contents => {
+        contents[req.body.contentIndex] = "[content deleted by admin/author]";
+        const fieldsToUpdate = { contents: contents };
+        return Post.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+    })
+    .then(post => {
+        if (!post){
+            res.status(404).send();
+        } else{
+            res.send();
+        }
+    })
+    .catch(error => {
+        if (isMongoError(error)){
+            res.status(500).send("Internal server error");
+        } else{
+            log(error);
+            res.status(400).send("Bad Request");
+        }
+    })
 });
 
 
