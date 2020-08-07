@@ -137,7 +137,7 @@ app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
 app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     const postId = req.params.postId;
 
-    if (!checkObjctId){
+    if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
     const post = new Post({
@@ -170,7 +170,7 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
 app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
     const postId = req.params.postId;
 
-    if (!checkObjctId){
+    if (!checkObjctId(postid)){
         res.status(404).send('Resource not found');
     }
 
@@ -207,9 +207,30 @@ app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
 
 
 // Delete a post
-app.delete("/post/:id", (req, res) => {
+app.delete("/post/:postId", mongoChecker, authenticate, (req, res) => {
     // TODO
-    res.status(500).send("internal server error");
+    const postId = req.params.postId;
+    
+    if (!checkObjctId(postId)){
+        res.status(404).send('Resource not found');
+    }
+
+    Post.findByIdAndDelete(postId)
+    .then( post => {
+        if (!post){
+            res.status(404).send('post not found');
+        } else{
+            res.send();
+        }
+    })
+    .catch(error => {
+        if (isMongoError(error)){
+            res.status(500).send("Internal server error");
+        } else{
+            log(error);
+            res.status(400).send("Bad Request");
+        }
+    })
 });
 
 

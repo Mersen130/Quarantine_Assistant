@@ -98,15 +98,12 @@ ServerCall.prototype = {
         let postsList;
         const request = new Request(url, {
             method: "get",
-            body: JSON.stringify({
-                // contentIndex: contentIndex,
-                // likeNum: likeNum,
-            }), // data to send over(the entire post)
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             }
-        })
+        });
+        fetch(request)
         .then( res => {
             if (res.status === 200){
                 return res.json();
@@ -122,6 +119,31 @@ ServerCall.prototype = {
             console.log(error);
         })
         return postsList;
+    },
+
+    removePost: function(postId, postsListB){
+        const url = `/post/${newList._id}`;
+
+        const request = new Request(url, {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        fetch(request)
+        .then((res) => {
+            if (res.status === 200){
+                this.setState({ postsList: postsListB });
+                this.pushNote("A post has been deleted.");
+            } else{
+                console.log('delete failed');
+            }
+        })
+        .catch(error=>{
+            console.log(error);
+        })
     }
 }
 

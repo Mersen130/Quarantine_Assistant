@@ -432,6 +432,9 @@ class QA extends React.Component {
     postsListB[mediaNum].contents[i] = "[content deleted by admin/author]";
     if (i === 0) {
       postsListB.splice(mediaNum, 1);
+
+      const removePost = serverCall.removePost.bind(this);
+      removePost(postsListB[mediaNum]._id, postsListB);
     }
 
     this.setState({ postsList: postsListB });
