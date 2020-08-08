@@ -34,20 +34,21 @@ const mongoChecker = (req, res, next) => {
 
 // Middleware for authentication of resources
 const authenticate = (req, res, next) => {
-	if (req.session.user) {
-		User.findById(req.session.user).then((user) => {
-			if (!user) {
-				return Promise.reject()
-			} else {
-				req.user = user
-				next()
-			}
-		}).catch((error) => {
-			res.status(401).send("Unauthorized")
-		})
-	} else {
-		res.status(401).send("Unauthorized")
-	}
+	// if (req.session.user) {
+	// 	User.findById(req.session.user).then((user) => {
+	// 		if (!user) {
+	// 			return Promise.reject()
+	// 		} else {
+	// 			req.user = user
+	// 			next()
+	// 		}
+	// 	}).catch((error) => {
+	// 		res.status(401).send("Unauthorized")
+	// 	})
+	// } else {
+	// 	res.status(401).send("Unauthorized")
+    // }
+    next();
 }
 
 
@@ -104,7 +105,7 @@ app.get("/post", mongoChecker, authenticate, (req, res) => {
       likes: [0],
       tags: [tags.value],
     }*/
-app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
+app.post("/post", mongoChecker, authenticate, (req, res) => {
 
     const posterID = req.params.posterId;
     if (!checkObjctId(posterID)) {
@@ -113,7 +114,7 @@ app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
 	}
     log(posterID)
     const post = new Post({
-        posterID: [posterID],
+        posterID: [session.user],
         postContent: req.body.contents,
         postTime: req.body.times,
         numLikes: req.body.likes,
@@ -140,17 +141,25 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
-    const post = new Post({
-        posterID: [posterID],
-        postContent: req.body.contents,
-        postTime: req.body.times,
-        numLikes: req.body.likes,
-        tags: req.body.tags,
-    });
-    Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false})
+    Post.findById(session.user)
+    .then( post => {
+        if (!post){
+            res.status(404).send("post not found");
+            Promise.reject();
+        }
+        const newPosterId = post.posterID.push(session.user);
+        const newPost = new Post({
+            posterID: newPosterId,
+            postContent: req.body.contents,
+            postTime: req.body.times,
+            numLikes: req.body.likes,
+            tags: req.body.tags,
+        });
+        return Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false});
+    })
     .then(post => {
         if (!post){
-            res.status(404).send();
+            res.status(404).send("post not found");
         } else{
             res.send();
         }

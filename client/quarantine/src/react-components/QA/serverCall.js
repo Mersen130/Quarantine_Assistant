@@ -4,7 +4,7 @@ function ServerCall() {
 
 ServerCall.prototype = {
     sendPost: function (data) {
-        const url = `/post/${this.props.currentUser}` // todo
+        const url = `/post/${this.props.app.currentUser}` // todo
         const request = new Request(url, {
             method: 'post',
             body: JSON.stringify(data),
