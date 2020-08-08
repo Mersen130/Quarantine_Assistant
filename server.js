@@ -88,7 +88,7 @@ app.use(
 // get all posts
 app.get("/post", mongoChecker, authenticate, (req, res) => {
     Post.find().then((posts) => {
-        res.send([ posts ]);
+        res.send([ posts, {userName: req.session.userName, userType: req.session.userType, userId: req.session.user} ]);
     })
     .catch((err) => {
         log(err);
@@ -122,7 +122,7 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
     });
     log(post)
     post.save().then((result) => {
-        res.send({ currentPost: post._id })
+        res.send({ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user })
     }).catch((error) => {
         if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
             res.status(500).send('Internal server error')
@@ -141,7 +141,7 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
-    Post.findById(session.user)
+    Post.findById(postId)
     .then( post => {
         if (!post){
             res.status(404).send("post not found");
@@ -161,7 +161,7 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
         if (!post){
             res.status(404).send("post not found");
         } else{
-            res.send();
+            res.send({ posterType: req.session.userType, posterId: req.session.user });
         }
     })
     .catch(error => {
