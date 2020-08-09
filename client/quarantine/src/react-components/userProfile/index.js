@@ -13,8 +13,8 @@ class UserProfile extends React.Component {
             avatar: require("./sampleprofile.png"),
             selfIsoProg: 66,
             gender: "Male",
-            description: "Today is a nice day",
-            region: "Toronto",
+            bio: "Today is a nice day",
+            region: "Toronto, CA",
         };
     }
     handleUpdate = (
@@ -22,14 +22,14 @@ class UserProfile extends React.Component {
         genderUpdate,
         ageUpdate,
         cityUpdate,
-        descriptionUpdate
+        bioUpdate
     ) => {
         this.setState({
             name: nameUpdate,
             gender: genderUpdate,
             age: ageUpdate,
             region: cityUpdate,
-            description: descriptionUpdate,
+            bio: bioUpdate,
         });
     };
     render() {
@@ -64,12 +64,17 @@ class UserProfile extends React.Component {
                                     gender={this.state.gender}
                                     age={this.state.age}
                                     region={this.state.region}
-                                    description={this.state.description}
+                                    bio={this.state.bio}
                                     changePhoto={this.changePhoto}
                                 />
                             </div>
                             <div className="col col-lg-8">
                                 <UserDetails
+                                    name={this.state.name}
+                                    gender={this.state.gender}
+                                    age={this.state.age}
+                                    region={this.state.region}
+                                    bio={this.state.bio}
                                     onUpdateClick={this.handleUpdate}
                                 />
                             </div>
