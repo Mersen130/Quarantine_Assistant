@@ -4,7 +4,7 @@ import '../../components.css';
 
 class Media extends React.Component {
 
-    constructor() {
+    constructor(props) {
         super(props)
         const { posterId, posterType, names, contents, times, likes } = this.props.postsList;
         this.state = {
