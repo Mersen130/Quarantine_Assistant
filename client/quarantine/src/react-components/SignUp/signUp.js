@@ -6,7 +6,7 @@ import {handleFormChange,signUp, handleUserType} from "../../actions/user";
 class SignUp extends React.Component{
   constructor(props){
     super(props);
-    this.props.history.push("/SignUp");
+    this.props.history.push("/signUp");
   }
   state = {
     userName:"",
@@ -40,7 +40,7 @@ class SignUp extends React.Component{
                   class="custom-form-control signUpInput"  
                   id ="signUpUserName" 
                   onChange={e => handleFormChange(this, e.target)} 
-                  required/>
+                  />
               </div>
             </div>
                 <div class = "custom-from-group">
@@ -53,7 +53,7 @@ class SignUp extends React.Component{
                     id="singUpEmail"
                     placeholder=""
                     onChange={e => handleFormChange(this, e.target)} 
-                    required/>
+                  />
                 </div>
                <div class="custom-from-group"> 
                   <label id="PswdLable" class="signUpLabel">Password</label>
@@ -64,7 +64,8 @@ class SignUp extends React.Component{
                      class="custom-form-control signUpInput"
                      placeholder=""
                      onChange={e => handleFormChange(this, e.target)} 
-                     required/>
+                     />
+                  {console.log(this.state)}
               </div>
                <div class="form-group" id="docNo">
                   <label id="DocNoLable" class="signUpLabel">Doc Certificate No*</label> 
@@ -73,7 +74,7 @@ class SignUp extends React.Component{
                     name="docCertificate" 
                     // value={this.state.docNo}
                     class="custom-form-control signUpInput" 
-                    placeholder="(optional)" 
+                    placeholder="fill to sign up as a doctor" 
                     onChange={e =>handleUserType(this, e.target)} 
                     />
 
@@ -86,7 +87,6 @@ class SignUp extends React.Component{
                   <label class = "custom-control-label" id="labelViaEmail"for="recieveViaEmail">I want to recieve notifications via email</label>
                 </div>
               <button
-                type="submit" 
                 id="signUpBtn"
                 onClick={() =>signUp(this,app)}>
                 <p id="btn">Sign Up for <b>Q</b>uarantine <b>A</b>ssistant</p>
