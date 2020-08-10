@@ -47,7 +47,7 @@ const authenticate = (req, res, next) => {
 		})
 	} else {
 		res.status(401).send("Unauthorized")
-    // }
+    }
     next();
 }
 
