@@ -28,31 +28,89 @@ class App extends React.Component {
 
     // global state passed down includes the current logged in user.
     state = {
-        currentUserName: null
+        currentUserName: "",
+        currentUserType:""
     }
 
     render() {
-        const { currentUserName} = this.state;
+        const {currentUserName, currentUserType} = this.state;
 
         return (
             <BrowserRouter>
                 <Switch>
+                    <Route path="/resetPswd" component={Reset}/>
                     <Route
-                        exact path={["/", "/SignIn", "/Dashboard"] /* any of these URLs are accepted. */ }
-                        render={({ history }) => (
-                            <div className="app">
-                            {!currentUserName ? <SignIn history={history} app={this} /> : <Dashboard history={history} app={this} />}
-                                
-                            </div>
+                        exact path={["/","/SignIn","/dashboard","/adminDashboard","/doctorDashboard"]}
+                        render={({history}) =>(
+                            <div className = "dashboard">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName ? <SignIn history={history} app={this} /> :
+                                {
+                                    '':<Dashboard history={history} app={this}/>,
+                                    'doctor':<DoctorDashboard history={history} app={this}/>,
+                                    'admin':<AdminDashboard history={history} app={this}/>
+
+                                         }[currentUserType]
+                                        }
                             
+                            </div>
                         )}
                     />
+                     <Route
+                        exact path={["/SignUp", "/dashboard","/dashboard","/adminDashboard","/doctorDashboard"]}
+                        render={({history}) =>(
+                            <div className = "signUp">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName ? <SignUp history={history} app={this} /> : 
+                                {
+                                    '':<Dashboard history={history} app={this}/>,
+                                    'doctor':<DoctorDashboard history={history} app={this}/>,
+                                    'admin':<AdminDashboard history={history} app={this}/>
+
+                                         }[currentUserType]
+                                } 
+                            
+                            </div>
+                        )}
+                    />
+                    <Route
+                        exact path={["/SignIn", "/questionnaire"]}
+                        render={({history}) =>(
+                            <div className = "questionnaire">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName 
+                                    ? <SignUp history={history} app={this} /> 
+                                    : <Questionnaire history={history} app={this}/>
+                                
+                                } 
+                            
+                            </div>
+                        )}
+                    />
+                    <Route
+                        exact path={["/SignIn", "/Activities"]}
+                        render={({history}) =>(
+                            <div className = "activities">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName 
+                                    ? <SignUp history={history} app={this} /> 
+                                    : <Activities history={history} app={this}/>
+                                
+                                } 
+                            
+                            </div>
+                        )}
+                    />
+                    
+                    
+                
 
                     { /* 404 if URL isn't expected. */}
                     <Route render={() => <div>404 Not found</div>} />
 
                 </Switch>
             </BrowserRouter>
+
         );
     }
 }

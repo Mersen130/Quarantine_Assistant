@@ -40,7 +40,6 @@ class SignIn extends React.Component{
                 class="custom-form-control signInEmailPswd" 
                 placeholder=""
                 onChange={e => handleFormChange(this,e.target)}
-                required
               />
             </div>
             <div class = "form-group">
@@ -52,7 +51,6 @@ class SignIn extends React.Component{
                  class="custom-form-control signInEmailPswd"
                  placeholder=""
                  onChange={e => handleFormChange(this, e.target)}
-                 required
                />
             </div>
             <div class="custom-control custom-checkbox" id="signInCheckbox">
@@ -64,16 +62,15 @@ class SignIn extends React.Component{
               <label class = "custom-control-label" id="labelRememberMe"for="rememberMe">Remeber Me</label>
             </div>
             <button
-              type="submit"
               id="signInBtn"
               onClick={() =>signIn(this,app)}
               >
               Sign In
             </button>
-            <div id="signInLink">
+            {/* <div id="signInLink">
               <a onClick = {handleChangePage.bind(this, "/Reset", this.props.history)} href="/Reset" id="goReset">Forgot password?</a>
               <a onClick = {handleChangePage.bind(this, "/questionnaire", this.props.history)} href="/questionnaire" id="goQue">Don't have an account? Sign up</a>
-            </div>
+            </div> */}
           </form>
         </div>
         </div>
