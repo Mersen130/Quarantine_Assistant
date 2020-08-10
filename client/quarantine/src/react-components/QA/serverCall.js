@@ -4,7 +4,7 @@ function ServerCall() {
 
 ServerCall.prototype = {
     sendPost: function (data) {
-        const url = `/post/${this.props.currentUser}` // todo
+        const url = `/post`
         const request = new Request(url, {
             method: 'post',
             body: JSON.stringify(data),
@@ -21,13 +21,16 @@ ServerCall.prototype = {
                     return res.json();
                 } else {
                     // If server couldn't add the post, tell the user.
-                    console.log('post failed')
+                    console.log('post failed');
+                    alert("Something went wrong, please try again.");
                     return Promise.reject();
                     // TODO: add some UI to notify user
                 }
             })
             .then(json => {
                 data._id = json.currentPost;
+                data.posterId = [json.posterId];
+                data.posterType = [json.posterType];
                 console.log('Added post')
                 this.state.postsList.splice(0, 0, data);
                 const newList = this.state.postsList;
@@ -53,11 +56,17 @@ ServerCall.prototype = {
         fetch(request)
         .then((res) => {
             if (res.status === 200){
-                this.setState({ postsList: newList });
-                this.pushNote("A reply has been added to your post.");
+                return res.json();
             } else{
                 console.log('reply failed');
+                alert("Something went wrong, please try again.");
             }
+        })
+        .then(json => {
+            newList.posterId.push(json.posterId);
+            newList.posterType.push(json.posterType)
+            this.setState({ postsList: newList });
+            this.pushNote("A reply has been added to your post.");
         })
         .catch(error=>{
             console.log(error);
@@ -95,7 +104,7 @@ ServerCall.prototype = {
 
     loadPosts: function(){
         const url = "/post"
-        let postsList;
+        let info;
         const request = new Request(url, {
             method: "get",
             headers: {
@@ -109,16 +118,17 @@ ServerCall.prototype = {
                 return res.json();
             } else{
                 console.log("get posts failed");
+                alert("Something went wrong, please try again.");
                 return Promise.reject();
             }
         })
         .then(json => {
-            postsList = json;
+            info = json;
         })
         .catch(error => {
             console.log(error);
         })
-        return postsList;
+        return info;
     },
 
     removePost: function(postId, postsListB){
@@ -139,6 +149,7 @@ ServerCall.prototype = {
                 this.pushNote("A post has been deleted.");
             } else{
                 console.log('delete failed');
+                alert("Something went wrong, please try again.");
             }
         })
         .catch(error=>{
@@ -167,6 +178,7 @@ ServerCall.prototype = {
                 this.pushNote("A post has been deleted.");
             } else{
                 console.log('delete failed');
+                alert("Something went wrong, please try again.");
             }
         })
         .catch(error => {

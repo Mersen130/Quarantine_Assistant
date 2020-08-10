@@ -10,130 +10,30 @@ class QA extends React.Component {
   constructor(props){
     super(props);
     const loadPosts = serverCall.loadPosts.bind(this);
+    const info = loadPosts();
     this.state = {
-      postsList: loadPosts(),
+      userInfo: info[0],
+      postsList: info[1],
       currShown: [0, 10],
       notes: [
         'Your post "aba aba..." has been deleted.',
         'Your post "aba aba..." has been deleted.',
       ],
-      numNotes: 2,}
+    numNotes: 2,}
+
     // this.state = {
     //   /*user = this.props.user*/
     //   postsList: [
     //     {
+    //       posterId: [posterId],
+    //       posterType: ["user", "doctor"]
+    //       _id: postId,
     //       names: ["user1", "user2"],
     //       contents: ["Aba aba aba?1 #aba", "Aba aba aba aba aba. #aba"],
     //       times: [new Date(), new Date()],
     //       likes: [10, 2],
     //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user2", "user1"],
-    //       contents: ["Aba aba aba?2 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user1", "user2"],
-    //       contents: ["Aba aba aba?3 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user2", "user1"],
-    //       contents: ["Aba aba aba?4 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user1", "user2"],
-    //       contents: ["Aba aba aba?5 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user2", "user1"],
-    //       contents: ["Aba aba aba?6 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user1", "user2"],
-    //       contents: ["Aba aba aba?7 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user2", "user1"],
-    //       contents: ["Aba aba aba?8 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user1", "user2"],
-    //       contents: ["Aba aba aba?9 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user2", "user1"],
-    //       contents: ["Aba aba aba?10 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user1", "user2"],
-    //       contents: ["Aba aba aba?11 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user2", "user1"],
-    //       contents: ["Aba aba aba?12 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user1", "user2"],
-    //       contents: ["Aba aba aba?13 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user2", "user1"],
-    //       contents: ["Aba aba aba?14 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user1", "user2"],
-    //       contents: ["Aba aba aba?15 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //     {
-    //       names: ["user2", "user1"],
-    //       contents: ["Aba aba aba?16 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [100, 659],
-    //       tags: ["#aba", "#aba"],
-    //     },
-    //   ],
+    //     }],
     //   currShown: [0, 10],
     //   notes: [
     //     'Your post "aba aba..." has been deleted.',
@@ -240,6 +140,7 @@ class QA extends React.Component {
               .slice(this.state.currShown[0], this.state.currShown[1])
               .map((post, mediaNum) => (
                 <Media
+                  userInfo={this.state.userInfo}
                   key={uid(post)}
                   postsList={post}
                   handleLike={(i, amt) => this.like(i, mediaNum, amt)}

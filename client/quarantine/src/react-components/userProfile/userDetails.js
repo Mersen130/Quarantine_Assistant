@@ -15,8 +15,7 @@ class UserDetails extends React.Component {
                                 <form>
                                     <div className="form-group row">
                                         <div
-                                            className="col col-md-6"
-                                            className="form-group"
+                                            className="row1-1"
                                         >
                                             <label htmlFor="feFirstName">
                                                 First Name
@@ -26,11 +25,11 @@ class UserDetails extends React.Component {
                                                 class="form-control"
                                                 id="feFirstName"
                                                 placeholder="First Name"
+                                                value={this.props.name.split(" ")[0]}
                                             ></input>
                                         </div>
                                         <div
-                                            className="col col-md-6"
-                                            className="form-group"
+                                            className="row1-2"
                                         >
                                             <label htmlFor="feLastName">
                                                 Last Name
@@ -40,29 +39,13 @@ class UserDetails extends React.Component {
                                                 class="form-control"
                                                 id="feLastName"
                                                 placeholder="Last Name"
+                                                value={this.props.name.split(" ")[1]}
                                             ></input>
                                         </div>
                                     </div>
                                     <div className="form-group row">
                                         <div
-                                            className="col col-md-6"
-                                            className="form-group"
-                                        >
-                                            <label htmlFor="feEmail">
-                                                Email
-                                            </label>
-
-                                            <input
-                                                type="email"
-                                                class="form-control"
-                                                id="feEmail"
-                                                placeholder="Email Address"
-                                                autoComplete="email"
-                                            ></input>
-                                        </div>
-                                        <div
-                                            className="col col-md-3"
-                                            className="form-group"
+                                            className="row1-1"
                                         >
                                             <label htmlFor="feAge">Age</label>
 
@@ -71,70 +54,46 @@ class UserDetails extends React.Component {
                                                 class="form-control"
                                                 id="feAge"
                                                 placeholder="Age"
+                                                value={this.props.age}
                                             ></input>
                                         </div>
                                         <div
-                                            className="col col-md-3"
-                                            className="form-group"
+                                            className="row1-2"
                                         >
                                             <label htmlFor="feGender">
                                                 Gender
                                             </label>
-                                            <select class="form-control">
+                                            <select id="feInputGender" class="form-control">
                                                 {/* <option>Choose...</option> */}
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label htmlFor="feAddress">
-                                                Address
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="feAddress"
-                                                placeholder="Address"
-                                            ></input>
-                                        </div>
-                                    </div>
-                                    <div className="form-group row">
-                                        <div
-                                            className="col col-md-6"
-                                            className="form-group"
-                                        >
-                                            <label htmlFor="feCity">City</label>
-
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="feCity"
-                                                placeholder="City"
-                                            ></input>
-                                        </div>
-                                        <div
-                                            className="col col-md-4"
-                                            className="form-group"
-                                        >
-                                            <label htmlFor="feInputState">
-                                                State
-                                            </label>
-                                            <select class="form-control">
-                                                <option>Choose...</option>
-                                                <option>...</option>
+                                                <option selected={this.props.gender === "Male"? "selected":""}>Male</option>
+                                                <option selected={this.props.gender === "Female"? "selected":""}>Female</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div className="form-group row">
-                                        <div className="col-lg-12">
-                                            <label htmlFor="feDescription">
-                                                Description
+                                        <div
+                                            className="row4"
+                                        >
+                                            <label htmlFor="feRegion">Region</label>
+
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="feRegion"
+                                                placeholder="Region, Country"
+                                                value={this.props.region}
+                                            ></input>
+                                        </div>
+                                    </div>
+                                    <div className="form-group row">
+                                        <div className="row4">
+                                            <label htmlFor="feBio">
+                                                Bio
                                             </label>
 
                                             <textarea
                                                 class="form-control"
-                                                id="feDescription"
+                                                id="feBio"
                                                 rows="5"
                                             />
                                         </div>
@@ -157,18 +116,19 @@ class UserDetails extends React.Component {
                                             const age = document.querySelector(
                                                 "#feAge"
                                             ).value;
-                                            const city = document.querySelector(
-                                                "#feCity"
+                                            const region = document.querySelector(
+                                                "#feRegion"
                                             ).value;
-                                            const description = document.querySelector(
-                                                "#feDescription"
+                                            const bio = document.querySelector(
+                                                "#feBio"
                                             ).value;
+                                            console.log(name, gender);
                                             this.props.onUpdateClick(
                                                 name,
                                                 gender,
                                                 age,
-                                                city,
-                                                description
+                                                region,
+                                                bio
                                             );
                                         }}
                                     >

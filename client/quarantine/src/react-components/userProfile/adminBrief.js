@@ -28,9 +28,9 @@ class AdminBrief extends React.Component {
                 <div className="list-group-flush">
                     <div className="p-4 list-group-item">
                         <strong className="text-muted d-block mb-2">
-                            Description
+                            Bio
                         </strong>
-                        <span>{this.props.description}</span>
+                        <span>{this.props.bio}</span>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@ AdminBrief.defaultProps = {
     avatar: require("../../lib/profilephotos/strange.png"),
     //   selfIsoProg: 20,
     gender: "Male",
-    description:
+    bio:
         "I went forward in time to view alternate futures. To see all the possible outcomes of the coming conflict. Only one time did we win.",
     region: "Toronto",
 };

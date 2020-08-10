@@ -6,126 +6,19 @@ import DropDown from "./dropdown";
 import Sidebar from "../SideNavBar/sidebar.js";
 import Sidebaradmin from "../SideNavBar/sidebarAdmin.js";
 import Pagination from "./pagination.js";
+import serverCall from "./serverCall";
 
 class QAAdmin extends React.Component {
-  state = {
-    /*user = this.props.user*/
-    postsList: [
-      {
-        names: ["user1", "user2"],
-        contents: ["Aba aba aba?1 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [10, 2],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user2", "user1"],
-        contents: ["Aba aba aba?2 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user1", "user2"],
-        contents: ["Aba aba aba?3 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user2", "user1"],
-        contents: ["Aba aba aba?4 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user1", "user2"],
-        contents: ["Aba aba aba?5 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user2", "user1"],
-        contents: ["Aba aba aba?6 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user1", "user2"],
-        contents: ["Aba aba aba?7 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user2", "user1"],
-        contents: ["Aba aba aba?8 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user1", "user2"],
-        contents: ["Aba aba aba?9 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user2", "user1"],
-        contents: ["Aba aba aba?10 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user1", "user2"],
-        contents: ["Aba aba aba?11 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user2", "user1"],
-        contents: ["Aba aba aba?12 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user1", "user2"],
-        contents: ["Aba aba aba?13 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user2", "user1"],
-        contents: ["Aba aba aba?14 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user1", "user2"],
-        contents: ["Aba aba aba?15 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-      {
-        names: ["user2", "user1"],
-        contents: ["Aba aba aba?16 #aba", "Aba aba aba aba aba. #aba"],
-        times: [new Date(), new Date()],
-        likes: [100, 659],
-        tags: ["#aba", "#aba"],
-      },
-    ],
-    currShown: [0, 10],
-  };
+  constructor(props){
+    super(props);
+    const loadPosts = serverCall.loadPosts.bind(this);
+    const info = loadPosts();
+    this.state = {
+      userInfo: info[0],
+      postsList: info[1],
+      currShown: [0, 10],
+    }
+  }
 
   render() {
     return (
@@ -325,15 +218,15 @@ class QAAdmin extends React.Component {
     e.preventDefault();
     const postsListB = this.state.postsList;
     postsListB[mediaNum].contents[i] = "[content deleted by admin/author]";
-    if (i === 0) {
+    if (i === 0) { 
+      // a server call that sends data
       postsListB.splice(mediaNum, 1);
+      const removePost = serverCall.removePost.bind(this);
+      removePost(postsListB[mediaNum]._id, postsListB);
+    } else{
+      const removeReply = serverCall.removeReply.bind(this);
+      removeReply(postsListB[mediaNum]._id, i, postsListB);
     }
-
-    console.log(postsListB);
-    this.setState({ postsList: postsListB });
-
-    /* todo: push notifications*/
-    // todo: a server call that sends data
   };
 }
 

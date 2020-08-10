@@ -46,9 +46,9 @@ class User2Brief extends React.Component {
                     </div>
                     <div className="p-4 list-group-item">
                         <strong className="text-muted d-block mb-2">
-                            Description
+                            Bio
                         </strong>
-                        <span>{this.props.description}</span>
+                        <span>{this.props.bio}</span>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@ User2Brief.defaultProps = {
     avatar: require("../../lib/profilephotos/user2.png"),
     selfIsoProg: 20,
     gender: "Female",
-    description: "I love bubble tea!",
+    bio: "I love bubble tea!",
     region: "Toronto",
 };
 
