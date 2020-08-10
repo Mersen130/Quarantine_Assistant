@@ -67,10 +67,10 @@ class SignIn extends React.Component{
               >
               Sign In
             </button>
-            {/* <div id="signInLink">
+            <div id="signInLink">
               <a onClick = {handleChangePage.bind(this, "/Reset", this.props.history)} href="/Reset" id="goReset">Forgot password?</a>
               <a onClick = {handleChangePage.bind(this, "/questionnaire", this.props.history)} href="/questionnaire" id="goQue">Don't have an account? Sign up</a>
-            </div> */}
+            </div>
           </form>
         </div>
         </div>

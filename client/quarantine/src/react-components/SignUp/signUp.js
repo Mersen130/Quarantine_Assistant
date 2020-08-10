@@ -65,6 +65,7 @@ class SignUp extends React.Component{
                      placeholder=""
                      onChange={e => handleFormChange(this, e.target)} 
                      />
+                  {console.log(this.state)}
               </div>
                <div class="form-group" id="docNo">
                   <label id="DocNoLable" class="signUpLabel">Doc Certificate No*</label> 

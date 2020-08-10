@@ -283,6 +283,27 @@ app.post("/profile/:id", (req, res) => {
 // =================
 
 // Yifei's API
+app.post("/users", (req, res) => {
+    log(req.body);
+
+    // Create a new user
+    const user = new User({
+        userName: req.body.userName,
+        userType:req.body.userType,
+        email:req.body.email,
+        password: req.body.password
+    });
+
+    // Save the user
+    user.save().then(
+        user => {
+            res.send(user);
+        },
+        error => {
+            res.status(400).send(error); // 400 for bad request
+        }
+    );
+});
 
 app.post("/users/signIn",(req, res) =>{
     const userName = req.body.userName;
@@ -293,7 +314,7 @@ app.post("/users/signIn",(req, res) =>{
         req.session.userType = user.userType;
         res.send({
                     currentUserName:user.userName,
-                    curresntUserType:user.userType
+                    currentUserType:user.userType
                 });
     })
     .catch(error=>{
@@ -301,32 +322,26 @@ app.post("/users/signIn",(req, res) =>{
     });
 });
 app.post("/users/signUp",(req,res) =>{
-    const newUser = {
+    log(req.body);
+
+    // Create a new user
+    const user = new User({
         userName: req.body.userName,
-        email: req.boday.email,
+        userType:req.body.userType,
+        email:req.body.email,
         password: req.body.password,
-        userType: req.body.userType,
-        docCertificate: req.body.docCertificate
-    }
-    User.findOne({
-        email:req.body.email
-    })
-    .then(user=>{
-        if(!user){
-            User.create(newUser).then(user =>{
-                req.session.user = user._id;
-                req.session.userName = user.userName;
-                req.session.userType = user.userType;
-                res.send({
-                    currentUserName:user.userName,
-                    currentUserType:user.userType
-                });
-            })
-            .catch(err =>{
-                res.status(400).send()
-            });
+        docCertificate:req.body.docCertificate
+    });
+
+    // Save the user
+    user.save().then(
+        result => {
+            res.send(result);
+        },
+        error => {
+            res.status(400).send(error); // 400 for bad request
         }
-    })
+    );
 })
 // app.post("/users/resetPswd",(req, res)=>{
 //     const userEmail = req.body.email;
@@ -342,7 +357,7 @@ app.get("/users/check-session",(req, res) =>{
     if(req.session.user){
         res.send({
             currentUserName: req.session.userName,
-            curresntUserType:req.session.userType
+            currentUserType:req.session.userType
         })
     }
     else{

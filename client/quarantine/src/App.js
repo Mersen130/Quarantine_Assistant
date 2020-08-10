@@ -39,7 +39,7 @@ class App extends React.Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/resetPswd" component={Reset}/>
-                    <Route
+                    {/* <Route
                         exact path={["/","/SignIn","/dashboard","/adminDashboard","/doctorDashboard"]}
                         render={({history}) =>(
                             <div className = "dashboard">
@@ -55,12 +55,12 @@ class App extends React.Component {
                             
                             </div>
                         )}
-                    />
+                    /> */}
                      <Route
                         exact path={["/SignUp", "/dashboard","/dashboard","/adminDashboard","/doctorDashboard"]}
                         render={({history}) =>(
                             <div className = "signUp">
-                                {console.log("app"+currentUserName)}
+                                {console.log("signUpapp"+currentUserName)}
                                 {!currentUserName ? <SignUp history={history} app={this} /> : 
                                 {
                                     '':<Dashboard history={history} app={this}/>,
