@@ -3,8 +3,13 @@ function ProfileServerCall(){
 }
 
 ProfileServerCall.prototype = {
-    loadUser: function(){
-        const url = "/profile"
+    loadUser: function(userid){
+        let url;
+        if (!userid){
+            url = "/profile/me"
+        } else{
+            url = `/profile/${userid}`
+        }
         let info;
         const request = new Request(url, {
             method: "get",

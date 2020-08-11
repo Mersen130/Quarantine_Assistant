@@ -10,7 +10,7 @@ class UserProfile extends React.Component {
         super(props);
         this.props.history.push("/UserProfile");
         const loadUser = profileServerCall.loadUser.bind(this);
-        const userInfo = loadUser();
+        const userInfo = loadUser(this.props.location.state.clicledUser);
         this.state = {
             userName: userInfo.userName,
             age: userInfo.age,
@@ -20,6 +20,7 @@ class UserProfile extends React.Component {
             gender: userInfo.region,
             bio: userInfo.selfDescription,
             region: userInfo.region,
+            allowModification: !this.props.location.state.clicledUser,
         };
     }
     handleUpdate = (
@@ -73,7 +74,7 @@ class UserProfile extends React.Component {
                                     changePhoto={this.changePhoto}
                                 />
                             </div>
-                            <div className="col col-lg-8">
+                            {this.state.allowModification && <div className="col col-lg-8">
                                 <UserDetails
                                     name={this.state.userName}
                                     gender={this.state.gender}
@@ -82,7 +83,7 @@ class UserProfile extends React.Component {
                                     bio={this.state.bio}
                                     onUpdateClick={this.handleUpdate}
                                 />
-                            </div>
+                            </div>}
                         </div>
                     </div>
                 </div>

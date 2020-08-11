@@ -54,24 +54,14 @@ class UserBrief extends React.Component {
                     </div>
                     <div className="p-4 list-group-item">
                         <strong className="text-muted d-block mb-2">
-                            Description
+                            Bio
                         </strong>
-                        <span>{this.props.description}</span>
+                        <span>{this.props.bio}</span>
                     </div>
                 </div>
             </div>
         );
     }
 }
-UserBrief.defaultProps = {
-    name: "Quincy Zhang",
-    age: 24,
-    userType: "User",
-    avatar: require("./sampleprofile.png"),
-    selfIsoProg: 66,
-    gender: "Male",
-    description: "Today is a nice day",
-    region: "Toronto",
-};
 
 export default UserBrief;

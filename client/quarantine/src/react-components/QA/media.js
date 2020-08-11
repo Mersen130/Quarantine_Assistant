@@ -16,7 +16,10 @@ class Media extends React.Component {
             names: names,
             contents: contents,
             times: times,
-            likes: likes
+            likes: likes,
+
+            redirect: false,
+            clickedUser: "",
         }
 
     }
@@ -30,12 +33,14 @@ class Media extends React.Component {
         for (let i = 1; i < names.length; i++) {
             indices.push(i);
         }
+        const redirectComponent = <Redirect to={{pathname: '/UserProfile', state: { clickedUser: this.state.clickedUser}}}/> ;
 
         return (
             <div className="container mt-3 mt-3Qa Media">
+                {this.state.redirect? redirectComponent : ""}
                 <div className="media border borderQa p-3">
                     <img src={require("../../lib/profilephotos/user1.png")} onClick={function () {
-                        window.location.href = names[0];
+                        this.setState({ redirect: true, clickedUser: posterId[0]});
                     }} className="profilephotoQa" />
                     <div className="media-body">
                         <h4 className="h4Qa">{names[0]} <small><i>{posterType[0] == 'doctor' ? (<img src={require("../../lib/qa/certified.png")}/>+" doctor") : ""} posted on {new Date(times[0]).toString().slice(0, 25)}</i></small></h4>
@@ -45,7 +50,7 @@ class Media extends React.Component {
                             {indices.map(i => (
                                 <div className="media p-3">
                                     <img src={require("../../lib/profilephotos/user2.png")} onClick={function () {
-                                        window.location.href = names[i];
+                                        this.setState({ redirect: true, clickedUser: posterId[i]});
                                     }} className="profilephotoQa" />
                                     <div className="media-body">
                                         <h4 className="h4Qa">{names[i]} <small><i> {posterType[i] == 'doctor' ? (<img src={require("../../lib/qa/certified.png")}/>+" doctor") : ""} replied on {new Date(times[i]).toString().slice(0, 25)}</i></small></h4>

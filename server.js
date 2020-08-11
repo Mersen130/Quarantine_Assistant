@@ -287,10 +287,13 @@ app.post("/profile/:id", (req, res) => {
     res.status(500).send("internal server error");
 });
 
-app.get("/profile", mongoChecker, authenticate, (req, res) => {
+app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
     /// req.params has the wildcard parameters in the url, in this case, id.
     // log(req.params.id)
-    const id = session.user;
+    let id = req.params.id;
+    if (id == "me"){
+        id = session.user;
+    }
 
     // Good practise: Validate id immediately.
     if (!ObjectID.isValid(id)) {

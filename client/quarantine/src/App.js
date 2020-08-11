@@ -10,7 +10,6 @@ import Questionnaire from "./react-components/questionnaire/questionnaire.js";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import QAAdmin from "./react-components/QA/qaAdmin.js";
 import UserProfile from "./react-components/userProfile/index";
-import User2Profile from "./react-components/userProfile/user2";
 import DoctorProfile from "./react-components/userProfile/doctor";
 import AdminProfile from "./react-components/userProfile/admin";
 import Dashboard from "./react-components/Dashboard/index";
@@ -138,20 +137,6 @@ class App extends React.Component {
                                 {!currentUserName 
                                     ? <SignUp history={history} app={this} /> 
                                     : <UserProfile history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
-                    />
-                    <Route
-                        exact path={["/SignIn", "/User2Profile"]}
-                        render={({history}) =>(
-                            <div className = "User2Profile">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <User2Profile history={history} app={this}/>
                                 
                                 } 
                             
