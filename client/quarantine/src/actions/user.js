@@ -50,12 +50,12 @@ export const signIn = (component, app) =>{
         });
 };
 export const signUp = (component, app)=>{
-    const request = new Request("/users/signUp",{
-        method:"post",
-        body:JSON.stringify(component.state),
-        headers:{
-            Accept:"application/json, text/plain, */*",
-            "Conten-Type":"application/json"
+    const request = new Request("/users/signUp", {
+        method: "post",
+        body: JSON.stringify(component.state),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
         }
     });
     fetch(request)
@@ -65,8 +65,8 @@ export const signUp = (component, app)=>{
             }
         })
         .then(json =>{
-            if(json.currentUserName !== undefined){
-                {console.log("in the signUp"+json.currentUserName)}
+            console.log("signUp json: " +json);
+            if(json.currentUserName !== undefined){     
                 app.setState({
                     currentUserName:json.currentUserName,
                     currentUserType:json.currentUserType

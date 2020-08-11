@@ -70,7 +70,8 @@ const UserSchema = new mongoose.Schema({
     userName:{
         type: String,
         required:true,
-        minlength:1
+        minlength:1,
+        unique:true
     },
     email: {
 		type: String,
@@ -78,11 +79,11 @@ const UserSchema = new mongoose.Schema({
 		minlength: 1,
 		trim: true,
 		unique: true,
-		validate: {
-			validator: validator.isEmail,
-			message: 'Not valid email'
-		}
-    }, 
+		// validate: {
+		// 	validator: validator.isEmail,   // custom validator
+		// 	message: 'Not valid email'
+		// }
+	}, 
     password: {
 		type: String,
 		required: true
@@ -97,9 +98,11 @@ const UserSchema = new mongoose.Schema({
     selfDecription:{
         type:String
     },
-region:{
-	type:String
-},
+
+    region:{
+        type:String
+    },
+
     quanrantineProgress:[QuanrantineProgressSchema],
     posts:[PostSchema],
     notifications:[NotificationSchema],
@@ -108,6 +111,8 @@ region:{
 
 
 //helper function for user that can use in the session
+//-------------------------------------------------------
+//find a user by userName and password
 UserSchema.statics.findUser = function(userName, password) {
 	const user = this
 	return user.findOne({ userName: userName}).then((u) => {
@@ -131,7 +136,8 @@ UserSchema.pre('save', function(next){
     if(user.isModified('password')){
         bcrypt.genSalt(10,(err,salt)=>{
             bcrypt.hash(user.password,salt,(err,hashedPswd) =>{
-                user.password = hashedPswdnet()
+                user.password = hashedPswd
+                next()
             })
         })
     }

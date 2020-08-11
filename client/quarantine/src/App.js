@@ -46,7 +46,7 @@ class App extends React.Component {
                                 {console.log("app"+currentUserName)}
                                 {!currentUserName ? <SignIn history={history} app={this} /> :
                                 {
-                                    '':<Dashboard history={history} app={this}/>,
+                                    'normal_user':<Dashboard history={history} app={this}/>,
                                     'doctor':<DoctorDashboard history={history} app={this}/>,
                                     'admin':<AdminDashboard history={history} app={this}/>
 
@@ -60,14 +60,15 @@ class App extends React.Component {
                         exact path={["/SignUp", "/dashboard","/dashboard","/adminDashboard","/doctorDashboard"]}
                         render={({history}) =>(
                             <div className = "signUp">
-                                {console.log("signUpapp"+currentUserName)}
+                                {console.log("signUpapp:"+currentUserName)}
+                                {console.log("signUp app userType:"+currentUserType)}
                                 {!currentUserName ? <SignUp history={history} app={this} /> : 
                                 {
-                                    '':<Dashboard history={history} app={this}/>,
+                                    'normal_user':<Dashboard history={history} app={this}/>,
                                     'doctor':<DoctorDashboard history={history} app={this}/>,
                                     'admin':<AdminDashboard history={history} app={this}/>
 
-                                         }[currentUserType]
+                                }[currentUserType]
                                 } 
                             
                             </div>
