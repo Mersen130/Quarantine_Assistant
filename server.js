@@ -87,7 +87,7 @@ app.use(
 // get all posts
 app.get("/post", mongoChecker, authenticate, (req, res) => {
     Post.find().then((posts) => {
-        res.send([ posts ]);
+        res.send([ posts, {userName: req.session.userName, userType: req.session.userType, userId: req.session.user} ]);
     })
     .catch((err) => {
         log(err);
@@ -104,7 +104,7 @@ app.get("/post", mongoChecker, authenticate, (req, res) => {
       likes: [0],
       tags: [tags.value],
     }*/
-app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
+app.post("/post", mongoChecker, authenticate, (req, res) => {
 
     const posterID = req.params.posterId;
     if (!checkObjctId(posterID)) {
@@ -113,7 +113,7 @@ app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
 	}
     log(posterID)
     const post = new Post({
-        posterID: [posterID],
+        posterID: [session.user],
         postContent: req.body.contents,
         postTime: req.body.times,
         numLikes: req.body.likes,
@@ -121,7 +121,7 @@ app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
     });
     log(post)
     post.save().then((result) => {
-        res.send({ currentPost: post._id })
+        res.send({ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user })
     }).catch((error) => {
         if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
             res.status(500).send('Internal server error')
@@ -140,19 +140,27 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
-    const post = new Post({
-        posterID: [posterID],
-        postContent: req.body.contents,
-        postTime: req.body.times,
-        numLikes: req.body.likes,
-        tags: req.body.tags,
-    });
-    Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false})
+    Post.findById(postId)
+    .then( post => {
+        if (!post){
+            res.status(404).send("post not found");
+            Promise.reject();
+        }
+        const newPosterId = post.posterID.push(session.user);
+        const newPost = new Post({
+            posterID: newPosterId,
+            postContent: req.body.contents,
+            postTime: req.body.times,
+            numLikes: req.body.likes,
+            tags: req.body.tags,
+        });
+        return Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false});
+    })
     .then(post => {
         if (!post){
-            res.status(404).send();
+            res.status(404).send("post not found");
         } else{
-            res.send();
+            res.send({ posterType: req.session.userType, posterId: req.session.user });
         }
     })
     .catch(error => {
@@ -279,6 +287,30 @@ app.post("/profile/:id", (req, res) => {
     res.status(500).send("internal server error");
 });
 
+app.get("/profile", mongoChecker, authenticate, (req, res) => {
+    /// req.params has the wildcard parameters in the url, in this case, id.
+    // log(req.params.id)
+    const id = session.user;
+
+    // Good practise: Validate id immediately.
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send(); // if invalid id, definitely can't find resource, 404.
+        return;
+    }
+
+    // Otherwise, findById
+    User.findById(id)
+        .then(user => {
+            if (!user) {
+                res.status(404).send(); // could not find this student
+            } else {
+                res.send(user);
+            }
+        })
+        .catch(error => {
+            res.status(500).send(); // server error
+        });
+});
 
 // =================
 

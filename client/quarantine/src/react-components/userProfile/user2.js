@@ -6,17 +6,18 @@ import Recent from "./recent";
 class User2Profile extends React.Component {
     constructor(props) {
         super(props);
-        this.props.history.push("/User2Profile");
-
+        this.props.history.push("/UserProfile");
+        const loadUser = profileServerCall.loadUser.bind(this);
+        const userInfo = loadUser();
         this.state = {
-            name: "User1",
-            age: 24,
-            userType: "User",
+            userName: userInfo.userName,
+            age: userInfo.age,
+            userType: userInfo.userType,
             avatar: require("./sampleprofile.png"),
-            selfIsoProg: 66,
-            gender: "Male",
-            bio: "Today is a nice day",
-            region: "Toronto, CA",
+            quarantineProgress: Math.floor((new Date() - new Date(userInfo.quarantineProgress))/ (1000*60*60*24)), // get progress percentage
+            gender: userInfo.region,
+            bio: userInfo.selfDescription,
+            region: userInfo.region,
         };
     }
 
@@ -41,7 +42,13 @@ class User2Profile extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col col-lg-4">
-                                <User2Brief />
+                                <User2Brief 
+                                    name={this.state.userName}
+                                    gender={this.state.gender}
+                                    age={this.state.age}
+                                    region={this.state.region}
+                                    bio={this.state.bio}
+                                    changePhoto={this.changePhoto}/>
                             </div>
                             <div className="col col-lg-8">
                                 <Recent view="other" username="user2" />

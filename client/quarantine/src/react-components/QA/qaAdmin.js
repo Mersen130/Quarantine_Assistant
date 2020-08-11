@@ -15,8 +15,8 @@ class QAAdmin extends React.Component {
     const loadPosts = serverCall.loadPosts.bind(this);
     const info = loadPosts();
     this.state = {
-      userInfo: info[0],
-      postsList: info[1],
+      userInfo: info[1],
+      postsList: info[0],
       currShown: [0, 10],
     }
   }
