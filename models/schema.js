@@ -98,9 +98,11 @@ const UserSchema = new mongoose.Schema({
     selfDecription:{
         type:String
     },
+
     region:{
         type:String
     },
+
     quanrantineProgress:[QuanrantineProgressSchema],
     posts:[PostSchema],
     notifications:[NotificationSchema],

@@ -34,17 +34,17 @@ class Media extends React.Component {
         return (
             <div className="container mt-3 mt-3Qa Media">
                 <div className="media border borderQa p-3">
-                    <img src={require("../../lib/profilephotos/" + posterId[0] + ".png")} onClick={function () {
+                    <img src={require("../../lib/profilephotos/user1.png")} onClick={function () {
                         window.location.href = names[0];
                     }} className="profilephotoQa" />
                     <div className="media-body">
-                        <h4 className="h4Qa">{names[0]} <small><i>{posterType[i] == 'doctor' ? (<img src={require("../../lib/qa/certified.png")}/>+" doctor") : ""} posted on {times[0].toString().slice(0, 25)}</i></small></h4>
+                        <h4 className="h4Qa">{names[0]} <small><i>{posterType[0] == 'doctor' ? (<img src={require("../../lib/qa/certified.png")}/>+" doctor") : ""} posted on {times[0].toString().slice(0, 25)}</i></small></h4>
                         <p className="content contentQa">{contents[0]} {names[0] === this.state.userInfo && <a href="#" onClick={(e) => this.props.handleRemove(0, e)}>delete</a>} {names.length == 1 && <input type="image" src={require("../../lib/qa/reply.png")} className="replyBtn" onClick={() => this.showReply(0, mediaId)} />} <button onClick={(e) => this.like(0, likes[0], e)} className="likeQa btn-primary ">Like</button></p>
                         {names.length == 1 && <div><input id={"replyInput0" + mediaId.toString(10)} className="replyInput" type="text" onKeyUp={(e) => this.reply(0, mediaId, e)} placeholder={"reply to " + names[0]} /></div>}
                         <div>
                             {indices.map(i => (
                                 <div className="media p-3">
-                                    <img src={require("../../lib/profilephotos/" + posterId[1] + ".png")} onClick={function () {
+                                    <img src={require("../../lib/profilephotos/user2.png")} onClick={function () {
                                         window.location.href = names[i];
                                     }} className="profilephotoQa" />
                                     <div className="media-body">
