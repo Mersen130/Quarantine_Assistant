@@ -11,6 +11,7 @@ import serverCall from "./serverCall";
 class QAAdmin extends React.Component {
   constructor(props){
     super(props);
+    this.props.history.push("/QAAdmin");
     const loadPosts = serverCall.loadPosts.bind(this);
     const info = loadPosts();
     this.state = {

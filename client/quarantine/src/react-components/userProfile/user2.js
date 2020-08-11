@@ -4,6 +4,22 @@ import PageTitle from "./../theme/PageTitle";
 import Sidebar from "./../SideNavBar/sidebar";
 import Recent from "./recent";
 class User2Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props.history.push("/User2Profile");
+
+        this.state = {
+            name: "User1",
+            age: 24,
+            userType: "User",
+            avatar: require("./sampleprofile.png"),
+            selfIsoProg: 66,
+            gender: "Male",
+            bio: "Today is a nice day",
+            region: "Toronto, CA",
+        };
+    }
+
     render() {
         return (
             <div>

@@ -6,6 +6,8 @@ import Sidebar from "./../SideNavBar/sidebar";
 class UserProfile extends React.Component {
     constructor(props) {
         super(props);
+        this.props.history.push("/UserProfile");
+
         this.state = {
             name: "User1",
             age: 24,

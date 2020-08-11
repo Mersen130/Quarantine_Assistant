@@ -101,6 +101,91 @@ class App extends React.Component {
                             </div>
                         )}
                     />
+                    <Route
+                        exact path={["/SignIn", "/QA"]}
+                        render={({history}) =>(
+                            <div className = "QA">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName 
+                                    ? <SignUp history={history} app={this} /> 
+                                    : <QA history={history} app={this}/>
+                                
+                                } 
+                            
+                            </div>
+                        )}
+                    />
+                    <Route
+                        exact path={["/SignIn", "/QAAdmin"]}
+                        render={({history}) =>(
+                            <div className = "QAAdmin">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName 
+                                    ? <SignUp history={history} app={this} /> 
+                                    : <QAAdmin history={history} app={this}/>
+                                
+                                } 
+                            
+                            </div>
+                        )}
+                    />
+                    <Route
+                        exact path={["/SignIn", "/UserProfile"]}
+                        render={({history}) =>(
+                            <div className = "UserProfile">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName 
+                                    ? <SignUp history={history} app={this} /> 
+                                    : <UserProfile history={history} app={this}/>
+                                
+                                } 
+                            
+                            </div>
+                        )}
+                    />
+                    <Route
+                        exact path={["/SignIn", "/User2Profile"]}
+                        render={({history}) =>(
+                            <div className = "User2Profile">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName 
+                                    ? <SignUp history={history} app={this} /> 
+                                    : <User2Profile history={history} app={this}/>
+                                
+                                } 
+                            
+                            </div>
+                        )}
+                    />
+                    <Route
+                        exact path={["/SignIn", "/DoctorProfile"]}
+                        render={({history}) =>(
+                            <div className = "DoctorProfile">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName 
+                                    ? <SignUp history={history} app={this} /> 
+                                    : <DoctorProfile history={history} app={this}/>
+                                
+                                } 
+                            
+                            </div>
+                        )}
+                    />
+                    <Route
+                        exact path={["/SignIn", "/AdminProfile"]}
+                        render={({history}) =>(
+                            <div className = "AdminProfile">
+                                {console.log("app"+currentUserName)}
+                                {!currentUserName 
+                                    ? <SignUp history={history} app={this} /> 
+                                    : <AdminProfile history={history} app={this}/>
+                                
+                                } 
+                            
+                            </div>
+                        )}
+                    />
+                    
                     
                     
                 

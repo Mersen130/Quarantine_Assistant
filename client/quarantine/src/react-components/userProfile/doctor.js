@@ -4,6 +4,9 @@ import PageTitle from "./../theme/PageTitle";
 import Sidebar from "./../SideNavBar/sidebar";
 import Recent from "./recent";
 class DoctorProfile extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <div>

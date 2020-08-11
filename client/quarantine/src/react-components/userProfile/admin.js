@@ -5,6 +5,10 @@ import Sidebaradmin from "./../SideNavBar/sidebarAdmin";
 import Recent from "./recent";
 // TODO: More realistic profile view and Unify user type interface
 class AdminProfile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props.history.push("/UserProfile");
+    }
     render() {
         return (
             <div>
