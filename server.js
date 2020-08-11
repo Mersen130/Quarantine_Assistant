@@ -47,9 +47,7 @@ const authenticate = (req, res, next) => {
 		})
 	} else {
 		res.status(401).send("Unauthorized")
-    }
-    next();
-
+	}
 }
 
 
@@ -362,60 +360,6 @@ app.post("/users/signUp",(req,res) =>{
         }
     );
 });
-//delete a user by id
-app.delete("/users/:id",(req, res) =>{
-    const id =req.params.id;
-    if(!ObjectID.isValid(id)){
-        const inValid={
-            message:"invalid id in delete user"
-        }
-        res.status(404).send(inValid);
-        return;
-    }
-    User.findByIdAndRemove(id)
-    .then(user =>{
-        if(!user){
-            const notFound={
-                id:req.params.id,
-                message:"did not found user by id"
-            }
-            res.status(404).send(notFound);
-        }
-        else{
-            res.send(user);
-        }
-    })
-    .catch(error =>{
-        res.status(500).send();
-    });
-});
-app.get("/users/:id", (req, res) => {
-    /// req.params has the wildcard parameters in the url, in this case, id.
-    // log(req.params.id)
-    const id = req.params.id;
-
-    // Good practise: Validate id immediately.
-    if (!ObjectID.isValid(id)) {
-        res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-        return;
-    }
-
-    // Otherwise, findById
-    User.findById(id)
-        .then(student => {
-            if (!student) {
-                res.status(404).send(); // could not find this student
-            } else {
-                /// sometimes we wrap returned object in another object:
-                //res.send({student})
-                res.send(student);
-            }
-        })
-        .catch(error => {
-            res.status(500).send(); // server error
-        });
-});
-
 // app.post("/users/resetPswd",(req, res)=>{
 //     const userEmail = req.body.email;
 //     User.findOne({
