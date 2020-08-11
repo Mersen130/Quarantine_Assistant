@@ -47,8 +47,7 @@ const authenticate = (req, res, next) => {
 		})
 	} else {
 		res.status(401).send("Unauthorized")
-    // }
-    next();
+	}
 }
 
 
@@ -88,7 +87,7 @@ app.use(
 // get all posts
 app.get("/post", mongoChecker, authenticate, (req, res) => {
     Post.find().then((posts) => {
-        res.send([ posts, {userName: req.session.userName, userType: req.session.userType, userId: req.session.user} ]);
+        res.send([ posts ]);
     })
     .catch((err) => {
         log(err);
@@ -105,7 +104,7 @@ app.get("/post", mongoChecker, authenticate, (req, res) => {
       likes: [0],
       tags: [tags.value],
     }*/
-app.post("/post", mongoChecker, authenticate, (req, res) => {
+app.post("/post/:posterId", mongoChecker, authenticate, (req, res) => {
 
     const posterID = req.params.posterId;
     if (!checkObjctId(posterID)) {
@@ -114,7 +113,7 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
 	}
     log(posterID)
     const post = new Post({
-        posterID: [session.user],
+        posterID: [posterID],
         postContent: req.body.contents,
         postTime: req.body.times,
         numLikes: req.body.likes,
@@ -122,7 +121,7 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
     });
     log(post)
     post.save().then((result) => {
-        res.send({ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user })
+        res.send({ currentPost: post._id })
     }).catch((error) => {
         if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
             res.status(500).send('Internal server error')
@@ -141,27 +140,19 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
-    Post.findById(postId)
-    .then( post => {
-        if (!post){
-            res.status(404).send("post not found");
-            Promise.reject();
-        }
-        const newPosterId = post.posterID.push(session.user);
-        const newPost = new Post({
-            posterID: newPosterId,
-            postContent: req.body.contents,
-            postTime: req.body.times,
-            numLikes: req.body.likes,
-            tags: req.body.tags,
-        });
-        return Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false});
-    })
+    const post = new Post({
+        posterID: [posterID],
+        postContent: req.body.contents,
+        postTime: req.body.times,
+        numLikes: req.body.likes,
+        tags: req.body.tags,
+    });
+    Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false})
     .then(post => {
         if (!post){
-            res.status(404).send("post not found");
+            res.status(404).send();
         } else{
-            res.send({ posterType: req.session.userType, posterId: req.session.user });
+            res.send();
         }
     })
     .catch(error => {
@@ -332,26 +323,97 @@ app.post("/users/signIn",(req, res) =>{
 });
 app.post("/users/signUp",(req,res) =>{
     log(req.body);
-
-    // Create a new user
-    const user = new User({
-        userName: req.body.userName,
-        userType:req.body.userType,
-        email:req.body.email,
-        password: req.body.password,
-        docCertificate:req.body.docCertificate
-    });
-
+    let userT;
+    let user;
+    if(!req.body.userType){
+        ! req.body.docCertificate ? userT = "normal_user" : userT = "doctor"
+        user = new User({
+            userName: req.body.userName,
+            userType:userT,
+            email:req.body.email,
+            password: req.body.password,
+            docCertificate:req.body.docCertificate
+        })
+    }
+    else{
+        user = new User({
+            userName: req.body.userName,
+            userType:req.body.userType,
+            email:req.body.email,
+            password: req.body.password,
+            docCertificate:req.body.docCertificate
+        });
+    }
     // Save the user
     user.save().then(
         result => {
-            res.send(result);
+            req.session.user = result._id;
+            req.session.userName = result.userName;
+            req.session.userType = result.userType;
+            res.send({
+                currentUserName:result.userName,
+                currentUserType:result.userType
+                });
         },
         error => {
             res.status(400).send(error); // 400 for bad request
         }
     );
-})
+});
+//delete a user by id
+app.delete("/users/:id",(req, res) =>{
+    const id =req.params.id;
+    if(!ObjectID.isValid(id)){
+        const inValid={
+            message:"invalid id in delete user"
+        }
+        res.status(404).send(inValid);
+        return;
+    }
+    User.findByIdAndRemove(id)
+    .then(user =>{
+        if(!user){
+            const notFound={
+                id:req.params.id,
+                message:"did not found user by id"
+            }
+            res.status(404).send(notFound);
+        }
+        else{
+            res.send(user);
+        }
+    })
+    .catch(error =>{
+        res.status(500).send();
+    });
+});
+app.get("/users/:id", (req, res) => {
+    /// req.params has the wildcard parameters in the url, in this case, id.
+    // log(req.params.id)
+    const id = req.params.id;
+
+    // Good practise: Validate id immediately.
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send(); // if invalid id, definitely can't find resource, 404.
+        return;
+    }
+
+    // Otherwise, findById
+    User.findById(id)
+        .then(student => {
+            if (!student) {
+                res.status(404).send(); // could not find this student
+            } else {
+                /// sometimes we wrap returned object in another object:
+                //res.send({student})
+                res.send(student);
+            }
+        })
+        .catch(error => {
+            res.status(500).send(); // server error
+        });
+});
+
 // app.post("/users/resetPswd",(req, res)=>{
 //     const userEmail = req.body.email;
 //     User.findOne({

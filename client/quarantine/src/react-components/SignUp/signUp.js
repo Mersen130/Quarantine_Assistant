@@ -6,7 +6,7 @@ import {handleFormChange,signUp, handleUserType} from "../../actions/user";
 class SignUp extends React.Component{
   constructor(props){
     super(props);
-    this.props.history.push("/signUp");
+    this.props.history.push("/SignUp");
   }
   state = {
     userName:"",
@@ -65,7 +65,6 @@ class SignUp extends React.Component{
                      placeholder=""
                      onChange={e => handleFormChange(this, e.target)} 
                      />
-                  {console.log(this.state)}
               </div>
                <div class="form-group" id="docNo">
                   <label id="DocNoLable" class="signUpLabel">Doc Certificate No*</label> 
