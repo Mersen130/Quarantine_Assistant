@@ -360,6 +360,7 @@ app.post("/users/signUp",(req,res) =>{
         }
     );
 });
+
 // app.post("/users/resetPswd",(req, res)=>{
 //     const userEmail = req.body.email;
 //     User.findOne({
