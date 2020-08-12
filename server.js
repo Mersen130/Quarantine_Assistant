@@ -287,12 +287,17 @@ app.post("/profile/:id", (req, res) => {
     res.status(500).send("internal server error");
 });
 
+// get user info
 app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
     /// req.params has the wildcard parameters in the url, in this case, id.
     // log(req.params.id)
     let id = req.params.id;
     if (id == "me"){
         id = session.user;
+    } else{
+        if (!checkObjctId(id)){
+            res.status(404).send('Resource not found');
+        }
     }
 
     // Good practise: Validate id immediately.
@@ -313,6 +318,38 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
         .catch(error => {
             res.status(500).send(); // server error
         });
+});
+
+// update user info
+app.patch("/profile", mongoChecker, authenticate, (req, res) => {
+
+    User.findById(session.user)
+    .then( user => {
+        if (!user){
+            res.status(404).send('user not found');
+            return Promise.reject();
+        } else{
+            return user;
+        }
+    })
+    .then( user => {
+        return User.findOneAndUpdate({id: session.user}, { $set: req.body }, {new: true, useFindAndModify: false});
+    })
+    .then(user => {
+        if (!user){
+            res.status(404).send();
+        } else{
+            res.send();
+        }
+    })
+    .catch(error => {
+        if (isMongoError(error)){
+            res.status(500).send("Internal server error");
+        } else{
+            log(error);
+            res.status(400).send("Bad Request");
+        }
+    })
 });
 
 // =================
