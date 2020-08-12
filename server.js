@@ -113,7 +113,7 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
 	}
     log(posterID)
     const post = new Post({
-        posterID: [session.user],
+        posterID: [req.session.user],
         postContent: req.body.contents,
         postTime: req.body.times,
         numLikes: req.body.likes,
@@ -121,15 +121,38 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
     });
     log(post)
     post.save().then((result) => {
-        res.send({ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user })
-    }).catch((error) => {
+        return result._id;
+    })
+    .then(postId =>{
+        User.findById(req.session.user).then(user => {
+            if (!user){
+                res.status(404).send("resource not found")
+            } else{
+                const fieldsToUpdate = { posts: user.posts.push(postId) };
+                return User.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+            }
+        })
+        .then(user => {
+            if (!user){
+                res.status(404).send("resource not found")
+            } else{
+                res.send({ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user })
+            }
+        }).catch(error => {
+            if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
+                res.status(500).send('Internal server error')
+            } else {
+                res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
+            }
+        });
+    })
+    .catch((error) => {
         if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
             res.status(500).send('Internal server error')
         } else {
             res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
         }
     })
-    // TODO: update user profile
 });
 
 
@@ -146,7 +169,7 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
             res.status(404).send("post not found");
             Promise.reject();
         }
-        const newPosterId = post.posterID.push(session.user);
+        const newPosterId = post.posterID.push(req.session.user);
         const newPost = new Post({
             posterID: newPosterId,
             postContent: req.body.contents,
@@ -160,8 +183,36 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
         if (!post){
             res.status(404).send("post not found");
         } else{
-            res.send({ posterType: req.session.userType, posterId: req.session.user });
+            return post._id;
         }
+    })
+    .then(postId =>{
+        User.findById(req.session.user).then(user => {
+            if (!user){
+                res.status(404).send("resource not found")
+            } else{
+                for (const existPost of user.posts){
+                    if (existPost == postId){
+                        return user;
+                    }
+                }
+                const fieldsToUpdate = { posts: user.posts.push(postId) };
+                return User.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+            }
+        })
+        .then(user => {
+            if (!user){
+                res.status(404).send("resource not found")
+            } else{
+                res.send({ posterType: req.session.userType, posterId: req.session.user });
+            }
+        }).catch(error => {
+            if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
+                res.status(500).send('Internal server error')
+            } else {
+                res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
+            }
+        });
     })
     .catch(error => {
         if (isMongoError(error)){
@@ -293,7 +344,7 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
     // log(req.params.id)
     let id = req.params.id;
     if (id == "me"){
-        id = session.user;
+        id = req.session.user;
     } else{
         if (!checkObjctId(id)){
             res.status(404).send('Resource not found');
@@ -323,7 +374,7 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
 // update user info
 app.patch("/profile", mongoChecker, authenticate, (req, res) => {
 
-    User.findById(session.user)
+    User.findById(req.session.user)
     .then( user => {
         if (!user){
             res.status(404).send('user not found');
@@ -333,7 +384,7 @@ app.patch("/profile", mongoChecker, authenticate, (req, res) => {
         }
     })
     .then( user => {
-        return User.findOneAndUpdate({id: session.user}, { $set: req.body }, {new: true, useFindAndModify: false});
+        return User.findOneAndUpdate({id: req.session.user}, { $set: req.body }, {new: true, useFindAndModify: false});
     })
     .then(user => {
         if (!user){
