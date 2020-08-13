@@ -158,7 +158,7 @@ ServerCall.prototype = {
     },
 
     removeReply: function(postId, contentIndex, postsListB){
-        const url = `/reply/${postId}`;
+        const url = `/reply/delete/${postId}`;
 
         const request = new request(url, {
             method: 'patch',

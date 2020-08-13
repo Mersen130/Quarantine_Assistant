@@ -104,7 +104,8 @@ const UserSchema = new mongoose.Schema({
     },
 
     quanrantineProgress:[QuanrantineProgressSchema],
-    posts:[PostSchema],
+    // posts:[PostSchema],
+    posts: [ObjectID],
     notifications:[NotificationSchema],
     activities:[ActivitiesSchema]
 });
