@@ -3,14 +3,16 @@ import UserBrief from "./userBrief";
 import UserDetails from "./userDetails";
 import PageTitle from "./../theme/PageTitle";
 import Sidebar from "./../SideNavBar/sidebar";
-import profileServerCall from "./profileServerCall"
+import profileServerCall from "./profileServerCall";
+import Recent from "./recent"
 
 class UserProfile extends React.Component {
     constructor(props) {
         super(props);
         this.props.history.push("/UserProfile");
         const loadUser = profileServerCall.loadUser.bind(this);
-        const userInfo = loadUser(this.props.location.state.clicledUser);
+        const userActInfo = loadUser(this.props.location.state.clicledUser);
+        const userInfo = userActInfo[0];
         this.state = {
             userName: userInfo.userName,
             age: userInfo.age,
@@ -21,6 +23,7 @@ class UserProfile extends React.Component {
             bio: userInfo.selfDescription,
             region: userInfo.region,
             allowModification: !this.props.location.state.clicledUser,
+            actInfo: userActInfo[1],
         };
     }
     handleUpdate = (
@@ -74,16 +77,17 @@ class UserProfile extends React.Component {
                                     changePhoto={this.changePhoto}
                                 />
                             </div>
-                            {this.state.allowModification && <div className="col col-lg-8">
-                                <UserDetails
+                            <div className="col col-lg-8">
+                                    {this.state.allowModification && <UserDetails
                                     name={this.state.userName}
                                     gender={this.state.gender}
                                     age={this.state.age}
                                     region={this.state.region}
                                     bio={this.state.bio}
                                     onUpdateClick={this.handleUpdate}
-                                />
-                            </div>}
+                                />}
+                                <Recent recentAct={this.state.actInfo} username={this.state.userName} />
+                            </div>
                         </div>
                     </div>
                 </div>

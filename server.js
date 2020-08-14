@@ -378,7 +378,28 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
             if (!user) {
                 res.status(404).send(); // could not find this student
             } else {
-                res.send(user);
+                const RecentAct = [];  // an array storing activities and posts
+
+                for (let i = 0, p = Promise.resolve(); i < user.posts.length; i++) {
+                    p = p.then(_ => Post.findById(user.posts[i])
+                    .then(post => {
+                        if (post) RecentAct.push({ type: "post", contentSketch: post.postContent[0], time: post.postTime[0]})
+                    })
+                    .catch(error => {
+                        res.status(500).send("server error");
+                    }));
+                }
+
+                for (let i = 0, p = Promise.resolve(); i < user.activities.length; i++) {
+                    p = p.then(_ => Post.findById(user.activities[i])
+                    .then(act => {
+                        if (act) RecentAct.push({ type: "activity", title: act.activityTitle})
+                    })
+                    .catch(error => {
+                        res.status(500).send("server error");
+                    }));
+                }
+                res.send([user, RecentAct]);
             }
         })
         .catch(error => {
