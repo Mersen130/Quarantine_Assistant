@@ -78,7 +78,7 @@ app.use(
         resave:false,
         saveUninitialized:false,
         cookie:{
-            expires: 50000,
+            // expires: 50000,
             httpOnly:true
         }
 
@@ -119,11 +119,14 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
     // log(posterId)
     const post = new Post({
         posterId: [req.session.user],
+        posterType: [req.session.userType],
+        posterName: [req.session.userName],
         postContent: req.body.contents,
         postTime: req.body.times,
         numLikes: req.body.likes,
         tags: req.body.tags,
     });
+    console.log(post);
     // log(post)
     post.save().then((result) => {
         return result._id;
@@ -146,7 +149,7 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
                 res.status(404).send("resource not found")
             } else{
                 // log("123",{ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user });
-                res.send({ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user })
+                res.send({ currentPost: post._id });
             }
         }).catch(error => {
             if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
@@ -171,7 +174,7 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
 //leave a reply
 app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     const postId = req.params.postId;
-
+    console.log(postId)
     if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
@@ -184,12 +187,15 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
         post.posterId.push(req.session.user);
         // log(post, newposterId);
         const newPost = {
-            posterId: post.posterId,
+            posterId: req.body.posterId,
+            posterType: req.body.posterType,
+            posterName: req.body.names,
             postContent: req.body.contents,
             postTime: req.body.times,
             numLikes: req.body.likes,
             tags: req.body.tags,
         }
+        console.log(newPost);
         // log(newPost)
         return Post.findOneAndUpdate({_id: postId}, {$set: newPost}, {new: true, useFindAndModify: false});
     })
@@ -230,6 +236,7 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
             if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
                 res.status(500).send('Internal server error')
             } else {
+                console.log("here?");
                 res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
             }
         });
@@ -532,6 +539,10 @@ app.post("/users/signUp",(req,res) =>{
 // })
 app.get("/users/check-session",(req, res) =>{
     if(req.session.user){
+        log({
+            currentUserName: req.session.userName,
+            currentUserType:req.session.userType
+        });
         res.send({
             currentUserName: req.session.userName,
             currentUserType:req.session.userType
@@ -567,6 +578,8 @@ app.get("*", (req, res) => {
         // if url not in expected page routes, set status to 404.
         res.status(404);
     }
+    log(req.originalUrl)
+    log("session", req.session.user, req.session.userName, req.session.userType);
     // send index.html
     res.sendFile(path.join(__dirname + "/client/quarantine/build/index.html"));
 });

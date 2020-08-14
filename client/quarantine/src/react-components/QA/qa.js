@@ -11,19 +11,18 @@ class QA extends React.Component {
     super(props);
     this.props.history.push("/QA");
     const loadPosts = serverCall.loadPosts.bind(this);
-    const info = loadPosts();
-    this.state = {
-      userInfo: info[1],
-      postsList: info[0],
-      currShown: [0, 10],
+    this.state = {currShown: [0, 10],
+      postsList: [],
       notes: [
         'Your post "aba aba..." has been deleted.',
         'Your post "aba aba..." has been deleted.',
       ],
     numNotes: 2,}
+    loadPosts();
 
     // this.state = {
     //   /*user = this.props.user*/
+    //   userInfo: info[1],
     //   postsList: [
     //     {
     //       posterId: [posterId],
@@ -46,6 +45,11 @@ class QA extends React.Component {
 
 
   render() {
+    {
+      console.log("rerender", this.state);
+      if (!this.state.postsList){
+        return <div></div>
+      }
     return (
       <div>
         <Sidebar
@@ -168,6 +172,7 @@ class QA extends React.Component {
         </div>
       </div>
     );
+                }
   }
 
   search = (e) => {
@@ -200,13 +205,16 @@ class QA extends React.Component {
     e.preventDefault();
     const post = document.querySelector("#post");
     const regExp = / +/;
+    console.log("post value:", post.value)
     if (post.value === "" || regExp.test(post.value)) {
       alert("Can't send empty post");
       return;
     }
     const tags = document.querySelector("#tags");
     const data = {
-      names: ["user1"],
+      posterId: [this.state.userInfo.userId],
+      posterType: [this.state.userInfo.userType],
+      names: [this.state.userInfo.userName],
       contents: [post.value + " " + tags.value],
       times: [new Date()],
       likes: [0],
@@ -235,12 +243,15 @@ class QA extends React.Component {
   handleReply = (mediaId, name, content) => {
     const newList = this.state.postsList;
 
+    newList[mediaId].posterId.push(this.state.userInfo.userId);
+    newList[mediaId].posterType.push(this.state.userInfo.userType);
     newList[mediaId].names.push(name);
     newList[mediaId].contents.push(content);
     newList[mediaId].times.push(new Date());
     newList[mediaId].likes.push(0);
     newList[mediaId].tags.push("");
     
+    console.log(newList[mediaId])
     // a server call that sends data
     const sendReply = serverCall.sendReply.bind(this);
     sendReply(newList, mediaId);

@@ -1,15 +1,18 @@
 
 import React from 'react';
 import '../../components.css';
+import { Redirect } from 'react-router';
 
 class Media extends React.Component {
 
     constructor(props) {
         super(props)
         const { posterId, posterType, names, contents, times, likes } = this.props.postsList;
+        const liked = [];
+        likes.map( i => liked.push(false) )
         this.state = {
             userInfo: this.props.userInfo,
-            liked: false,
+            liked: liked,
             replied: false,
             posterId: posterId,
             posterType: posterType,
@@ -34,7 +37,7 @@ class Media extends React.Component {
             indices.push(i);
         }
         const redirectComponent = <Redirect to={{pathname: '/UserProfile', state: { clickedUser: this.state.clickedUser}}}/> ;
-
+        console.log("in media.js: ", this.state);
         return (
             <div className="container mt-3 mt-3Qa Media">
                 {this.state.redirect? redirectComponent : ""}
@@ -69,14 +72,14 @@ class Media extends React.Component {
 
     like = (i, likeNum, e) => {
         e.preventDefault();
-        if (this.state.liked) {
+        if (this.state.liked[i]) {
             this.props.handleLike(i, -1);
             e.target.innerText = "Like";
-            this.state.liked = false;
+            this.state.liked[i] = false;
         } else {
             this.props.handleLike(i, 1);
             e.target.innerText = (likeNum + 1).toString(10) + " Likes";
-            this.state.liked = true;
+            this.state.liked[i] = true;
         }
     }
 

@@ -12,6 +12,14 @@ const PostSchema = new mongoose.Schema({
 		type: [mongoose.Schema.ObjectId],
 		required: true,
     },
+    posterType: {
+        type: [String],
+        required: true,
+    },
+    posterName: {
+        type: [String],
+        required: true,
+    },
     postContent: {
         type: [String],
         required: true,
@@ -27,6 +35,7 @@ const PostSchema = new mongoose.Schema({
     tags: {
         type: [String],
     },
+
 });
 
 const NotificationSchema = new mongoose.Schema({
