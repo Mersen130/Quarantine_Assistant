@@ -71,7 +71,7 @@ ServerCall.prototype = {
         })
     },
 
-    sendLike: function (postsListB, postIndex, contentIndex, likeNum){
+    sendLike: function (postsListB, contentIndex, postIndex, likeNum){
         const url = `/post/like/${postsListB[postIndex]._id}`;
 
         const request = new Request(url, {
@@ -136,10 +136,11 @@ ServerCall.prototype = {
                 }
                 postsList.push(adjustContent)
             })
+            postsList.reverse();
             this.setState({
                 userInfo: info[1],
                 postsList: postsList,
-            }, () => console.log(this.state));
+            });
             
         })
         .catch(error => {
@@ -151,7 +152,7 @@ ServerCall.prototype = {
         const url = `/post/${postId}`;
 
         const request = new Request(url, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -176,7 +177,7 @@ ServerCall.prototype = {
     removeReply: function(postId, contentIndex, postsListB){
         const url = `/reply/delete/${postId}`;
 
-        const request = new request(url, {
+        const request = new Request(url, {
             method: 'PATCH',
             body: JSON.stringify({
                 contentIndex: contentIndex,

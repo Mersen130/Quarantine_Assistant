@@ -37,7 +37,7 @@ class Media extends React.Component {
             indices.push(i);
         }
         const redirectComponent = <Redirect to={{pathname: '/UserProfile', state: { clickedUser: this.state.clickedUser}}}/> ;
-        console.log("in media.js: ", this.state);
+        // console.log("in media.js: ", this.state);
         return (
             <div className="container mt-3 mt-3Qa Media">
                 {this.state.redirect? redirectComponent : ""}
@@ -47,17 +47,17 @@ class Media extends React.Component {
                     }} className="profilephotoQa" />
                     <div className="media-body">
                         <h4 className="h4Qa">{names[0]} <small><i>{posterType[0] == 'doctor' ? (<img src={require("../../lib/qa/certified.png")}/>+" doctor") : ""} posted on {new Date(times[0]).toString().slice(0, 25)}</i></small></h4>
-                        <p className="content contentQa">{contents[0]} {names[0] === this.state.userInfo && <a href="#" onClick={(e) => this.props.handleRemove(0, e)}>delete</a>} {names.length == 1 && <input type="image" src={require("../../lib/qa/reply.png")} className="replyBtn" onClick={() => this.showReply(0, mediaId)} />} <button onClick={(e) => this.like(0, likes[0], e)} className="likeQa btn-primary ">Like</button></p>
+                        <p className="content contentQa">{contents[0]} {names[0] === this.state.userInfo.userName && <a href="#" onClick={(e) => this.props.handleRemove(0, e)}>delete</a>} {names.length == 1 && <input type="image" src={require("../../lib/qa/reply.png")} className="replyBtn" onClick={() => this.showReply(0, mediaId)} />} <button onClick={(e) => this.like(0, likes[0], e)} className="likeQa btn-primary ">Like</button></p>
                         {names.length == 1 && <div><input id={"replyInput0" + mediaId.toString(10)} className="replyInput" type="text" onKeyUp={(e) => this.reply(0, mediaId, e)} placeholder={"reply to " + names[0]} /></div>}
                         <div>
                             {indices.map(i => (
                                 <div className="media p-3">
-                                    <img src={require("../../lib/profilephotos/user2.png")} onClick={function () {
+                                    <img src={require("../../lib/profilephotos/user1.png")} onClick={function () {
                                         this.setState({ redirect: true, clickedUser: posterId[i]});
                                     }} className="profilephotoQa" />
                                     <div className="media-body">
                                         <h4 className="h4Qa">{names[i]} <small><i> {posterType[i] == 'doctor' ? (<img src={require("../../lib/qa/certified.png")}/>+" doctor") : ""} replied on {new Date(times[i]).toString().slice(0, 25)}</i></small></h4>
-                                        <p class="content contentQa">{contents[i]} {i == names.length - 1 && <input className="replyBtn" type="image" src={require("../../lib/qa/reply.png")} onClick={() => this.showReply(i, mediaId)} />} {names[i] === this.state.userInfo && <a href="#" onClick={(e) => this.props.handleRemove(i, e)}>delete</a>} <button onClick={(e) => this.like(1, likes[i], e)} className="likeQa btn-primary">Like</button></p>
+                                        <p class="content contentQa">{contents[i]} {i == names.length - 1 && <input className="replyBtn" type="image" src={require("../../lib/qa/reply.png")} onClick={() => this.showReply(i, mediaId)} />} {names[i] === this.state.userInfo.userName && <a href="#" onClick={(e) => this.props.handleRemove(i, e)}>delete</a>} <button onClick={(e) => this.like(i, likes[i], e)} className="likeQa btn-primary">Like</button></p>
                                         {i == names.length - 1 && <div><input id={"replyInput" + i.toString(10) + mediaId.toString(10)} className="replyInput" type="text" onKeyUp={(e) => this.reply(i, mediaId, e)} placeholder={"reply to " + names[i]} /></div>}
                                     </div>
                                 </div>
@@ -72,14 +72,19 @@ class Media extends React.Component {
 
     like = (i, likeNum, e) => {
         e.preventDefault();
+        // alert(i);
         if (this.state.liked[i]) {
             this.props.handleLike(i, -1);
             e.target.innerText = "Like";
-            this.state.liked[i] = false;
+            const tempLiked = this.state.liked
+            tempLiked[i] = false;
+            this.setState( {liked: tempLiked} );
         } else {
             this.props.handleLike(i, 1);
             e.target.innerText = (likeNum + 1).toString(10) + " Likes";
-            this.state.liked[i] = true;
+            const tempLiked = this.state.liked
+            tempLiked[i] = true;
+            this.setState( {liked: tempLiked} );
         }
     }
 

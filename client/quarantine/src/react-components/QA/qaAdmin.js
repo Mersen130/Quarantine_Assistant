@@ -13,15 +13,17 @@ class QAAdmin extends React.Component {
     super(props);
     this.props.history.push("/QAAdmin");
     const loadPosts = serverCall.loadPosts.bind(this);
-    const info = loadPosts();
-    this.state = {
-      userInfo: info[1],
-      postsList: info[0],
-      currShown: [0, 10],
-    }
+    this.state = {currShown: [0, 10],
+      postsList: [],}
+    loadPosts();
+
   }
 
   render() {
+    // console.log("rerender", this.state);
+    if (!this.state.postsList){
+      return <div></div>
+    }
     return (
       <div>
         <Sidebaradmin title={"Q&A"} />
@@ -121,7 +123,7 @@ class QAAdmin extends React.Component {
       return;
     }
     const tags = document.querySelector("#tags");
-    console.log(post.value);
+    // console.log(post.value);
     this.state.postsList.splice(0, 0, {
       names: ["user1"],
       contents: [post.value + " " + tags.value],
@@ -188,14 +190,14 @@ class QAAdmin extends React.Component {
   };
 
   handleOrder = (e) => {
-    console.log(e);
+    // console.log(e);
     const postsListB = this.state.postsList;
     if (e == "Newest") {
       // time based
       this.setState({ postsList: this.selectionSort(postsListB, "Newest") });
     } else if (e == "Top rated") {
       // like based
-      console.log(this.selectionSort(postsListB, "Top"));
+      // console.log(this.selectionSort(postsListB, "Top"));
       this.setState({ postsList: this.selectionSort(postsListB, "Top") });
     } else {
       // reply based
@@ -218,12 +220,14 @@ class QAAdmin extends React.Component {
   handleRemove = (i, mediaNum, e) => {
     e.preventDefault();
     const postsListB = this.state.postsList;
+    // alert(i); alert(mediaNum);
     postsListB[mediaNum].contents[i] = "[content deleted by admin/author]";
     if (i === 0) { 
       // a server call that sends data
+      const postId = postsListB[mediaNum]._id;
       postsListB.splice(mediaNum, 1);
       const removePost = serverCall.removePost.bind(this);
-      removePost(postsListB[mediaNum]._id, postsListB);
+      removePost(postId, postsListB);
     } else{
       const removeReply = serverCall.removeReply.bind(this);
       removeReply(postsListB[mediaNum]._id, i, postsListB);

@@ -179,7 +179,7 @@ class QA extends React.Component {
     const t = document.getElementById("searchedTag").value;
     e.preventDefault();
     const posts = document.getElementsByClassName("mt-3");
-    console.log(posts)
+    // console.log(posts)
     const regExp = / +/;
     if (t === "" || regExp.test(t)) {
         for (let i = 0; i < posts.length; i++) {
@@ -190,11 +190,11 @@ class QA extends React.Component {
     for (let i = 0; i < posts.length; i++) {
         posts[i].style.visibility = "collapse";
     }
-    console.log(this.state.currShown)
+    // console.log(this.state.currShown)
     for (let i = this.state.currShown[0]; i < this.state.currShown[1]; i++) {
         for (let j = 0; j < this.state.postsList[i].tags.length; j++){
             if (this.state.postsList[i].tags[j].includes(t)) {
-                console.log(posts[i])
+                // console.log(posts[i])
                 posts[i].style.visibility = "visible";
             }
         }
@@ -205,7 +205,7 @@ class QA extends React.Component {
     e.preventDefault();
     const post = document.querySelector("#post");
     const regExp = / +/;
-    console.log("post value:", post.value)
+    // console.log("post value:", post.value)
     if (post.value === "" || regExp.test(post.value)) {
       alert("Can't send empty post");
       return;
@@ -237,6 +237,7 @@ class QA extends React.Component {
     postsListB[j].likes[i] += amt;
     // todo: a server call that sends data
     const sendLike = serverCall.sendLike.bind(this);
+    // alert(j);alert(i);alert(amt);
     sendLike(postsListB, i, j, amt);
   };
 
@@ -251,7 +252,7 @@ class QA extends React.Component {
     newList[mediaId].likes.push(0);
     newList[mediaId].tags.push("");
     
-    console.log(newList[mediaId])
+    // console.log(newList[mediaId])
     // a server call that sends data
     const sendReply = serverCall.sendReply.bind(this);
     sendReply(newList, mediaId);
@@ -342,12 +343,14 @@ class QA extends React.Component {
   handleRemove = (i, mediaNum, e) => {
     e.preventDefault();
     const postsListB = this.state.postsList;
+    // alert(i); alert(mediaNum);
     postsListB[mediaNum].contents[i] = "[content deleted by admin/author]";
     if (i === 0) { 
       // a server call that sends data
+      const postId = postsListB[mediaNum]._id;
       postsListB.splice(mediaNum, 1);
       const removePost = serverCall.removePost.bind(this);
-      removePost(postsListB[mediaNum]._id, postsListB);
+      removePost(postId, postsListB);
     } else{
       const removeReply = serverCall.removeReply.bind(this);
       removeReply(postsListB[mediaNum]._id, i, postsListB);

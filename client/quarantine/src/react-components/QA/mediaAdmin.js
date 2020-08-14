@@ -8,9 +8,11 @@ class MediaAdmin extends React.Component {
     constructor(props) {
         super(props)
         const { posterId, posterType, names, contents, times, likes } = this.props.postsList;
+        const liked = [];
+        likes.map( i => liked.push(false) )
         this.state = {
             userInfo: this.props.userInfo,
-            liked: false,
+            liked: liked,
             replied: false,
             posterId: posterId,
             posterType: posterType,
@@ -49,7 +51,7 @@ class MediaAdmin extends React.Component {
                         <div>
                             {indices.map(i => (
                             <div className="media p-3">
-                                <img src={require("../../lib/profilephotos/user2.png")} onClick={function () {
+                                <img src={require("../../lib/profilephotos/user1.png")} onClick={function () {
                         this.setState({ redirect: true, clickedUser: posterId[i]});
                     }} className="profilephotoQa" />
                                 <div className="media-body">
