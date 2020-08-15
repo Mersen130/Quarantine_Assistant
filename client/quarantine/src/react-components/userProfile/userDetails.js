@@ -25,7 +25,6 @@ class UserDetails extends React.Component {
                                                 class="form-control"
                                                 id="feFirstName"
                                                 placeholder="First Name"
-                                                value={this.props.name.split(" ")[0]}
                                             ></input>
                                         </div>
                                         <div
@@ -39,7 +38,6 @@ class UserDetails extends React.Component {
                                                 class="form-control"
                                                 id="feLastName"
                                                 placeholder="Last Name"
-                                                value={this.props.name.split(" ")[1]}
                                             ></input>
                                         </div>
                                     </div>
@@ -54,7 +52,6 @@ class UserDetails extends React.Component {
                                                 class="form-control"
                                                 id="feAge"
                                                 placeholder="Age"
-                                                value={this.props.age}
                                             ></input>
                                         </div>
                                         <div
@@ -81,7 +78,6 @@ class UserDetails extends React.Component {
                                                 class="form-control"
                                                 id="feRegion"
                                                 placeholder="Region, Country"
-                                                value={this.props.region}
                                             ></input>
                                         </div>
                                     </div>
@@ -103,23 +99,26 @@ class UserDetails extends React.Component {
                                         type="button"
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            const fName = document.querySelector(
+                                            let fName = document.querySelector(
                                                 "#feFirstName"
                                             ).value;
-                                            const lName = document.querySelector(
+                                            let lName = document.querySelector(
                                                 "#feLastName"
                                             ).value;
-                                            const name = fName + " " + lName;
-                                            const gender = document.querySelector(
+                                            let name = "";
+                                            if (fName || lName){
+                                                name = fName + " " + lName;
+                                            } 
+                                            let gender = document.querySelector(
                                                 "#feInputGender"
                                             ).value;
-                                            const age = document.querySelector(
+                                            let age = document.querySelector(
                                                 "#feAge"
                                             ).value;
-                                            const region = document.querySelector(
+                                            let region = document.querySelector(
                                                 "#feRegion"
                                             ).value;
-                                            const bio = document.querySelector(
+                                            let bio = document.querySelector(
                                                 "#feBio"
                                             ).value;
                                             console.log(name, gender);

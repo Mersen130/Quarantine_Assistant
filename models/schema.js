@@ -104,7 +104,10 @@ const UserSchema = new mongoose.Schema({
     age:{
         type:Number
     },
-    selfDecription:{
+    gender:{
+        type: String
+    },
+    selfDescription:{
         type:String
     },
 

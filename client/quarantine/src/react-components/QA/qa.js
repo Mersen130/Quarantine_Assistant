@@ -44,14 +44,14 @@ class QA extends React.Component {
 
 
   render() {
-    {
       console.log("rerender", this.state);
-      if (!this.state.postsList){
+      if (!this.state.userInfo){
         return <div></div>
       }
     return (
       <div>
         <Sidebar
+          userName={this.state.userInfo.userName}
           title={"Q&A"}
           notes={this.state.notes}
           numNotes={this.state.numNotes}
@@ -171,7 +171,6 @@ class QA extends React.Component {
         </div>
       </div>
     );
-                }
   }
 
   search = (e) => {

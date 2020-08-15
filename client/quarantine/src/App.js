@@ -53,7 +53,7 @@ class App extends React.Component {
                     <Route path="/UserProfile/" component={UserProfile} />
                     <Route path="/userlist/" component={UserList} />
                     <Route
-                        path="/doctorprofile/"
+                        path="/DoctorProfile/"
                         component={DoctorProfile}
                     />
                     <Route
@@ -61,7 +61,7 @@ class App extends React.Component {
                         component={DoctorDashboard}
                     />
                     <Route
-                        path="/adminprofile/"
+                        path="/AdminProfile/"
                         component={AdminProfile}
                     />
                     <Route path="/Activities" component={Activities} />
