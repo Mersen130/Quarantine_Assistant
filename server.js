@@ -15,7 +15,9 @@ app.use(bodyParser.json());
 // Mongo and Mongoose
 const { ObjectID } = require('mongodb')
 const { mongoose } = require('./db/mongoose');
+
 const { Post, Notification, User,Activities,Tips, News} = require('./models/schema');  // TODO: update this
+
 const { Collection } = require('mongoose');
 
 
@@ -49,7 +51,9 @@ const authenticate = (req, res, next) => {
 		})
 	} else {
 		res.status(401).send("Unauthorized")
+
 	}
+
 }
 
 
@@ -280,8 +284,25 @@ app.delete("/post/:postId", mongoChecker, authenticate, (req, res) => {
         if (!post){
             res.status(404).send('post not found');
         } else{
-            res.send();
+            return User.findById(req.session.user);
         }
+    })
+    .then( user => {
+        if (!user){
+            res.status(404).send("resource not found")
+        } else{
+            const posts = user.posts;
+            for (let currPostId = 0; currPostId < posts.length; currPostId++){
+                if (posts[currPostId].toString() === postId.toString()){
+                    posts.splice(currPostId, 1);
+                    break;
+                }
+            }
+            return User.findOneAndUpdate({_id: req.session.user}, { $set: { posts: posts } }, {new: true, useFindAndModify: false});
+        }
+    })
+    .then(user => {
+        res.send();
     })
     .catch(error => {
         if (isMongoError(error)){
@@ -343,7 +364,6 @@ app.post("/profile/:id", (req, res) => {
 // get user info
 app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
     /// req.params has the wildcard parameters in the url, in this case, id.
-    // log(req.params.id)
     let id = req.params.id;
     if (id == "me"){
         id = req.session.user;
@@ -365,7 +385,46 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
             if (!user) {
                 res.status(404).send(); // could not find this student
             } else {
-                res.send(user);
+
+                const RecentAct = [];  // an array storing activities and posts
+                let p = Promise.resolve();
+                for (let i = 0; i < user.posts.length; i++) {
+                    p = p.then(_ => Post.findById(user.posts[i]))
+                    .then(post => {
+                        if (post) {
+                            RecentAct.push({ type: "post", contentSketch: post.postContent[0], time: post.postTime[0]})
+                            // log("here1", RecentAct)
+                        }
+                        return Promise.resolve();
+                    })
+                    .catch(error => {
+                        // log("something wrong internal")
+                        res.status(500).send("server error");
+                    });
+                    // log("here1.3", p)
+                }
+                // log("here1.5")
+                for (let i = 0; i < user.activities.length; i++) {
+                    p = p.then(_ => Post.findById(user.activities[i]))
+                    .then(act => {
+                        if (act) {
+                            RecentAct.push({ type: "activity", title: act.activityTitle})
+                            // log("here2")
+                        }
+                        // log("here3")
+                        return Promise.resolve();
+                    })
+                    .catch(error => {
+                        // log("something wrong internal")
+                        res.status(500).send("server error");
+                    });
+                }
+                // log("here3.6", p)
+                // p.then(e => log("profile", [user, RecentAct])).catch(log("something wrong"));
+                // log("here3.7")
+
+                p.then( e => res.send([user, RecentAct])).catch(e => res.status(400).send("bad request"));
+
             }
         })
         .catch(error => {
@@ -376,6 +435,7 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
 // update user info
 app.patch("/profile", mongoChecker, authenticate, (req, res) => {
 
+    log(req.body)
     User.findById(req.session.user)
     .then( user => {
         if (!user){
@@ -433,7 +493,9 @@ app.post("/users", (req, res) => {
 app.post("/users/signIn",(req, res) =>{
     const userName = req.body.userName;
     const password = req.body.password;
+    log(userName, password)
     User.findUser(userName, password).then(user =>{
+        
         req.session.user = user._id;
         req.session.userName = user.userName;
         req.session.userType = user.userType;
@@ -785,7 +847,7 @@ app.get("/news",(req, res)=>{
 /* KEEP THIS BLOCK AT THE BOTTOM */
 app.get("*", (req, res) => {
     // check for page routes that we expect in the frontend to provide correct status code.
-    const goodPageRoutes = ["/SignIn","/SignUp", "/qa", "questionnaire", "qaadmin", "profile"];
+    const goodPageRoutes = ["/", "/SignIn","/SignUp", "/qa", "/questionnaire", "/qaAdmin", "/UserProfile", "/DoctorProfile", "AdminProfile", "/dashboard", "doctordashboard", "admindashboard"];
     if (!goodPageRoutes.includes(req.url)) {
         // if url not in expected page routes, set status to 404.
         res.status(404);

@@ -9,7 +9,7 @@ import serverCall from "./serverCall"
 class QA extends React.Component {
   constructor(props){
     super(props);
-    this.props.history.push("/QA");
+    this.props.history.push("/qa");
     console.log(this.props.history);
     const loadPosts = serverCall.loadPosts.bind(this);
     this.state = {currShown: [0, 10],
@@ -44,14 +44,14 @@ class QA extends React.Component {
 
 
   render() {
-    {
       console.log("rerender", this.state);
-      if (!this.state.postsList){
+      if (!this.state.userInfo){
         return <div></div>
       }
     return (
       <div>
         <Sidebar
+          userName={this.state.userInfo.userName}
           title={"Q&A"}
           notes={this.state.notes}
           numNotes={this.state.numNotes}
@@ -171,7 +171,6 @@ class QA extends React.Component {
         </div>
       </div>
     );
-                }
   }
 
   search = (e) => {
@@ -203,9 +202,9 @@ class QA extends React.Component {
   post = (e) => {
     e.preventDefault();
     const post = document.querySelector("#post");
-    const regExp = / +/;
+    const regExp = /\S/;
     // console.log("post value:", post.value)
-    if (post.value === "" || regExp.test(post.value)) {
+    if (!regExp.test(post.value)) {
       alert("Can't send empty post");
       return;
     }

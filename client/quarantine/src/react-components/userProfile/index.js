@@ -11,20 +11,13 @@ class UserProfile extends React.Component {
         super(props);
         this.props.history.push("/UserProfile");
         const loadUser = profileServerCall.loadUser.bind(this);
-        const userActInfo = loadUser(this.props.location.state.clicledUser);
-        const userInfo = userActInfo[0];
         this.state = {
-            userName: userInfo.userName,
-            age: userInfo.age,
-            userType: userInfo.userType,
-            avatar: require("./sampleprofile.png"),
-            quarantineProgress: Math.floor((new Date() - new Date(userInfo.quarantineProgress))/ (1000*60*60*24)), // get progress percentage
-            gender: userInfo.region,
-            bio: userInfo.selfDescription,
-            region: userInfo.region,
-            allowModification: !this.props.location.state.clicledUser,
-            actInfo: userActInfo[1],
         };
+        if (!this.props.location.state){
+            loadUser(undefined);
+        } else{
+            loadUser(this.props.location.state.clicledUser);
+        }
     }
     handleUpdate = (
         nameUpdate,
@@ -33,15 +26,13 @@ class UserProfile extends React.Component {
         cityUpdate,
         bioUpdate
     ) => {
-        this.setState({
-            userName: nameUpdate,
-            gender: genderUpdate,
-            age: ageUpdate,
-            region: cityUpdate,
-            bio: bioUpdate,
-        });
+        const updateProfile = profileServerCall.updateProfile.bind(this)
+        updateProfile(nameUpdate, genderUpdate, ageUpdate, cityUpdate, bioUpdate);
     };
     render() {
+        if (!this.state.userName){
+            return <div></div>;
+        }
         return (
             <div>
                 <input type="file" id="FileUpload1" style={{display: "none"}} 
@@ -52,7 +43,7 @@ class UserProfile extends React.Component {
                     console.log(file);
                     // a server call that sends file
                 }}/>
-                <Sidebar title={"Profile"} />
+                <Sidebar userName={this.state.userName} title={"Profile"} />
                 <div className=" container-fluid main-content-container px-4">
                     <div className="col-lg-10 offset-lg-2">
                         <div
@@ -68,6 +59,7 @@ class UserProfile extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col col-lg-4">
+                                {console.log(this.state)}
                                 <UserBrief
                                     name={this.state.userName}
                                     gender={this.state.gender}
@@ -75,6 +67,7 @@ class UserProfile extends React.Component {
                                     region={this.state.region}
                                     bio={this.state.bio}
                                     changePhoto={this.changePhoto}
+                                    quarantineProgress={this.state.quarantineProgress}
                                 />
                             </div>
                             <div className="col col-lg-8">

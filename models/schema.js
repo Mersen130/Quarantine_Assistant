@@ -91,7 +91,10 @@ const UserSchema = new mongoose.Schema({
     age:{
         type:Number
     },
-    selfDecription:{
+    gender:{
+        type: String
+    },
+    selfDescription:{
         type:String
     },
 
@@ -102,12 +105,18 @@ const UserSchema = new mongoose.Schema({
         type:String
     },
 
+
+    posts: {
+        type: [ObjectID],
+        default: []
+
     quarantineStartDate:{
         type:Date,
         default:Date.now,
         required:true
+
     },
-    posts:[PostSchema],
+//     posts:[PostSchema],
     notifications:[NotificationSchema],
     activities:[ActivitiesSchema]
 });
@@ -153,6 +162,7 @@ const NewsSchema = new mongoose.Schema({
 UserSchema.statics.findUser = function(userName, password) {
 	const user = this
 	return user.findOne({ userName: userName}).then((u) => {
+        console.log(u)
 		if (!u) {
 			return Promise.reject()
 		}
@@ -216,8 +226,11 @@ UserSchema.pre('save', function(next){
 const Post = mongoose.model('Post', PostSchema);
 const Notification = mongoose.model('Notification', NotificationSchema);
 const User = mongoose.model('User', UserSchema);
+
 const Activities = mongoose.model('Activities', ActivitiesSchema);
 const Tips = mongoose.model('Tips', TipsSchema);
 const News = mongoose.model('News', NewsSchema);
 
+
 module.exports = { Post, Notification, User, Activities,Tips, News}
+

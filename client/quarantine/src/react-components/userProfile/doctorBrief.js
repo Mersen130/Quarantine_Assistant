@@ -8,7 +8,7 @@ class DoctorBrief extends React.Component {
                         {/* TODO: Add servel call to retrieve user info from user DB*/}
                         <img
                             className="rounded-circle"
-                            src={this.props.avatar}
+                            src={require("./sampleprofile.png")}
                             alt={this.props.name}
                             width="110"
                         />
@@ -33,24 +33,14 @@ class DoctorBrief extends React.Component {
                     </div>
                     <div className="p-4 list-group-item">
                         <strong className="text-muted d-block mb-2">
-                            Description
+                            Bio
                         </strong>
-                        <span>{this.props.description}</span>
+                        <span>{this.props.bio}</span>
                     </div>
                 </div>
             </div>
         );
     }
 }
-DoctorBrief.defaultProps = {
-    name: "Yuqiu Zhang",
-    age: 42,
-    userType: "Doctor",
-    avatar: require("../../lib/profilephotos/user3.png"),
-    //   selfIsoProg: 20,
-    gender: "Male",
-    description: "Feel free to ask me questions!",
-    region: "Toronto",
-};
 
 export default DoctorBrief;

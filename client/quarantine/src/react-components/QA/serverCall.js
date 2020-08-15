@@ -22,7 +22,8 @@ ServerCall.prototype = {
                 } else {
                     // If server couldn't add the post, tell the user.
                     console.log('post failed');
-                    alert("Something went wrong, please try again.");
+                    alert("Something went wrong, please make sure you have logged in.");
+                    this.props.hitory.push("/SignIn")
                     return Promise.reject();
                     // TODO: add some UI to notify user
                 }
@@ -56,7 +57,9 @@ ServerCall.prototype = {
                 return res.json();
             } else{
                 console.log('reply failed');
-                alert("Something went wrong, please try again.");
+                alert("Something went wrong, please make sure you have logged in.");
+                this.props.hitory.push("/SignIn")
+                return Promise.reject();
             }
         })
         .then(json => {
@@ -116,7 +119,8 @@ ServerCall.prototype = {
                 return res.json();
             } else{
                 console.log("get posts failed");
-                alert("Something went wrong, please try again.");
+                alert("Something went wrong, please make sure you have logged in.");
+                this.props.hitory.push("/SignIn")
                 return Promise.reject();
             }
         })
@@ -166,7 +170,8 @@ ServerCall.prototype = {
                 this.pushNote("A post has been deleted.");
             } else{
                 console.log('delete failed');
-                alert("Something went wrong, please try again.");
+                alert("Something went wrong, please make sure you have logged in.");
+                this.props.hitory.push("/SignIn")
             }
         })
         .catch(error=>{
@@ -195,7 +200,9 @@ ServerCall.prototype = {
                 this.pushNote("A post has been deleted.");
             } else{
                 console.log('delete failed');
-                alert("Something went wrong, please try again.");
+                alert("Something went wrong, please make sure you have logged in.");
+                this.props.hitory.push("/SignIn")
+
             }
         })
         .catch(error => {

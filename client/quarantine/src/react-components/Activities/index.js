@@ -19,7 +19,7 @@ class Activities extends React.Component {
     render() {
         return (
             <div>
-                <Sidebar title={"Activities"} />
+                <Sidebar userName="user" title={"Activities"} />
                 <div className="main-content-container px-4 py-4 container-fluid">
                     <div div className="col-lg-10 offset-lg-2">
                         <div id="myActivitiesBlock">

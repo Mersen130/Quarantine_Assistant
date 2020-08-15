@@ -40,7 +40,11 @@ class Dashboard extends React.Component {
         const {app}=this.props;
         return (
             <div>
-                <Sidebar title={"Dashboard"} history={this.props.history} app={app} />
+
+//                 <Sidebar userName="user" title={"Dashboard"} />
+
+                <Sidebar title={"Dashboard"} history={this.props.history} app={app.state.currentUserName} />
+
 
                 <div className="main-content-container px-4 pb-4 container-fluid">
                     <div className="col-lg-10 offset-lg-2">

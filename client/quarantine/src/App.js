@@ -25,7 +25,9 @@ import {readCookie} from "./actions/user"
 class App extends React.Component {
     constructor(props) {
         super(props);
+
         readCookie(this); // sees if a user is logged in.
+
     }
 
     // global state passed down includes the current logged in user.
@@ -120,18 +122,10 @@ class App extends React.Component {
                         )}
                     />
                     <Route
-                        exact path={["/SignIn", "/QAAdmin"]}
-                        render={({history}) =>(
-                            <div className = "QAAdmin">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <QAAdmin history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
+
+                        path="/DoctorProfile/"
+                        component={DoctorProfile}
+
                     />
                     <Route
                         exact path={["/SignIn", "/UserProfile"]}
@@ -148,18 +142,10 @@ class App extends React.Component {
                         )}
                     />
                     <Route
-                        exact path={["/SignIn", "/User2Profile"]}
-                        render={({history}) =>(
-                            <div className = "User2Profile">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <User2Profile history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
+
+                        path="/AdminProfile/"
+                        component={AdminProfile}
+
                     />
                     <Route
                         exact path={["/SignIn", "/DoctorProfile"]}

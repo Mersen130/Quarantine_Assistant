@@ -41,11 +41,16 @@ export const signIn = (component, app,history) =>{
         })
         .then(json => {
             if (json.currentUserName !== undefined) {
-                app.setState({ currentUserName: json.currentUserName,
+
+                 app.setState({ currentUserName: json.currentUserName,
                                 currentUserType:json.currentUserType,
                                 quarantineStartDate:json.quarantineStartDate
                              });
-                history.push('/dashboard');
+                component.props.history.push("/dashboard");
+            } else{
+                alert("Please double check your username and password.")
+                component.props.history.push("/SignIn");
+
             }
         })
         .catch(error => {

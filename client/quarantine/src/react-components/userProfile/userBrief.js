@@ -8,7 +8,7 @@ class UserBrief extends React.Component {
                     <div className="mb-3 mx-auto">
                         <img
                             className="rounded-circle"
-                            src={this.props.avatar}
+                            src={require("./sampleprofile.png")}
                             alt={this.props.name}
                             width="110"
                             alt="alternative text" 
@@ -17,7 +17,7 @@ class UserBrief extends React.Component {
                         />
                     </div>
                     <h4 className="mb-0">{this.props.name}</h4>{" "}
-                    {this.props.gender == "Male" ? (
+                    {this.props.gender === "Male" ? (
                         <i className="fas fa-mars"></i>
                     ) : (
                         <i className="fas fa-venus"></i>
@@ -39,14 +39,14 @@ class UserBrief extends React.Component {
                             <div className="progress">
                                 <div
                                     className={"progress-sm progress-bar"}
-                                    style={{ width: "66%" }}
+                                    style={{ width: `${this.props.quarantineProgress}%` }}
                                     aria-valuenow="66"
                                     aria-valuemin="0"
                                     aria-valuemax="100"
                                     role="progressbar"
                                 >
                                     <span className="progress-value">
-                                        {this.props.selfIsoProg}%
+                                        {this.props.quarantineProgress}%
                                     </span>
                                 </div>
                             </div>
