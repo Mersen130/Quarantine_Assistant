@@ -63,7 +63,7 @@ class SignIn extends React.Component{
             </div>
             <button
               id="signInBtn"
-              onClick={() =>signIn(this,app)}
+              onClick={(e) =>{e.preventDefault(); signIn(this,app)}}
               >
               Sign In
             </button>

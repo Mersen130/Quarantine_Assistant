@@ -331,7 +331,7 @@ app.patch("/reply/delete/:postId", mongoChecker, authenticate, (req, res) => {
     .then( post => {
         if (!post){
             res.status(404).send('post not found');
-            return Promise.reject();  // todo: debug this
+            return Promise.reject();
         } else{
             // log(post)
             return post.postContent;
@@ -578,7 +578,7 @@ app.get("*", (req, res) => {
         // if url not in expected page routes, set status to 404.
         res.status(404);
     }
-    log(req.originalUrl)
+    // log(req.originalUrl)
     log("session", req.session.user, req.session.userName, req.session.userType);
     // send index.html
     res.sendFile(path.join(__dirname + "/client/quarantine/build/index.html"));

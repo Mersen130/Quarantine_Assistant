@@ -112,11 +112,20 @@ const UserSchema = new mongoose.Schema({
         type:String
     },
 
-    quanrantineProgress:[QuanrantineProgressSchema],
+    quanrantineProgress: QuanrantineProgressSchema,
     // posts:[PostSchema],
-    posts: [ObjectID],
-    notifications:[NotificationSchema],
-    activities:[ActivitiesSchema]
+    posts: {
+        type: [ObjectID],
+        default: []
+    },
+    notifications:{
+        type: [ObjectID],
+        default: []
+    },
+    activities:{
+        type: [ObjectID],
+        default: []
+    },
 });
 
 

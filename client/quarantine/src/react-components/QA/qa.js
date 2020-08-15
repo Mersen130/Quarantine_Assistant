@@ -10,14 +10,13 @@ class QA extends React.Component {
   constructor(props){
     super(props);
     this.props.history.push("/QA");
+    console.log(this.props.history);
     const loadPosts = serverCall.loadPosts.bind(this);
     this.state = {currShown: [0, 10],
       postsList: [],
       notes: [
-        'Your post "aba aba..." has been deleted.',
-        'Your post "aba aba..." has been deleted.',
       ],
-    numNotes: 2,}
+    numNotes: 0,}
     loadPosts();
 
     // this.state = {

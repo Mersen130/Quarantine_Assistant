@@ -41,8 +41,9 @@ export const signIn = (component, app) =>{
         })
         .then(json => {
             if (json.currentUserName !== undefined) {
-                app.setState({ currentUserName: json.currentUserName,
-                                currentUserType:json.currentUserType });
+                // app.setState({ currentUserName: json.currentUserName,
+                //                 currentUserType:json.currentUserType });
+                component.props.history.push("/dashboard");
             }
         })
         .catch(error => {
