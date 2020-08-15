@@ -2,6 +2,8 @@
 
 This is a web application designed for assisting people people to get through their quarantine period during this COVID-19 pandemic. The front-end part of this application is built with React and Bootstrap.
 
+# Deployed Address: https://obscure-sands-70009.herokuapp.com/ | https://git.heroku.com/obscure-sands-70009.git
+
 ## Getting Started
 
 Run the following command to install the dependencies:

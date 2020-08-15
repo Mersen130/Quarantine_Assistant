@@ -7,7 +7,7 @@ import Reset from "./react-components/ResetPwd/resetPwd.js";
 import Activities from "./react-components/Activities/index.js";
 import QA from "./react-components/QA/qa.js";
 import Questionnaire from "./react-components/questionnaire/questionnaire.js";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import QAAdmin from "./react-components/QA/qaAdmin.js";
 import UserProfile from "./react-components/userProfile/index";
 import DoctorProfile from "./react-components/userProfile/doctor";
@@ -22,7 +22,8 @@ import {readCookie} from "./actions/user"
 class App extends React.Component {
     constructor(props) {
         super(props);
-        readCookie(this); // sees if a user is logged in.
+        // readCookie(this); // sees if a user is logged in.
+        console.log("reread", this.state)
     }
 
     // global state passed down includes the current logged in user.
@@ -34,154 +35,42 @@ class App extends React.Component {
     render() {
         const {currentUserName, currentUserType} = this.state;
 
-        return (
-            <BrowserRouter>
+        return (                
+        <React.Fragment>
+            <Router>
                 <Switch>
-                    <Route path="/resetPswd" component={Reset}/>
+                    <Route exact path="/" component={SignIn} />
+                    <Route path="/SignUp" component={SignUp} />
+                    <Route path="/Reset" component={Reset} />
                     <Route
-                        exact path={["/","/SignIn","/dashboard","/adminDashboard","/doctorDashboard"]}
-                        render={({history}) =>(
-                            <div className = "dashboard">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName ? <SignIn history={history} app={this} /> :
-                                {
-                                    'normal_user':<Dashboard history={history} app={this}/>,
-                                    'doctor':<DoctorDashboard history={history} app={this}/>,
-                                    'admin':<AdminDashboard history={history} app={this}/>
-
-                                         }[currentUserType]
-                                        }
-                            
-                            </div>
-                        )}
+                        path="/questionnaire/"
+                        component={Questionnaire}
                     />
-                     <Route
-                        exact path={["/SignUp", "/dashboard","/dashboard","/adminDashboard","/doctorDashboard"]}
-                        render={({history}) =>(
-                            <div className = "signUp">
-                                {console.log("signUpapp:"+currentUserName)}
-                                {console.log("signUp app userType:"+currentUserType)}
-                                {!currentUserName ? <SignUp history={history} app={this} /> : 
-                                {
-                                    'normal_user':<Dashboard history={history} app={this}/>,
-                                    'doctor':<DoctorDashboard history={history} app={this}/>,
-                                    'admin':<AdminDashboard history={history} app={this}/>
-
-                                }[currentUserType]
-                                } 
-                            
-                            </div>
-                        )}
+                    <Route path="/qaAdmin/" component={QAAdmin} />
+                    <Route path="/qa/" component={QA} />
+                    <Route path="/dashboard/" component={Dashboard} />
+                    <Route path="/UserProfile/" component={UserProfile} />
+                    <Route path="/userlist/" component={UserList} />
+                    <Route
+                        path="/doctorprofile/"
+                        component={DoctorProfile}
                     />
                     <Route
-                        exact path={["/SignIn", "/questionnaire"]}
-                        render={({history}) =>(
-                            <div className = "questionnaire">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <Questionnaire history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
+                        path="/doctordashboard/"
+                        component={DoctorDashboard}
                     />
                     <Route
-                        exact path={["/SignIn", "/Activities"]}
-                        render={({history}) =>(
-                            <div className = "activities">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <Activities history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
+                        path="/adminprofile/"
+                        component={AdminProfile}
                     />
+                    <Route path="/Activities" component={Activities} />
                     <Route
-                        exact path={["/SignIn", "/QA"]}
-                        render={({history}) =>(
-                            <div className = "QA">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <QA history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
+                        path="/admindashboard/"
+                        component={AdminDashboard}
                     />
-                    <Route
-                        exact path={["/SignIn", "/QAAdmin"]}
-                        render={({history}) =>(
-                            <div className = "QAAdmin">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <QAAdmin history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
-                    />
-                    <Route
-                        exact path={["/SignIn", "/UserProfile"]}
-                        render={({history}) =>(
-                            <div className = "UserProfile">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <UserProfile history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
-                    />
-                    <Route
-                        exact path={["/SignIn", "/DoctorProfile"]}
-                        render={({history}) =>(
-                            <div className = "DoctorProfile">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <DoctorProfile history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
-                    />
-                    <Route
-                        exact path={["/SignIn", "/AdminProfile"]}
-                        render={({history}) =>(
-                            <div className = "AdminProfile">
-                                {console.log("app"+currentUserName)}
-                                {!currentUserName 
-                                    ? <SignUp history={history} app={this} /> 
-                                    : <AdminProfile history={history} app={this}/>
-                                
-                                } 
-                            
-                            </div>
-                        )}
-                    />
-                    
-                    
-                    
-                
-
-                    { /* 404 if URL isn't expected. */}
-                    <Route render={() => <div>404 Not found</div>} />
-
                 </Switch>
-            </BrowserRouter>
-
+            </Router>
+        </React.Fragment>
         );
     }
 }
