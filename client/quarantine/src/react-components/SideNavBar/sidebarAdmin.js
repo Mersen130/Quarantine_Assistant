@@ -26,7 +26,7 @@ class Sidebaradmin extends React.Component {
               src={require("../../lib/profilephotos/strange.png")}
             />
           </a>
-          <p id="profileName">user1</p>
+          <p id="profileName">user</p>
           <a onClick={this.changeNavbarTitle} href="/admindashboard">
             <img src={require("../../lib/sidebar/dashboard.png")} /> Dashboard
           </a>

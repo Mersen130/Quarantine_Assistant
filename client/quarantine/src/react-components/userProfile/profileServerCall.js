@@ -24,7 +24,8 @@ ProfileServerCall.prototype = {
                 return res.json();
             } else{
                 console.log("load user failed");
-                alert("Something went wrong, please try again.");
+                alert("Something went wrong, please make sure you have logged in.");
+                this.props.history.push("/SignIn")
                 return Promise.reject();
             }
         })
@@ -73,7 +74,8 @@ ProfileServerCall.prototype = {
                 return;
             } else{
                 console.log("load user failed");
-                alert("Something went wrong, please try again.");
+                alert("Something went wrong, please make sure you have logged in.");
+                this.props.history.push("/SignIn")
                 return Promise.reject();
             }
         })

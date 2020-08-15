@@ -9,7 +9,7 @@ import serverCall from "./serverCall"
 class QA extends React.Component {
   constructor(props){
     super(props);
-    this.props.history.push("/QA");
+    this.props.history.push("/qa");
     console.log(this.props.history);
     const loadPosts = serverCall.loadPosts.bind(this);
     this.state = {currShown: [0, 10],

@@ -103,7 +103,7 @@ class Media extends React.Component {
     reply = (i, mediaId, e) => {
         e.preventDefault();
         if (e.keyCode === 13) {
-            this.props.handleReply(this.state.names[i], e.target.value);
+            this.props.handleReply(this.state.userInfo.userName, e.target.value);
             this.showReply(i, mediaId);
         }
 

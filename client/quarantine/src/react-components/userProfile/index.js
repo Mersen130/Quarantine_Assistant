@@ -67,6 +67,7 @@ class UserProfile extends React.Component {
                                     region={this.state.region}
                                     bio={this.state.bio}
                                     changePhoto={this.changePhoto}
+                                    quarantineProgress={this.state.quarantineProgress}
                                 />
                             </div>
                             <div className="col col-lg-8">

@@ -23,7 +23,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         // readCookie(this); // sees if a user is logged in.
-        console.log("reread", this.state)
+        // console.log("reread", this.state)
     }
 
     // global state passed down includes the current logged in user.

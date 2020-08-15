@@ -44,6 +44,9 @@ export const signIn = (component, app) =>{
                 // app.setState({ currentUserName: json.currentUserName,
                 //                 currentUserType:json.currentUserType });
                 component.props.history.push("/dashboard");
+            } else{
+                alert("Please double check your username and password.")
+                component.props.history.push("/SignIn");
             }
         })
         .catch(error => {

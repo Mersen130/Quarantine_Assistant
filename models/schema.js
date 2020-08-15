@@ -51,16 +51,16 @@ const NotificationSchema = new mongoose.Schema({
         default: 0,
     }
 });
-const QuanrantineProgressSchema = new mongoose.Schema({
-    startDate: {
-        type:Date,
-        required:true
-    },
-    endDate:{
-        type:Date,
-        required:true
-    }
-});
+// const QuanrantineProgressSchema = new mongoose.Schema({
+//     startDate: {
+//         type:Date,
+//         required:true
+//     },
+//     endDate:{
+//         type:Date,
+//         required:true
+//     }
+// });
 const ActivitiesSchema = new mongoose.Schema({
     activityTile:{
         type:String,
@@ -115,7 +115,10 @@ const UserSchema = new mongoose.Schema({
         type:String
     },
 
-    quanrantineProgress: QuanrantineProgressSchema,
+    quarantineProgress: {
+        type: Date,
+        default: new Date(),
+    },
     // posts:[PostSchema],
     posts: {
         type: [ObjectID],
@@ -138,6 +141,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.statics.findUser = function(userName, password) {
 	const user = this
 	return user.findOne({ userName: userName}).then((u) => {
+        console.log(u)
 		if (!u) {
 			return Promise.reject()
 		}
@@ -173,7 +177,7 @@ UserSchema.pre('save', function(next){
 const Post = mongoose.model('Post', PostSchema);
 const Notification = mongoose.model('Notification', NotificationSchema);
 const User = mongoose.model('User', UserSchema);
-const QuanrantineProgress = mongoose.model('QuarantineProgress', QuanrantineProgressSchema);
+// const QuanrantineProgress = mongoose.model('QuarantineProgress', QuanrantineProgressSchema);
 const Activities = mongoose.model('Activities', ActivitiesSchema);
 
-module.exports = { Post, Notification, User, QuanrantineProgress, Activities}
+module.exports = { Post, Notification, User, Activities}

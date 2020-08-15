@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 // Mongo and Mongoose
 const { ObjectID } = require('mongodb')
 const { mongoose } = require('./db/mongoose');
-const { Post, Notification, User, QuanrantineProgress, Activities} = require('./models/schema');  // TODO: update this
+const { Post, Notification, User, Activities} = require('./models/schema');  // TODO: update this
 const { Collection } = require('mongoose');
 
 // helpers & middlewares
@@ -35,24 +35,24 @@ const mongoChecker = (req, res, next) => {
 
 // Middleware for authentication of resources
 const authenticate = (req, res, next) => {
-	// if (req.session.user) {
-	// 	User.findById(req.session.user).then((user) => {
-	// 		if (!user) {
-	// 			return Promise.reject()
-	// 		} else {
-	// 			req.user = user
-	// 			next()
-	// 		}
-	// 	}).catch((error) => {
-	// 		res.status(401).send("Unauthorized")
-	// 	})
-	// } else {
-	// 	res.status(401).send("Unauthorized")
-    // }
-    req.session.user = new ObjectID("5f358e874fe8c47bf348b751")
-    req.session.userType = "normal_user"
-    req.session.userName = "user"
-    next();
+	if (req.session.user) {
+		User.findById(req.session.user).then((user) => {
+			if (!user) {
+				return Promise.reject()
+			} else {
+				req.user = user
+				next()
+			}
+		}).catch((error) => {
+			res.status(401).send("Unauthorized")
+		})
+	} else {
+		res.status(401).send("Unauthorized")
+    }
+    // req.session.user = new ObjectID("5f358e874fe8c47bf348b751")
+    // req.session.userType = "normal_user"
+    // req.session.userName = "user"
+    // next();
 }
 
 
@@ -507,7 +507,9 @@ app.post("/users", (req, res) => {
 app.post("/users/signIn",(req, res) =>{
     const userName = req.body.userName;
     const password = req.body.password;
+    log(userName, password)
     User.findUser(userName, password).then(user =>{
+        
         req.session.user = user._id;
         req.session.userName = user.userName;
         req.session.userType = user.userType;

@@ -41,7 +41,7 @@ export class DoctorDashboard extends Component {
         );
         return (
             <div>
-                <Sidebar title={"Dashboard"} />
+                <Sidebar userName="user" title={"Dashboard"} />
                 <div className=" main-content-container px-4 pb-4 container-fluid">
                     <div className="col-lg-10 offset-lg-2">
                         <div className="row no-gutters page-header py-4">
