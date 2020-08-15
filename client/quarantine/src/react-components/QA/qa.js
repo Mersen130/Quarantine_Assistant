@@ -202,9 +202,9 @@ class QA extends React.Component {
   post = (e) => {
     e.preventDefault();
     const post = document.querySelector("#post");
-    const regExp = / +/;
+    const regExp = /\S/;
     // console.log("post value:", post.value)
-    if (post.value === "" || regExp.test(post.value)) {
+    if (!regExp.test(post.value)) {
       alert("Can't send empty post");
       return;
     }
