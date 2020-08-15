@@ -36,7 +36,7 @@ class Sidebar extends React.Component {
           <a onClick={this.changeNavbarTitle} href="/qa">
             <img src={require("../../lib/sidebar/qa.png")} /> Q&A
           </a>
-          <a onClick={this.changeNavbarTitle} href="/Activities">
+          <a onClick={this.changeNavbarTitle} href="/userActivities">
             <img src={require("../../lib/sidebar/activity.png")} /> Activities
           </a>
           <a href="/" id="logout">

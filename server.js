@@ -15,8 +15,12 @@ app.use(bodyParser.json());
 // Mongo and Mongoose
 const { ObjectID } = require('mongodb')
 const { mongoose } = require('./db/mongoose');
-const { Post, Notification, User, Activities} = require('./models/schema');  // TODO: update this
+
+const { Post, Notification, User,Activities,Tips, News} = require('./models/schema');  // TODO: update this
+
 const { Collection } = require('mongoose');
+
+
 
 // helpers & middlewares
 
@@ -30,7 +34,6 @@ const mongoChecker = (req, res, next) => {
 	} else {
 		next()	
 	}	
-    // next();
 }
 
 // Middleware for authentication of resources
@@ -48,11 +51,9 @@ const authenticate = (req, res, next) => {
 		})
 	} else {
 		res.status(401).send("Unauthorized")
-    }
-    // req.session.user = new ObjectID("5f358e874fe8c47bf348b751")
-    // req.session.userType = "normal_user"
-    // req.session.userName = "user"
-    // next();
+
+	}
+
 }
 
 
@@ -64,7 +65,7 @@ function isMongoError(error) { // checks for first error returned by promise rej
 
 // check if id is valid ObjectID
 function checkObjctId(id) {
-    return ObjectID.isValid(id);
+    return ObjectID.isValid(posterID);
 }
 
 //Session
@@ -78,7 +79,7 @@ app.use(
         resave:false,
         saveUninitialized:false,
         cookie:{
-            // expires: 50000,
+            expires: 500000,
             httpOnly:true
         }
 
@@ -111,51 +112,42 @@ app.get("/post", mongoChecker, authenticate, (req, res) => {
     }*/
 app.post("/post", mongoChecker, authenticate, (req, res) => {
 
-    const posterId = req.session.user;
-    if (!checkObjctId(posterId)) {
+    const posterID = req.params.posterId;
+    if (!checkObjctId(posterID)) {
 		res.status(404).send()  // if invalid id, definitely can't find resource, 404.
 		return;  // so that we don't run the rest of the handler.
 	}
-    // log(posterId)
+    log(posterID)
     const post = new Post({
-        posterId: [req.session.user],
-        posterType: [req.session.userType],
-        posterName: [req.session.userName],
+        posterID: [req.session.user],
         postContent: req.body.contents,
         postTime: req.body.times,
         numLikes: req.body.likes,
         tags: req.body.tags,
     });
-    console.log(post);
-    // log(post)
+    log(post)
     post.save().then((result) => {
         return result._id;
     })
     .then(postId =>{
         User.findById(req.session.user).then(user => {
             if (!user){
-                // log('here');
                 res.status(404).send("resource not found")
             } else{
-                // log("123")
-                // const fieldsToUpdate = { posts: [postId] };
-                user.posts.push(postId);
-                const fieldsToUpdate = { posts: user.posts };
-                return User.findOneAndUpdate({_id: req.session.user}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+                const fieldsToUpdate = { posts: user.posts.push(postId) };
+                return User.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
             }
         })
         .then(user => {
             if (!user){
                 res.status(404).send("resource not found")
             } else{
-                // log("123",{ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user });
-                res.send({ currentPost: post._id });
+                res.send({ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user })
             }
         }).catch(error => {
             if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
                 res.status(500).send('Internal server error')
             } else {
-                // log("herer")
                 res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
             }
         });
@@ -164,7 +156,6 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
         if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
             res.status(500).send('Internal server error')
         } else {
-            // log("here2")
             res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
         }
     })
@@ -172,9 +163,9 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
 
 
 //leave a reply
-app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
+app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     const postId = req.params.postId;
-    console.log(postId)
+
     if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
@@ -184,24 +175,18 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
             res.status(404).send("post not found");
             Promise.reject();
         }
-        post.posterId.push(req.session.user);
-        // log(post, newposterId);
-        const newPost = {
-            posterId: req.body.posterId,
-            posterType: req.body.posterType,
-            posterName: req.body.names,
+        const newPosterId = post.posterID.push(req.session.user);
+        const newPost = new Post({
+            posterID: newPosterId,
             postContent: req.body.contents,
             postTime: req.body.times,
             numLikes: req.body.likes,
             tags: req.body.tags,
-        }
-        console.log(newPost);
-        // log(newPost)
-        return Post.findOneAndUpdate({_id: postId}, {$set: newPost}, {new: true, useFindAndModify: false});
+        });
+        return Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false});
     })
     .then(post => {
         if (!post){
-            // log("here1")
             res.status(404).send("post not found");
         } else{
             return post._id;
@@ -210,24 +195,19 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     .then(postId =>{
         User.findById(req.session.user).then(user => {
             if (!user){
-                // log("here2")
                 res.status(404).send("resource not found")
             } else{
                 for (const existPost of user.posts){
-                    log(existPost, postId, existPost === postId, existPost == postId);
-                    if (existPost.toString() === postId.toString()){
-                        log("here4")
+                    if (existPost == postId){
                         return user;
                     }
                 }
-                user.posts.push(postId)
-                const fieldsToUpdate = { posts: user.posts };
-                return User.findOneAndUpdate({_id: req.session.user}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+                const fieldsToUpdate = { posts: user.posts.push(postId) };
+                return User.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
             }
         })
         .then(user => {
             if (!user){
-                // log("here3")
                 res.status(404).send("resource not found")
             } else{
                 res.send({ posterType: req.session.userType, posterId: req.session.user });
@@ -236,7 +216,6 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
             if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
                 res.status(500).send('Internal server error')
             } else {
-                console.log("here?");
                 res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
             }
         });
@@ -256,7 +235,7 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
 app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
     const postId = req.params.postId;
 
-    if (!checkObjctId(postId)){
+    if (!checkObjctId(postid)){
         res.status(404).send('Resource not found');
     }
 
@@ -272,7 +251,7 @@ app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
     .then( numLikes => {
         numLikes[req.body.contentIndex] += req.body.likeNum;
         const fieldsToUpdate = { numLikes: numLikes };
-        return Post.findOneAndUpdate({_id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+        return Post.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
     })
     .then(post => {
         if (!post){
@@ -337,10 +316,10 @@ app.delete("/post/:postId", mongoChecker, authenticate, (req, res) => {
 
 
 // Delete a reply
-app.patch("/reply/delete/:postId", mongoChecker, authenticate, (req, res) => {
+app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     const postId = req.params.postId;
 
-    if (!checkObjctId(postId)){
+    if (!checkObjctId(postid)){
         res.status(404).send('Resource not found');
     }
 
@@ -348,17 +327,15 @@ app.patch("/reply/delete/:postId", mongoChecker, authenticate, (req, res) => {
     .then( post => {
         if (!post){
             res.status(404).send('post not found');
-            return Promise.reject();
+            return Promise.reject();  // todo: debug this
         } else{
-            // log(post)
-            return post.postContent;
+            return post.contents;
         }
     })
     .then( contents => {
-        // log(contents)
         contents[req.body.contentIndex] = "[content deleted by admin/author]";
-        const fieldsToUpdate = { postContent: contents };
-        return Post.findOneAndUpdate({_id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+        const fieldsToUpdate = { contents: contents };
+        return Post.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
     })
     .then(post => {
         if (!post){
@@ -375,6 +352,13 @@ app.patch("/reply/delete/:postId", mongoChecker, authenticate, (req, res) => {
             res.status(400).send("Bad Request");
         }
     })
+});
+
+
+// Update profile
+app.post("/profile/:id", (req, res) => {
+    // TODO
+    res.status(500).send("internal server error");
 });
 
 // get user info
@@ -401,6 +385,7 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
             if (!user) {
                 res.status(404).send(); // could not find this student
             } else {
+
                 const RecentAct = [];  // an array storing activities and posts
                 let p = Promise.resolve();
                 for (let i = 0; i < user.posts.length; i++) {
@@ -439,6 +424,7 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
                 // log("here3.7")
 
                 p.then( e => res.send([user, RecentAct])).catch(e => res.status(400).send("bad request"));
+
             }
         })
         .catch(error => {
@@ -460,7 +446,7 @@ app.patch("/profile", mongoChecker, authenticate, (req, res) => {
         }
     })
     .then( user => {
-        return User.findOneAndUpdate({_id: req.session.user}, { $set: req.body }, {new: true, useFindAndModify: false});
+        return User.findOneAndUpdate({id: req.session.user}, { $set: req.body }, {new: true, useFindAndModify: false});
     })
     .then(user => {
         if (!user){
@@ -513,9 +499,11 @@ app.post("/users/signIn",(req, res) =>{
         req.session.user = user._id;
         req.session.userName = user.userName;
         req.session.userType = user.userType;
+        req.session.quarantineStartDate = user.quarantineStartDate
         res.send({
                     currentUserName:user.userName,
-                    currentUserType:user.userType
+                    currentUserType:user.userType,
+                    quarantineStartDate:user.quarantineStartDate
                 });
     })
     .catch(error=>{
@@ -526,6 +514,8 @@ app.post("/users/signUp",(req,res) =>{
     log(req.body);
     let userT;
     let user;
+    // const current = new Date();
+    // const currentDate=current.getMonth()+1 +"/" +current.getDate()+"/"+current.getFullYear();
     if(!req.body.userType){
         ! req.body.docCertificate ? userT = "normal_user" : userT = "doctor"
         user = new User({
@@ -551,9 +541,11 @@ app.post("/users/signUp",(req,res) =>{
             req.session.user = result._id;
             req.session.userName = result.userName;
             req.session.userType = result.userType;
+            req.session.quarantineStartDate = result.quarantineStartDate;
             res.send({
                 currentUserName:result.userName,
-                currentUserType:result.userType
+                currentUserType:result.userType,
+                quarantineStartDate:result.quarantineStartDate
                 });
         },
         error => {
@@ -562,25 +554,44 @@ app.post("/users/signUp",(req,res) =>{
     );
 });
 
-// app.post("/users/resetPswd",(req, res)=>{
-//     const userEmail = req.body.email;
-//     User.findOne({
-//         email:req.body.email
-//     }).then(user=>{
-//         if(user){
-//             const email=require('nodemailer');
-//         }
-//     })
-// })
+app.post("/users/resetPswd",(req, res)=>{
+    const userEmail = req.body.email;
+    User.findOne({
+        email:req.body.email
+    }).then(user=>{
+        if(user){
+           res.send(user);
+        }
+    })
+})
+
+app.put("/users/resetPswd", (req, res)=>{
+  User.findOneAndUpdate(
+        {email:req.body.email},
+        {password:req.body.password},{
+        new:true
+    })
+    .then(updated=>{
+        if(updated){
+            updated.save()
+            .then(res.send({user:updated}))
+            
+        }
+    })
+    .catch(error=>{
+        res.status(404).send(error);
+    })
+
+})
+
+
+
 app.get("/users/check-session",(req, res) =>{
     if(req.session.user){
-        log({
-            currentUserName: req.session.userName,
-            currentUserType:req.session.userType
-        });
         res.send({
             currentUserName: req.session.userName,
-            currentUserType:req.session.userType
+            currentUserType:req.session.userType,
+            quarantineStartDate:req.session.quarantineStartDate
         })
     }
     else{
@@ -599,6 +610,234 @@ app.get("/users/logout",(req,res) =>{
         }
     });
 });
+//middleware to authenticate the current user is admin
+const adminAuth = (req, res, next) =>{
+    if(req.session.user){
+        User.findById(req.session.user).then((user) =>{
+            if(!user){
+               return Promise.reject()
+            }
+            else{
+                if(user.userType !== "admin"){
+                    return Promise.reject()
+                }
+                else{
+                    req.user = user
+                    next()
+                }
+            }
+        })
+        .catch((error) =>{
+            res.status(401).send(error +" Unauthorized")
+        })
+    }
+    else{
+        res.status(401).send("Unauthorized")
+    }
+}
+//get all users
+app.get("/normalUsers", adminAuth,(req, res) =>{
+    User.find({
+        userType : "normal_user"
+    }).then(normalUsers =>{
+        res.send({normalUsers});
+    },
+    error =>{
+        res.status(500).send(error);
+    }
+    )
+});
+//get all doctors
+app.get("/doctors", adminAuth,(req, res) =>{
+    User.find({
+        userType:"doctor"
+    }).then(doctors =>{
+        res.send({doctors});
+    }),
+    error=>{
+        res.status(500).send(error);
+    }
+});
+
+//delete user by id
+app.delete("/user/:id", adminAuth, (req, res) =>{
+    const id= req.params.id;
+    console.log(id)
+    if(!ObjectID.isValid(id)){
+        res.status(404).send("Recources is not found")
+        return;
+    }
+    User.findByIdAndRemove(id)
+        .then(user =>{
+            if(!user){
+                res.status(404).send();
+            }
+            else{
+                User.find({
+                    userType:user.userType
+                }).then(
+                    (users)=>{
+                    res.send({users});
+                    }
+                );
+            }
+        })
+        .catch((error) =>{
+            res.status(500).send(error);
+        })
+});
+//add an activitiy in to uses's list
+app.post("/users/activities/:id",authenticate,(req, res) =>{
+    const actId = req.params.id;
+    const userId = req.user._id;
+    if(!ObjectID.isValid(actId)){
+        res.status(404).send("Recources is not found")
+        return;
+    }
+    Activities.findById(actId).then(
+        act=>{
+            if(!act){
+                res.status(404).send("activity not found");
+            }
+            else{
+                User.findById(userId).then(
+                    user=>{
+                        user.activities.push({
+                            activityTile:act.activityTile,
+                            activityType:act.activityType,
+                            activityDescription:act.activityDescription
+                        });
+                        user.save().then(
+                            (updatedUser)=>{
+                                res.send({updatedUser});
+                            }
+                        );
+                    }
+                ),
+                error=>{
+                    res.send(error);
+                }
+
+            }
+        }
+    ),
+    error=>{
+        res.send(error);
+    }
+});
+
+//delete an activitiy form the user's list
+app.delete("/users/activities/:id", authenticate,(req, res)=>{
+    const actId = req.params.id;
+    const userId = req.user._id;
+    User.findById(userId).then(
+        user=>{
+            user.activities.id(actId).remove();
+            user.save().then(
+                u=>{
+                    res.send({updatedUser:u});
+                }
+            );        
+        }
+    )
+    .catch(error=>{
+        res.send(error);
+    });
+    
+});
+
+//add an activitiy in to the database
+app.post("/activities", (req, res)=>{
+    const act = new Activities({
+        activityTile:req.body.activityTile,
+        activityType:req.body.activityType,
+        activityDescription:req.body.activityDescription
+    });
+    act.save().then(
+        act=>{
+            res.send(act);
+        },
+        error => {
+            res.status(400).send(error); 
+        }
+    );
+});
+//get all activities in the database
+app.get("/activities", (req, res)=>{
+    Activities.find().then(
+        (activities)=>{
+            res.send({activities});
+        },
+        error=>{
+            res.status(500).send(error);
+        }
+    );
+});
+//get all users' activities
+app.get("/users/activities", authenticate,(req, res)=>{
+    const userId = req.user._id;
+    User.findById(userId).then(
+        user=>{
+            res.send({
+                activities: user.activities
+            });
+        },
+        error=>{
+            res.status(500).send(error);
+        }
+    );
+});
+
+//add tips to database
+app.post("/tips",(req,res) =>{
+    const tips= new Tips({
+        title:req.body.title,
+        content:req.body.content
+    });
+    tips.save().then(
+        (tip)=>{
+            res.send({tip});
+        },
+        error=>{
+            res.status(404).send(error);
+        }
+    );
+});
+
+//get a random tips from database
+app.get("/tips",(req, res)=>{
+    Tips.findOneRandom(
+        function(err, tip){
+            res.send({tip:tip});
+        }
+    );
+});
+
+
+//add news to database
+app.post("/news",(req,res) =>{
+    const news= new News({
+        title:req.body.title,
+        content:req.body.content
+    });
+    news.save().then(
+        (news)=>{
+            res.send({news});
+        },
+        error=>{
+            res.status(404).send(error);
+        }
+    );
+});
+
+//get a random news from database
+app.get("/news",(req, res)=>{
+    News.findOneRandom(
+        function(err, news){
+            res.send({news:news});
+        }
+    );
+});
 
 
 
@@ -613,8 +852,6 @@ app.get("*", (req, res) => {
         // if url not in expected page routes, set status to 404.
         res.status(404);
     }
-    // log(req.originalUrl)
-    log("session", req.session.user, req.session.userName, req.session.userType);
     // send index.html
     res.sendFile(path.join(__dirname + "/client/quarantine/build/index.html"));
 });

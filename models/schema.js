@@ -1,5 +1,6 @@
 /* Quanrantine mongoose model */
 const mongoose = require('mongoose')
+var random = require('mongoose-simple-random');
 const validator = require('validator');
 const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs')
@@ -11,14 +12,6 @@ const PostSchema = new mongoose.Schema({
 	posterId: {
 		type: [mongoose.Schema.ObjectId],
 		required: true,
-    },
-    posterType: {
-        type: [String],
-        required: true,
-    },
-    posterName: {
-        type: [String],
-        required: true,
     },
     postContent: {
         type: [String],
@@ -35,7 +28,6 @@ const PostSchema = new mongoose.Schema({
     tags: {
         type: [String],
     },
-
 });
 
 const NotificationSchema = new mongoose.Schema({
@@ -51,16 +43,7 @@ const NotificationSchema = new mongoose.Schema({
         default: 0,
     }
 });
-// const QuanrantineProgressSchema = new mongoose.Schema({
-//     startDate: {
-//         type:Date,
-//         required:true
-//     },
-//     endDate:{
-//         type:Date,
-//         required:true
-//     }
-// });
+
 const ActivitiesSchema = new mongoose.Schema({
     activityTile:{
         type:String,
@@ -73,6 +56,10 @@ const ActivitiesSchema = new mongoose.Schema({
     activityDescription:{
         type:String,
         required:true
+    },
+    addTime:{
+        type:Date,
+        default:Date.now
     }
 });
 const UserSchema = new mongoose.Schema({
@@ -114,25 +101,59 @@ const UserSchema = new mongoose.Schema({
     region:{
         type:String
     },
-
-    quarantineProgress: {
-        type: Date,
-        default: new Date(),
+    docCertificate:{
+        type:String
     },
-    // posts:[PostSchema],
+
+
     posts: {
         type: [ObjectID],
         default: []
+
+    quarantineStartDate:{
+        type:Date,
+        default:Date.now,
+        required:true
+
     },
-    notifications:{
-        type: [ObjectID],
-        default: []
-    },
-    activities:{
-        type: [ObjectID],
-        default: []
-    },
+//     posts:[PostSchema],
+    notifications:[NotificationSchema],
+    activities:[ActivitiesSchema]
 });
+
+const TipsSchema = new mongoose.Schema({
+    title:{
+        type:String,
+        required:true
+    },
+    content:{
+        type:String,
+        required:true
+    },
+    date:{
+        type:Date,
+        default:Date.now,
+        required:true
+    }
+});
+const NewsSchema = new mongoose.Schema({
+    title:{
+        type:String,
+        required:true
+    },
+    content:{
+        type:String,
+        required:true
+    },
+    date:{
+        type:Date,
+        default:Date.now,
+        required:true
+    }
+})
+
+
+
 
 
 //helper function for user that can use in the session
@@ -155,7 +176,35 @@ UserSchema.statics.findUser = function(userName, password) {
 			})
 		})
 	})
-}
+};
+
+//find a random tips in the database
+TipsSchema.statics.findRandom = function(cb){
+    this.count(function(error, count){
+        if(error){
+            return cb(error);
+        }
+        const rand = Math.floor(Math.random()*count);
+        this.findOne().skip(rand).exec(callback);
+    }.bind(this)
+    );
+};
+TipsSchema.plugin(random);
+
+//find a random posts in the database
+NewsSchema.statics.findRandom = function(cb){
+    this.count(function(error, count){
+        if(error){
+            return cb(error);
+        }
+        const rand = Math.floor(Math.random()*count);
+        this.findOne().skip(rand).exec(callback);
+    }.bind(this)
+    );
+};
+NewsSchema.plugin(random);
+
+
 //middleware hashing password and save it 
 UserSchema.pre('save', function(next){
     const user = this;
@@ -177,7 +226,11 @@ UserSchema.pre('save', function(next){
 const Post = mongoose.model('Post', PostSchema);
 const Notification = mongoose.model('Notification', NotificationSchema);
 const User = mongoose.model('User', UserSchema);
-// const QuanrantineProgress = mongoose.model('QuarantineProgress', QuanrantineProgressSchema);
-const Activities = mongoose.model('Activities', ActivitiesSchema);
 
-module.exports = { Post, Notification, User, Activities}
+const Activities = mongoose.model('Activities', ActivitiesSchema);
+const Tips = mongoose.model('Tips', TipsSchema);
+const News = mongoose.model('News', NewsSchema);
+
+
+module.exports = { Post, Notification, User, Activities,Tips, News}
+
