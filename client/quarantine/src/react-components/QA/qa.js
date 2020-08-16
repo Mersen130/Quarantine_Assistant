@@ -1,69 +1,36 @@
 import React from "react";
 import "../../components.css";
-import Media from "./media";
+import MediaAdmin from "./mediaAdmin";
 import { uid } from "react-uid";
 import DropDown from "./dropdown";
 import Sidebar from "../SideNavBar/sidebar.js";
+import Sidebaradmin from "../SideNavBar/sidebarAdmin.js";
 import Pagination from "./pagination.js";
-import serverCall from "./serverCall"
-class QA extends React.Component {
+import serverCall from "./serverCall";
+
+class QAAdmin extends React.Component {
   constructor(props){
     super(props);
-    this.props.history.push("/qa");
-    console.log(this.props.history);
+    this.props.history.push("/qaAdmin");
     const loadPosts = serverCall.loadPosts.bind(this);
     this.state = {currShown: [0, 10],
-      postsList: [],
-      notes: [
-      ],
-    numNotes: 0,}
+      postsList: [],}
     loadPosts();
 
-    // this.state = {
-    //   /*user = this.props.user*/
-    //   userInfo: info[1],
-    //   postsList: [
-    //     {
-    //       posterId: [posterId],
-    //       posterType: ["user", "doctor"]
-    //       _id: postId,
-    //       names: ["user1", "user2"],
-    //       contents: ["Aba aba aba?1 #aba", "Aba aba aba aba aba. #aba"],
-    //       times: [new Date(), new Date()],
-    //       likes: [10, 2],
-    //       tags: ["#aba", "#aba"],
-    //     }],
-    //   currShown: [0, 10],
-    //   notes: [
-    //     'Your post "aba aba..." has been deleted.',
-    //     'Your post "aba aba..." has been deleted.',
-    //   ],
-    //   numNotes: 2,
-    // };
   }
 
-
   render() {
-      console.log("rerender", this.state);
-      if (!this.state.userInfo){
-        return <div></div>
-      }
+    // console.log("rerender", this.state);
+    if (!this.state.userInfo){
+      return <div></div>
+    }
     return (
       <div>
-        <Sidebar
-          userName={this.state.userInfo.userName}
-          title={"Q&A"}
-          notes={this.state.notes}
-          numNotes={this.state.numNotes}
-        />
-        <div>
-        <div className="jumbotron jumbotron-fluid" id="jumbotronQa">
+        <Sidebaradmin userName={this.state.userInfo.userName} title={"Q&A"} />
+        <div className="jumbotron jumbotron-fluid" id="jumbotronQaadmin">
           <div className="containerQA">
-            <h1 className="title titleQa">Quanrantine Assistant Communities</h1>
-            <p>
-              Find answers, ask questions, and connect with our community of the
-              most authoritative doctors around the world.
-            </p>
+            <h1 className="title titleQa">Welcome, Admin</h1>
+            <p>Please delete inappropriate posts.</p>
             <form className="searchGroup searchGroupQa">
               <div className="form-group form-groupQa">
                 <input
@@ -75,8 +42,8 @@ class QA extends React.Component {
               </div>
               <button
                 type="submit"
-                id="searchBtn"
                 className="btn btn-primary"
+                id="searchBtn"
                 onClick={this.search}
               >
                 Search !
@@ -86,51 +53,7 @@ class QA extends React.Component {
               Scroll Down</div>
           </div>
         </div>
-        </div>
         <div id="bgwhite">
-          <div>
-            <form action="#" className="postForm">
-              <img
-                src={require("../../lib/profilephotos/user1.png")}
-                className="profilephotoPost"
-                onClick={function() {
-                  window.location.href = 'user1';
-             }}
-              />
-
-              <div className="form-group form-groupQab">
-                <input
-                  className="form-control"
-                  id="post"
-                  placeholder="Make a new post here..."
-                  name="email"
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                id="postBtn"
-                onClick={this.post}
-              >
-                Post ! !{" "}
-              </button>
-              <br />
-              <div className="form-group form-groupQab tagDiv">
-                <input
-                  className="form-control"
-                  id="tags"
-                  placeholder="#Tags"
-                  name="pswd"
-                />
-              </div>
-              <div className="anonnCheck">
-                <label className="form-check-label">
-                  <input className="form-check-input" type="checkbox" />{" "}
-                  Anonnymous to others
-                </label>
-              </div>
-            </form>
-          </div>
           <br />
           <hr />
           <br />
@@ -143,14 +66,9 @@ class QA extends React.Component {
             {this.state.postsList
               .slice(this.state.currShown[0], this.state.currShown[1])
               .map((post, mediaNum) => (
-                <Media
-                  userInfo={this.state.userInfo}
+                <MediaAdmin
                   key={uid(post)}
                   postsList={post}
-                  handleLike={(i, amt) => this.like(i, mediaNum, amt)}
-                  handleReply={(name, content) =>
-                    this.handleReply(mediaNum, name, content)
-                  }
                   handleRemove={(i, e) => this.handleRemove(i, mediaNum, e)}
                   mediaId={mediaNum}
                 />
@@ -177,83 +95,50 @@ class QA extends React.Component {
     const t = document.getElementById("searchedTag").value;
     e.preventDefault();
     const posts = document.getElementsByClassName("mt-3");
-    // console.log(posts)
     const regExp = / +/;
     if (t === "" || regExp.test(t)) {
-        for (let i = 0; i < posts.length; i++) {
-            posts[i].style.visibility = "visible";
-        }
-        return;
+      for (let i = 0; i < posts.length; i++) {
+        posts[i].style.visibility = "visible";
+      }
+      return;
     }
     for (let i = 0; i < posts.length; i++) {
-        posts[i].style.visibility = "collapse";
+      posts[i].style.visibility = "collapse";
     }
-    // console.log(this.state.currShown)
-    for (let i = this.state.currShown[0]; i < this.state.currShown[1]; i++) {
-        for (let j = 0; j < this.state.postsList[i].tags.length; j++){
-            if (this.state.postsList[i].tags[j].includes(t)) {
-                // console.log(posts[i])
-                posts[i].style.visibility = "visible";
-            }
+    for (let i = 0; i < this.state.postsList.length; i++) {
+      for (let j = 0; j < this.state.postsList[i].tags.length; j++) {
+        if (this.state.postsList[i].tags[j].includes(t)) {
+          posts[i].style.visibility = "visible";
         }
+      }
     }
-  }
-  
+  };
+
   post = (e) => {
     e.preventDefault();
     const post = document.querySelector("#post");
-    const regExp = /\S/;
-    // console.log("post value:", post.value)
-    if (!regExp.test(post.value)) {
+    const regExp = / +/;
+    if (post.value === "" || regExp.test(post.value)) {
       alert("Can't send empty post");
       return;
     }
     const tags = document.querySelector("#tags");
-    const data = {
-      posterId: [this.state.userInfo.userId],
-      posterType: [this.state.userInfo.userType],
-      names: [this.state.userInfo.userName],
+    // console.log(post.value);
+    this.state.postsList.splice(0, 0, {
+      names: ["user1"],
       contents: [post.value + " " + tags.value],
       times: [new Date()],
       likes: [0],
       tags: [tags.value],
-    }
-
-    // server call that sends data
-    const sendPost = serverCall.sendPost.bind(this);
-    sendPost(data);
-  }
+    });
+    const newList = this.state.postsList;
+    this.setState({ postsList: newList });
+    // todo: a server call that sends data
+  };
 
   backTop = () => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  };
-
-  like = (i, j, amt) => {
-    // j is the postIndex, i is the contentIndex
-    const postsListB = this.state.postsList;
-    postsListB[j].likes[i] += amt;
-    // todo: a server call that sends data
-    const sendLike = serverCall.sendLike.bind(this);
-    // alert(j);alert(i);alert(amt);
-    sendLike(postsListB, i, j, amt);
-  };
-
-  handleReply = (mediaId, name, content) => {
-    const newList = this.state.postsList;
-
-    newList[mediaId].posterId.push(this.state.userInfo.userId);
-    newList[mediaId].posterType.push(this.state.userInfo.userType);
-    newList[mediaId].names.push(name);
-    newList[mediaId].contents.push(content);
-    newList[mediaId].times.push(new Date());
-    newList[mediaId].likes.push(0);
-    newList[mediaId].tags.push("");
-    
-    // console.log(newList[mediaId])
-    // a server call that sends data
-    const sendReply = serverCall.sendReply.bind(this);
-    sendReply(newList, mediaId);
   };
 
   swap = (items, firstIndex, secondIndex) => {
@@ -305,12 +190,14 @@ class QA extends React.Component {
   };
 
   handleOrder = (e) => {
+    // console.log(e);
     const postsListB = this.state.postsList;
     if (e == "Newest") {
       // time based
       this.setState({ postsList: this.selectionSort(postsListB, "Newest") });
     } else if (e == "Top rated") {
       // like based
+      // console.log(this.selectionSort(postsListB, "Top"));
       this.setState({ postsList: this.selectionSort(postsListB, "Top") });
     } else {
       // reply based
@@ -322,19 +209,11 @@ class QA extends React.Component {
   handlePage = (mode, page) => {
     if (mode === "next") {
       if (this.state.currShown[1] >= this.state.postsList.length) return;
-      let end = this.state.currShown[1] + 10;
-      if (end > this.state.postsList.length){
-        end = this.state.postsList.length
-      }
       this.setState({
-        currShown: [this.state.currShown[0] + 10, end],
+        currShown: [this.state.currShown[0] + 10, this.state.currShown[1] + 10],
       });
     } else {
-      let end = page * 10;
-      if (end > this.state.postsList.length){
-        end = this.state.postsList.length
-      }
-      this.setState({ currShown: [(page - 1) * 10, end] });
+      this.setState({ currShown: [(page - 1) * 10, page * 10] });
     }
   };
 
@@ -354,14 +233,6 @@ class QA extends React.Component {
       removeReply(postsListB[mediaNum]._id, i, postsListB);
     }
   };
-
-  pushNote = (v) => {
-    const noteB = this.state.notes;
-    const numB = this.state.numNotes + 1;
-    noteB.splice(0, 0, v);
-    this.setState({ notes: noteB });
-    this.setState({ numNotes: numB });
-  };
 }
 
-export default QA;
+export default QAAdmin;
