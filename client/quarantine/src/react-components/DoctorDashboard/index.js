@@ -1,44 +1,21 @@
 import React, { Component } from "react";
 import Sidebar from "../SideNavBar/sidebar.js";
 import PageTitle from "../theme/PageTitle";
+import { ContentCardTips } from "./ContentCardTips.js";
+import ContentCardNews from "./ContentCardNews.js";
+import { getTips, getNews } from "../../actions/user.js";
+
 
 export class DoctorDashboard extends Component {
+    componentDidMount() {
+        getTips(this);
+        getNews(this);  
+      }
     state = {
-        notifiLists: [
-            {
-                username: "user1",
-                uid: "1",
-                type: "request",
-            },
-            {
-                username: "user2",
-                uid: "2",
-                type: "reply",
-            },
-            {
-                username: "user3",
-                uid: "3",
-                type: "reply",
-            },
-            {
-                username: "user4",
-                uid: "4",
-                type: "request",
-            },
-            {
-                username: "user5",
-                uid: "5",
-                type: "reply",
-            },
-        ],
+        tips:[],
+        news:[]
     };
     render() {
-        const requests = this.state.notifiLists.filter(
-            (note) => note.type === "request"
-        );
-        const replies = this.state.notifiLists.filter(
-            (note) => note.type === "reply"
-        );
         return (
             <div>
                 <Sidebar userName="user" title={"Dashboard"} />
@@ -47,57 +24,14 @@ export class DoctorDashboard extends Component {
                         <div className="row no-gutters page-header py-4">
                             <PageTitle
                                 sm="4"
-                                title="Requests for my answer"
+                                title="Covid-19 related Tips & News"
                                 subtitle=""
                                 className="text-sm-left"
                             />
                         </div>
-
-                        {requests.map((post, idx) => (
-                            <div class="alert alert-warning" role="alert">
-                                User{" "}
-                                <a
-                                    href={"/" + post.username}
-                                    class="alert-link"
-                                >
-                                    {post.username}
-                                </a>{" "}
-                                asked you a question. Take a look{" "}
-                                {/* Add corresponding post link here */}
-                                <a href="/qa" class="alert-link">
-                                    here
-                                </a>
-                                .
-                            </div>
-                        ))}
-
-                        <div className="row no-gutters page-header py-4">
-                            <PageTitle
-                                sm="4"
-                                title="Replies to my answer"
-                                subtitle=""
-                                className="text-sm-left"
-                            />
-                        </div>
-
-                        {replies.map((post, idx) => (
-                            <div class="alert alert-info" role="alert">
-                                User{" "}
-                                <a
-                                    href={"/" + post.username}
-                                    class="alert-link"
-                                >
-                                    {post.username}
-                                </a>{" "}
-                                has replied to your answer. Take a look{" "}
-                                {/* Add corresponding post link here */}
-                                <a href="/qa" class="alert-link">
-                                    here
-                                </a>
-                                .
-                            </div>
-                        ))}
                     </div>
+                    <ContentCardTips category="Tips" component={this} />
+                    <ContentCardNews category="News" component={this} />
                 </div>
             </div>
         );

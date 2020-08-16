@@ -1,5 +1,6 @@
 {
   "files": {
+
     "main.css": "/static/css/main.8c58f2b1.chunk.css",
     "main.js": "/static/js/main.dc17a559.chunk.js",
     "main.js.map": "/static/js/main.dc17a559.chunk.js.map",
@@ -15,6 +16,7 @@
     "static/css/main.8c58f2b1.chunk.css.map": "/static/css/main.8c58f2b1.chunk.css.map",
     "static/js/2.23cdb523.chunk.js.LICENSE.txt": "/static/js/2.23cdb523.chunk.js.LICENSE.txt",
     "static/media/Yoga.png": "/static/media/Yoga.d8119ad0.png",
+
     "static/media/appLogo.png": "/static/media/appLogo.f19967d4.png",
     "static/media/bg1.jpeg": "/static/media/bg1.80b48b36.jpeg",
     "static/media/bg2.jpg": "/static/media/bg2.c1759d44.jpg",
@@ -25,9 +27,11 @@
   },
   "entrypoints": [
     "static/js/runtime-main.511d6b44.js",
+
     "static/css/2.c1fedb3d.chunk.css",
     "static/js/2.23cdb523.chunk.js",
     "static/css/main.8c58f2b1.chunk.css",
     "static/js/main.dc17a559.chunk.js"
+
   ]
 }
