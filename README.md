@@ -1,6 +1,10 @@
 # Quanrantine Assistant - Team 23
 
 This is a web application designed for assisting people people to get through their quarantine period during this COVID-19 pandemic. The front-end part of this application is built with React and Bootstrap.
+## Contributors and work distribution
+
+- Qixin: Sidebar, Q&A, Questionnire, User Profile
+- Yifei: Login & signup, Recommend activities, Dashboard
 
 ## Deployed Address: https://obscure-sands-70009.herokuapp.com/
 NOTE: Behaviour of this app is undefined if using browsers other than Chrome.
@@ -79,18 +83,29 @@ For the ease of testing, you can imitate there's a user logged in in the cookies
     1. `GET('/profile/:id')`
         - When is called: user loads `/UserProfile` or `DoctorProfile` or `AdminProfile` page
         - params&#46;id: the ObjectID of the target user, or `me` if the user is loading his own profile page.
-        - Takes: 
+        - Takes: nothing
+        - Action: locate the target user/logged in user and send back his/her info
+        - Returns: on success: `[ Mongoose user document, [ array of posts and activities that the user interacted with ] ]`
+    2. `PATCH('/profile')`
+        - When is called: user updates his/her own profile information
+        - Takes: `{ userName: Optional String, gender: Optional String, age: Optional String, region: Optional String, selfDescription: Optional String }`
+        - Action: if there is a user logged in, update his/her user document with `req.body`
+        - Returns: on success: nothing
 
 ## Login (`/`)
 
-This page lets users log in the app. There are 2 accounts you can login with for now:
+This page lets users log in the app. There are a few accounts you can login with for now:
 
-- Regular user
-<pre>userName: <b>user</b>, password: <b>user</b></pre></br>
+- Regular user: (username, password) pairs
+user, user
+user1, user1
 
-- Admin
+- Doctor: (username, password) pairs
+doctor, doctor
 
-<pre>userName: <b>admin</b>, password: <b>admin</b></pre></br>
+- Admin (username, password) pairs
+admin, admin
+
 
 User and Admin will be routed to the corresponding dashboard after login.
 
@@ -104,17 +119,15 @@ This page lets users create an account, and will route to the normal user's dash
 
 ## User profile
 
-There are currently 4 available user profiles to view, they can be accessed either by clicking the avatar on the sidebar or directly visiting the link.
+There are currently 4 available user profiles to view, they can be accessed either by clicking the profile photo on the sidebar or in the Q&A page.
 
-Note that all data used in user views are now hard-coded. The information will be obtained from our user database in later development.
+- User self-view: This is the view where a regular user checks his own profile. The left card shows the name, gender, age, region, quarantine progress and bio of the user. The user can update his information by updating the fields in the forms on the right card. The changes will be reflected on the left card. The card at the very end of the page is displaying all posts and activities that he/she interacted in the past.
 
-- User self-view (`/user1/`): This is the view where a regular user checks his own profile. The left card shows the name, gender, age, region, quarantine progress and description of the user. The user can update his information by updating the fields in the forms on the right card. The changes will be reflected on the left card.
+- Regular user view: This is the view where a user checks another regular user's profile. The card shows the name, gender, age, region, quarantine progress and description of the user. The card at the very end of the page is displaying all posts and activities that he/she interacted in the past.
 
-- Regular user view (`/user2/`): This is the view where a user checks another regular user's profile. The card shows the name, gender, age, region, quarantine progress and description of the user.
+- Doctor profile (`/DoctorProfile`): This is the view where a user checks a doctor user's profile. Apart from the necessary information, there's also a badge verifying the doctor identity and a field indicating the doctor's specialization.
 
-- Doctor profile (`/doctorprofile/`): This is the view where a user checks a doctor user's profile. Apart from the necessary information, there's also a badge verifying the doctor identity and a field indicating the doctor's specialization.
-
-- Admin profile (`/adminprofile/`): This is the view where a user checks an admin's profile. Apart from the necessary information, there's also a badge indicating this is an admin.
+- Admin profile (`/AdminProfile`): This is the view where a user checks an admin's profile. Apart from the necessary information, there's also a badge indicating this is an admin.
 
 ## Dashboard
 
@@ -134,8 +147,8 @@ This is the entrypoint for an admin. The admin can view the stats in the app in 
 
 There are two views of the QA platform, for regular users and admins respectively.
 
-### User view (`/qa/`)
-
+### User view (`/qa`)
+NOTE: doctors will share the same view as regular users.
 - A user can post his/hers question on this page (with some optional tags). The newly posted question will be stacked on the top of the page.
 
 - A user can `[like, unlike, reply]` to any post/reply, can delete only his posts/replies.
@@ -146,7 +159,7 @@ There are two views of the QA platform, for regular users and admins respectivel
 - The default layout of posts are ordered from newest to oldest, this can always be changed by the dropdown on the right hand side of the page, where user can specify `"Newest"`-- ranked by time posted, `"top rated"` -- ranked by likes received, `"hottest"` -- ranked by number of replies.
 - Users will receives notifications if their posts/replies are `[liked, deleted or replied]` in the navbar.
 - A page can contain maximumly 10 posts, the rest of posts can be accessed throught the pagination tool at the bottom of the page.
-
+- Users can click on any profile photos and redirect to that person's profile page
 ### Admin view (`/qaAdmin/`)
 
 The admin view shares similar layout with user view, except that an admin cannot [like, post, reply], but can delete ANY posts/replies if the content is not appropriate.
@@ -159,14 +172,13 @@ This is a page that lists user's activities and activities that recommended by t
 
 A user/admin can redirect to his own profile/Dashboard/Q&A/recomendation activities pages or log out through sidebar, or check the notifications through navbar.
 
-## Note
+## Notes and Pitfalls of this App
 
-As TA suggested, we choose to implement the abovementioned unique features of our app first. Time permitted, we will implement the additional `People Nearby` feature at a later stage.
-
-## Contributors and work distribution
-
-- Qixin: Sidebar, Q&A, Questionnire
-- Yuqiu: User profile, Dashboard
-- Yifei: Login & signup, Recommend activities
+As for now, the master branch only contains Qixin's work. And there exists many pitfalls and unexpected behaviours due to lack of labour.
+This branch does not contain Yifei's works since she didn't commit her work until the last 3 hours prior to the deadline, all of her works are stored in a git branch called `new`.
+Because steps of developing a web app are all linked together with each other. I(Qixin) spend most of the time waiting for a Yifei's code. So, there really isn't much I can do without her signin funcioning.
+- Pitfall 1: Do not use your everyday password since we didn't spend much effort on security.
+- Pitfall 2: Dashboard and Activities are front-end ONLY.
 
 Thanks :)
+
