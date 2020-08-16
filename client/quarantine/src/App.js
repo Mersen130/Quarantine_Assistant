@@ -88,7 +88,7 @@ class App extends React.Component {
                             "admin":<AdminDashboard  app={this} />
                         }[currentUserType]
                     }
-                </Route>
+                </Route> 
                 <Route exact path="/userActivities">
                     <UserActivities app={this}/>
                 </Route>
