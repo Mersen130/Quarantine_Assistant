@@ -112,42 +112,51 @@ app.get("/post", mongoChecker, authenticate, (req, res) => {
     }*/
 app.post("/post", mongoChecker, authenticate, (req, res) => {
 
-    const posterID = req.params.posterId;
-    if (!checkObjctId(posterID)) {
+    const posterId = req.session.user;
+    if (!checkObjctId(posterId)) {
 		res.status(404).send()  // if invalid id, definitely can't find resource, 404.
 		return;  // so that we don't run the rest of the handler.
 	}
-    log(posterID)
+    // log(posterId)
     const post = new Post({
-        posterID: [req.session.user],
+        posterId: [req.session.user],
+        posterType: [req.session.userType],
+        posterName: [req.session.userName],
         postContent: req.body.contents,
         postTime: req.body.times,
         numLikes: req.body.likes,
         tags: req.body.tags,
     });
-    log(post)
+    console.log(post);
+    // log(post)
     post.save().then((result) => {
         return result._id;
     })
     .then(postId =>{
         User.findById(req.session.user).then(user => {
             if (!user){
+                // log('here');
                 res.status(404).send("resource not found")
             } else{
-                const fieldsToUpdate = { posts: user.posts.push(postId) };
-                return User.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+                // log("123")
+                // const fieldsToUpdate = { posts: [postId] };
+                user.posts.push(postId);
+                const fieldsToUpdate = { posts: user.posts };
+                return User.findOneAndUpdate({_id: req.session.user}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
             }
         })
         .then(user => {
             if (!user){
                 res.status(404).send("resource not found")
             } else{
-                res.send({ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user })
+                // log("123",{ currentPost: post._id, posterType: req.session.userType, posterId: req.session.user });
+                res.send({ currentPost: post._id });
             }
         }).catch(error => {
             if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
                 res.status(500).send('Internal server error')
             } else {
+                // log("herer")
                 res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
             }
         });
@@ -156,6 +165,7 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
         if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
             res.status(500).send('Internal server error')
         } else {
+            // log("here2")
             res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
         }
     })
@@ -163,9 +173,9 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
 
 
 //leave a reply
-app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
+app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     const postId = req.params.postId;
-
+    console.log(postId)
     if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
@@ -175,18 +185,24 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
             res.status(404).send("post not found");
             Promise.reject();
         }
-        const newPosterId = post.posterID.push(req.session.user);
-        const newPost = new Post({
-            posterID: newPosterId,
+        post.posterId.push(req.session.user);
+        // log(post, newposterId);
+        const newPost = {
+            posterId: req.body.posterId,
+            posterType: req.body.posterType,
+            posterName: req.body.names,
             postContent: req.body.contents,
             postTime: req.body.times,
             numLikes: req.body.likes,
             tags: req.body.tags,
-        });
-        return Post.findOneAndReplace({id: postId}, post, {new: true, useFindAndModify: false});
+        }
+        console.log(newPost);
+        // log(newPost)
+        return Post.findOneAndUpdate({_id: postId}, {$set: newPost}, {new: true, useFindAndModify: false});
     })
     .then(post => {
         if (!post){
+            // log("here1")
             res.status(404).send("post not found");
         } else{
             return post._id;
@@ -195,19 +211,24 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     .then(postId =>{
         User.findById(req.session.user).then(user => {
             if (!user){
+                // log("here2")
                 res.status(404).send("resource not found")
             } else{
                 for (const existPost of user.posts){
-                    if (existPost == postId){
+                    log(existPost, postId, existPost === postId, existPost == postId);
+                    if (existPost.toString() === postId.toString()){
+                        log("here4")
                         return user;
                     }
                 }
-                const fieldsToUpdate = { posts: user.posts.push(postId) };
-                return User.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+                user.posts.push(postId)
+                const fieldsToUpdate = { posts: user.posts };
+                return User.findOneAndUpdate({_id: req.session.user}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
             }
         })
         .then(user => {
             if (!user){
+                // log("here3")
                 res.status(404).send("resource not found")
             } else{
                 res.send({ posterType: req.session.userType, posterId: req.session.user });
@@ -216,6 +237,7 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
             if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
                 res.status(500).send('Internal server error')
             } else {
+                console.log("here?");
                 res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
             }
         });
@@ -235,7 +257,7 @@ app.put("/reply/:postId", mongoChecker, authenticate, (req, res) => {
 app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
     const postId = req.params.postId;
 
-    if (!checkObjctId(postid)){
+    if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
 
@@ -251,7 +273,7 @@ app.patch("/post/like/:postId",  mongoChecker, authenticate, (req, res) => {
     .then( numLikes => {
         numLikes[req.body.contentIndex] += req.body.likeNum;
         const fieldsToUpdate = { numLikes: numLikes };
-        return Post.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+        return Post.findOneAndUpdate({_id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
     })
     .then(post => {
         if (!post){
@@ -316,10 +338,10 @@ app.delete("/post/:postId", mongoChecker, authenticate, (req, res) => {
 
 
 // Delete a reply
-app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
+app.patch("/reply/delete/:postId", mongoChecker, authenticate, (req, res) => {
     const postId = req.params.postId;
 
-    if (!checkObjctId(postid)){
+    if (!checkObjctId(postId)){
         res.status(404).send('Resource not found');
     }
 
@@ -327,15 +349,17 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
     .then( post => {
         if (!post){
             res.status(404).send('post not found');
-            return Promise.reject();  // todo: debug this
+            return Promise.reject();
         } else{
-            return post.contents;
+            // log(post)
+            return post.postContent;
         }
     })
     .then( contents => {
+        // log(contents)
         contents[req.body.contentIndex] = "[content deleted by admin/author]";
-        const fieldsToUpdate = { contents: contents };
-        return Post.findOneAndUpdate({id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
+        const fieldsToUpdate = { postContent: contents };
+        return Post.findOneAndUpdate({_id: postId}, { $set: fieldsToUpdate }, {new: true, useFindAndModify: false});
     })
     .then(post => {
         if (!post){
@@ -352,13 +376,6 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
             res.status(400).send("Bad Request");
         }
     })
-});
-
-
-// Update profile
-app.post("/profile/:id", (req, res) => {
-    // TODO
-    res.status(500).send("internal server error");
 });
 
 // get user info
@@ -385,7 +402,6 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
             if (!user) {
                 res.status(404).send(); // could not find this student
             } else {
-
                 const RecentAct = [];  // an array storing activities and posts
                 let p = Promise.resolve();
                 for (let i = 0; i < user.posts.length; i++) {
@@ -424,7 +440,6 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
                 // log("here3.7")
 
                 p.then( e => res.send([user, RecentAct])).catch(e => res.status(400).send("bad request"));
-
             }
         })
         .catch(error => {
@@ -446,7 +461,7 @@ app.patch("/profile", mongoChecker, authenticate, (req, res) => {
         }
     })
     .then( user => {
-        return User.findOneAndUpdate({id: req.session.user}, { $set: req.body }, {new: true, useFindAndModify: false});
+        return User.findOneAndUpdate({_id: req.session.user}, { $set: req.body }, {new: true, useFindAndModify: false});
     })
     .then(user => {
         if (!user){
@@ -464,6 +479,7 @@ app.patch("/profile", mongoChecker, authenticate, (req, res) => {
         }
     })
 });
+
 
 // =================
 
