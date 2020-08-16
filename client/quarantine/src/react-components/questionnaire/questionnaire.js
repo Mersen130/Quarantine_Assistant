@@ -70,11 +70,3 @@ class Questionnaire extends React.Component {
 }
 
 export default Questionnaire;
-
-
-
-
-
-
-
-
