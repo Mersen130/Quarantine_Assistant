@@ -2,15 +2,12 @@ import React from "react";
 import "../../App.css";
 import "../../components.css";
 
-
-class Sidebar extends React.Component {
+class Sidebaradmin extends React.Component {
   state = { title: "Dashboard" };
 
-  state = { title: this.props.title, numRead: 0 };
+  state = { title: this.props.title };
 
   render() {
-    const notes = this.props.notes;
-    const numNotes = this.props.numNotes;
     return (
       <div className="Navbar">
         <div id="mySidebar" className="sidebar">
@@ -23,21 +20,18 @@ class Sidebar extends React.Component {
           </a>
           {/* TODO: change hrefs to appropriate links */}
           {/*Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>*/}
-          <a href="/UserProfile">
+          <a href="/adminprofile">
             <img
               id="profilePhoto"
-              src={require("../../lib/sidebar/sampleprofile.png")}
+              src={require("../../lib/profilephotos/strange.png")}
             />
           </a>
-          <p id="profileName">{this.props.userName}</p>
-          <a onClick={this.changeNavbarTitle} href="/dashboard">
+          <p id="profileName">user</p>
+          <a onClick={this.changeNavbarTitle} href="/admindashboard">
             <img src={require("../../lib/sidebar/dashboard.png")} /> Dashboard
           </a>
-          <a onClick={this.changeNavbarTitle} href="/qa">
+          <a onClick={this.changeNavbarTitle} href="/qaAdmin">
             <img src={require("../../lib/sidebar/qa.png")} /> Q&A
-          </a>
-          <a onClick={this.changeNavbarTitle} href="/userActivities">
-            <img src={require("../../lib/sidebar/activity.png")} /> Activities
           </a>
           <a href="/" id="logout">
             log out
@@ -46,35 +40,8 @@ class Sidebar extends React.Component {
 
         <div id="main">
           <button className="openbtn" onClick={this.openSide}>
-            <img className="logo" src={require("../../lib/appLogo.png")}/> <span>{this.state.title}</span>
+          <img className="logo" src={require("../../lib/appLogo.png")}/> {this.state.title}
           </button>
-
-          <div class="dropdown" id="notification">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="notification2"
-              onClick={() => this.removeUnread(numNotes)}
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Notifications{" "}
-              <span class="badge badge-danger">
-                {typeof notes !== "undefined" &&
-                  this.state.numRead !== numNotes &&
-                  numNotes - this.state.numRead}
-              </span>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {typeof notes !== "undefined" &&
-                notes.map((note) => (
-                  <a class="dropdown-item" href="#">
-                    {note}
-                  </a>
-                ))}
-            </div>
-          </div>
         </div>
       </div>
     );
@@ -93,10 +60,6 @@ class Sidebar extends React.Component {
   closeSide = () => {
     document.getElementById("mySidebar").style.width = "0";
   };
-
-  removeUnread = (numNotes) => {
-    this.setState({ numRead: numNotes });
-  };
 }
 
-export default Sidebar;
+export default Sidebaradmin;
