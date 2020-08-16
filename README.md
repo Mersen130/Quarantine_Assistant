@@ -2,30 +2,84 @@
 
 This is a web application designed for assisting people people to get through their quarantine period during this COVID-19 pandemic. The front-end part of this application is built with React and Bootstrap.
 
-# Deployed Address: https://obscure-sands-70009.herokuapp.com/ | https://git.heroku.com/obscure-sands-70009.git
+## Deployed Address: https://obscure-sands-70009.herokuapp.com/
+NOTE: Behaviour of this app is undefined if using browsers other than Chrome.
 
-## Getting Started
+## Getting Started 
+##### (follow this section if you want to run this app locally)
 
-Run the following command to install the dependencies:
+Run the following command to install the dependencies and build components:
 
 `npm install`
+`cd client/quarantine`
+`npm install`
+`npm run build`
 
 After setup, run the following command to start the app:
 
-`npm start`
+`cd ../../`
+`node server.js`
+open `localhost:5000` in Chrome
 
-## Structure
+## Routes
 
-The main components of the front-end part of this application are (followed by its relative paths):
+##### UI routes (what user can see in the browser tab) of this application are (followed by its relative paths):
 
-- Login (`/`)
-- Signup (`/signup/`)
-- Questionnaire (`/questionnaire/`)
-- Dashboard (`/dashboard/`, `/admindashboard/`)
-- Profiles (`/user1/`,`/user2/`,`/adminprofile/`,`/doctorprofile/`)
-- Q&A (`/qa/`, `/qaAdmin/`)
-- Activity Recommendations (`/Activities/`)
+- Signin (`/`, `/SignIn`)
+- Signup (`/SignUp`)
+- Reset (`/Reset`)
+- Questionnaire (`/questionnaire`)
+- Dashboard (`/dashboard`, `/admindashboard`, `doctordashboard`)
+- Profiles (`/UserProfile`,`/DoctorProfile`, `/AdminProfile`)
+- Q&A (`/qa`, `/qaAdmin`)
+- Activity Recommendations (`/Activities`)
+- Userlist (`/userlist`)
 - Other miscs (Navbar, Sidebar etc.)
+
+##### Back-end routes (server API):
+Qixin's API:  
+For the ease of testing, you can imitate there's a user logged in in the cookies by: comment out line38-line51 and uncomment line52-line55 in `server.js`. If you are running locally, remember to replace line52 with a valid user ObjectID in your own local database.
+
+- Q&A section
+    1. `GET('/post')`
+        - When is called: user loads `/qa` or `/qaAdmin` page
+        - Takes: nothing
+        - Action: if there is a valid user logged in, send back all of the posts in the database and an object of user information
+        - Returns: on success: `[ [Post Mongoose Documents], { userName: String, userType: String, userId: ObjectID } ]`
+    2. `POST('/post')`
+        - When is called: user sends a new post
+        - Takes: `{ contents: [String], times: [String of Dates], likes: [String of Numbers], tags: [String] }`, NOTE: these arrays should be parallel arrays(i.e. they have the same length)
+        - Action: if there is a valid user logged in, add the post to the database, and make this post belongs to the current user.
+        - Returns: on success: `{ currentPost: ObjectID of the newly added post }`
+    3. `PATCH('/reply/:postId')`
+        - When is called: user leaves a reply to any post
+        - params.postId: the ObjectID of the target post
+        - Takes: `{ posterId: [interacters' ObjectID of this post], posterType: [interacters' types of this post], names: [interacters' names of this post], contents: [String], times: [String of Dates], likes: [String of Numbers], tags: [String] }`, NOTE 1: these arrays should be parallel arrays(i.e. they have the same length). NOTE 2: we stored the post and its replies in an array. For example, a post has 2 replies, then its data structure will be `postContent: [mainPost, reply1, reply2]`
+        - Action: if there's a valid user logged in, update the target post with fields provided in request. Also, if this is the first time that the logged in user interacts with this post, make this post belongs to the logged in user as well.
+        - Returns: on success: `{ posterType: userType of the logged in user, posterId: ObjectID of the logged in user }`
+    4. `PATCH('/post/like/:postId')`
+        - When is called: user clickes the like button on any reply/post
+        - params.postId: the ObjectID of the target post
+        - Takes: `{ contentIndex: Number, likeNum: Number }`
+        - Action: if there is a valid user logged in, increase the target post's `<req.body.contentIndex>`th content by `<req.body.likeNum>`. 
+        - Returns: on success: nothing
+    5. `DELETE('/post/:postId')`
+        - When is called: user deletes his/her own post
+        - params.postId: the ObjectID of the target post
+        - Takes: nothing
+        - Action: if there is a valid user logged in, remove the target post from existance, and remove the reference to this post from this user's mongoose document.
+        - Returns: on success: nothing
+    6. `PATCH('/reply/delete/:postId')`
+        - When is called: user deletes his/her own reply
+        - params.postId: the ObjectID of the target post
+        - Takes: `{ contentIndex: Number }`
+        - Action: replace the target post's `<req.body.contentIndex>th` content with `"content deleted by admin/author"`
+        - returns: on success: nothing
+- Profile section
+    1. `GET('/profile/:id')`
+        - When is called: user loads `/UserProfile` or `DoctorProfile` or `AdminProfile` page
+        - params&#46;id: the ObjectID of the target user, or `me` if the user is loading his own profile page.
+        - Takes: 
 
 ## Login (`/`)
 

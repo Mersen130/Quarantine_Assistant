@@ -44,29 +44,29 @@ class App extends React.Component {
                     <Route path="/SignUp" component={SignUp} />
                     <Route path="/Reset" component={Reset} />
                     <Route
-                        path="/questionnaire/"
+                        path="/questionnaire"
                         component={Questionnaire}
                     />
-                    <Route path="/qaAdmin/" component={QAAdmin} />
-                    <Route path="/qa/" component={QA} />
-                    <Route path="/dashboard/" component={Dashboard} />
-                    <Route path="/UserProfile/" component={UserProfile} />
-                    <Route path="/userlist/" component={UserList} />
+                    <Route path="/qaAdmin" component={QAAdmin} />
+                    <Route path="/qa" component={QA} />
+                    <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/UserProfile" component={UserProfile} />
+                    <Route path="/userlist" component={UserList} />
                     <Route
-                        path="/DoctorProfile/"
+                        path="/DoctorProfile"
                         component={DoctorProfile}
                     />
                     <Route
-                        path="/doctordashboard/"
+                        path="/doctordashboard"
                         component={DoctorDashboard}
                     />
                     <Route
-                        path="/AdminProfile/"
+                        path="/AdminProfile"
                         component={AdminProfile}
                     />
                     <Route path="/Activities" component={Activities} />
                     <Route
-                        path="/admindashboard/"
+                        path="/admindashboard"
                         component={AdminDashboard}
                     />
                 </Switch>
