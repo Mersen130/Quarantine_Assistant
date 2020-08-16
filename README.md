@@ -91,6 +91,109 @@ For the ease of testing, you can imitate there's a user logged in in the cookies
         - Takes: `{ userName: Optional String, gender: Optional String, age: Optional String, region: Optional String, selfDescription: Optional String }`
         - Action: if there is a user logged in, update his/her user document with `req.body`
         - Returns: on success: nothing
+        
+Yifei's Api
+
+- User SignIn, SignUp, Reset pasword
+    1. `Post(`/users`)`
+        - When is called: when tester want to add an admin, it is the only way to add an admin. The user can not add an admin by singing up
+        - Tasks: `{userName: required String, email:required String(must in the email formate), userType: required String (normal_user, doctor, admin), password:required String}`
+        - Action: add a user into the database
+        - Returns: `{currentUserName: userName, currentUserType: userType,"quarantineStartDate": Date}`
+    2. `post("/users/signIn)"`
+        - When is called: When the user signIn
+        - Tasks:`{userName: required String, password: required String}`
+        - Action: sign In the user if the user name and password is correct
+        - Returns: `{ "currentUserName": "user", "currentUserType": userType,"quarantineStartDate": Date}`
+     3. `post("/users/signUp)"`
+         - When is called: when the user signin up
+         - Tasks: `{userName: required String, email: required String, password: required String, docCertificate:optional String}`
+         - Action: Sign up the user, if the user provide the docCertificate then the user will be signUped as a doctor, normal_user otherwise
+         - Returns: `{"currentUserName": "user", "currentUserType": userType,"quarantineStartDate": Date)`
+       4. `put("/users/resetPswd")`
+          - When is called: when the user ask to reset the password
+          - Tasks:`{email: required String, password: required String}`
+          - Action: reset the user's password if the user provide a correct email address
+          - Return: 
+        5. `get("/users/check-session")`
+            - When is called: every time run the app
+            - Tasks:nothing
+            - Action: check the cookie session see if there is a user logged in
+            - Returns: `{"currentUserName": "user", "currentUserType": userType,"quarantineStartDate": Date)`
+         6. `get("/users/logout")`
+            - When is called: when the user clicked logout button
+            - Tasks: nothing
+            - Action: destroy the session cookie and route back to the signIn page
+            - Retruns:nothing
+ - Admin Dashboard
+      1. `get("/normalUsers")`
+            - When is called: In the userList that shows all the normalUser's info in the dashboard
+            - Tasks: nothing
+            - Action:get all the normal users in the database
+            - Retruns: `{"normalUsers": [{ "posts": Array,"_id": objectID,"userName": userName, "userType": userType,"email": email,"password": password,"docCertificate": String,"quarantineStartDate": Date,"notifications": Array,"activities": [{activities}],}]}`
+      2. `get("/doctors")`
+            - When is called: In the userList that shows all the doctors's info in the dashboard
+            - Tasks:nothing
+            - Action:get all the doctors users in the database
+            - Retruns:`{"doctors": [{ "posts": Array,"_id": objectID,"userName": userName, "userType": userType,"email": email,"password": password,"docCertificate": String,"quarantineStartDate": Date,"notifications": Array,"activities": [{activities}],}]}`
+      3. `delete("/user/:id")`
+            - When is called: When the admin wants to delete a user(normal_user, doctor), click the 'delete' button 
+            - params.id: id of the user whihc the admin going to delete
+            - Tasks:nothing
+            - Action:delete the user form the database
+            - Returns:nothing
+            
+- Activities
+     1. `post("/users/activities/:id"`
+           - When is called: When the user want to add the activity into his/her activities list, and click the 'add' button
+           - params.id: it is the id of the activity that the user want to add
+           - Tasks: nothing
+           - Action:add the activity into the current user's  activites list, and this activity will not showing in the recommended activities list
+           - Returns:`{"normalUsers": [{ "posts": Array,"_id": objectID,"userName": userName, "userType": userType,"email": email,"password": password,"docCertificate": String,"quarantineStartDate": Date,"notifications": Array,"activities": [{activities}],}]}`
+      2. `delete("/users/activities/:id"`
+            - When is called: When the current user want to delete an activity form their list, and click the 'Remove' button
+            - params.id: it is the id of the activity that the user want to delete
+            - Tasks: nothing
+            - Action: delete an activity from user's activities list
+            - Returns:`{"normalUsers": [{ "posts": Array,"_id": objectID,"userName": userName, "userType": userType,"email": email,"password": password,"docCertificate": String,"quarantineStartDate": Date,"notifications": Array,"activities": [{activities}],}]}`
+      3. `post("/activities")`
+            - When is called: add an activity into the database
+            - Tasks: `{activityTile: required String, activityType: required String, activityDescription: required String, addTime: default Date.now()}`
+            - Actions:add an activitiy into the database
+            - Returns:`{"_id": ObjectId,"activityTile": String, "activityType": String,"activityDescription": String,"addTime": Date}`
+       4. `get("/activities")`
+            - When is called: get all activities form the database
+            - Tasks: nothing
+            - Actions: get all activities
+            - Returns:`{activities:[`{"_id": ObjectId,"activityTile": String, "activityType": String,"activityDescription": String,"addTime": Date}`]}`
+       5. `get("/users/activities")`
+            - When is called: get all the activities of the current user
+            - Tasks:nothing
+            - Actions: get user's activities
+            - Returns: `{activities:[{"_id": ObjectId,"activityTile": String, "activityType": String,"activityDescription": String,"addTime": Date}]`
+- Tips & News in user dashboard
+    1. `post("/tips")`
+          - When is called: Adding tips into the database. Note: please add some tips into the datbase before run the app
+          - Tasks:`{title:required String, content: required String, addTime:default Date.now()}`
+          - Action: Add tips into the database
+          - Returns:`{title:title, content: content, date:Date}`
+    2. `get("/tips")`
+        - when is called: in the normal_user dashbord, it will randomly return a tip form the database
+        - Tasks: nothing
+        - Actions:Randomly get a tip from the database
+        - Retuns:`{tips:{title: title, content: content}`
+    3. `post("/news")`
+          - When is called: Adding news into the database. Note: please add some news into the datbase befro run the app
+          - Tasks:`{title:required String, content: required String, date:default Date.now()}`
+          - Action: Add news into the database
+          - Returns:`{title:title, content: content, addTime:Date}`
+    4. `get("/news")`
+        - when is called: in the normal_user dashbord, it will randomly return a news in the database
+        - Tasks: nothing
+        - Actions:Randomly get a news from the database
+        - Retuns:`{news:{title: title, content: content}`
+
+          
 
 ## Login (`/`)
 
@@ -107,7 +210,7 @@ doctor, doctor
 admin, admin
 
 
-User and Admin will be routed to the corresponding dashboard after login.
+User , Doctor and Admin will be routed to the corresponding dashboard after login.
 
 ## Questionnaire (`/questionnaire/`)
 
@@ -115,7 +218,7 @@ If a user does not have an existing account, he will be directed to a simple que
 
 ## Signup (`/signup/`)
 
-This page lets users create an account, and will route to the normal user's dashboard page upon creation. Users can only create accounts in the type of normal user, admin account and doctor account are setup by developers, it could not be created by users.
+This page lets users create an account, and will route to the normal user's dashboard page upon creation. Users can only create accounts in the type of normal_user and doctor, if the user provide the doctorCertificate No*, he/she will be created as a doctor.  admin account is setup by developers, it could not be created by users. Developers should use post("/uers") to create an admin.
 
 ## User profile
 
@@ -131,17 +234,19 @@ There are currently 4 available user profiles to view, they can be accessed eith
 
 ## Dashboard
 
-There are two types of dashboards, namely user dashboard and admin dashboard.
-
-Note that all data used in dashboards are now hard-coded. The date will be obtained from our user database in later development.
+There are 3 types of dashboards, namely user dashboard, doctor dashboard and admin dashboard.
 
 ### User dashboard (`/dashboard/`)
 
-This is the entrypoint for a regular user. The user can track his quarantine progress and check-in in the upper half of the page. The bottom half presents COVID-19 related tips and news. They are currently placeholder texts and will be pulled from external sources later.
+This is the entrypoint for a regular user. The title above the calendar shows the user's quarantine start date which is created when the user create an account. The calendar is dynamic, it shows the current date. The bottom half presents COVID-19 related tips and news. The tip and news on the dashboard is selected form the database randomly.
 
-### Admin dasboard(`/admindashboard/`)
+### Admin dasboard(`/dashboard/`)
 
-This is the entrypoint for an admin. The admin can view the stats in the app in this page, e.g. the number of users/doctors/questions posted etc. Also it shows some user distribution data to help the admin analyze the situation and trend. Later the admin will be able to see the list of users by clicking the corresponding cards to carry out operations after we build our user database.
+The admin can get infos of all the normal users and doctors, by clicking the User card in the dashboard, the admin will be routed to the userList page which shows all the users with their userid, userName, email, date start quarantine, region. By clicking the Doctor card in the dashboard, the admin will be routed to the doctorList page which shows all the doctor with their userid, userName, email, doctorCertificate and region. Admin is able to delete any normal user and doctor by clicking the delete button besides the user.
+
+### Doctor dashboard(`/dashboard/`)
+The doctor dashboard shows a tip and a piece of news that related to the COVID-19. Both the tip and the news are randomly select from the database.
+
 
 ## Q&A
 
@@ -166,7 +271,7 @@ The admin view shares similar layout with user view, except that an admin cannot
 
 ## Activity Recommendations (`/Activities/`)
 
-This is a page that lists user's activities and activities that recommended by the website (of which the data will come from other source/API later). Users can remove the activities from their list and can add activities from recommended list to their list.
+This is a page that lists user's activities and activities that recommended by the website. Users can remove the activities from their list and can add activities from recommended list to their list. Activities added in the user's list will not show in the recommend list anymore.
 
 ## Sidebar and Navbar (with notification center on top)
 
@@ -175,10 +280,11 @@ A user/admin can redirect to his own profile/Dashboard/Q&A/recomendation activit
 ## Notes and Pitfalls of this App
 
 As for now, the master branch only contains Qixin's work. And there exists many pitfalls and unexpected behaviours due to lack of labour.
-This branch does not contain Yifei's works since she didn't commit her work until the last 3 hours prior to the deadline, all of her works are stored in a git branch called `new`.
+
 Because steps of developing a web app are all linked together with each other. I(Qixin) spend most of the time waiting for a Yifei's code. So, there really isn't much I can do without her signin funcioning.
 - Pitfall 1: Do not use your everyday password since we didn't spend much effort on security.
-- Pitfall 2: Dashboard and Activities are front-end ONLY.
+
+I(Yifei Gao) already finished and commited the signIn, signUp and session check befroe the TA meeting, and it can be totally used to test credentials. All the other work for me is dashboard and activities which Qixin does not need to wait I finished to do his part. 
 
 Thanks :)
 
