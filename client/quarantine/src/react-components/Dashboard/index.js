@@ -14,9 +14,12 @@ class Dashboard extends React.Component {
         // this.props.history.push("/dashboard")
 
     }
+
+    //get a random tip and news from the database
     componentDidMount() {
         getTips(this);
         getNews(this);  
+        console.log("componentDidMount");
       }
     
     //   componentWillReceiveProps({ location = {} }) {
@@ -27,21 +30,20 @@ class Dashboard extends React.Component {
     //   }
     state={
         tips:{
-            title:"",
-            content:""
+          
         },
         news:{
-            title:"",
-            content:""
+         
         }
 
     }
     render() {
-        const {app}=this.props;
+        const {app}= this.props;
         return (
             <div>
 
 {/* //                 <Sidebar userName="user" title={"Dashboard"} /> */}
+
 
                 <Sidebar title={"Dashboard"} history={this.props.history} app={app.state.currentUserName} />
 
@@ -57,7 +59,6 @@ class Dashboard extends React.Component {
                             />
                         </div>
                         <div class="alert alert-dark" role="alert">
-                            {/* TODO: Add servel call */}
                             Your self-isolation started at {app.state.quarantineStartDate}
                         </div>
                         
@@ -77,7 +78,7 @@ class Dashboard extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col-lg-6">
-                                <ContentCard category="Tips" component={this} />
+                                <ContentCardNews category="Tips" component={this} />
                             </div>
                             <div className="col-lg-6">
                                 <ContentCardNews category="News" component={this}/>

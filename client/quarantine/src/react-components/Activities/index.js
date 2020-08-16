@@ -9,7 +9,10 @@ class Activities extends React.Component {
         userActList: [
         ],
         recommendList: [
-        ]
+        ],
+        sport:require("../../lib/activities/Sports.png"),
+        yoga:require("../../lib/activities/Yoga.png"),
+        book:require("../../lib/activities/Book.png")
     };
     componentDidMount() {
         getAllActivities(this);
