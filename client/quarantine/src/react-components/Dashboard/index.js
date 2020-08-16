@@ -41,7 +41,7 @@ class Dashboard extends React.Component {
         return (
             <div>
 
-//                 <Sidebar userName="user" title={"Dashboard"} />
+{/* //                 <Sidebar userName="user" title={"Dashboard"} /> */}
 
                 <Sidebar title={"Dashboard"} history={this.props.history} app={app.state.currentUserName} />
 
@@ -70,7 +70,7 @@ class Dashboard extends React.Component {
                         <div className="row">
                             <PageTitle
                                 sm="4"
-                                title="COVID-19 related:"
+                                title="COVID-19 related:(1 tip and a news a day)"
                                 subtitle=""
                                 className="text-sm-left"
                             />

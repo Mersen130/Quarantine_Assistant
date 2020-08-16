@@ -37,9 +37,9 @@ export class ContentCardTips extends Component {
                     </div>
                     <div className="card-body">
                         <h5 className="card-title">
-                            <a className="text-fiord-blue" href="#">
+                            <div className="text-fiord-blue" >
                                 {component.state.news.title}
-                            </a>
+                            </div>
                         </h5>
                         <p className="card-text d-inline-block mb-3">
                             {component.state.news.content}

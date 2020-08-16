@@ -37,9 +37,9 @@ export class ContentCardNews extends Component {
                     </div>
                     <div className="card-body">
                         <h5 className="card-title">
-                            <a className="text-fiord-blue" href="#">
+                            <div className="text-fiord-blue" >
                                 {component.state.news.title}
-                            </a>
+                            </div>
                         </h5>
                         {/* TODO: Add servel call to retrieve content from public news*/}
                         <p className="card-text d-inline-block mb-3">

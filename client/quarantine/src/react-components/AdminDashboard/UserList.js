@@ -18,6 +18,7 @@ class UserList extends React.Component{
 	render(){
         const userList = this.state.userList;
 		return(
+            
             <div>
             <SidebarAdmin title={"User List"} />
 			<table class="table">

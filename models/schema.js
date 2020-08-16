@@ -88,6 +88,12 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    firstName:{
+        type:String
+    },
+    lastName:{
+        type:String
+    },
     age:{
         type:Number
     },
@@ -109,7 +115,7 @@ const UserSchema = new mongoose.Schema({
     posts: {
         type: [ObjectID],
         default: []
-
+    },
     quarantineStartDate:{
         type:Date,
         default:Date.now,
