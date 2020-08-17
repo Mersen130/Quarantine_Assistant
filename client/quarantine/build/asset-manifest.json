@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.106cd6ae.chunk.css",
+    "main.js": "/static/js/main.2aa69490.chunk.js",
+    "main.js.map": "/static/js/main.2aa69490.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.511d6b44.js",
+    "runtime-main.js.map": "/static/js/runtime-main.511d6b44.js.map",
+    "static/css/2.c1fedb3d.chunk.css": "/static/css/2.c1fedb3d.chunk.css",
+    "static/js/2.f2491c23.chunk.js": "/static/js/2.f2491c23.chunk.js",
+    "static/js/2.f2491c23.chunk.js.map": "/static/js/2.f2491c23.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.8cc8a24b2acbe95ffe3e0d8310f876fb.js": "/precache-manifest.8cc8a24b2acbe95ffe3e0d8310f876fb.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.c1fedb3d.chunk.css.map": "/static/css/2.c1fedb3d.chunk.css.map",
+    "static/css/main.106cd6ae.chunk.css.map": "/static/css/main.106cd6ae.chunk.css.map",
+    "static/media/Book.png": "/static/media/Book.949d7bd0.png",
+    "static/media/Sports.png": "/static/media/Sports.32ec5fa8.png",
+    "static/media/Yoga.png": "/static/media/Yoga.d8119ad0.png",
+    "static/media/appLogo.png": "/static/media/appLogo.f19967d4.png",
+    "static/media/bg1.jpeg": "/static/media/bg1.80b48b36.jpeg",
+    "static/media/bg2.jpg": "/static/media/bg2.c1759d44.jpg",
+    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg",
+    "static/media/sampleprofile.png": "/static/media/sampleprofile.c13c55fb.png",
+    "static/media/strange.png": "/static/media/strange.de49561b.png",
+    "static/media/user1.png": "/static/media/user1.c13c55fb.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.511d6b44.js",
+    "static/css/2.c1fedb3d.chunk.css",
+    "static/js/2.f2491c23.chunk.js",
+    "static/css/main.106cd6ae.chunk.css",
+    "static/js/main.2aa69490.chunk.js"
+  ]
+}
