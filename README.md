@@ -12,7 +12,7 @@ This is a web application designed for assisting people people to get through th
 - Qixin: Sidebar, Q&A, Questionnire, User Profile
 - Yifei: Login & signup & Reset pswd, Recommend activities, Dashboard
 
-## Deployed Address: https://obscure-sands-70009.herokuapp.com/
+## Deployed Address: https://quarantineassistant.herokuapp.com/
 NOTE: Behaviour of this app is undefined if using browsers other than Chrome.
 
 ## Getting Started 
