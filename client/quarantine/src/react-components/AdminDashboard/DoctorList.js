@@ -16,9 +16,10 @@ class DoctorList extends React.Component{
     }
 	render(){
         const doctorList = this.state.doctorList;
+		const {app} = this.props;
 		return(
             <div>
-            <SidebarAdmin title={"Doctor List"} />
+            <SidebarAdmin title={"Doctor List"}  userName={app.state.currentUserName} app={app}/>
 			<table class="table">
                 <thead class="thead-light">
                     <tr>
