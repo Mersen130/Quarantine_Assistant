@@ -8,6 +8,7 @@ This is a web application designed for assisting people people to get through th
 
 ## Deployed Address: https://obscure-sands-70009.herokuapp.com/
 NOTE: Behaviour of this app is undefined if using browsers other than Chrome.
+This deployed app is not the latest version on the github, please update the heruko app. 
 
 ## Getting Started 
 ##### (follow this section if you want to run this app locally)
