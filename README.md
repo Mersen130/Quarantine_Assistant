@@ -10,7 +10,7 @@ This is a web application designed for assisting people people to get through th
 ## Contributors and work distribution
 
 - Qixin: Sidebar, Q&A, Questionnire, User Profile
-- Yifei: Login & signup, Recommend activities, Dashboard
+- Yifei: Login & signup & Reset pswd, Recommend activities, Dashboard
 
 ## Deployed Address: https://obscure-sands-70009.herokuapp.com/
 NOTE: Behaviour of this app is undefined if using browsers other than Chrome.
@@ -201,9 +201,9 @@ Yifei's Api
 
           
 
-## Login (`/`)
+## Login (`/`,`/SignIn`)
 
-This page lets users log in the app. There are a few accounts you can login with for now:
+Both of the above urls can direct user to the signIn page. The url `/` will direct to the Login page if the user is not logged in, otherwise it will direct to the dashboard according the usertype. This page lets users log in the app. There are a few accounts you can login with for now:
 
 - Regular user: (username, password) pairs
 user, user
@@ -224,7 +224,11 @@ If a user does not have an existing account, he will be directed to a simple que
 
 ## Signup (`/signup/`)
 
-This page lets users create an account, and will route to the normal user's dashboard page upon creation. Users can only create accounts in the type of normal_user and doctor, if the user provide the doctorCertificate No*, he/she will be created as a doctor.  admin account is setup by developers, it could not be created by users. Developers should use post("/uers") to create an admin.
+This page lets users create an account, and will route to the normal user's dashboard page upon creation. Users can only create accounts in the type of normal_user and doctor, if the user provide the doctorCertificate No*, he/she will be created as a doctor, normal_user otherwise.  Admin account is setup by developers, it could not be created by users. Developers should use post("/uers") to create an admin.
+
+## Reset password (`/Reset/`)
+
+This page lets users reset their password, the password will be successfully reseted if the user provide a correct email address.
 
 ## User profile
 
@@ -242,16 +246,16 @@ There are currently 4 available user profiles to view, they can be accessed eith
 
 There are 3 types of dashboards, namely user dashboard, doctor dashboard and admin dashboard.
 
-### User dashboard (`/dashboard/`)
+### User dashboard (`/dashboard/` `/`)
 
-This is the entrypoint for a regular user. The title above the calendar shows the user's quarantine start date which is created when the user create an account. The calendar is dynamic, it shows the current date. The bottom half presents COVID-19 related tips and news. The tip and news on the dashboard is selected form the database randomly.
+This is the entrypoint for a regular user. The title above the calendar shows the user's quarantine start date which is created when the user create an account. The calendar is dynamic, it shows the current date. The bottom half presents COVID-19 related tips and news. The tip and news on the dashboard is selected form the database randomly. The url `/` will direct the uesr to the dashboard if he/she is logged in.
 
-### Admin dasboard(`/dashboard/`)
+### Admin dasboard(`/dashboard/` `/`)
 
-The admin can get infos of all the normal users and doctors, by clicking the User card in the dashboard, the admin will be routed to the userList page which shows all the users with their userid, userName, email, date start quarantine, region. By clicking the Doctor card in the dashboard, the admin will be routed to the doctorList page which shows all the doctor with their userid, userName, email, doctorCertificate and region. Admin is able to delete any normal user and doctor by clicking the delete button besides the user.
+The admin can get infos of all the normal users and doctors, by clicking the User card in the dashboard, the admin will be routed to the userList page which shows all the users with their userid, userName, email, date start quarantine, region. By clicking the Doctor card in the dashboard, the admin will be routed to the doctorList page which shows all the doctor with their userid, userName, email, doctorCertificate and region. Admin is able to delete any normal user and doctor by clicking the delete button besides the user. The url `/` will direct the uesr to the dashboard if he/she is logged in.
 
-### Doctor dashboard(`/dashboard/`)
-The doctor dashboard shows a tip and a piece of news that related to the COVID-19. Both the tip and the news are randomly select from the database.
+### Doctor dashboard(`/dashboard/` `/`)
+The doctor dashboard shows a tip and a piece of news that related to the COVID-19. Both the tip and the news are randomly select from the database. The url `/` will direct the uesr to the dashboard if he/she is logged in.
 
 
 ## Q&A
@@ -275,13 +279,13 @@ NOTE: doctors will share the same view as regular users.
 
 The admin view shares similar layout with user view, except that an admin cannot [like, post, reply], but can delete ANY posts/replies if the content is not appropriate.
 
-## Activity Recommendations (`/Activities/`)
+## Activity Recommendations (`/userActivities/`)
 
 This is a page that lists user's activities and activities that recommended by the website. Users can remove the activities from their list and can add activities from recommended list to their list. Activities added in the user's list will not show in the recommend list anymore.
 
 ## Sidebar and Navbar (with notification center on top)
 
-A user/admin can redirect to his own profile/Dashboard/Q&A/recomendation activities pages or log out through sidebar, or check the notifications through navbar.
+A user/admin can redirect to his own profile/Dashboard/Q&A/recomendation activities pages or log out through sidebar, or check the notifications through navbar. The user also can log out through clicking the "logout" button on the sidebar.
 
 ## Notes and Pitfalls of this App
 
@@ -289,8 +293,7 @@ There exists many pitfalls and unexpected behaviours due to lack of labour.
 
 - Pitfall 1: Do not use your everyday password since we didn't spend much effort on security.
 - Pitfall 2: Users cannot reset their profile photos, the app has a handler that can let users upload a new photo, however it won't make any changes. We think *Cloudinary* would be time consuming to config.
-
-I(Yifei Gao) already finished and commited the signIn, signUp and session check befroe the TA meeting, and it can be totally used to test credentials. All the other work for me is dashboard and activities which Qixin does not need to wait I finished to do his part. 
+ 
 
 Thanks :)
 
