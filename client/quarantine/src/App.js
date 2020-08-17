@@ -12,7 +12,6 @@ import QAAdmin from "./react-components/QA/qaAdmin.js";
 import UserProfile from "./react-components/userProfile/index";
 // import User2Profile from "./react-components/userProfile/user2";
 import DoctorProfile from "./react-components/userProfile/doctor";
-import AdminProfile from "./react-components/userProfile/admin";
 import Dashboard from "./react-components/Dashboard/index";
 import { AdminDashboard } from "./react-components/AdminDashboard/index";
 import DoctorDashboard from "./react-components/DoctorDashboard/index";
@@ -112,10 +111,6 @@ class App extends React.Component {
                     <Route path="/qa/" component={QA}>
                        
                     </Route>
-                    <Route
-                        path="/AdminProfile"
-                        component={AdminProfile}
-                    />
                     
                     <Route path="/UserProfile/" component={UserProfile} />
                    
