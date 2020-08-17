@@ -32,7 +32,6 @@ export const signIn = (component, app,history) =>{
         }
     });
 
-    // Send the request with fetch()
     fetch(request)
         .then(res => {
             if (res.status === 200) {
@@ -54,7 +53,7 @@ export const signIn = (component, app,history) =>{
             }
         })
         .catch(error => {
-            console.log(error);
+            alert("Please double check your username and password.");
         });
 };
 export const signUp = (component, app, history)=>{
@@ -73,7 +72,6 @@ export const signUp = (component, app, history)=>{
             }
         })
         .then(json =>{
-            console.log("signUp json: " +json);
             if(json.currentUserName !== undefined){     
                 app.setState({
                     currentUserName:json.currentUserName,
@@ -89,28 +87,26 @@ export const signUp = (component, app, history)=>{
 
 };
 
-export const reset = (user, history)=>{
+export const reset = (u, history)=>{
+
     const request = new Request("/users/resetPswd", {
-        method: "put",
-        body: JSON.stringify(user.state),
+        method: "PATCH",
+        body: JSON.stringify(u),
         headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json"
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
         }
     });
     fetch(request)
         .then(res=>{
-            if(res.status ===200){
+            if(res.status === 200){
+                history.push('/');
                 return res.json();
             }
         })
-        .then(json =>{
-            user.setState({
-                email:user.email,
-                password:user.password
-            });
-            history.push('/SignIn');
-        })
+        .catch(error=>{
+            alert("Please double check your email address")
+        });
 
 }
 export const logout = (app,history) => {

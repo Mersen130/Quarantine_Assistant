@@ -6,11 +6,12 @@ import { handleFormChange, reset } from '../../actions/user';
 class Reset extends React.Component{
 	constructor(props){
 		super(props);
-		this.state={
-			email:"",
-			password:""
-		};
+		
 	}
+	state={
+		email:"",
+		password:""
+	};
 	render(){
 		const{app, history} = this.props;
 		return(
@@ -18,7 +19,7 @@ class Reset extends React.Component{
 			<img src={require("../../lib/appLogo.png")}class = "mx-auto d-block" id="resetLogo"/>
 			<h4 class="resetHeader">Forgot your password?</h4>
 			<div id="resetForm">
-				<form>
+				
 		  			<div class="form-group">
 		  				<div>
 		  				<label class="RSLabel">Email*</label>
@@ -37,7 +38,7 @@ class Reset extends React.Component{
 				          <label class="RSLabel">New Password*</label>
 				          <input
 				          type="text"
-				          name="newPswd"
+				          name="password"
 				        //   value={this.state.userName}
 				          placeholder=""
 				          class="custom-form-control resetInput"
@@ -50,14 +51,14 @@ class Reset extends React.Component{
 					  <button 
 						  type="submit"
 						  id="resetBtn"
-						  onClick={(e) =>{e.preventDefault(); reset(this, this.props.history)}}
+						  onClick={() =>{reset(this.state, history)}}
 						  >
 						Submit
 						</button>
 		  			<div id="resetLink">
 		              <a onClick = {this.handleChangePage} href="/" id="goSignIn">Goback sign in</a>
 	              </div>
-		  		</form>
+		  		
 			</div>
 		</div>
 			);

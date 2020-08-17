@@ -5,6 +5,7 @@ log('Express server')
 
 const path = require('path')
 
+
 // Express
 const express = require('express')
 const app = express();
@@ -569,26 +570,26 @@ app.post("/users/signUp",(req,res) =>{
     );
 });
 
-app.post("/users/resetPswd",(req, res)=>{
-    const userEmail = req.body.email;
-    User.findOne({
-        email:req.body.email
-    }).then(user=>{
-        if(user){
-           res.send(user);
-        }
-    })
-})
+// app.post("/users/resetPswd",(req, res)=>{
+//     const userEmail = req.body.email;
+//     User.findOne({
+//         email:req.body.email
+//     }).then(user=>{
+//         if(user){
+//            res.send(user);
+//         }
+//     })
+// })
 
-app.put("/users/resetPswd", (req, res)=>{
-  User.findOneAndUpdate(
-        {email:req.body.email},
-        {password:req.body.password},{
-        new:true
-    })
+app.patch("/users/resetPswd", (req, res)=>{
+
+  User.findOne(
+        {email:req.body.email}
+    )
     .then(updated=>{
         if(updated){
-            updated.save()
+            updated.password = req.body.password;
+             updated.save()
             .then(res.send({user:updated}))
             
         }
@@ -677,7 +678,7 @@ app.get("/doctors", adminAuth,(req, res) =>{
 //delete user by id
 app.delete("/user/:id", adminAuth, (req, res) =>{
     const id= req.params.id;
-    // console.log(id)
+
     if(!ObjectID.isValid(id)){
         res.status(404).send("Recources is not found")
         return;
