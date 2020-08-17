@@ -43,6 +43,7 @@ ProfileServerCall.prototype = {
                 bio: userInfo.selfDescription,
                 region: userInfo.region,
                 actInfo: info[1],
+                allowModification: info[2].userName === userInfo.userName,
             });
         })
         .catch(error => {
