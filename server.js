@@ -718,7 +718,7 @@ app.post("/users/activities/:id",authenticate,(req, res) =>{
                 User.findById(userId).then(
                     user=>{
                         user.activities.push({
-                            activityTile:act.activityTile,
+                            activityTitle:act.activityTitle,
                             activityType:act.activityType,
                             activityDescription:act.activityDescription
                         });
@@ -764,7 +764,7 @@ app.delete("/users/activities/:id", authenticate,(req, res)=>{
 //add an activitiy in to the database
 app.post("/activities", (req, res)=>{
     const act = new Activities({
-        activityTile:req.body.activityTile,
+        activityTitle:req.body.activityTitle,
         activityType:req.body.activityType,
         activityDescription:req.body.activityDescription
     });
