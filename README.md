@@ -1,3 +1,9 @@
+# Please grade on this commit!
+As indicated by professor Mark:
+> Please work with your teammate to fix the conflicts, and if you do by tomorrow 10pm we will only count it as only one day late.  - Aug 16, 20:59
+
+Sorry for the inconvenience.
+
 # Quanrantine Assistant - Team 23
 
 This is a web application designed for assisting people people to get through their quarantine period during this COVID-19 pandemic. The front-end part of this application is built with React and Bootstrap.
@@ -8,7 +14,6 @@ This is a web application designed for assisting people people to get through th
 
 ## Deployed Address: https://obscure-sands-70009.herokuapp.com/
 NOTE: Behaviour of this app is undefined if using browsers other than Chrome.
-This deployed app is not the latest version on the github, please update the heruko app. 
 
 ## Getting Started 
 ##### (follow this section if you want to run this app locally)
@@ -35,7 +40,7 @@ open `localhost:5000` in Chrome
 - Reset (`/Reset`)
 - Questionnaire (`/questionnaire`)
 - Dashboard (`/dashboard`, `/admindashboard`, `doctordashboard`)
-- Profiles (`/UserProfile`,`/DoctorProfile`, `/AdminProfile`)
+- Profiles (`/UserProfile`,`/DoctorProfile`, ~~`/AdminProfile`~~) ~AdminProfile\ is\ merged\ with\ UserProfile~
 - Q&A (`/qa`, `/qaAdmin`)
 - Activity Recommendations (`/Activities`)
 - Userlist (`/userlist`)
@@ -86,7 +91,7 @@ For the ease of testing, you can imitate there's a user logged in in the cookies
         - params&#46;id: the ObjectID of the target user, or `me` if the user is loading his own profile page.
         - Takes: nothing
         - Action: locate the target user/logged in user and send back his/her info
-        - Returns: on success: `[ Mongoose user document, [ array of posts and activities that the user interacted with ] ]`
+        - Returns: on success: `[ Mongoose user document, [ array of posts and activities that the user interacted with ],  { userName: String, userType: String, userId: ObjectID }]` NOTE: the third element of the returning array is always the information of logged in user.
     2. `PATCH('/profile')`
         - When is called: user updates his/her own profile information
         - Takes: `{ userName: Optional String, gender: Optional String, age: Optional String, region: Optional String, selfDescription: Optional String }`
@@ -231,7 +236,7 @@ There are currently 4 available user profiles to view, they can be accessed eith
 
 - Doctor profile (`/DoctorProfile`): This is the view where a user checks a doctor user's profile. Apart from the necessary information, there's also a badge verifying the doctor identity and a field indicating the doctor's specialization.
 
-- Admin profile (`/AdminProfile`): This is the view where a user checks an admin's profile. Apart from the necessary information, there's also a badge indicating this is an admin.
+- Admin profile (~~`/AdminProfile`~~ `/UserProfile`): Only admin can see his/her profile.  Apart from the necessary information, there's also a badge indicating this is an admin.
 
 ## Dashboard
 
@@ -280,10 +285,10 @@ A user/admin can redirect to his own profile/Dashboard/Q&A/recomendation activit
 
 ## Notes and Pitfalls of this App
 
-As for now, the master branch only contains Qixin's work. And there exists many pitfalls and unexpected behaviours due to lack of labour.
+There exists many pitfalls and unexpected behaviours due to lack of labour.
 
-Because steps of developing a web app are all linked together with each other. I(Qixin) spend most of the time waiting for a Yifei's code. So, there really isn't much I can do without her signin funcioning.
 - Pitfall 1: Do not use your everyday password since we didn't spend much effort on security.
+- Pitfall 2: Users cannot reset their profile photos, the app has a handler that can let users upload a new photo, however it won't make any changes. We think *Cloudinary* would be time consuming to config.
 
 I(Yifei Gao) already finished and commited the signIn, signUp and session check befroe the TA meeting, and it can be totally used to test credentials. All the other work for me is dashboard and activities which Qixin does not need to wait I finished to do his part. 
 
