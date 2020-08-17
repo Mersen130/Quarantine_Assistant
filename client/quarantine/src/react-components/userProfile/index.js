@@ -40,6 +40,7 @@ class UserProfile extends React.Component {
         if (!this.state.userName){
             return <div></div>;
         }
+        if (this.state.userType === "doctor") this.props.history.push("DoctorProfile");  // only exists when doctor access himself through sidebar
         return (
             <div>
                 <input type="file" id="FileUpload1" style={{display: "none"}} 

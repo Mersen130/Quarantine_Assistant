@@ -93,7 +93,11 @@ class QA extends React.Component {
                 src={require("../../lib/profilephotos/user1.png")}
                 className="profilephotoPost"
                 onClick={function() {
-                  window.location.href = 'UserProfile';
+                  if (this.state.userInfo.userType === "doctor"){
+                    window.location.href = 'DoctorProfile';
+                  } else{
+                    window.location.href = 'UserProfile';
+                  }
              }}
               />
 

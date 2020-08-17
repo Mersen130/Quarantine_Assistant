@@ -421,7 +421,7 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
                 }
                 // log("here1.5")
                 for (let i = 0; i < user.activities.length; i++) {
-                    p = p.then(_ => Post.findById(user.activities[i]))
+                    p = p.then(_ => Activities.findById(user.activities[i]))
                     .then(act => {
                         if (act) {
                             RecentAct.push({ type: "activity", title: act.activityTitle})
