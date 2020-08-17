@@ -17,10 +17,11 @@ class UserList extends React.Component{
     }
 	render(){
         const userList = this.state.userList;
+	const {app} = this.props;
 		return(
             
             <div>
-            <SidebarAdmin title={"User List"} />
+            <SidebarAdmin title={"User List"} userName={app.state.currentUserName} app={app}/>
 			<table class="table">
                 <thead class="thead-light">
                     <tr>
