@@ -21,7 +21,7 @@ class DropDown extends React.Component {
     setOrder = (s, e) =>{
         e.preventDefault();
         const text = document.getElementById("dropdownMenuLink");
-        console.log(text);
+        // console.log(text);
         text.innerText = s;
         this.props.handleOrder(s);
     }

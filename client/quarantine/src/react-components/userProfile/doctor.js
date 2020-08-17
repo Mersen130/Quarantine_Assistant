@@ -10,23 +10,27 @@ class DoctorProfile extends React.Component {
         super(props);
         this.props.history.push("/DoctorProfile");
         const loadUser = profileServerCall.loadUser.bind(this);
-        console.log(this)
+        // console.log(this);
         this.state = {
+            allowModification: !this.props.location.state,
         };
+        // console.log(this.props.location);
+        // console.log(this.props.location.state);
+        
         if (!this.props.location.state){
             loadUser(undefined);
         } else{
-            loadUser(this.props.location.state.clicledUser);
+            loadUser(this.props.location.state.clickedUser);
         }
     }
     render() {
         if (!this.state.userName){
             return <div></div>;
         }
+        console.log(this.state.loggedinUser.userName);
         return (
             <div>
-                {console.log("doctor")}
-                <Sidebar username={this.state.userName} title={"Profile"} />
+                <Sidebar userName={this.state.loggedinUser.userName} title={"Profile"} />
                 <div className="main-content-container px-4 container-fluid">
                     <div className="col-lg-10 offset-lg-2">
                         <div className=" row no-gutters page-header py-4 ">
@@ -43,7 +47,6 @@ class DoctorProfile extends React.Component {
                             />
                         </div>
                         <div className="row">
-                            {console.log("doctor")}
                             <div className="col col-lg-4">
                                 <DoctorBrief 
                                     name={this.state.userName}

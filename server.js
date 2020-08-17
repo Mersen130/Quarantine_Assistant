@@ -127,7 +127,7 @@ app.post("/post", mongoChecker, authenticate, (req, res) => {
         numLikes: req.body.likes,
         tags: req.body.tags,
     });
-    console.log(post);
+    // console.log(post);
     // log(post)
     post.save().then((result) => {
         return result._id;
@@ -196,7 +196,7 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
             numLikes: req.body.likes,
             tags: req.body.tags,
         }
-        console.log(newPost);
+        // console.log(newPost);
         // log(newPost)
         return Post.findOneAndUpdate({_id: postId}, {$set: newPost}, {new: true, useFindAndModify: false});
     })
@@ -215,9 +215,9 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
                 res.status(404).send("resource not found")
             } else{
                 for (const existPost of user.posts){
-                    log(existPost, postId, existPost === postId, existPost == postId);
+                    // log(existPost, postId, existPost === postId, existPost == postId);
                     if (existPost.toString() === postId.toString()){
-                        log("here4")
+                        // log("here4")
                         return user;
                     }
                 }
@@ -237,7 +237,7 @@ app.patch("/reply/:postId", mongoChecker, authenticate, (req, res) => {
             if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
                 res.status(500).send('Internal server error')
             } else {
-                console.log("here?");
+                // console.log("here?");
                 res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
             }
         });
@@ -450,7 +450,7 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
 // update user info
 app.patch("/profile", mongoChecker, authenticate, (req, res) => {
 
-    log(req.body)
+    // log(req.body)
     User.findById(req.session.user)
     .then( user => {
         if (!user){
@@ -484,7 +484,7 @@ app.patch("/profile", mongoChecker, authenticate, (req, res) => {
 
 // Yifei's API
 app.post("/users", (req, res) => {
-    log(req.body);
+    // log(req.body);
 
     // Create a new user
     const user = new User({
@@ -508,7 +508,7 @@ app.post("/users", (req, res) => {
 app.post("/users/signIn",(req, res) =>{
     const userName = req.body.userName;
     const password = req.body.password;
-    log(userName, password)
+    // log(userName, password)
     User.findUser(userName, password).then(user =>{
         
         req.session.user = user._id;
@@ -526,7 +526,7 @@ app.post("/users/signIn",(req, res) =>{
     });
 });
 app.post("/users/signUp",(req,res) =>{
-    log(req.body);
+    // log(req.body);
     let userT;
     let user;
     // const current = new Date();
@@ -677,7 +677,7 @@ app.get("/doctors", adminAuth,(req, res) =>{
 //delete user by id
 app.delete("/user/:id", adminAuth, (req, res) =>{
     const id= req.params.id;
-    console.log(id)
+    // console.log(id)
     if(!ObjectID.isValid(id)){
         res.status(404).send("Recources is not found")
         return;
