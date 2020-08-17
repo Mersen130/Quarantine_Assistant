@@ -12,3 +12,17 @@
 	background-color: white;
 	color:grey;
 }
+
+#userListPage{
+	margin:auto;
+	width:80%;
+}
+#doctorListPage{
+	margin:auto;
+	width:80%;
+}
+#adminDashboard{
+	margin:auto;
+	width:80%;
+	
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import {removeDoctor} from "./adminDashboardActions";
+import "./users.css";
 
 
 
@@ -18,12 +19,12 @@ class Doctors extends React.Component{
                 <td>{doctor.docCertificate}</td>
                 <td>{doctor.region}</td>
                 <td>
-                    <button class = "userDelete"
+                    <button class = "userDeleteBtn"
                         onClick={()=>{
                             removeDoctor(doctor, component);
                         }}
                     >
-                        Delete the User
+                        Delete the Doctor
                     </button>
                 </td>
             </tr>

@@ -5,6 +5,7 @@ import StatCard from "./StatCard";
 import UserByGender from "./DivisionChart.js";
 import { UserByRegion } from "./userByRegion";
 import "./stats.css";
+import "./users.css";
 import StatCardDoc from "./StatCardDoc.js";
 export class AdminDashboard extends Component {
     constructor(props){
@@ -12,13 +13,13 @@ export class AdminDashboard extends Component {
 	}
     render() {
         const {app} = this.props;
-        console.log(app.state.currentUserName);
+   
         return (
             <div>
                 <SidebarAdmin userName={app.state.currentUserName} title={"Dashboard"} app={app}/>
 
                 <div className="main-content-container px-4 pb-4 container-fluid">
-                    <div className="col-lg-10 offset-lg-2">
+                    <div className="col-lg-10 offset-lg-2" id="adminDashboard">
                         <div className="row no-gutters page-header py-4 ">
                             <PageTitle
                                 sm="4"
