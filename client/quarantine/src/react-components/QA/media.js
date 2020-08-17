@@ -23,6 +23,7 @@ class Media extends React.Component {
 
             redirect: false,
             clickedUser: "",
+            clickedUserType: "",
         }
 
     }
@@ -36,14 +37,14 @@ class Media extends React.Component {
         for (let i = 1; i < names.length; i++) {
             indices.push(i);
         }
-        const redirectComponent = <Redirect to={{pathname: '/UserProfile', state: { clickedUser: this.state.clickedUser}}}/> ;
+        const redirectComponent = <Redirect to={{pathname: `/${this.state.clickedUserType}Profile`, state: { clickedUser: this.state.clickedUser}}}/> ;
         // console.log("in media.js: ", this.state);
         return (
             <div className="container mt-3 mt-3Qa Media">
                 {this.state.redirect? redirectComponent : ""}
                 <div className="media border borderQa p-3">
                     <img src={require("../../lib/profilephotos/user1.png")} onClick={() => {
-                        this.setState({ redirect: true, clickedUser: posterId[0]});
+                        this.setState({ redirect: true, clickedUser: posterId[0], clickedUserType: posterType[0]});
                     }} className="profilephotoQa" />
                     <div className="media-body">
                         <h4 className="h4Qa">{names[0]} <small><i>{posterType[0] == 'doctor' ? <span><img src={require("../../lib/qa/certified.png")}/> doctor</span> : ""} posted on {new Date(times[0]).toString().slice(0, 25)}</i></small></h4>
@@ -53,7 +54,7 @@ class Media extends React.Component {
                             {indices.map(i => (
                                 <div className="media p-3">
                                     <img src={require("../../lib/profilephotos/user1.png")} onClick={() => {
-                                        this.setState({ redirect: true, clickedUser: posterId[i]});
+                                        this.setState({ redirect: true, clickedUser: posterId[i], clickedUserType: posterType[i]});
                                     }} className="profilephotoQa" />
                                     <div className="media-body">
                                         <h4 className="h4Qa">{names[i]} <small><i> {posterType[i] == 'doctor' ? <span><img src={require("../../lib/qa/certified.png")}/> doctor</span> : ""} replied on {new Date(times[i]).toString().slice(0, 25)}</i></small></h4>

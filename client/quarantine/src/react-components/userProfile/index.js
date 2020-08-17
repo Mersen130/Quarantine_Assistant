@@ -47,7 +47,6 @@ class UserProfile extends React.Component {
                     e.stopPropagation();
                     e.preventDefault();
                     var file = e.target.files[0];
-                    console.log(file);
                     // a server call that sends file, seems like we dont have time for this
                 }}/>
                 {this.state.loggedinUser.userType == "admin"? <SidebarAdmin userName={this.state.loggedinUser.userName} title={"Profile"} /> : <Sidebar userName={this.state.loggedinUser.userName} title={"Profile"} />}
@@ -66,7 +65,6 @@ class UserProfile extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col col-lg-4">
-                                {console.log(this.state)}
                                 <UserBrief
                                     type={this.state.userType}
                                     name={this.state.userName}
@@ -79,7 +77,6 @@ class UserProfile extends React.Component {
                                 />
                             </div>
                             <div className="col col-lg-8">
-                                {console.log(this.state.allowModification)}
                                     {this.state.allowModification && <UserDetails
                                     name={this.state.userName}
                                     gender={this.state.gender}

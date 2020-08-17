@@ -18,6 +18,7 @@ class UserList extends React.Component{
     }
 	render(){
         const userList = this.state.userList;
+
         const {app} = this.props;
 		return(
             
@@ -71,6 +72,7 @@ class UserList extends React.Component{
                     </div>
                 </div>
 			</div>
+
 			);
 
 	}

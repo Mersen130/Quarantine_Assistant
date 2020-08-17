@@ -43,15 +43,14 @@ class QA extends React.Component {
 
 
   render() {
-    const {app}=this.props;
-      console.log("rerender", this.state);
+      // console.log("rerender", this.state);
       if (!this.state.userInfo){
         return <div></div>
       }
     return (
       <div>
         <Sidebar
-          userName={app.state.currentUserName}
+          userName={this.state.userInfo.userName}
           title={"Q&A"}
           notes={this.state.notes}
           numNotes={this.state.numNotes}

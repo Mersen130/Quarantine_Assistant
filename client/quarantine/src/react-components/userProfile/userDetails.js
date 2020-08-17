@@ -121,7 +121,6 @@ class UserDetails extends React.Component {
                                             let bio = document.querySelector(
                                                 "#feBio"
                                             ).value;
-                                            console.log(name, gender);
                                             this.props.onUpdateClick(
                                                 name,
                                                 gender,
