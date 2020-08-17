@@ -3,23 +3,27 @@ import UserBrief from "./userBrief";
 import UserDetails from "./userDetails";
 import PageTitle from "./../theme/PageTitle";
 import Sidebar from "./../SideNavBar/sidebar";
+import SidebarAdmin from "./../SideNavBar/sidebarAdmin"
 import profileServerCall from "./profileServerCall";
 import Recent from "./recent"
+import Sidebaradmin from "./../SideNavBar/sidebarAdmin";
 
 class UserProfile extends React.Component {
     constructor(props) {
         super(props);
         this.props.history.push("/UserProfile");
         const loadUser = profileServerCall.loadUser.bind(this);
+        // console.log(this);
         this.state = {
+            allowModification: !this.props.location.state,
         };
-        console.log(this.props.location);
-        console.log(this.props.location.state);
+        // console.log(this.props.location);
+        // console.log(this.props.location.state);
         
         if (!this.props.location.state){
             loadUser(undefined);
         } else{
-            loadUser(this.props.location.state.clicledUser);
+            loadUser(this.props.location.state.clickedUser);
         }
     }
     handleUpdate = (
@@ -44,9 +48,9 @@ class UserProfile extends React.Component {
                     e.preventDefault();
                     var file = e.target.files[0];
                     console.log(file);
-                    // a server call that sends file
+                    // a server call that sends file, seems like we dont have time for this
                 }}/>
-                <Sidebar userName={this.state.userName} title={"Profile"} />
+                {this.state.loggedinUser.userType == "admin"? <SidebarAdmin userName={this.state.loggedinUser.userName} title={"Profile"} /> : <Sidebar userName={this.state.loggedinUser.userName} title={"Profile"} />}
                 <div className=" container-fluid main-content-container px-4">
                     <div className="col-lg-10 offset-lg-2">
                         <div
@@ -64,6 +68,7 @@ class UserProfile extends React.Component {
                             <div className="col col-lg-4">
                                 {console.log(this.state)}
                                 <UserBrief
+                                    type={this.state.userType}
                                     name={this.state.userName}
                                     gender={this.state.gender}
                                     age={this.state.age}
@@ -74,6 +79,7 @@ class UserProfile extends React.Component {
                                 />
                             </div>
                             <div className="col col-lg-8">
+                                {console.log(this.state.allowModification)}
                                     {this.state.allowModification && <UserDetails
                                     name={this.state.userName}
                                     gender={this.state.gender}

@@ -8,7 +8,7 @@ class UserBrief extends React.Component {
                     <div className="mb-3 mx-auto">
                         <img
                             className="rounded-circle"
-                            src={require("./sampleprofile.png")}
+                            src={this.props.type == "admin"? require("../../lib/profilephotos/strange.png") : require("./sampleprofile.png")}
                             alt={this.props.name}
                             width="110"
                             alt="alternative text" 

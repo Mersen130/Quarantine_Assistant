@@ -439,7 +439,7 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
                 // p.then(e => log("profile", [user, RecentAct])).catch(log("something wrong"));
                 // log("here3.7")
 
-                p.then( e => res.send([user, RecentAct])).catch(e => res.status(400).send("bad request"));
+                p.then( e => res.send([user, RecentAct, {userName: req.session.userName, userType: req.session.userType, userId: req.session.user}])).catch(e => res.status(400).send("bad request"));
             }
         })
         .catch(error => {

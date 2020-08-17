@@ -41,7 +41,7 @@ class MediaAdmin extends React.Component {
             <div className="container mt-3 mt-3Qa Media">
                 {this.state.redirect? redirectComponent : ""}
                 <div className="media border borderQa p-3">
-                    <img src={require("../../lib/profilephotos/user1.png")} onClick={function () {
+                    <img src={require("../../lib/profilephotos/user1.png")} onClick={() => {
                         this.setState({ redirect: true, clickedUser: posterId[0]});
                     }} className="profilephotoQa" />
                     <div className="media-body">

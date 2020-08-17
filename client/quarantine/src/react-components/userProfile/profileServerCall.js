@@ -4,6 +4,7 @@ function ProfileServerCall(){
 
 ProfileServerCall.prototype = {
     loadUser: function(userid){
+        console.log(userid)
         let url;
         if (!userid){
             url = "/profile/me"
@@ -32,7 +33,9 @@ ProfileServerCall.prototype = {
         .then(json => {
             info = json;
             const userInfo = info[0];
+            console.log(this);
             this.setState({
+                loggedinUser: info[2],
                 userName: userInfo.userName,
                 age: userInfo.age,
                 userType: userInfo.userType,
@@ -41,7 +44,6 @@ ProfileServerCall.prototype = {
                 gender: userInfo.gender,
                 bio: userInfo.selfDescription,
                 region: userInfo.region,
-                allowModification: !this.props.location.state,
                 actInfo: info[1],
             });
         })
