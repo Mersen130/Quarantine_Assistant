@@ -1,3 +1,9 @@
+# Please grade on this commit!
+As indicated by professor Mark:
+> Please work with your teammate to fix the conflicts, and if you do by tomorrow 10pm we will only count it as only one day late.  - Aug 16, 20:59
+
+Sorry for the inconvenience.
+
 # Quanrantine Assistant - Team 23
 
 This is a web application designed for assisting people people to get through their quarantine period during this COVID-19 pandemic. The front-end part of this application is built with React and Bootstrap.
@@ -34,7 +40,7 @@ open `localhost:5000` in Chrome
 - Reset (`/Reset`)
 - Questionnaire (`/questionnaire`)
 - Dashboard (`/dashboard`, `/admindashboard`, `doctordashboard`)
-- Profiles (`/UserProfile`,`/DoctorProfile`, `/AdminProfile`)
+- Profiles (`/UserProfile`,`/DoctorProfile`, ~~`/AdminProfile`~~) ~AdminProfile\ is\ merged\ with\ UserProfile~
 - Q&A (`/qa`, `/qaAdmin`)
 - Activity Recommendations (`/Activities`)
 - Userlist (`/userlist`)
@@ -230,7 +236,7 @@ There are currently 4 available user profiles to view, they can be accessed eith
 
 - Doctor profile (`/DoctorProfile`): This is the view where a user checks a doctor user's profile. Apart from the necessary information, there's also a badge verifying the doctor identity and a field indicating the doctor's specialization.
 
-- Admin profile (`/AdminProfile`): This is the view where a user checks an admin's profile. Apart from the necessary information, there's also a badge indicating this is an admin.
+- Admin profile (~~`/AdminProfile`~~ `/UserProfile`): Only admin can see his/her profile.  Apart from the necessary information, there's also a badge indicating this is an admin.
 
 ## Dashboard
 
