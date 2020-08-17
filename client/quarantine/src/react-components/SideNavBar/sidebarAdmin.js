@@ -1,6 +1,7 @@
 import React from "react";
 import "../../App.css";
 import "../../components.css";
+import { logout } from "../../actions/user";
 
 class Sidebaradmin extends React.Component {
   state = { title: "Dashboard" };
@@ -20,20 +21,22 @@ class Sidebaradmin extends React.Component {
           </a>
           {/* TODO: change hrefs to appropriate links */}
           {/*Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>*/}
-          <a href="/adminprofile">
+          <a href="/UserProfile">
             <img
               id="profilePhoto"
               src={require("../../lib/profilephotos/strange.png")}
             />
           </a>
-          <p id="profileName">user</p>
-          <a onClick={this.changeNavbarTitle} href="/admindashboard">
+    <p id="profileName">{this.props.userName}</p>
+          <a onClick={this.changeNavbarTitle} href="/dashboard">
             <img src={require("../../lib/sidebar/dashboard.png")} /> Dashboard
           </a>
           <a onClick={this.changeNavbarTitle} href="/qaAdmin">
             <img src={require("../../lib/sidebar/qa.png")} /> Q&A
           </a>
-          <a href="/" id="logout">
+          <a href="/" id="logout"
+          onClick={()=>{logout(this.props.app)}}
+          >
             log out
           </a>
         </div>

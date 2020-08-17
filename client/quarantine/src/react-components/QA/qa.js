@@ -9,8 +9,7 @@ import serverCall from "./serverCall"
 class QA extends React.Component {
   constructor(props){
     super(props);
-    this.props.history.push("/qa");
-    console.log(this.props.history);
+    // this.props.history.push("/qa");
     const loadPosts = serverCall.loadPosts.bind(this);
     this.state = {currShown: [0, 10],
       postsList: [],
@@ -44,6 +43,7 @@ class QA extends React.Component {
 
 
   render() {
+    const {app}=this.props;
       console.log("rerender", this.state);
       if (!this.state.userInfo){
         return <div></div>
@@ -51,7 +51,7 @@ class QA extends React.Component {
     return (
       <div>
         <Sidebar
-          userName={this.state.userInfo.userName}
+          userName={app.state.currentUserName}
           title={"Q&A"}
           notes={this.state.notes}
           numNotes={this.state.numNotes}

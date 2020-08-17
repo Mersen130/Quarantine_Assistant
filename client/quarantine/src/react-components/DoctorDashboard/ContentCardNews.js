@@ -38,12 +38,18 @@ export class ContentCardNews extends Component {
                     <div className="card-body">
                         <h5 className="card-title">
                             <div className="text-fiord-blue" >
-                                {component.state.news.title}
+                            {! component.state.news
+                                ? <div>No news in the database</div>
+                                : component.state.news.title
+                                }
                             </div>
                         </h5>
                         {/* TODO: Add servel call to retrieve content from public news*/}
                         <p className="card-text d-inline-block mb-3">
-                            {component.state.news.content}
+                        {! component.state.news
+                                ? <div>Please add news by 'post(/news)'</div>
+                                : component.state.news.content
+                                }
                         </p>
                         
                     </div>

@@ -38,11 +38,17 @@ export class ContentCardTips extends Component {
                     <div className="card-body">
                         <h5 className="card-title">
                             <div className="text-fiord-blue" >
-                                {component.state.news.title}
+                            {! component.state.tips
+                                ? <div>No tips in the database</div>
+                                : component.state.tips.title
+                                }
                             </div>
                         </h5>
                         <p className="card-text d-inline-block mb-3">
-                            {component.state.news.content}
+                        {! component.state.tips
+                                ? <div>Pleas add tips by 'post(/tips)'</div>
+                                : component.state.tips.content
+                                }
                         </p>
                         
                     </div>

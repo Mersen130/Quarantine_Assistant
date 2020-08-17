@@ -13,11 +13,15 @@ class MyActivites extends React.Component{
 			<div class="card mb-3">
 			  <div class="row no-gutters">
 			    <div class="col-md-4">
-			      <img src={myAct.image} class="card-img"/>
+				{{
+			     	"Sport":<img src={queueComponent.state.sport} class="card-img"/>,
+			     	"Yoga": <img src={queueComponent.state.yoga} class="card-img"/>,
+			     	"Read": <img src={queueComponent.state.book} class="card-img"/>  
+			    }[myAct.activityType]}
 			    </div>
 			    <div class="col-md-8">
 			      <div class="card-body">
-			        <h5 class="card-title">{myAct.activityTile}</h5><p>{myAct.activityType}</p>
+			        <h5 class="card-title">{myAct.activityTitle}</h5><p>{myAct.activityType}</p>
 			        <p class="card-text">{myAct.activityDescription}</p>
 			        <p class="card-text">
 			        	

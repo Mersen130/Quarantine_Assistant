@@ -1,6 +1,7 @@
 import React from "react";
 import "../../App.css";
 import "../../components.css";
+import { logout } from "../../actions/user";
 
 
 class Sidebar extends React.Component {
@@ -39,7 +40,11 @@ class Sidebar extends React.Component {
           <a onClick={this.changeNavbarTitle} href="/userActivities">
             <img src={require("../../lib/sidebar/activity.png")} /> Activities
           </a>
-          <a href="/" id="logout">
+          <a href="/" id="logout"
+          onClick={()=>{
+            logout(this.props.app);
+          }}
+          >
             log out
           </a>
         </div>

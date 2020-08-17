@@ -4,7 +4,7 @@ export const addToMyList = (recAct, queue) =>{
 
 
 	const newAct={
-		activityTile:recAct.activityTile,
+		activityTitle:recAct.activityTitle,
 		activityType:recAct.activityType,
 		activityDescription:recAct.activityDescription
 	};
@@ -22,11 +22,15 @@ export const addToMyList = (recAct, queue) =>{
 };
 
 export const removeFromMyList = (queue, myAct) =>{
+	const recommendList=queue.state.recommendList;
 	const filteredMyActs = queue.state.userActList.filter(act =>{
 		return act !== myAct;
 	});
+	recommendList.push(myAct);
 	queue.setState({
-		userActList: filteredMyActs
+		userActList: filteredMyActs,
+		recommendList:recommendList
 	});
+	
 	deleteActivities(queue, myAct);
 };

@@ -55,7 +55,7 @@ const NotificationSchema = new mongoose.Schema({
 });
 
 const ActivitiesSchema = new mongoose.Schema({
-    activityTile:{
+    activityTitle:{
         type:String,
         required:true
     },

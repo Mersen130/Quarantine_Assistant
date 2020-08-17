@@ -11,7 +11,7 @@ import serverCall from "./serverCall";
 class QAAdmin extends React.Component {
   constructor(props){
     super(props);
-    this.props.history.push("/qaAdmin");
+    // this.props.history.push("/qaAdmin");
     const loadPosts = serverCall.loadPosts.bind(this);
     this.state = {currShown: [0, 10],
       postsList: [],}
@@ -24,9 +24,10 @@ class QAAdmin extends React.Component {
     if (!this.state.userInfo){
       return <div></div>
     }
+    const {app} = this.props;
     return (
       <div>
-        <Sidebaradmin userName={this.state.userInfo.userName} title={"Q&A"} />
+        <Sidebaradmin userName={app.state.currentUserName} title={"Q&A"} app={app}/>
         <div className="jumbotron jumbotron-fluid" id="jumbotronQaadmin">
           <div className="containerQA">
             <h1 className="title titleQa">Welcome, Admin</h1>

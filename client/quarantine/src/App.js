@@ -50,7 +50,7 @@ class App extends React.Component {
                         <SignIn app={this} history={history} />
                     )}
                 />
-                 {/* <Route
+                 <Route
                         exact path="/"
                         render={({history}) =>(
                             <div className = "dashboard">
@@ -66,13 +66,13 @@ class App extends React.Component {
                             
                             </div>
                         )}
-                    /> */}
-                   <Route 
+                    />
+                   {/* <Route 
                     exact path="/"
                     render={({history})=>(
                         <SignIn app={this} history={history} />
                     )}
-                    />
+                    /> */}
 
                 <Route 
                     exact path="/SignUp"
@@ -106,16 +106,20 @@ class App extends React.Component {
                 />
                  <Route
                         path="/questionnaire/"
-                        component={Questionnaire}
-                    />
-                    <Route path="/qaAdmin/" component={QAAdmin} />
-                    <Route path="/qa/" component={QA}>
-                       
+                    >
+                        <Questionnaire app={this}/>
+                </Route>
+                    <Route path="/qaAdmin/" >
+                        <QAAdmin app={this}/>
                     </Route>
-                    <Route
+                    <Route path="/qa/">
+                       <QA app={this}/>
+                    </Route>
+                    {/* <Route
                         path="/AdminProfile"
                         component={AdminProfile}
-                    />
+                    /> */}
+    
                     
                     <Route path="/UserProfile/" component={UserProfile} />
                    

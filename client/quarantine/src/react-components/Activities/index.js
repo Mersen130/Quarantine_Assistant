@@ -20,9 +20,10 @@ class Activities extends React.Component {
       }
 
     render() {
+        const {app} = this.props;
         return (
             <div>
-                <Sidebar userName="user" title={"Activities"} />
+                <Sidebar userName={app.state.currentUserName} title={"Activities"} app={app}/>
                 <div className="main-content-container px-4 py-4 container-fluid">
                     <div div className="col-lg-10 offset-lg-2">
                         <div id="myActivitiesBlock">

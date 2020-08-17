@@ -23,10 +23,9 @@ class RecommendActivities extends React.Component{
 			    {console.log(recAct.activityType)}
 			    </div>
 			    <div class="col-md-8">
-			    {!recAct.activityTile
-			     ? <div> There is no activities in the database</div>
-			     : <div class="card-body">
-			        <h5 class="card-title">{recAct.activityTile}</h5>
+			    
+			     <div class="card-body">
+			        <h5 class="card-title">{recAct.activityTitle}</h5>
 			        <p>{recAct.activityType}</p>
 			        <p class="card-text">{recAct.activityDescription}</p>
 			        <p class="card-text">
@@ -43,7 +42,7 @@ class RecommendActivities extends React.Component{
 						</button>
 			        </p>
 			      </div>
-			    }
+			
 			      
 			    </div>
 			  </div>
