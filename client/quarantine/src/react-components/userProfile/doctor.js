@@ -4,6 +4,7 @@ import PageTitle from "./../theme/PageTitle";
 import Sidebar from "./../SideNavBar/sidebar";
 import Recent from "./recent";
 import profileServerCall from "./profileServerCall"
+import UserDetails from "./userDetails"
 
 class DoctorProfile extends React.Component {
     constructor(props) {
@@ -12,7 +13,6 @@ class DoctorProfile extends React.Component {
         const loadUser = profileServerCall.loadUser.bind(this);
         // console.log(this);
         this.state = {
-            allowModification: !this.props.location.state,
         };
         // console.log(this.props.location);
         // console.log(this.props.location.state);
@@ -27,7 +27,7 @@ class DoctorProfile extends React.Component {
         if (!this.state.userName){
             return <div></div>;
         }
-        console.log(this.state.loggedinUser.userName);
+        if (this.state.userType !== "doctor") this.props.history.push("UserProfile");  // only exists when doctor access himself through sidebar
         return (
             <div>
                 <Sidebar userName={this.state.loggedinUser.userName} title={"Profile"} />
@@ -58,6 +58,14 @@ class DoctorProfile extends React.Component {
                                 />
                             </div>
                             <div className="col col-lg-8">
+                            {this.state.allowModification && <UserDetails
+                                    name={this.state.userName}
+                                    gender={this.state.gender}
+                                    age={this.state.age}
+                                    region={this.state.region}
+                                    bio={this.state.bio}
+                                    onUpdateClick={this.handleUpdate}
+                                />}
                                 <Recent recentAct={this.state.actInfo} username={this.state.userName} />
                             </div>
                         </div>

@@ -15,7 +15,6 @@ class UserProfile extends React.Component {
         const loadUser = profileServerCall.loadUser.bind(this);
         // console.log(this);
         this.state = {
-            allowModification: !this.props.location.state,
         };
         // console.log(this.props.location);
         // console.log(this.props.location.state);

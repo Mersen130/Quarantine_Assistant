@@ -420,26 +420,12 @@ app.get("/profile/:id", mongoChecker, authenticate, (req, res) => {
                     // log("here1.3", p)
                 }
                 // log("here1.5")
-                for (let i = 0; i < user.activities.length; i++) {
-                    p = p.then(_ => Activities.findById(user.activities[i]))
-                    .then(act => {
-                        if (act) {
-                            RecentAct.push({ type: "activity", title: act.activityTitle})
-                            // log("here2")
-                        }
-                        // log("here3")
-                        return Promise.resolve();
-                    })
-                    .catch(error => {
-                        // log("something wrong internal")
-                        res.status(500).send("server error");
-                    });
-                }
-                // log("here3.6", p)
-                // p.then(e => log("profile", [user, RecentAct])).catch(log("something wrong"));
-                // log("here3.7")
-
-                p.then( e => res.send([user, RecentAct, {userName: req.session.userName, userType: req.session.userType, userId: req.session.user}])).catch(e => res.status(400).send("bad request"));
+                p.then(_ => {
+                    for (let i = 0; i < user.activities.length; i++) {
+                        RecentAct.push({ type: "activity", title: user.activities[i].activityTitle})
+                    }
+                })
+                .then( e => res.send([user, RecentAct, {userName: req.session.userName, userType: req.session.userType, userId: req.session.user}])).catch(e => res.status(400).send("bad request"));
             }
         })
         .catch(error => {
