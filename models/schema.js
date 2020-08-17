@@ -5,6 +5,7 @@ const validator = require('validator');
 const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs')
 
+
 // replies are embedded in Post model
 const PostSchema = new mongoose.Schema({
     // first element in each array is the main post info
@@ -12,6 +13,14 @@ const PostSchema = new mongoose.Schema({
 	posterId: {
 		type: [mongoose.Schema.ObjectId],
 		required: true,
+    },
+    posterType: {
+        type: [String],
+        required: true,
+    },
+    posterName: {
+        type: [String],
+        required: true,
     },
     postContent: {
         type: [String],
@@ -28,6 +37,7 @@ const PostSchema = new mongoose.Schema({
     tags: {
         type: [String],
     },
+
 });
 
 const NotificationSchema = new mongoose.Schema({

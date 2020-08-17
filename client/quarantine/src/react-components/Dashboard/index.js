@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
 {/* //                 <Sidebar userName="user" title={"Dashboard"} /> */}
 
 
-                <Sidebar title={"Dashboard"} history={this.props.history} app={app.state.currentUserName} />
+                <Sidebar title={"Dashboard"} userName={app.state.currentUserName} history={this.props.history} app={app.state.currentUserName} />
 
 
                 <div className="main-content-container px-4 pb-4 container-fluid">

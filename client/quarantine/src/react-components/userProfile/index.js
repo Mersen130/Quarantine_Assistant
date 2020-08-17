@@ -13,6 +13,9 @@ class UserProfile extends React.Component {
         const loadUser = profileServerCall.loadUser.bind(this);
         this.state = {
         };
+        console.log(this.props.location);
+        console.log(this.props.location.state);
+        
         if (!this.props.location.state){
             loadUser(undefined);
         } else{
@@ -67,7 +70,7 @@ class UserProfile extends React.Component {
                                     region={this.state.region}
                                     bio={this.state.bio}
                                     changePhoto={this.changePhoto}
-                                    quarantineProgress={this.state.quarantineProgress}
+                                    quarantineStartDate={this.state.quarantineStartDate}
                                 />
                             </div>
                             <div className="col col-lg-8">

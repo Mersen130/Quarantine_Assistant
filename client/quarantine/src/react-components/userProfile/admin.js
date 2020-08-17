@@ -7,7 +7,7 @@ import Recent from "./recent";
 class AdminProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.props.history.push("/UserProfile");
+        this.props.history.push("/AdminProfile");
     }
     render() {
         return (

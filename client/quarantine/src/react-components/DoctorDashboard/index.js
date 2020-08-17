@@ -15,10 +15,12 @@ export class DoctorDashboard extends Component {
         tips:[],
         news:[]
     };
+    
     render() {
+        const {app}= this.props;
         return (
             <div>
-                <Sidebar userName="user" title={"Dashboard"} />
+                <Sidebar userName={app.state.currentUserName} title={"Dashboard"} />
                 <div className=" main-content-container px-4 pb-4 container-fluid">
                     <div className="col-lg-10 offset-lg-2">
                         <div className="row no-gutters page-header py-4">

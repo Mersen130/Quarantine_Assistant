@@ -37,7 +37,7 @@ ProfileServerCall.prototype = {
                 age: userInfo.age,
                 userType: userInfo.userType,
                 avatar: require("./sampleprofile.png"),
-                quarantineProgress: Math.floor((new Date() - new Date(userInfo.quarantineProgress))/ (1000*60*60*24)), // get progress percentage
+                quarantineStartDate: Math.floor((new Date() - new Date(userInfo.quarantineStartDate))/ (1000*60*60*24)), // get progress percentage
                 gender: userInfo.gender,
                 bio: userInfo.selfDescription,
                 region: userInfo.region,

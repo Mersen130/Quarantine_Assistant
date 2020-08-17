@@ -15,7 +15,7 @@ export class AdminDashboard extends Component {
         console.log(app.state.currentUserName);
         return (
             <div>
-                <SidebarAdmin title={"Dashboard"} app={app}/>
+                <SidebarAdmin userName={app.state.currentUserName} title={"Dashboard"} app={app}/>
 
                 <div className="main-content-container px-4 pb-4 container-fluid">
                     <div className="col-lg-10 offset-lg-2">

@@ -94,7 +94,7 @@ class QA extends React.Component {
                 src={require("../../lib/profilephotos/user1.png")}
                 className="profilephotoPost"
                 onClick={function() {
-                  window.location.href = 'user1';
+                  window.location.href = 'UserProfile';
              }}
               />
 

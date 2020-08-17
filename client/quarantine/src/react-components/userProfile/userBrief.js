@@ -39,14 +39,14 @@ class UserBrief extends React.Component {
                             <div className="progress">
                                 <div
                                     className={"progress-sm progress-bar"}
-                                    style={{ width: `${this.props.quarantineProgress}%` }}
+                                    style={{ width: `${this.props.quarantineStartDate}%` }}
                                     aria-valuenow="66"
                                     aria-valuemin="0"
                                     aria-valuemax="100"
                                     role="progressbar"
                                 >
                                     <span className="progress-value">
-                                        {this.props.quarantineProgress}%
+                                        {this.props.quarantineStartDate}%
                                     </span>
                                 </div>
                             </div>
