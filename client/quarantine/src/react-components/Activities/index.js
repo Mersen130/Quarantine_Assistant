@@ -14,7 +14,7 @@ class Activities extends React.Component {
         yoga:require("../../lib/activities/Yoga.png"),
         book:require("../../lib/activities/Book.png"),
         cook:require("../../lib/activities/Cooking.png"),
-        movie:equire("../../lib/activities/Movie.png"),
+        movie:require("../../lib/activities/Movie.png"),
         study:require("../../lib/activities/Study.png")
     };
     componentDidMount() {
