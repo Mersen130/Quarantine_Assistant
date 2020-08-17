@@ -39,7 +39,6 @@ class Dashboard extends React.Component {
     }
     render() {
         const {app}= this.props;
-        console.log(app.state.currentUserId);
         return (
             
             <div>
@@ -80,7 +79,7 @@ class Dashboard extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col-lg-6">
-                                <ContentCardNews category="Tips" component={this} />
+                                <ContentCard category="Tips" component={this} />
                             </div>
                             <div className="col-lg-6">
                                 <ContentCardNews category="News" component={this}/>
