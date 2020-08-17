@@ -17,7 +17,7 @@ class MyActivites extends React.Component{
 			     	"Sport":<img src={queueComponent.state.sport} class="card-img"/>,
 			     	"Yoga": <img src={queueComponent.state.yoga} class="card-img"/>,
 					 "Read": <img src={queueComponent.state.book} class="card-img"/> ,
-					 "Cook": <img src={queueComponent.state.cook} class="card-img"/>,
+					 "Cooking": <img src={queueComponent.state.cook} class="card-img"/>,
 					 "Movie":<img src={queueComponent.state.movie} class="card-img"/>,
 					 "Study":<img src={queueComponent.state.study} class="card-img"/>
 			    }[myAct.activityType]}
