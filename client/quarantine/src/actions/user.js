@@ -105,7 +105,7 @@ export const reset = (u, history)=>{
             }
         })
         .catch(error=>{
-            alert("Please double check your email address")
+            console.log(error);
         });
 
 }
