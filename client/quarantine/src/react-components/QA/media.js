@@ -59,9 +59,9 @@ class Media extends React.Component {
                                 <div className="media p-3">
                                     <img src={require("../../lib/profilephotos/user1.png")} onClick={() => {
                                         if (posterType[i] !== "doctor") {
-                                            this.setState({ redirect: true, clickedUser: posterId[0], clickedUserType: "user"});
+                                            this.setState({ redirect: true, clickedUser: posterId[i], clickedUserType: "user"});
                                         } else{
-                                            this.setState({ redirect: true, clickedUser: posterId[0], clickedUserType: posterType[i]});
+                                            this.setState({ redirect: true, clickedUser: posterId[i], clickedUserType: posterType[i]});
                                         }
                                     }} className="profilephotoQa" />
                                     <div className="media-body">
