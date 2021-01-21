@@ -1,9 +1,3 @@
-# Please grade on this commit!
-As indicated by professor Mark:
-> Please work with your teammate to fix the conflicts, and if you do by tomorrow 10pm we will only count it as only one day late.  - Aug 16, 20:59
-
-Sorry for the inconvenience.
-
 # Quanrantine Assistant - Team 23
 
 This is a web application designed for assisting people people to get through their quarantine period during this COVID-19 pandemic. The front-end part of this application is built with React and Bootstrap.
